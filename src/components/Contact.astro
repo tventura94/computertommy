@@ -44,6 +44,11 @@ import background from '../assets/background.svg';
 				</div>
 				
 				<div class="form-group">
+					<label for="design-inspiration">Design Inspiration (Optional)</label>
+					<input type="text" id="design-inspiration" name="design-inspiration" placeholder="Links to websites or designs you like">
+				</div>
+				
+				<div class="form-group">
 					<label for="message">Message</label>
 					<textarea id="message" name="message" rows="5" required></textarea>
 				</div>
@@ -68,7 +73,7 @@ import background from '../assets/background.svg';
 		width: 100%;
 		height: 100%;
 		z-index: -1;
-		filter: blur(100px);
+		filter: blur(40px);
 	}
 
 	#container {
@@ -221,12 +226,37 @@ import background from '../assets/background.svg';
 
 		#contact-section {
 			display: block;
-			padding-top: 10%;
+			padding: 2rem 1rem;
+			margin-top: 1rem;
+			width: calc(100% - 2rem);
+			box-sizing: border-box;
+		}
+		
+		.contact-form {
+			width: 100%;
+			box-sizing: border-box;
+			padding: 0 0.5rem;
+		}
+		
+		.heading-container {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+		
+		h1 {
+			font-size: 20px;
+		}
+		
+		.back-link {
+			margin-left: 0;
 		}
 		
 		.trust-badges {
 			flex-direction: column;
 			gap: 1rem;
+			margin-top: 1.5rem;
+			align-items: flex-start;
 		}
 
 		.corner-arrow {
@@ -236,6 +266,47 @@ import background from '../assets/background.svg';
 		
 		.corner-arrow .text {
 			display: none;
+		}
+		
+		input, textarea {
+			padding: 10px;
+			font-size: 14px;
+		}
+		
+		.form-group {
+			margin-bottom: 1rem;
+		}
+		
+		.subtitle {
+			margin: 1rem 0;
+			font-size: 14px;
+			line-height: 1.4;
+		}
+		
+		button[type="submit"] {
+			padding: 10px 20px;
+			font-size: 14px;
+		}
+	}
+	
+	/* Add a smaller breakpoint for very small screens */
+	@media screen and (max-width: 480px) {
+		#contact-section {
+			padding: 1.5rem 0.75rem;
+			width: calc(100% - 1.5rem);
+		}
+		
+		h1 {
+			font-size: 18px;
+		}
+		
+		.trust-badges {
+			font-size: 0.8rem;
+		}
+		
+		input, textarea {
+			width: calc(100% - 4px);
+			box-sizing: border-box;
 		}
 	}
 

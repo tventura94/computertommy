@@ -147,6 +147,8 @@ import background from '../assets/background.svg';
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 1rem;
+		display: flex;
+		flex-direction: column;
 	}
 
 	main {
@@ -443,7 +445,8 @@ import background from '../assets/background.svg';
 		.pricing-cards {
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
-			max-width: 600px;
+			margin: 0 auto;
+			justify-content: center;
 			margin-left: auto;
 			margin-right: auto;
 		}
@@ -471,8 +474,14 @@ import background from '../assets/background.svg';
 	}
 
 	@media screen and (max-width: 768px) {
+		#container {
+			display: flex;
+			flex-direction: column;
+			height: auto;
+		}
+
 		#services-section {
-			padding: 2rem 0;
+			padding: 2rem 0.75rem;
 		}
 		
 		.services-grid {
@@ -522,6 +531,10 @@ import background from '../assets/background.svg';
 	}
 	
 	@media screen and (max-width: 480px) {
+		#services-section {
+			padding: 1.5rem 0;
+		}
+		
 		h1 {
 			font-size: 1.6rem;
 		}
