@@ -1,0 +1,515 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="services-section">
+			<a href="/" class="logo">
+				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
+			</a>
+			
+			<div class="heading-container">
+				<h1>Our Services</h1>
+				<a href="/" class="back-link" aria-label="Back to home">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+			
+			<p class="subtitle">
+				Professional web solutions that eliminate the headaches of DIY website builders and expensive monthly fees.
+			</p>
+			
+			<div class="services-grid">
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-laptop-code"></i>
+					</div>
+					<h2>Web Development</h2>
+					<p>
+						Custom websites built with clean, efficient code. We create fast-loading sites that look great on all devices and help your business stand out.
+					</p>
+					<ul class="service-features">
+						<li>Responsive design for all devices</li>
+						<li>Fast loading speeds (90+ PageSpeed score)</li>
+						<li>SEO-friendly structure</li>
+						<li>Modern, professional aesthetics</li>
+					</ul>
+					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+				</div>
+				
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-tools"></i>
+					</div>
+					<h2>Internal Tool Development</h2>
+					<p>
+						Custom internal applications that streamline your business processes. We build tools that automate workflows and increase productivity.
+					</p>
+					<ul class="service-features">
+						<li>Custom workflow automation</li>
+						<li>Database integration</li>
+						<li>Employee dashboards</li>
+						<li>Process optimization</li>
+					</ul>
+					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+				</div>
+				
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-lightbulb"></i>
+					</div>
+					<h2>IT Consulting</h2>
+					<p>
+						Strategic technology guidance for your business. We help you make informed decisions about your IT infrastructure and digital presence.
+					</p>
+					<ul class="service-features">
+						<li>Technology needs assessment</li>
+						<li>IT strategy development</li>
+						<li>Software and hardware recommendations</li>
+						<li>Digital transformation planning</li>
+					</ul>
+					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+				</div>
+				
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-robot"></i>
+					</div>
+					<h2>AI Solutions</h2>
+					<p>
+						Leverage the power of artificial intelligence for your business. We develop custom AI solutions that provide insights and automate complex tasks.
+					</p>
+					<ul class="service-features">
+						<li>Custom AI model development</li>
+						<li>Data analysis and processing</li>
+						<li>Chatbot implementation</li>
+						<li>AI integration with existing systems</li>
+					</ul>
+					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+				</div>
+			</div>
+			
+			<div class="pricing-section">
+				<h2>Simple, Transparent Pricing</h2>
+				<div class="pricing-cards">
+					<div class="pricing-card featured">
+						<div class="pricing-header">
+							<h3>Website Package</h3>
+							<div class="price">$100</div>
+							<div class="price-period">one-time payment</div>
+						</div>
+						<div class="pricing-features">
+							<ul>
+								<li><span class="check">✓</span> Professional, responsive design</li>
+								<li><span class="check">✓</span> 24-hour turnaround</li>
+								<li><span class="check">✓</span> Mobile optimization</li>
+								<li><span class="check">✓</span> Basic SEO setup</li>
+								<li><span class="check">✓</span> Contact form</li>
+								<li><span class="check">✓</span> NO monthly fees</li>
+							</ul>
+						</div>
+						<a href="/contact" class="button primary">Get Started</a>
+					</div>
+					
+					<div class="pricing-card">
+						<div class="pricing-header">
+							<h3>Other Services</h3>
+							<div class="price">Contact Us</div>
+							<div class="price-period">for custom quotes</div>
+						</div>
+						<div class="pricing-features">
+							<ul>
+								<li><span class="check">✓</span> Web development</li>
+								<li><span class="check">✓</span> Internal tool development</li>
+								<li><span class="check">✓</span> AI solutions</li>
+								<li><span class="check">✓</span> IT consulting</li>
+								<li><span class="check">✓</span> Custom web applications</li>
+								<li><span class="check">✓</span> Software integration</li>
+							</ul>
+						</div>
+						<a href="/contact" class="button secondary">Request Quote</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="cta-container">
+				<h2>Ready to get started?</h2>
+				<p>Contact us today to discuss your project and see how we can help.</p>
+				<a href="/contact" class="button primary">Contact Us</a>
+			</div>
+		</section>
+	</main>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		min-height: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	main {
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#services-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		margin: 0;
+		line-height: 1.2;
+	}
+	
+	h2 {
+		font-size: 1.75rem;
+		margin: 0 0 1rem 0;
+		color: #111827;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin: 0 0 0.5rem 0;
+		color: #111827;
+	}
+	
+	.back-link {
+		color: #4b5563;
+		font-size: 1.125rem;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+	
+	.back-link:hover {
+		color: #111827;
+		transform: translateX(-3px);
+	}
+
+	p {
+		color: #4b5563;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		letter-spacing: -0.006em;
+		margin: 0 0 1rem 0;
+	}
+
+	.logo {
+		transition: transform 0.2s ease;
+	}
+
+	.logo:hover {
+		transform: scale(1.05);
+	}
+
+	.subtitle {
+		font-size: 1.3rem;
+		max-width: 800px;
+		margin: 1.5rem 0 2.5rem 0;
+		color: #374151;
+		font-weight: 500;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		width: 100%;
+		margin-bottom: 4rem;
+	}
+
+	.service-card {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	
+	.service-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	}
+
+	.service-icon {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+		color: #3245ff;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.service-features {
+		list-style: none;
+		padding: 0;
+		margin: 1rem 0;
+	}
+
+	.service-features li {
+		position: relative;
+		padding-left: 1.5rem;
+		margin-bottom: 0.5rem;
+		color: #4b5563;
+	}
+
+	.service-features li:before {
+		content: "•";
+		position: absolute;
+		left: 0.5rem;
+		color: #3245ff;
+	}
+
+	.service-link {
+		display: inline-flex;
+		align-items: center;
+		color: #3245ff;
+		text-decoration: none;
+		font-weight: 500;
+		margin-top: 1rem;
+		transition: transform 0.2s ease;
+	}
+
+	.service-link i {
+		margin-left: 0.5rem;
+		transition: transform 0.2s ease;
+	}
+
+	.service-link:hover i {
+		transform: translateX(3px);
+	}
+
+	.pricing-section {
+		width: 100%;
+		margin: 3rem 0;
+	}
+
+	.pricing-cards {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.pricing-card {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	.pricing-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	}
+
+	.pricing-card.featured {
+		position: relative;
+		border: 2px solid;
+		border-image: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%) 1;
+		background-clip: padding-box;
+	}
+
+	.pricing-header {
+		padding: 2rem;
+		text-align: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.price {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #111827;
+		margin: 1rem 0 0.25rem;
+	}
+
+	.price-period {
+		color: #6b7280;
+		font-size: 0.9rem;
+	}
+
+	.pricing-features {
+		padding: 2rem;
+		flex-grow: 1;
+	}
+
+	.pricing-features ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.pricing-features li {
+		margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
+	}
+
+	.check {
+		color: #3245ff;
+		margin-right: 0.75rem;
+		font-weight: bold;
+	}
+
+	.button {
+		padding: 14px 28px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		font-size: 1.1rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: block;
+		text-align: center;
+		width: auto;
+		margin: 0 2rem 2rem;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.primary {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	}
+
+	.button.secondary {
+		background: rgba(255, 255, 255, 0.9);
+		color: #111827;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.cta-container {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 3rem;
+		text-align: center;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		width: 100%;
+		margin-top: 2rem;
+	}
+
+	.cta-container h2 {
+		margin-bottom: 1rem;
+	}
+
+	.cta-container p {
+		max-width: 600px;
+		margin: 0 auto 2rem;
+	}
+
+	.cta-container .button {
+		width: auto;
+		margin: 0;
+	}
+
+	@media screen and (max-width: 992px) {
+		.services-grid,
+		.pricing-cards {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.service-card,
+		.pricing-card {
+			padding: 1.5rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+		}
+		
+		.subtitle {
+			font-size: 1.1rem;
+		}
+		
+		.cta-container {
+			padding: 2rem;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#services-section {
+			padding: 2rem 0;
+		}
+		
+		h1 {
+			font-size: 1.8rem;
+		}
+		
+		.pricing-header {
+			padding: 1.5rem;
+		}
+		
+		.pricing-features {
+			padding: 1.5rem;
+		}
+		
+		.button {
+			margin: 0 1.5rem 1.5rem;
+			padding: 12px 20px;
+		}
+		
+		.cta-container {
+			padding: 1.5rem;
+		}
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	#services-section > * {
+		animation: fadeIn 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	#services-section > *:nth-child(1) { animation-delay: 0.1s; }
+	#services-section > *:nth-child(2) { animation-delay: 0.2s; }
+	#services-section > *:nth-child(3) { animation-delay: 0.3s; }
+	#services-section > *:nth-child(4) { animation-delay: 0.4s; }
+	#services-section > *:nth-child(5) { animation-delay: 0.5s; }
+	#services-section > *:nth-child(6) { animation-delay: 0.6s; }
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

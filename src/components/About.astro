@@ -1,0 +1,327 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="about-section">
+			<a href="/" class="logo">
+				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
+			</a>
+			
+			<div class="heading-container">
+				<h1>About Computer Tommy</h1>
+				<a href="/" class="back-link" aria-label="Back to home">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+			
+			<p class="subtitle">
+				We build beautiful, high-performance websites for people who want professional results without the headaches of DIY website builders.
+			</p>
+			
+			<div class="about-content">
+				<div class="about-card">
+					<h2>Our Mission</h2>
+					<p>
+						At Computer Tommy, we believe that getting a professional website shouldn't cost a fortune or require you to become a web designer overnight. Our mission is simple: deliver stunning, effective websites that work for your business, not against it.
+					</p>
+				</div>
+				
+				<div class="about-card">
+					<h2>Why We're Different</h2>
+					<p>
+						We started Computer Tommy after seeing too many small businesses struggle with frustrating website builders, excessive monthly fees, and disappointing results. Our approach eliminates the headaches:
+					</p>
+					<ul class="feature-list">
+						<li><span class="icon">✓</span> <strong>One-time fee</strong> - No recurring costs or surprise charges</li>
+						<li><span class="icon">✓</span> <strong>24-hour turnaround</strong> - Get your site up and running quickly</li>
+						<li><span class="icon">✓</span> <strong>Professional design</strong> - Clean code that loads lightning-fast</li>
+						<li><span class="icon">✓</span> <strong>No technical skills needed</strong> - We handle everything for you</li>
+					</ul>
+				</div>
+				
+				<div class="about-card">
+					<h2>Our Process</h2>
+					<div class="process-steps">
+						<div class="step">
+							<div class="step-number">1</div>
+							<div class="step-content">
+								<h3>Consultation</h3>
+								<p>We discuss your needs, goals, and vision for your website.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">2</div>
+							<div class="step-content">
+								<h3>Design & Development</h3>
+								<p>We build your site with clean, efficient code that loads quickly.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">3</div>
+							<div class="step-content">
+								<h3>Delivery</h3>
+								<p>We deliver your completed site within 24 hours.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">4</div>
+							<div class="step-content">
+								<h3>Support</h3>
+								<p>We provide ongoing support to ensure your site continues to perform.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cta-container">
+					<p class="cta-text">Ready to get your professional website without the DIY headache?</p>
+					<a href="/contact" class="button primary">Get Started Today</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		min-height: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	main {
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#about-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		margin: 0;
+		line-height: 1.2;
+	}
+	
+	h2 {
+		font-size: 1.75rem;
+		margin: 0 0 1rem 0;
+		color: #111827;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin: 0 0 0.5rem 0;
+		color: #111827;
+	}
+	
+	.back-link {
+		color: #4b5563;
+		font-size: 1.125rem;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+	
+	.back-link:hover {
+		color: #111827;
+		transform: translateX(-3px);
+	}
+
+	p {
+		color: #4b5563;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		letter-spacing: -0.006em;
+		margin: 0 0 1.5rem 0;
+	}
+
+	.logo {
+		transition: transform 0.2s ease;
+	}
+
+	.logo:hover {
+		transform: scale(1.05);
+	}
+
+	.subtitle {
+		font-size: 1.3rem;
+		max-width: 800px;
+		margin: 1.5rem 0 2.5rem 0;
+		color: #374151;
+		font-weight: 500;
+	}
+
+	.about-content {
+		width: 100%;
+	}
+
+	.about-card {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	}
+
+	.feature-list {
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0 0 0;
+	}
+
+	.feature-list li {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+		font-size: 1.1rem;
+	}
+
+	.icon {
+		color: #3245ff;
+		margin-right: 0.75rem;
+		font-weight: bold;
+	}
+
+	.process-steps {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.step {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.step-number {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		flex-shrink: 0;
+	}
+
+	.step-content {
+		flex: 1;
+	}
+
+	.step-content p {
+		margin-bottom: 0;
+	}
+
+	.cta-container {
+		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.cta-text {
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin-bottom: 1.5rem;
+		color: #111827;
+	}
+
+	.button {
+		padding: 14px 28px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		font-size: 1.1rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: inline-block;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.primary {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	}
+
+	@media screen and (max-width: 768px) {
+		#about-section {
+			padding: 2rem 0;
+		}
+		
+		h1 {
+			font-size: 1.8rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+		}
+		
+		.subtitle {
+			font-size: 1.1rem;
+		}
+		
+		.about-card {
+			padding: 1.5rem;
+		}
+		
+		.process-steps {
+			gap: 1.25rem;
+		}
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	#about-section > * {
+		animation: fadeIn 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	#about-section > *:nth-child(1) { animation-delay: 0.1s; }
+	#about-section > *:nth-child(2) { animation-delay: 0.2s; }
+	#about-section > *:nth-child(3) { animation-delay: 0.3s; }
+	#about-section > *:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
