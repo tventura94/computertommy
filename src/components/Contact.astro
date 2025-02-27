@@ -79,12 +79,16 @@ import background from '../assets/background.svg';
 	#container {
 		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 		height: 100%;
+		position: relative;
+		z-index: 2;
 	}
 
 	main {
 		height: 100%;
 		display: flex;
 		justify-content: center;
+		position: relative;
+		z-index: 2;
 	}
 
 	#contact-section {
@@ -222,6 +226,8 @@ import background from '../assets/background.svg';
 		#container {
 			display: flex;
 			flex-direction: column;
+			min-height: 100vh;
+			padding-bottom: 2rem;
 		}
 
 		#contact-section {
