@@ -58,22 +58,7 @@ import background from '../assets/background.svg';
 					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
 				</div>
 				
-				<div class="service-card">
-					<div class="service-icon">
-						<i class="fas fa-lightbulb"></i>
-					</div>
-					<h2>IT Consulting</h2>
-					<p>
-						Strategic technology guidance for your business. We help you make informed decisions about your IT infrastructure and digital presence.
-					</p>
-					<ul class="service-features">
-						<li>Technology needs assessment</li>
-						<li>IT strategy development</li>
-						<li>Software and hardware recommendations</li>
-						<li>Digital transformation planning</li>
-					</ul>
-					<a href="/contact" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-				</div>
+			
 				
 				<div class="service-card">
 					<div class="service-icon">
@@ -243,10 +228,10 @@ import background from '../assets/background.svg';
 
 	.services-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: 2rem;
 		width: 100%;
-		margin-bottom: 4rem;
+		margin-bottom: 3rem;
 	}
 
 	.service-card {
@@ -438,18 +423,36 @@ import background from '../assets/background.svg';
 		margin: 0;
 	}
 
+	@media screen and (max-width: 1200px) {
+		.services-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
 	@media screen and (max-width: 992px) {
-		.services-grid,
+		.services-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		
+		.services-grid > *:last-child {
+			grid-column: 1 / -1;
+			max-width: 500px;
+			margin: 0 auto;
+		}
+		
 		.pricing-cards {
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
+			max-width: 600px;
+			margin-left: auto;
+			margin-right: auto;
 		}
-
+		
 		.service-card,
 		.pricing-card {
 			padding: 1.5rem;
 		}
-
+		
 		h1 {
 			font-size: 2rem;
 		}
@@ -472,8 +475,23 @@ import background from '../assets/background.svg';
 			padding: 2rem 0;
 		}
 		
+		.services-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+		
+		.services-grid > *:last-child {
+			grid-column: auto;
+			max-width: none;
+		}
+		
 		h1 {
 			font-size: 1.8rem;
+		}
+		
+		.service-icon {
+			font-size: 1.75rem;
+			margin-bottom: 0.75rem;
 		}
 		
 		.pricing-header {
@@ -487,10 +505,50 @@ import background from '../assets/background.svg';
 		.button {
 			margin: 0 1.5rem 1.5rem;
 			padding: 12px 20px;
+			font-size: 1rem;
 		}
 		
 		.cta-container {
 			padding: 1.5rem;
+		}
+		
+		.service-features li {
+			margin-bottom: 0.75rem;
+		}
+		
+		.price {
+			font-size: 2rem;
+		}
+	}
+	
+	@media screen and (max-width: 480px) {
+		h1 {
+			font-size: 1.6rem;
+		}
+		
+		.pricing-header {
+			padding: 1.25rem;
+		}
+		
+		.pricing-features {
+			padding: 1.25rem;
+		}
+		
+		.service-card, 
+		.pricing-card {
+			padding: 1.25rem;
+		}
+		
+		.price {
+			font-size: 1.75rem;
+		}
+		
+		.cta-container h2 {
+			font-size: 1.4rem;
+		}
+		
+		.cta-container p {
+			font-size: 0.95rem;
 		}
 	}
 

@@ -1,0 +1,443 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../../assets/astro.svg';
+import background from '../../assets/background.svg';
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="service-section">
+			<a href="/" class="logo">
+				<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
+			</a>
+			
+			<div class="heading-container">
+				<h1>IT Consulting Services</h1>
+				<a href="/services" class="back-link" aria-label="Back to services">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+			
+			<p class="subtitle">
+				Strategic technology guidance for businesses of all sizes. We help you make smart IT decisions that drive growth and efficiency.
+			</p>
+			
+			<div class="service-content">
+				<div class="service-detail-card">
+					<h2>How We Can Help</h2>
+					<p>
+						Technology should be an asset to your business, not a burden. Our consulting services help you navigate the complex world of IT to find solutions that truly work for your specific needs.
+					</p>
+                    
+                    <div class="service-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Technology Assessment</h3>
+                                <p>We evaluate your current technology infrastructure and identify opportunities for improvement and optimization.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>IT Strategy Development</h3>
+                                <p>We create a roadmap for your technology needs, aligning IT investments with your business goals and growth plans.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Infrastructure Planning</h3>
+                                <p>We help you design an IT infrastructure that's reliable, secure, and scalable to support your business needs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Security & Compliance</h3>
+                                <p>We assess your cybersecurity posture and recommend improvements to protect your business and customer data.</p>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				
+				<div class="service-detail-card">
+					<h2>Our Consulting Process</h2>
+					<div class="process-steps">
+						<div class="step">
+							<div class="step-number">1</div>
+							<div class="step-content">
+								<h3>Discovery</h3>
+								<p>We learn about your business goals, challenges, and current technology environment.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">2</div>
+							<div class="step-content">
+								<h3>Assessment</h3>
+								<p>We analyze your existing systems, processes, and infrastructure to identify strengths and weaknesses.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">3</div>
+							<div class="step-content">
+								<h3>Recommendations</h3>
+								<p>We develop practical recommendations and a strategic roadmap tailored to your specific situation.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">4</div>
+							<div class="step-content">
+								<h3>Implementation Support</h3>
+								<p>We provide guidance and support during the implementation of recommended solutions.</p>
+							</div>
+						</div>
+                        <div class="step">
+							<div class="step-number">5</div>
+							<div class="step-content">
+								<h3>Ongoing Advice</h3>
+								<p>We remain available for continued support and advice as your business and technology needs evolve.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="service-detail-card case-studies">
+					<h2>Areas of Expertise</h2>
+					<div class="case-studies-grid">
+                        <div class="case-study">
+                            <h3>Digital Transformation</h3>
+                            <p>We help businesses modernize their operations by implementing digital tools and processes that increase efficiency and competitiveness.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>Cloud Migration</h3>
+                            <p>We guide businesses through the process of moving applications and data to cloud environments safely and efficiently.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>Software Selection</h3>
+                            <p>We help you identify and select the right software tools for your specific business needs, avoiding costly mistakes.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>IT Cost Optimization</h3>
+                            <p>We identify opportunities to reduce technology costs while maintaining or improving service levels and capabilities.</p>
+                        </div>
+                    </div>
+				</div>
+				
+				<div class="cta-container">
+					<p class="cta-text">Ready to make smarter technology decisions for your business?</p>
+					<a href="/contact" class="button primary">Schedule a Consultation</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		min-height: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	main {
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#service-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		margin: 0;
+		line-height: 1.2;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	
+	h2 {
+		font-size: 1.75rem;
+		margin: 0 0 1rem 0;
+		color: #111827;
+	}
+	
+	h3 {
+		font-size: 1.25rem;
+		margin: 0 0 0.5rem 0;
+		color: #111827;
+	}
+	
+	.back-link {
+		color: #4b5563;
+		font-size: 1.125rem;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+	
+	.back-link:hover {
+		color: #111827;
+		transform: translateX(-3px);
+	}
+
+	p {
+		color: #4b5563;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		letter-spacing: -0.006em;
+		margin: 0 0 1rem 0;
+	}
+
+	.logo {
+		transition: transform 0.2s ease;
+	}
+
+	.logo:hover {
+		transform: scale(1.05);
+	}
+
+	.subtitle {
+		font-size: 1.3rem;
+		max-width: 800px;
+		margin: 1.5rem 0 2.5rem 0;
+		color: #374151;
+		font-weight: 500;
+	}
+
+    .service-content {
+        width: 100%;
+    }
+
+	.service-detail-card {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		margin-bottom: 2rem;
+        width: 100%;
+	}
+
+	.service-highlights {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.highlight-item {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.highlight-icon {
+		font-size: 2rem;
+		color: #3245ff;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+        flex-shrink: 0;
+        margin-top: 0.25rem;
+	}
+
+	.highlight-content {
+		flex: 1;
+	}
+
+	.process-steps {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.step {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.step-number {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		flex-shrink: 0;
+	}
+
+	.step-content {
+		flex: 1;
+	}
+
+	.step-content p {
+		margin-bottom: 0;
+	}
+
+    .case-studies-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .case-study {
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .case-study h3 {
+        margin-top: 0;
+    }
+
+    .case-study p {
+        margin-bottom: 0;
+    }
+
+	.cta-container {
+		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.cta-text {
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin-bottom: 1.5rem;
+		color: #111827;
+	}
+
+	.button {
+		padding: 14px 28px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		font-size: 1.1rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: inline-block;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.primary {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	}
+
+	@media screen and (max-width: 992px) {
+		.service-highlights,
+        .case-studies-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+		}
+		
+		.subtitle {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#service-section {
+			padding: 2rem 0;
+		}
+		
+		h1 {
+			font-size: 1.8rem;
+		}
+		
+		.service-detail-card {
+			padding: 1.5rem;
+		}
+		
+		.button {
+			padding: 12px 20px;
+		}
+		
+		.cta-container {
+			padding: 1.5rem;
+		}
+
+        .highlight-item {
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .highlight-icon {
+            margin-top: 0;
+        }
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	#service-section > * {
+		animation: fadeIn 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	#service-section > *:nth-child(1) { animation-delay: 0.1s; }
+	#service-section > *:nth-child(2) { animation-delay: 0.2s; }
+	#service-section > *:nth-child(3) { animation-delay: 0.3s; }
+	#service-section > *:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

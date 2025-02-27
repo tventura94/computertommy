@@ -1,0 +1,457 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../../assets/astro.svg';
+import background from '../../assets/background.svg';
+---
+
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="service-section">
+			<a href="/" class="logo">
+				<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
+			</a>
+			
+			<div class="heading-container">
+				<h1>Internal Tool Development</h1>
+				<a href="/services" class="back-link" aria-label="Back to services">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+			
+			<p class="subtitle">
+				Custom internal applications that streamline your business processes, automate repetitive tasks, and boost productivity.
+			</p>
+			
+			<div class="service-content">
+				<div class="service-detail-card">
+					<h2>How We Can Help</h2>
+					<p>
+						Off-the-shelf software doesn't always meet your specific business needs. We build custom internal tools that solve your unique challenges and integrate seamlessly with your workflows.
+					</p>
+                    
+                    <div class="service-highlights">
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Workflow Automation</h3>
+                                <p>We build tools that automate repetitive tasks, reducing errors and freeing up your team's time for more valuable work.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Database Applications</h3>
+                                <p>Custom database solutions that organize your information and make it accessible when and where you need it.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Reporting Dashboards</h3>
+                                <p>Interactive dashboards that provide real-time insights into your business performance and key metrics.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-item">
+                            <div class="highlight-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div class="highlight-content">
+                                <h3>Process Optimization</h3>
+                                <p>We analyze your current processes and develop tools that eliminate bottlenecks and improve efficiency.</p>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				
+				<div class="service-detail-card">
+					<h2>Our Development Process</h2>
+					<div class="process-steps">
+						<div class="step">
+							<div class="step-number">1</div>
+							<div class="step-content">
+								<h3>Requirements Gathering</h3>
+								<p>We work closely with your team to understand your processes, pain points, and goals for the tool.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">2</div>
+							<div class="step-content">
+								<h3>Design & Prototyping</h3>
+								<p>We create wireframes and interactive prototypes to refine the tool's functionality and user experience.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">3</div>
+							<div class="step-content">
+								<h3>Development</h3>
+								<p>We build the tool using modern technologies that ensure reliability, security, and ease of maintenance.</p>
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">4</div>
+							<div class="step-content">
+								<h3>Testing & Deployment</h3>
+								<p>We thoroughly test the tool and deploy it to your environment, ensuring seamless integration.</p>
+							</div>
+						</div>
+                        <div class="step">
+							<div class="step-number">5</div>
+							<div class="step-content">
+								<h3>Training & Support</h3>
+								<p>We provide training for your team and ongoing support to ensure the tool continues to meet your needs.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="service-detail-card case-studies">
+					<h2>Common Internal Tools We Build</h2>
+					<div class="case-studies-grid">
+                        <div class="case-study">
+                            <h3>Employee Portals</h3>
+                            <p>Centralized platforms where employees can access information, submit requests, and manage their work efficiently.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>Inventory Management Systems</h3>
+                            <p>Tools that track inventory levels, orders, and supply chain information in real-time to optimize stock levels.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>CRM Extensions</h3>
+                            <p>Custom functionality that extends your existing CRM to better match your sales process and customer journey.</p>
+                        </div>
+                        <div class="case-study">
+                            <h3>Approval Workflows</h3>
+                            <p>Digital systems that streamline approval processes, ensuring nothing falls through the cracks and keeping projects moving.</p>
+                        </div>
+                    </div>
+				</div>
+				
+				<div class="cta-container">
+					<p class="cta-text">Ready to streamline your business with custom internal tools?</p>
+					<a href="/contact" class="button primary">Discuss Your Needs</a>
+				</div>
+			</div>
+		</section>
+	</main>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		min-height: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	main {
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#service-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin: 0;
+		line-height: 1.2;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	
+	.back-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.8);
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+		color: #333;
+		text-decoration: none;
+		transition: all 0.2s ease;
+	}
+	
+	.back-link:hover {
+		background: rgba(255, 255, 255, 1);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		transform: translateY(-2px);
+	}
+	
+	.subtitle {
+		font-size: 1.25rem;
+		color: #4b5563;
+		margin: 1.5rem 0 2.5rem;
+		max-width: 800px;
+		line-height: 1.6;
+	}
+	
+	.service-content {
+		width: 100%;
+	}
+	
+	.service-detail-card {
+		background: rgba(255, 255, 255, 0.8);
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		margin-bottom: 2rem;
+		width: 100%;
+	}
+
+	h2 {
+		font-size: 1.8rem;
+		margin-top: 0;
+		margin-bottom: 1rem;
+		color: #111827;
+	}
+
+	h3 {
+		font-size: 1.25rem;
+		margin-bottom: 0.5rem;
+		color: #111827;
+	}
+
+	p {
+		color: #4b5563;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+	}
+
+	.service-highlights {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.highlight-item {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.highlight-icon {
+		font-size: 2rem;
+		color: #3245ff;
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		flex-shrink: 0;
+		margin-top: 0.25rem;
+	}
+
+	.highlight-content {
+		flex: 1;
+	}
+
+	.highlight-content h3 {
+		margin-top: 0;
+	}
+
+	.highlight-content p {
+		margin-bottom: 0;
+	}
+
+	.process-steps {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.step {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.step-number {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		flex-shrink: 0;
+	}
+
+	.step-content {
+		flex: 1;
+	}
+
+	.step-content h3 {
+		margin-top: 0;
+	}
+
+	.step-content p {
+		margin-bottom: 0;
+	}
+
+	.case-studies-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+
+	.case-study {
+		background: rgba(255, 255, 255, 0.5);
+		border-radius: 12px;
+		padding: 1.5rem;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	.case-study h3 {
+		margin-top: 0;
+	}
+
+	.case-study p {
+		margin-bottom: 0;
+	}
+
+	.cta-container {
+		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		margin-top: 3rem;
+	}
+
+	.cta-text {
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin-bottom: 1.5rem;
+		color: #111827;
+	}
+
+	.button {
+		padding: 14px 28px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		font-size: 1.1rem;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		display: inline-block;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.primary {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	}
+
+	@media screen and (max-width: 992px) {
+		.service-highlights,
+		.case-studies-grid {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+		
+		h2 {
+			font-size: 1.5rem;
+		}
+		
+		.subtitle {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		#service-section {
+			padding: 2rem 0;
+		}
+		
+		h1 {
+			font-size: 1.8rem;
+		}
+		
+		.service-detail-card {
+			padding: 1.5rem;
+		}
+		
+		.button {
+			padding: 12px 20px;
+		}
+		
+		.cta-container {
+			padding: 1.5rem;
+		}
+
+		.highlight-item {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.highlight-icon {
+			margin-top: 0;
+		}
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	#service-section > * {
+		animation: fadeIn 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	#service-section > *:nth-child(1) { animation-delay: 0.1s; }
+	#service-section > *:nth-child(2) { animation-delay: 0.2s; }
+	#service-section > *:nth-child(3) { animation-delay: 0.3s; }
+	#service-section > *:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
