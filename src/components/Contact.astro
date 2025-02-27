@@ -1,0 +1,296 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../assets/astro.svg';
+import background from '../assets/background.svg';
+---
+<div id="container">
+	<img id="background" src={background.src} alt="" fetchpriority="high" />
+	<main>
+		<section id="contact-section">
+			<a href="" class="logo">
+				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
+			</a>
+			
+			<div class="heading-container">
+				<h1>Get in touch with us</h1>
+				<a href="/" class="back-link" aria-label="Back to home">
+					<i class="fas fa-arrow-left"></i>
+				</a>
+			</div>
+			
+			<p class="subtitle">
+				Fill out the form below and we'll get back to you within 24 hours. We're excited to discuss your website needs!
+			</p>
+			
+			<form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+				<input type="hidden" name="form-name" value="contact" />
+				<p class="hidden">
+					<label>Don't fill this out if you're human: <input name="bot-field" /></label>
+				</p>
+				
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" id="name" name="name" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" required>
+				</div>
+
+				<div class="form-group">
+					<label for="phone">Phone</label>
+					<input type="tel" id="phone" name="phone" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" rows="5" required></textarea>
+				</div>
+				
+				<button type="submit" class="button primary">Send Message</button>
+			</form>
+			
+			<div class="trust-badges">
+				<span>✓ 24 Hour Response</span>
+				<span>✓ No Obligation Quote</span>
+				<span>✓ Confidential</span>
+			</div>
+		</section>
+	</main>
+</div>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		height: 100%;
+	}
+
+	main {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#contact-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 16px;
+		max-width: 600px;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+	
+	h1 {
+		font-size: 22px;
+		margin: 0;
+	}
+	
+	.back-link {
+		color: #4b5563;
+		font-size: 18px;
+		transition: transform 0.2s ease, color 0.2s ease;
+		margin-left: 12px;
+	}
+	
+	.back-link:hover {
+		color: #111827;
+		transform: translateX(-3px);
+	}
+
+	p {
+		color: #4b5563;
+		font-size: 16px;
+		line-height: 24px;
+		letter-spacing: -0.006em;
+		margin: 0;
+	}
+
+	.logo {
+		transition: transform 0.2s ease;
+	}
+
+	.logo:hover {
+		transform: scale(1.05);
+	}
+
+	.subtitle {
+		max-width: 600px;
+		margin: 1.5rem 0;
+	}
+
+	.button {
+		padding: 12px 24px;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 500;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		border: none;
+		cursor: pointer;
+	}
+
+	.button:hover {
+		transform: translateY(-2px);
+	}
+
+	.button.primary {
+		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+		color: white;
+		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	}
+
+	.trust-badges {
+		display: flex;
+		gap: 2rem;
+        margin: 0 auto;
+        justify-content: space-between;
+		color: #4b5563;
+		font-size: 0.9rem;
+	}
+
+	.trust-badges span {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	/* Contact form specific styles */
+	.contact-form {
+		width: 100%;
+		margin: 2rem 0;
+	}
+
+	.form-group {
+		margin-bottom: 1.5rem;
+		width: 100%;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 0.5rem;
+		color: #111827;
+		font-weight: 500;
+	}
+
+	input, textarea {
+		width: 100%;
+		padding: 12px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.9);
+		font-family: inherit;
+		font-size: 16px;
+	}
+
+	input:focus, textarea:focus {
+		outline: none;
+		border-color: #3245ff;
+		box-shadow: 0 0 0 3px rgba(50, 69, 255, 0.2);
+	}
+
+	button[type="submit"] {
+		width: 100%;
+		font-size: 16px;
+		margin-top: 1rem;
+	}
+
+	@media screen and (max-width: 768px) {
+		#container {
+			display: flex;
+			flex-direction: column;
+		}
+
+		#contact-section {
+			display: block;
+			padding-top: 10%;
+		}
+		
+		.trust-badges {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.corner-arrow {
+			top: 10px;
+			right: 10px;
+		}
+		
+		.corner-arrow .text {
+			display: none;
+		}
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	#contact-section > * {
+		animation: fadeIn 0.5s ease-out forwards;
+		opacity: 0;
+	}
+
+	#contact-section > *:nth-child(1) { animation-delay: 0.1s; }
+	#contact-section > *:nth-child(2) { animation-delay: 0.2s; }
+	#contact-section > *:nth-child(3) { animation-delay: 0.3s; }
+	#contact-section > *:nth-child(4) { animation-delay: 0.4s; }
+	#contact-section > *:nth-child(5) { animation-delay: 0.5s; }
+
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		scroll-behavior: smooth;
+	}
+
+	.corner-arrow {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		font-size: 24px;
+		color: #4b5563;
+		text-decoration: none;
+		transition: transform 0.2s ease, color 0.2s ease;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+	}
+	
+	.corner-arrow:hover {
+		transform: translateX(-3px);
+		color: #111827;
+	}
+
+	.hidden {
+		display: none;
+	}
+</style>
+
+<!-- Font Awesome script -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+
