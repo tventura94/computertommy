@@ -26,6 +26,8 @@ const currentYear = new Date().getFullYear();
         font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
         width: 100%;
         box-sizing: border-box;
+        position: relative;
+        z-index: 1;
     }
 
     .footer-container {
@@ -145,6 +147,11 @@ const currentYear = new Date().getFullYear();
     }
 
     @media (max-width: 768px) {
+        footer {
+            position: static;
+            margin-top: 2rem;
+        }
+        
         .footer-container {
             flex-direction: column;
             gap: 2rem;
