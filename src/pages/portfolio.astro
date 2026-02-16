@@ -1,0 +1,252 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import astroLogo from '../assets/computertommylogo.svg';
+import background from '../assets/background.svg';
+import { portfolioItems } from '../data/portfolio';
+---
+
+<Layout>
+	<div id="container">
+		<img id="background" src={background.src} alt="" fetchpriority="high" />
+		<main>
+			<section id="portfolio-section">
+				<a href="/" class="logo">
+					<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Home" />
+				</a>
+
+				<div class="heading-container">
+					<h1>Portfolio</h1>
+					<a href="/" class="back-link" aria-label="Back to home">
+						<i class="fas fa-arrow-left"></i>
+					</a>
+				</div>
+
+				<p class="subtitle">
+					Selected projects: software, band sites, and community sites. Each preview shows the live front page.
+				</p>
+
+				<div class="portfolio-grid">
+					{portfolioItems.map((item) => (
+						<article class="portfolio-card">
+							<div class="preview-wrap">
+								
+								<iframe
+									title={`Live preview of ${item.title}`}
+									src={item.url}
+									class="preview-iframe"
+									aria-hidden="true"
+								/>
+							</div>
+							<div class="card-body">
+								<span class="category">{item.category}</span>
+								<h2>{item.title}</h2>
+								<a href={item.url} target="_blank" rel="noopener noreferrer" class="card-link">
+									Visit site <i class="fas fa-external-link-alt"></i>
+								</a>
+							</div>
+						</article>
+					))}
+				</div>
+			</section>
+		</main>
+	</div>
+	<Footer />
+</Layout>
+
+<style>
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		filter: blur(100px);
+	}
+
+	#container {
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		min-height: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		min-height: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
+	#portfolio-section {
+		display: flex;
+		align-items: start;
+		flex-direction: column;
+		justify-content: center;
+		padding: 3rem 0;
+		width: 100%;
+		position: relative;
+	}
+
+	.heading-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+		margin-top: 0.25em;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	.back-link {
+		color: #4b5563;
+		font-size: 1.125rem;
+		transition: transform 0.2s ease, color 0.2s ease;
+	}
+
+	.back-link:hover {
+		color: #111827;
+		transform: translateX(-3px);
+	}
+
+	.subtitle {
+		font-size: 1.125rem;
+		color: #374151;
+		margin: 0 0 2.5rem 0;
+		max-width: 700px;
+	}
+
+	.logo {
+		transition: transform 0.2s ease;
+	}
+
+	.logo:hover {
+		transform: scale(1.05);
+	}
+
+	.portfolio-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem;
+		width: 100%;
+	}
+
+	.portfolio-card {
+		background: rgba(255, 255, 255, 0.9);
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.portfolio-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+	}
+
+	.preview-wrap {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		background: #f3f4f6;
+		overflow: hidden;
+	}
+
+	.preview-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 1;
+	}
+
+	/* When image fails to load (404), hide it so iframe shows */
+	.preview-img[src*="/portfolio/"] {
+		/* Fallback: if image missing, iframe is behind */
+	}
+
+	.preview-iframe {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: none;
+		z-index: 0;
+		pointer-events: none;
+		transform: scale(0.5);
+		transform-origin: top left;
+		width: 200%;
+		height: 200%;
+	}
+
+	.card-body {
+		padding: 1.25rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.category {
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: #3245ff;
+		font-weight: 600;
+	}
+
+	.card-body h2 {
+		font-size: 1.25rem;
+		margin: 0;
+		color: #111827;
+	}
+
+	.card-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: #3245ff;
+		text-decoration: none;
+		font-weight: 500;
+		margin-top: 0.5rem;
+		font-size: 0.95rem;
+		transition: gap 0.2s ease;
+	}
+
+	.card-link:hover {
+		gap: 0.75rem;
+	}
+
+	.card-link i {
+		font-size: 0.8em;
+	}
+
+	@media screen and (max-width: 768px) {
+		.portfolio-grid {
+			grid-template-columns: 1fr;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+	}
+</style>
+
+<script>
+	// If screenshot image fails to load (404), hide it so the iframe fallback is visible
+	document.querySelectorAll<HTMLImageElement>('.preview-img').forEach((img) => {
+		img.addEventListener('error', () => {
+			img.style.display = 'none';
+		});
+	});
+</script>
