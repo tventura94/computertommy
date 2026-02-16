@@ -8,7 +8,7 @@ export interface PortfolioItem {
 export const portfolioItems: PortfolioItem[] = [
   {
     slug: "notle-client",
-    title: "Notle Client",
+    title: "Notle.ai",
     category: "Software",
     url: "https://notle-client.vercel.app/",
   },
@@ -19,14 +19,14 @@ export const portfolioItems: PortfolioItem[] = [
     url: "https://guessmethod.com/",
   },
   {
-    slug: "keen-chaja",
-    title: "Keen Chaja",
+    slug: "snailhand",
+    title: "Snailhand",
     category: "Band site",
     url: "https://keen-chaja-4aaf31.netlify.app/",
   },
   {
     slug: "5th-world",
-    title: "5th World",
+    title: "5th World Collective",
     category: "Collective / Community",
     url: "https://5th-world.netlify.app/",
   },
