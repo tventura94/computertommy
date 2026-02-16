@@ -30,4 +30,16 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Collective / Community",
     url: "https://5th-world.netlify.app/",
   },
+  {
+    slug: "nathankingtattoos",
+    title: "Nathan King Tattoos",
+    category: "Personal site",
+    url: "https://nathankingtattoos.com/",
+  },
+  {
+    slug: "junggpt",
+    title: "JungGPT",
+    category: "AI Agent",
+    url: "https://junggpt.vercel.app/",
+  },
 ];
