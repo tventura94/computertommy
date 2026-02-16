@@ -40,6 +40,6 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "junggpt",
     title: "JungGPT",
     category: "AI Agent",
-    url: "https://junggpt.vercel.app/",
+    url: "https://theragpt-client-git-master-tventura94s-projects.vercel.app/",
   },
 ];
