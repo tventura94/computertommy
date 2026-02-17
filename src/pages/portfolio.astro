@@ -17,7 +17,7 @@ import { portfolioItems } from '../data/portfolio';
 				</a>
 
 				<div class="heading-container">
-					<h1>Sites I've built</h1>
+					<h1>Sites We've built</h1>
 					<a href="/" class="back-link" aria-label="Back to home">
 						<i class="fas fa-arrow-left"></i>
 					</a>
@@ -263,7 +263,7 @@ import { portfolioItems } from '../data/portfolio';
 
 	function holdScrollToTop() {
 		const start = Date.now();
-		const duration = 500;
+		const duration = 1000;
 		function tick() {
 			if (Date.now() - start > duration) return;
 			if (window.scrollY !== 0) window.scrollTo(0, 0);
