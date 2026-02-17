@@ -34,9 +34,10 @@ import { portfolioItems } from '../data/portfolio';
 								
 								<iframe
 									title={`Live preview of ${item.title}`}
-									src={item.url}
+									data-src={item.url}
 									class="preview-iframe"
 									aria-hidden="true"
+									tabindex="-1"
 								/>
 							</div>
 							<div class="card-body">
@@ -243,6 +244,39 @@ import { portfolioItems } from '../data/portfolio';
 </style>
 
 <script>
+	// Prevent load-related scroll: stay at top until page has settled
+	window.history.scrollRestoration = 'manual';
+	window.scrollTo(0, 0);
+
+	function holdScrollToTop() {
+		const start = Date.now();
+		const duration = 2000;
+		function tick() {
+			if (Date.now() - start > duration) return;
+			if (window.scrollY !== 0) window.scrollTo(0, 0);
+			requestAnimationFrame(tick);
+		}
+		requestAnimationFrame(tick);
+	}
+
+	function loadIframes() {
+		document.querySelectorAll<HTMLIFrameElement>('.preview-iframe').forEach((iframe) => {
+			const src = iframe.getAttribute('data-src');
+			if (src && !iframe.src) iframe.src = src;
+		});
+	}
+
+	// Defer iframe loading so they don’t trigger scroll during initial paint
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			holdScrollToTop();
+			setTimeout(loadIframes, 150);
+		});
+	} else {
+		holdScrollToTop();
+		setTimeout(loadIframes, 150);
+	}
+
 	// If screenshot image fails to load (404), hide it so the iframe fallback is visible
 	document.querySelectorAll<HTMLImageElement>('.preview-img').forEach((img) => {
 		img.addEventListener('error', () => {
