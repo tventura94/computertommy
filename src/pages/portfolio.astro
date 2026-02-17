@@ -263,7 +263,7 @@ import { portfolioItems } from '../data/portfolio';
 
 	function holdScrollToTop() {
 		const start = Date.now();
-		const duration = 1000;
+		const duration = 500;
 		function tick() {
 			if (Date.now() - start > duration) return;
 			if (window.scrollY !== 0) window.scrollTo(0, 0);

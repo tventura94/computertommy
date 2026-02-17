@@ -21,6 +21,10 @@ import background from '../assets/background.svg';
 			<p class="subtitle">
 				Drop a message below with what you need. I'll get back to you and we can figure out if it's a fit — no pressure.
 			</p>
+
+			<p class="direct-contact">
+				Text or call: <a href="mailto:tventura94@gmail.com">tventura94@gmail.com</a> · <a href="tel:+15083802013">(508) 380-2013</a>
+			</p>
 			
 			<form class="contact-form" name="contact" method="POST" action="/thank-you" netlify>
 				<input type="hidden" name="form-name" value="contact" />
@@ -140,6 +144,23 @@ import background from '../assets/background.svg';
 	.subtitle {
 		max-width: 600px;
 		margin: 1.5rem 0;
+	}
+
+	.direct-contact {
+		max-width: 600px;
+		margin: 0 0 1.5rem;
+		font-size: 15px;
+		color: #4b5563;
+	}
+
+	.direct-contact a {
+		color: #111827;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.direct-contact a:hover {
+		text-decoration: underline;
 	}
 
 	.button {
@@ -282,6 +303,11 @@ import background from '../assets/background.svg';
 			margin: 1rem 0;
 			font-size: 14px;
 			line-height: 1.4;
+		}
+
+		.direct-contact {
+			margin: 0 0 1rem;
+			font-size: 14px;
 		}
 		
 		button[type="submit"] {
