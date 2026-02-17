@@ -7,19 +7,19 @@ import background from '../assets/background.svg';
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main>
 		<section id="contact-section">
-			<a href="" class="logo">
+			<a href="/" class="logo">
 				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
 			</a>
 			
 			<div class="heading-container">
-				<h1>Get in touch with us</h1>
+				<h1>Tell me what you're trying to build</h1>
 				<a href="/" class="back-link" aria-label="Back to home">
 					<i class="fas fa-arrow-left"></i>
 				</a>
 			</div>
 			
 			<p class="subtitle">
-				Fill out the form below and we'll get back to you within 72 hours. We're excited to discuss your website needs!
+				Drop a message below with what you need. I'll get back to you and we can figure out if it's a fit — no pressure.
 			</p>
 			
 			<form class="contact-form" name="contact" method="POST" action="/thank-you" netlify>
@@ -53,14 +53,8 @@ import background from '../assets/background.svg';
 					<textarea id="message" name="message" rows="5" required></textarea>
 				</div>
 				
-				<button type="submit" class="button primary">Send Message</button>
+				<button type="submit" class="button primary">Send it</button>
 			</form>
-			
-			<div class="trust-badges">
-				<span>✓ 24 Hour Response</span>
-				<span>✓ No Obligation Quote</span>
-				<span>✓ Confidential</span>
-			</div>
 		</section>
 	</main>
 </div>

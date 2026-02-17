@@ -13,74 +13,83 @@ import background from '../assets/background.svg';
 			</a>
 			
 			<div class="heading-container">
-				<h1>About Computer Tommy</h1>
+				<h1>About</h1>
 				<a href="/" class="back-link" aria-label="Back to home">
 					<i class="fas fa-arrow-left"></i>
 				</a>
 			</div>
 			
 			<p class="subtitle">
-				We build beautiful, high-performance websites for people who want professional results without the headaches of DIY website builders.
+				Local dev who builds simple sites for small businesses and bands. No agency, no monthly fee traps.
 			</p>
 			
 			<div class="about-content">
 				<div class="about-card">
-					<h2>Our Mission</h2>
+					<div class="about-intro">
+						<div class="about-photo">
+							<img src="/tombo_2.jpg" alt="Tom playing bass" width="160" height="160" loading="lazy" />
+						</div>
+						<div class="about-intro-text">
+							<h2>Hi, I'm Tom.</h2>
+							<p class="about-intro-text-p">
+								Bass player, Web developer, Asheville-based. <br>I build websites for bands and small businesses that need something fast, clear, and built to last.
+							</p>
+						</div>
+					</div>
 					<p>
-						At Computer Tommy, we believe that getting a professional website shouldn't cost a fortune or require you to become a web designer overnight. Our mission is simple: deliver stunning, effective websites that work for your business, not against it.
+						Most local businesses don't need a bloated platform or a stack of monthly subscriptions. They need a site that loads quickly, shows up in search, and gives customers what they're looking for without friction. When a site is built well and sized for the actual traffic it gets, it performs better and costs a lot less to keep online.
+					</p>
+					<p>
+						That's how I approach things.
+					</p>
+					<p>
+						I build lightweight, modern sites that are fast, SEO-friendly, and easy to maintain. When we're done, you own the site. No lock-in, no ongoing fees unless you actually want ongoing work. Straightforward price, quick turnaround, and infrastructure that matches what you actually need.
+					</p>
+					<p>
+						In many cases, your only ongoing cost is the domain each year.
+					</p>
+					<p>
+						If that sounds like the kind of setup you're after, <a href="/contact">tell me what you're trying to build</a>.
 					</p>
 				</div>
 				
 				<div class="about-card">
-					<h2>Why We're Different</h2>
-					<p>
-						We started Computer Tommy after seeing too many small businesses struggle with frustrating website builders, excessive monthly fees, and disappointing results. Our approach eliminates the headaches:
-					</p>
-					<ul class="feature-list">
-						<li><span class="icon">✓</span> One-time fee - No recurring costs or surprise charges</li>
-						<li><span class="icon">✓</span> 24-hour turnaround - Get your site up and running quickly</li>
-						<li><span class="icon">✓</span> Professional design - Clean code that loads lightning-fast</li>
-						<li><span class="icon">✓</span> No technical skills needed - We handle everything for you</li>
-					</ul>
-				</div>
-				
-				<div class="about-card">
-					<h2>Our Process</h2>
+					<h2>How this works</h2>
 					<div class="process-steps">
 						<div class="step">
 							<div class="step-number">1</div>
 							<div class="step-content">
-								<h3>Consultation</h3>
-								<p>We discuss your needs, goals, and vision for your website.</p>
+								<h3>You message me</h3>
+								<p>Tell me what you need. We talk for ~10 minutes.</p>
 							</div>
 						</div>
 						<div class="step">
 							<div class="step-number">2</div>
 							<div class="step-content">
-								<h3>Design & Development</h3>
-								<p>We build your site with clean, efficient code that loads quickly.</p>
+								<h3>I quote it</h3>
+								<p>Straight price. No subscriptions, no surprise invoices.</p>
 							</div>
 						</div>
 						<div class="step">
 							<div class="step-number">3</div>
 							<div class="step-content">
-								<h3>Delivery</h3>
-								<p>We deliver your completed site within 72 hours.</p>
+								<h3>I build it</h3>
+								<p>Clean, fast site. Quick turnaround.</p>
 							</div>
 						</div>
 						<div class="step">
 							<div class="step-number">4</div>
 							<div class="step-content">
-								<h3>Support</h3>
-								<p>We provide ongoing support to ensure your site continues to perform.</p>
+								<h3>You own it</h3>
+								<p>It's yours. No monthly lock-in.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				
 				<div class="cta-container">
-					<p class="cta-text">Ready to get your professional website without the DIY headache?</p>
-					<a href="/contact" class="button primary">Get Started Today</a>
+					<p class="cta-text">Want to skip the runaround?</p>
+					<a href="/contact" class="button primary">Tell me what you need</a>
 				</div>
 			</div>
 		</section>
@@ -195,6 +204,54 @@ import background from '../assets/background.svg';
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 	}
 
+	.about-card a {
+		color: #3245ff;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.about-card a:hover {
+		text-decoration: underline;
+	}
+
+	.about-intro {
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+		margin-bottom: 1.5rem;
+	}
+
+	.about-photo {
+		flex-shrink: 0;
+		width: 200px;
+		height: 200px;
+		border-radius: 10px;
+		overflow: hidden;
+		background: #e5e7eb;
+	}
+
+	.about-photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 15%;
+	}
+
+	.about-intro-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.about-intro-text h2 {
+		margin-top: 0;
+	}
+
+	.about-intro-text p {
+		margin-bottom: 0;
+		width: 80%;
+		font-size: 1.4rem;
+	}
+
 	.feature-list {
 		list-style: none;
 		padding: 0;
@@ -301,6 +358,16 @@ import background from '../assets/background.svg';
 		
 		.about-card {
 			padding: 1.5rem;
+		}
+		
+		.about-intro {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+		
+		.about-photo {
+			width: 100px;
+			height: 100px;
 		}
 		
 		.process-steps {

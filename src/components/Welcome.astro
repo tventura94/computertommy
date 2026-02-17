@@ -6,43 +6,80 @@ import background from '../assets/background.svg';
 <div id="container">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main>
-		<section id="hero">
-			<a href="" class="logo">
-				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
+		<!-- Hero: one clear focal block -->
+		<header class="hero">
+			<a href="/" class="site-name">
+				<img src={astroLogo.src} width="115" height="48" alt="" />
 			</a>
-			<h1>Your website done in 72 hours, without the Wix headache</h1>
-			<p class="subtitle">
-				<strong>Professional website design and development with a lightning-fast turnaround.</strong> Beautiful, responsive, and ready for business - <em>all for just $300</em>. <br/><br/><strong>No monthly fees, no bloat, no hassle.</strong>
-			</p>
-			<div class="cta-buttons">
-				<a href="contact" class="button primary">Get Started Now</a>
-				<a href="services" class="button secondary">Our Services</a>
-				<a href="why-us" class="button secondary">Why Us?</a>
-				<a href="portfolio" class="button secondary">Portfolio</a>
-			</div>
-			<div class="trust-badges">
-				<span>✓ 24 Hour Delivery</span>
-				<span>✓ Satisfaction Guarantee</span>
-				<span>✓ Unlimited Revisions</span>
-			</div>
-			
-			<section id="why-us">
-				<h2>We get it - website builders are frustrating</h2>
-				<div class="pain-points">
-					<div class="pain-point">
-						<h3>No monthly fees</h3>
-						<p>Unlike Wix or Squarespace with their $20-$40 monthly subscriptions, you pay once and own your site forever.</p>
-					</div>
-					<div class="pain-point">
-						<h3>No slow, bloated code</h3>
-						<p>We build clean, fast websites that don't drag your business down with unnecessary scripts and plugins.</p>
-					</div>
-					<div class="pain-point">
-						<h3>No complicated builders</h3>
-						<p>Skip the frustrating drag-and-drop editors and let a professional handle it all for you in 72 hours.</p>
-					</div>
+			<div class="hero-content">
+				<h1 class="hero-title">I build simple, clean websites for local businesses that don't want to deal with agencies.</h1>
+				<p class="hero-subtitle">
+					One-time build. No monthly fees. Real dude.  Easy process. You own the site.<br />
+				</p>
+				<div class="hero-cta">
+					<a href="/contact" class="btn btn-primary">Tell me what you need →</a>
+					<a href="/portfolio" class="btn btn-secondary">Sites I've built</a>
+					<a href="/about" class="btn btn-secondary">About</a>
 				</div>
-			</section>
+			</div>
+		</header>
+
+		<!-- Sections: clear blocks with labels -->
+		<section class="block block-process" id="how-it-works">
+			<span class="block-label">How it works</span>
+			<h2 class="block-title">Five steps. No runaround.</h2>
+			<div class="process-card">
+				<ol class="process-list">
+					<li><span class="step-num">1</span> You message me</li>
+					<li><span class="step-num">2</span> We talk for 10 minutes</li>
+					<li><span class="step-num">3</span> I quote it</li>
+					<li><span class="step-num">4</span> I build it</li>
+					<li><span class="step-num">5</span> You own it</li>
+				</ol>
+			</div>
+		</section>
+
+		<section class="block block-pricing" id="simple-pricing">
+			<span class="block-label">Pricing</span>
+			<h2 class="block-title">Simple pricing</h2>
+			<div class="pricing-card">
+				<p class="pricing-lead">Most small business sites land around <strong>$300–$600</strong> depending on what you need.</p>
+				<p class="pricing-note">I'll tell you the price upfront. No subscriptions, no surprise invoices.</p>
+			</div>
+		</section>
+
+		<section class="block block-about" id="about-tom">
+			<span class="block-label">Who you're talking to</span>
+			<h2 class="block-title">Hi, I'm Tom.</h2>
+			<div class="about-card">
+				<div class="about-photo">
+					<img src="/tom.jpg" alt="Tom" loading="lazy" />
+				</div>
+				<div class="about-text">
+					<p class="about-lead">Bass player. Local. I build sites for bands and small businesses.</p>
+					<p>I hate monthly fee traps. I use modern tools (Netlify, etc.) and get you a clean site with quick turnaround. You own it when we're done.</p>
+					<p>If that sounds like what you're looking for, <a href="/contact">tell me what you're trying to build</a> and we'll go from there.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="block block-why" id="why-not-builders">
+			<span class="block-label">Why not a builder?</span>
+			<h2 class="block-title">Why not just use Wix or Squarespace?</h2>
+			<div class="why-grid">
+				<article class="why-card">
+					<h3>No monthly fees</h3>
+					<p>Pay once, own your site. No subscription eating into your budget.</p>
+				</article>
+				<article class="why-card">
+					<h3>Clean, fast code</h3>
+					<p>No bloated drag-and-drop output. Just a simple site that loads fast.</p>
+				</article>
+				<article class="why-card">
+					<h3>No learning curve</h3>
+					<p>You don't have to figure out the builder. Tell me what you need; I build it.</p>
+				</article>
+			</div>
 		</section>
 	</main>
 </div>
@@ -60,394 +97,359 @@ import background from '../assets/background.svg';
 
 	#container {
 		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		height: 100%;
-		max-width: 1200px;
+		min-height: 100%;
+		max-width: 720px;
 		margin: 0 auto;
+		padding: 0 1.5rem;
 	}
 
 	main {
-		height: 100%;
-		display: flex;
-		justify-content: center;
+		padding: 0 0 4rem 0;
 	}
 
-	#hero {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 3rem 1.5rem;
-		width: 100%;
+	/* ----- Hero ----- */
+	.hero {
+		padding: 3rem 0 4rem;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	}
 
-	h1 {
-		font-size: 2.5rem;
-		margin-top: 0.25em;
-		line-height: 1.2;
-		max-width: 800px;
-	}
-
-	#links {
-		display: flex;
-		gap: 16px;
-	}
-
-	#links a {
-		display: flex;
+	.hero .site-name {
+		display: inline-flex;
 		align-items: center;
-		padding: 10px 12px;
-		color: #111827;
+		gap: 0.75rem;
 		text-decoration: none;
-		transition: color 0.2s;
+		margin-bottom: 2.5rem;
+		transition: opacity 0.2s ease;
+		opacity: 0.95;
 	}
 
-	#links a:hover {
-		color: rgb(78, 80, 86);
+	.hero .site-name:hover {
+		opacity: 1;
 	}
 
-	#links a svg {
-		height: 1em;
-		margin-left: 8px;
+	.site-name-text {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: #0f172a;
+		letter-spacing: -0.02em;
 	}
 
-	#links a.button {
-		color: white;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		box-shadow:
-			inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-			inset 0 -2px 0 rgba(0, 0, 0, 0.24);
-		border-radius: 10px;
+	.hero-content {
+		max-width: 640px;
 	}
 
-	#links a.button:hover {
-		color: rgb(230, 230, 230);
-		box-shadow: none;
+	.hero-title {
+		font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+		font-weight: 700;
+		line-height: 1.25;
+		letter-spacing: -0.02em;
+		color: #0f172a;
+		margin: 0 0 1.25rem 0;
 	}
 
-	pre {
-		font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas,
-			'DejaVu Sans Mono', monospace;
-		font-weight: normal;
-		background: linear-gradient(14deg, #d83333 0%, #f041ff 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		margin: 0;
-	}
-
-	h2 {
-		margin: 0 0 1em;
-		font-weight: normal;
-		color: #111827;
-		font-size: 2rem;
-	}
-
-	p {
-		color: #4b5563;
+	.hero-subtitle {
 		font-size: 1.125rem;
-		line-height: 1.5;
-		letter-spacing: -0.006em;
-		margin: 0;
+		line-height: 1.6;
+		color: #64748b;
+		margin: 0 0 2rem 0;
+		max-width: 540px;
 	}
 
-	code {
-		display: inline-block;
-		background:
-			linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
-			linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
-		border-radius: 8px;
-		border: 1px solid transparent;
-		padding: 6px 8px;
-	}
-
-	.box {
-		padding: 16px;
-		background: rgba(255, 255, 255, 1);
-		border-radius: 16px;
-		border: 1px solid white;
-	}
-
-	#news {
-		position: absolute;
-		bottom: 16px;
-		right: 16px;
-		max-width: 300px;
-		text-decoration: none;
-		transition: background 0.2s;
-		backdrop-filter: blur(50px);
-	}
-
-	#news:hover {
-		background: rgba(255, 255, 255, 0.55);
-	}
-
-	.logo {
-		transition: transform 0.2s ease;
-	}
-
-	.logo:hover {
-		transform: scale(1.05);
-	}
-
-	.subtitle {
-		max-width: 700px;
-		margin: 1.5rem 0;
-	}
-
-	.cta-buttons {
+	.hero-cta {
 		display: flex;
-		gap: 1rem;
-		margin: 2rem 0;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
-	.button {
-		padding: 14px 28px;
-		border-radius: 8px;
-		text-decoration: none;
-		font-weight: 500;
-		font-size: 1.1rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	.btn {
 		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		font-size: 1rem;
+		font-weight: 500;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
 	}
 
-	.button:hover {
-		transform: translateY(-2px);
+	.btn:hover {
+		transform: translateY(-1px);
 	}
 
-	.button.primary {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+	.btn-primary {
+		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
 		color: white;
-		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+		box-shadow: 0 4px 14px rgba(50, 69, 255, 0.35);
 	}
 
-	.button.secondary {
-		background: rgba(255, 255, 255, 0.9);
-		color: #111827;
+	.btn-primary:hover {
+		box-shadow: 0 6px 20px rgba(50, 69, 255, 0.4);
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.85);
+		color: #334155;
 		border: 1px solid rgba(0, 0, 0, 0.1);
 	}
 
-	.trust-badges {
-		display: flex;
-		gap: 2rem;
-		margin-top: 2rem;
-		color: #4b5563;
-		font-size: 1rem;
-		flex-wrap: wrap;
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.95);
+		border-color: rgba(0, 0, 0, 0.15);
 	}
 
-	.trust-badges span {
+	/* ----- Section blocks ----- */
+	.block {
+		padding: 3.5rem 0 0;
+	}
+
+	.block-label {
+		display: block;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #6366f1;
+		margin-bottom: 0.5rem;
+	}
+
+	.block-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		color: #0f172a;
+		margin: 0 0 1.5rem 0;
+		line-height: 1.3;
+	}
+
+	/* Process */
+	.block-process .process-card {
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 12px;
+		padding: 1.75rem 2rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+	}
+
+	.process-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.875rem;
+	}
+
+	.process-list li {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 1rem;
+		font-size: 1.0625rem;
+		color: #334155;
+		line-height: 1.4;
 	}
 
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
+	.step-num {
+		flex-shrink: 0;
+		width: 1.75rem;
+		height: 1.75rem;
+		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
+		color: white;
+		border-radius: 50%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.8125rem;
+		font-weight: 600;
 	}
 
-	#hero > * {
-		animation: fadeIn 0.5s ease-out forwards;
-		opacity: 0;
-	}
-
-	#hero > *:nth-child(1) { animation-delay: 0.1s; }
-	#hero > *:nth-child(2) { animation-delay: 0.2s; }
-	#hero > *:nth-child(3) { animation-delay: 0.3s; }
-	#hero > *:nth-child(4) { animation-delay: 0.4s; }
-	#hero > *:nth-child(5) { animation-delay: 0.5s; }
-	#hero > *:nth-child(6) { animation-delay: 0.6s; }
-
-	#why-us {
-		margin-top: 4rem;
-		width: 100%;
-		max-width: 1100px;
-	}
-
-	#why-us h2 {
-		font-size: 1.75rem;
-		margin-bottom: 2rem;
-		color: #111827;
-	}
-
-	.pain-points {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1.5rem;
-	}
-
-	.pain-point {
-		background: rgba(255, 255, 255, 0.8);
-		padding: 1.75rem;
+	/* Pricing */
+	.block-pricing .pricing-card {
+		background: rgba(99, 102, 241, 0.06);
+		border: 1px solid rgba(99, 102, 241, 0.15);
 		border-radius: 12px;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
-	}
-	
-	.pain-point:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+		padding: 1.5rem 1.75rem;
+		max-width: 480px;
 	}
 
-	.pain-point h3 {
-		font-size: 1.2rem;
-		margin: 0 0 1rem 0;
-		color: #111827;
+	.pricing-lead {
+		font-size: 1.0625rem;
+		color: #0f172a;
+		font-weight: 500;
+		margin: 0 0 0.5rem 0;
+		line-height: 1.5;
 	}
 
-	.pain-point p {
+	.pricing-note {
+		font-size: 0.9375rem;
+		color: #64748b;
 		margin: 0;
-		font-size: 1rem;
-		line-height: 1.6;
+		line-height: 1.5;
 	}
 
-	html,
-	body {
-		margin: 0;
+	/* About Tom */
+	.block-about .about-card {
+		display: flex;
+		gap: 2rem;
+		align-items: flex-start;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 16px;
+		padding: 2rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+	}
+
+	.about-photo {
+		flex-shrink: 0;
+		width: 160px;
+		height: 160px;
+		border-radius: 12px;
+		overflow: hidden;
+		background: #e2e8f0;
+	}
+
+	.about-photo img {
 		width: 100%;
 		height: 100%;
-		scroll-behavior: smooth;
-		overflow-x: hidden;
+		object-fit: cover;
 	}
-	
-	/* Responsive styles */
-	@media screen and (max-width: 1200px) {
+
+	.about-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.about-lead {
+		font-size: 1.0625rem;
+		font-weight: 600;
+		color: #0f172a;
+		margin: 0 0 0.75rem 0;
+		line-height: 1.5;
+	}
+
+	.about-text p {
+		font-size: 1rem;
+		color: #475569;
+		line-height: 1.6;
+		margin: 0 0 0.75rem 0;
+	}
+
+	.about-text p:last-child {
+		margin-bottom: 0;
+	}
+
+	.about-text a {
+		color: #6366f1;
+		text-decoration: none;
+		font-weight: 500;
+	}
+
+	.about-text a:hover {
+		text-decoration: underline;
+	}
+
+	/* Why not builders */
+	.why-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
+	}
+
+	.why-card {
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.why-card:hover {
+		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+		transform: translateY(-2px);
+	}
+
+	.why-card h3 {
+		font-size: 1rem;
+		font-weight: 600;
+		color: #0f172a;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.why-card p {
+		font-size: 0.9375rem;
+		color: #64748b;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	/* ----- Responsive ----- */
+	@media screen and (max-width: 768px) {
 		#container {
 			padding: 0 1rem;
 		}
-		
-		h1 {
-			font-size: 2.2rem;
-		}
-		
-		.pain-points {
-			gap: 1.25rem;
-		}
-	}
 
-	@media screen and (max-width: 992px) {
-		h1 {
-			font-size: 1.9rem;
+		.hero {
+			padding: 2rem 0 3rem;
 		}
-		
-		h2 {
-			font-size: 1.75rem;
+
+		.hero .logo {
+			margin-bottom: 2rem;
 		}
-		
-		.subtitle {
+
+		.hero-title {
+			font-size: 1.625rem;
+		}
+
+		.hero-subtitle {
 			font-size: 1rem;
+			margin-bottom: 1.5rem;
 		}
-		
-		.pain-point {
-			padding: 1.5rem;
-		}
-	}
 
-	@media screen and (max-width: 768px) {
-		#container {
-			display: flex;
+		.hero-cta {
 			flex-direction: column;
-			height: auto;
+			align-items: stretch;
 		}
 
-		#hero {
-			padding: 2rem 1rem;
-		}
-		
-		h1 {
-			font-size: 1.7rem;
-			line-height: 1.3;
-		}
-		
-		h2 {
-			font-size: 1.5rem;
-		}
-
-		#links {
-			flex-wrap: wrap;
-		}
-
-		#links a.button {
-			padding: 14px 18px;
-		}
-
-		#news {
-			right: 16px;
-			left: 16px;
-			bottom: 2.5rem;
-			max-width: 100%;
-		}
-		
-		.cta-buttons {
-			flex-direction: column;
-			width: 100%;
-			gap: 0.75rem;
-			align-items: center;
-		}
-		
-		.button {
+		.btn {
 			text-align: center;
-			max-width: 280px;
-			width: 100%;
-			padding: 12px 20px;
-			font-size: 1rem;
+			padding: 0.875rem 1.25rem;
 		}
-		
-		.trust-badges {
+
+		.block {
+			padding-top: 2.5rem;
+		}
+
+		.block-title {
+			font-size: 1.35rem;
+		}
+
+		.block-process .process-card {
+			padding: 1.5rem 1.25rem;
+		}
+
+		.block-about .about-card {
 			flex-direction: column;
-			gap: 1rem;
-			margin-top: 1.5rem;
+			padding: 1.5rem;
+			align-items: center;
+			text-align: center;
 		}
-		
-		.pain-points {
+
+		.about-photo {
+			width: 140px;
+			height: 140px;
+		}
+
+		.about-text {
+			text-align: left;
+		}
+
+		.why-grid {
 			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-		
-		#why-us {
-			margin-top: 2.5rem;
-		}
-		
-		.pain-point h3 {
-			font-size: 1.1rem;
-			margin-bottom: 0.75rem;
 		}
 	}
 
 	@media screen and (max-width: 480px) {
-		#hero {
-			padding: 1.5rem 0.75rem;
-		}
-		
-		h1 {
+		.hero-title {
 			font-size: 1.5rem;
-		}
-		
-		p {
-			font-size: 0.95rem;
-		}
-		
-		.button {
-			padding: 10px 16px;
-		}
-		
-		.trust-badges {
-			font-size: 0.9rem;
-		}
-		
-		#why-us h2 {
-			font-size: 1.4rem;
-			margin-bottom: 1.5rem;
-		}
-		
-		.pain-point {
-			padding: 1.25rem;
-		}
-	}
-
-	@media screen and (max-height: 368px) {
-		#news {
-			display: none;
 		}
 	}
 </style>

@@ -17,21 +17,19 @@ import { portfolioItems } from '../data/portfolio';
 				</a>
 
 				<div class="heading-container">
-					<h1>Portfolio</h1>
+					<h1>Sites I've built</h1>
 					<a href="/" class="back-link" aria-label="Back to home">
 						<i class="fas fa-arrow-left"></i>
 					</a>
 				</div>
 
 				<p class="subtitle">
-					Fast websites for small businesses.
-					Live in 72 hours. No subscriptions.</p>
+					What they needed, what we shipped. No agencies, no monthly traps.</p>
 
 				<div class="portfolio-grid">
 					{portfolioItems.map((item) => (
 						<article class="portfolio-card">
 							<div class="preview-wrap">
-								
 								<iframe
 									title={`Live preview of ${item.title}`}
 									data-src={item.url}
@@ -43,6 +41,8 @@ import { portfolioItems } from '../data/portfolio';
 							<div class="card-body">
 								<span class="category">{item.category}</span>
 								<h2>{item.title}</h2>
+								<p class="need">{item.whatTheyNeeded}</p>
+								<p class="result">{item.result}</p>
 								<a href={item.url} target="_blank" rel="noopener noreferrer" class="card-link">
 									Visit site <i class="fas fa-external-link-alt"></i>
 								</a>
@@ -212,6 +212,19 @@ import { portfolioItems } from '../data/portfolio';
 		color: #111827;
 	}
 
+	.card-body .need,
+	.card-body .result {
+		font-size: 0.95rem;
+		color: #4b5563;
+		line-height: 1.5;
+		margin: 0.5rem 0 0 0;
+	}
+
+	.card-body .result {
+		font-weight: 500;
+		color: #374151;
+	}
+
 	.card-link {
 		display: inline-flex;
 		align-items: center;
@@ -250,7 +263,7 @@ import { portfolioItems } from '../data/portfolio';
 
 	function holdScrollToTop() {
 		const start = Date.now();
-		const duration = 2000;
+		const duration = 1000;
 		function tick() {
 			if (Date.now() - start > duration) return;
 			if (window.scrollY !== 0) window.scrollTo(0, 0);
