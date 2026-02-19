@@ -11,6 +11,15 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "JSC PsyD",
+    title: "Portfolio Site",
+    category: "Personal site",
+    url: "https://superlative-crumble-35189d.netlify.app/",
+    whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
+    result:
+      "Simple site to showcase work and take inquiries. Built in a weekend.",
+  },
+  {
     slug: "notle-client",
     title: "Notle.ai",
     category: "Software",
@@ -48,7 +57,8 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Personal site",
     url: "https://nathankingtattoos.com/",
     whatTheyNeeded: "A portfolio site to book sessions and show work.",
-    result: "Simple site to showcase work and take inquiries. Built in a weekend.",
+    result:
+      "Simple site to showcase work and take inquiries. Built in a weekend.",
   },
   {
     slug: "junggpt",

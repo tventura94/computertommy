@@ -11,8 +11,11 @@ const currentYear = new Date().getFullYear();
             </a>
             <p class="copyright">© {currentYear} Computer Tommy. All rights reserved.</p>
         </div>
-        
-      
+        <div class="footer-contact">
+            <span class="contact-label">Contact</span>
+            <a href="tel:5083802013" class="contact-link">508 380 2013</a>
+            <a href="mailto:tventura94@gmail.com" class="contact-link">tventura94@gmail.com</a>
+        </div>
     </div>
 </footer>
 
@@ -35,12 +38,14 @@ const currentYear = new Date().getFullYear();
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-end;
         gap: clamp(2rem, 4vw, 3rem);
         width: 100%;
     }
 
     .footer-branding {
-        flex: 1 1 300px;
+        flex: 0 1 auto;
         min-width: 200px;
     }
 
@@ -63,6 +68,35 @@ const currentYear = new Date().getFullYear();
         color: #6b7280;
         font-size: 0.9rem;
         margin: 0;
+    }
+
+    .footer-contact {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.35rem;
+        text-align: right;
+    }
+
+    .contact-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #9ca3af;
+        margin-bottom: 0.25rem;
+    }
+
+    .contact-link {
+        color: #4b5563;
+        text-decoration: none;
+        font-size: 0.9rem;
+        letter-spacing: 0.01em;
+        transition: color 0.2s ease;
+    }
+
+    .contact-link:hover {
+        color: #3245ff;
     }
 
     .footer-links {
@@ -140,6 +174,14 @@ const currentYear = new Date().getFullYear();
         .copyright {
             color: #9ca3af;
         }
+
+        .contact-label {
+            color: #6b7280;
+        }
+
+        .contact-link {
+            color: #d1d5db;
+        }
         
         .link-group a {
             color: #d1d5db;
@@ -154,7 +196,13 @@ const currentYear = new Date().getFullYear();
         
         .footer-container {
             flex-direction: column;
+            align-items: stretch;
             gap: 2rem;
+        }
+
+        .footer-contact {
+            align-items: center;
+            text-align: center;
         }
 
         .footer-links {
@@ -188,6 +236,11 @@ const currentYear = new Date().getFullYear();
             text-align: center;
             min-width: 0;
             width: 100%;
+        }
+
+        .footer-contact {
+            align-items: center;
+            text-align: center;
         }
         
         .link-group h3 {
