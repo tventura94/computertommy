@@ -12,7 +12,7 @@ export interface PortfolioItem {
 export const portfolioItems: PortfolioItem[] = [
   {
     slug: "JSC PsyD",
-    title: "Portfolio Site",
+    title: "JSC PsyD",
     category: "Personal site",
     url: "https://superlative-crumble-35189d.netlify.app/",
     whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
