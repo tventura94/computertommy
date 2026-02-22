@@ -11,16 +11,35 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    slug: "Jon Q",
-    title: "Jon Q",
-    category: "Personal site",
-    url: "https://jonqcountry.netlify.app/",
-    whatTheyNeeded: "A portfolio site to showcase music and take inquiries.",
-    result: "Beautiful site to showcase music and take inquiries.",
+    slug: "future-hippies-of-funk",
+    title: "Future Hippies of Funk (Sample Site)",
+    category: "Band site",
+    url: "https://futurehippiesoffunk.netlify.app/",
+    whatTheyNeeded: "A site to showoff their music and shows.",
+    result:
+      "Simple site w/ a beautiful design to showcase their music and shows.",
   },
   {
+    slug: "carolina-troubadours",
+    title: "Carolina Troubadours (Sample Site)",
+    category: "Band site",
+    url: "https://carolinatroubadors.netlify.app/",
+    whatTheyNeeded: "A site to showoff their music and shows.",
+    result:
+      "Simple site w/ a beautiful design to showcase their music and shows.",
+  },
+  {
+    slug: "fresh-grill-bbq",
+    title: "Fresh Grills BBQ (Sample Site)",
+    category: "Service site",
+    url: "https://freshgrills.netlify.app/",
+    whatTheyNeeded: "A site to showoff their services.",
+    result: "Simple site w/ a beautiful design to showcase their services.",
+  },
+
+  {
     slug: "JSC PsyD",
-    title: "JSC PsyD",
+    title: "JSC PsyD (Sample Site)",
     category: "Personal site",
     url: "https://superlative-crumble-35189d.netlify.app/",
     whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
