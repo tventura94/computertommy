@@ -1,4 +1,23 @@
 
+---
+const localBusinessSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'LocalBusiness',
+	name: 'Computer Tommy',
+	url: 'https://computertommy.com',
+	telephone: '+1-508-380-2013',
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: '10 Tunnel Rd',
+		addressLocality: 'Asheville',
+		addressRegion: 'NC',
+		postalCode: '28806',
+		addressCountry: 'US',
+	},
+	sameAs: ['https://instagram.com/computertommy'],
+};
+---
+
 <!doctype html>
 
 <html lang="en">
@@ -8,6 +27,7 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Computer Tommy: Professional Website Design and Development</title>
+		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 	</head>
 	<body>
 		<slot />
