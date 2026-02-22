@@ -11,6 +11,31 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "fresh-grill-bbq",
+    title: "Fresh Grills BBQ (Sample Site)",
+    category: "Service site",
+    url: "https://freshgrills.netlify.app/",
+    whatTheyNeeded: "A site to showoff their services.",
+    result: "Simple site w/ a beautiful design to showcase their services.",
+  },
+  {
+    slug: "notle-client",
+    title: "Notle.ai",
+    category: "Software",
+    url: "https://notle-client.vercel.app/",
+    whatTheyNeeded: "A clean app for their product.",
+    result: "Built a simple, fast front-end they could ship with.",
+  },
+  {
+    slug: "JSC PsyD",
+    title: "JSC PsyD (Sample Site)",
+    category: "Personal site",
+    url: "https://superlative-crumble-35189d.netlify.app/",
+    whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
+    result:
+      "Simple site to showcase work and take inquiries. Built in a weekend.",
+  },
+  {
     slug: "future-hippies-of-funk",
     title: "Future Hippies of Funk (Sample Site)",
     category: "Band site",
@@ -28,32 +53,7 @@ export const portfolioItems: PortfolioItem[] = [
     result:
       "Simple site w/ a beautiful design to showcase their music and shows.",
   },
-  {
-    slug: "fresh-grill-bbq",
-    title: "Fresh Grills BBQ (Sample Site)",
-    category: "Service site",
-    url: "https://freshgrills.netlify.app/",
-    whatTheyNeeded: "A site to showoff their services.",
-    result: "Simple site w/ a beautiful design to showcase their services.",
-  },
 
-  {
-    slug: "JSC PsyD",
-    title: "JSC PsyD (Sample Site)",
-    category: "Personal site",
-    url: "https://superlative-crumble-35189d.netlify.app/",
-    whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
-    result:
-      "Simple site to showcase work and take inquiries. Built in a weekend.",
-  },
-  {
-    slug: "notle-client",
-    title: "Notle.ai",
-    category: "Software",
-    url: "https://notle-client.vercel.app/",
-    whatTheyNeeded: "A clean app for their product.",
-    result: "Built a simple, fast front-end they could ship with.",
-  },
   {
     slug: "guessmethod",
     title: "Guess Method",
