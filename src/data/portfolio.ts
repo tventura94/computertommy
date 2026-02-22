@@ -11,6 +11,14 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "Jon Q",
+    title: "Jon Q",
+    category: "Personal site",
+    url: "https://jonqcountry.netlify.app/",
+    whatTheyNeeded: "A portfolio site to showcase music and take inquiries.",
+    result: "Beautiful site to showcase music and take inquiries.",
+  },
+  {
     slug: "JSC PsyD",
     title: "JSC PsyD",
     category: "Personal site",
