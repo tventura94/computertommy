@@ -96,6 +96,26 @@ import background from '../assets/background.svg';
 						</div>
 						<a href="/contact" class="button primary">Tell me what you need</a>
 					</div>
+
+					<div class="pricing-card">
+						<div class="pricing-header">
+							<h3>Full multi-page site</h3>
+							<div class="price">$1500+</div>
+							<div class="price-period">performance + SEO focused</div>
+						</div>
+						<div class="pricing-features">
+							<ul>
+								<li><span class="check">✓</span> Full multi-page build (custom design)</li>
+								<li><span class="check">✓</span> Near-perfect PageSpeed scores</li>
+								<li><span class="check">✓</span> SEO optimization + structured data</li>
+								<li><span class="check">✓</span> Copywriting assistance</li>
+								<li><span class="check">✓</span> Tracking/analytics setup</li>
+								<li><span class="check">✓</span> CMS options (optional)</li>
+								<li><span class="check">✓</span> Option for continued support</li>
+							</ul>
+						</div>
+						<a href="/contact" class="button primary">Get a quote</a>
+					</div>
 					
 					<div class="pricing-card">
 						<div class="pricing-header">
@@ -307,7 +327,7 @@ import background from '../assets/background.svg';
 
 	.pricing-cards {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 		gap: 2rem;
 		margin-top: 2rem;
 	}

@@ -46,6 +46,55 @@ import background from '../assets/background.svg';
 				<p class="pricing-lead">Most small business sites land around <strong>$300–$600</strong> depending on what you need.</p>
 				<p class="pricing-note">I'll tell you the price upfront. No subscriptions, no surprise invoices.</p>
 			</div>
+			<div class="pricing-grid">
+				<article class="pricing-tier">
+					<header class="pricing-tier-header">
+						<h3>Small business site</h3>
+						<div class="price">$300+</div>
+						<div class="price-period">one-time. you own it.</div>
+					</header>
+					<ul class="tier-features">
+						<li>Responsive, clean design</li>
+						<li>Quick turnaround</li>
+						<li>Basic SEO</li>
+						<li>Contact form</li>
+						<li>No monthly fees</li>
+					</ul>
+					<a href="/contact" class="btn btn-primary">Tell me what you need →</a>
+				</article>
+
+				<article class="pricing-tier featured">
+					<header class="pricing-tier-header">
+						<h3>Full multi-page site</h3>
+						<div class="price">$1500+</div>
+						<div class="price-period">performance + SEO focused</div>
+					</header>
+					<ul class="tier-features">
+						<li>Full multi-page build (custom design)</li>
+						<li>Near-perfect PageSpeed scores</li>
+						<li>SEO optimization + structured data</li>
+						<li>Copywriting assistance</li>
+						<li>Tracking/analytics setup</li>
+						<li>CMS Integration (optional)</li>
+						<li>Option for continued support</li>
+					</ul>
+					<a href="/contact" class="btn btn-primary">Get a quote →</a>
+				</article>
+
+				<article class="pricing-tier">
+					<header class="pricing-tier-header">
+						<h3>Other stuff</h3>
+						<div class="price">Quote</div>
+						<div class="price-period">tools, apps, custom work</div>
+					</header>
+					<ul class="tier-features">
+						<li>Internal tools</li>
+						<li>AI or custom apps</li>
+						<li>Consulting</li>
+					</ul>
+					<a href="/contact" class="btn btn-secondary">Let's figure it out</a>
+				</article>
+			</div>
 		</section>
 
 		<section class="block block-about" id="about-tom">
@@ -267,7 +316,7 @@ import background from '../assets/background.svg';
 		border: 1px solid rgba(99, 102, 241, 0.15);
 		border-radius: 12px;
 		padding: 1.5rem 1.75rem;
-		max-width: 480px;
+		max-width: 560px;
 	}
 
 	.pricing-lead {
@@ -283,6 +332,83 @@ import background from '../assets/background.svg';
 		color: #64748b;
 		margin: 0;
 		line-height: 1.5;
+	}
+
+	.pricing-grid {
+		margin-top: 1.25rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1rem;
+	}
+
+	.pricing-tier {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.5rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.pricing-tier.featured {
+		border-color: rgba(99, 102, 241, 0.28);
+		background: rgba(99, 102, 241, 0.06);
+	}
+
+	.pricing-tier-header h3 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: #0f172a;
+		letter-spacing: -0.01em;
+	}
+
+	.price {
+		font-size: 1.75rem;
+		font-weight: 800;
+		color: #0f172a;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+	}
+
+	.price-period {
+		margin-top: 0.25rem;
+		color: #64748b;
+		font-size: 0.9375rem;
+		line-height: 1.4;
+	}
+
+	.tier-features {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.tier-features li {
+		position: relative;
+		padding-left: 1.25rem;
+		color: #334155;
+		font-size: 0.95rem;
+		line-height: 1.45;
+	}
+
+	.tier-features li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: #6366f1;
+		font-weight: 700;
+	}
+
+	.pricing-tier .btn {
+		margin-top: auto;
+		width: fit-content;
 	}
 
 	/* About Tom */
@@ -424,6 +550,10 @@ import background from '../assets/background.svg';
 
 		.block-process .process-card {
 			padding: 1.5rem 1.25rem;
+		}
+
+		.pricing-tier .btn {
+			width: 100%;
 		}
 
 		.block-about .about-card {
