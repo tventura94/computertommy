@@ -74,7 +74,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "5th-world",
     title: "5th World Collective",
     category: "Collective / Community",
-    url: "https://5th-world.netlify.app/",
+    url: "https://5thworldcollective.com/",
     whatTheyNeeded: "A hub for their collective and events.",
     result: "One place for the group, events, and links. No bloat.",
   },
