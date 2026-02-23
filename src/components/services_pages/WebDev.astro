@@ -2,6 +2,15 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
+import Breadcrumbs from '../Breadcrumbs.astro';
+import { locations } from '../../data/locations';
+
+const featuredSlug = 'asheville-nc';
+const featured = locations.find((l) => l.slug === featuredSlug);
+const otherLocations = locations
+	.filter((l) => l.slug !== featuredSlug)
+	.slice()
+	.sort((a, b) => a.city.localeCompare(b.city));
 ---
 
 <div id="container">
@@ -18,16 +27,51 @@ import background from '../../assets/background.svg';
 					<i class="fas fa-arrow-left"></i>
 				</a>
 			</div>
+
+			<Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/services', label: 'Services' }]} current="Web development" />
 			
 			<p class="subtitle">
 				Professional, fast-loading websites without the headaches of DIY website builders or expensive monthly fees.
 			</p>
+
+			<section class="service-areas" aria-label="City pages">
+				<h2 class="areas-title">City pages</h2>
+				<p class="areas-subtitle">
+					Each city page is tuned with local proof + examples (not just a swapped city name).
+				</p>
+
+				{featured ? (
+					<a class="featured-city" href={`/services/web-development/${featured.slug}/`}>
+						<div class="featured-city-top">
+							<span class="featured-city-badge">Local</span>
+							<h3 class="featured-city-title">
+								{featured.city}, {featured.regionLabel}
+							</h3>
+						</div>
+						<p class="featured-city-subtitle">
+							{featured.seo?.description ?? 'Fast, clean websites. 72-hour turnaround. No monthly fees.'}
+						</p>
+						{featured.proof?.landmarks?.length ? (
+							<p class="featured-city-meta">Landmarks: {featured.proof.landmarks.join(', ')}</p>
+						) : null}
+						<span class="featured-city-cta">View the Asheville page →</span>
+					</a>
+				) : null}
+
+				<div class="areas-links">
+					{otherLocations.map((l) => (
+						<a class="area-pill" href={`/services/web-development/${l.slug}/`}>
+							{l.city}, {l.regionLabel}
+						</a>
+					))}
+				</div>
+			</section>
 			
 			<div class="service-content">
 				<div class="service-detail-card">
 					<h2>How We Can Help</h2>
 					<p>
-						Getting a professional website shouldn't cost a fortune or require you to become a web designer overnight. We deliver stunning, effective websites with a 24-hour turnaround and no recurring fees.
+						Getting a professional website shouldn't cost a fortune or require you to become a web designer overnight. We deliver stunning, effective websites with a 72-hour turnaround and no recurring fees.
 					</p>
                     
                     <div class="service-highlights">
@@ -124,7 +168,7 @@ import background from '../../assets/background.svg';
                             </div>
                             <div class="benefit-content">
                                 <h3>One-Time Fee</h3>
-                                <p>Pay just $300 once and own your website forever. No monthly subscriptions or hidden fees, unlike Wix or Squarespace.</p>
+                                <p>One-time build, and you own your website. No monthly subscriptions or hidden fees, unlike Wix or Squarespace.</p>
                             </div>
                         </div>
                         
@@ -133,8 +177,8 @@ import background from '../../assets/background.svg';
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="benefit-content">
-                                <h3>24-Hour Turnaround</h3>
-                                <p>Get your professional website up and running in just one day, not weeks or months.</p>
+                                <h3>72-Hour Turnaround</h3>
+                                <p>Get your professional website up and running in 72 hours, not weeks or months.</p>
                             </div>
                         </div>
                         
@@ -271,6 +315,116 @@ import background from '../../assets/background.svg';
 		margin: 1.5rem 0 2.5rem;
 		max-width: 800px;
 		line-height: 1.6;
+	}
+
+	.service-areas {
+		width: 100%;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 16px;
+		padding: 1.5rem 2rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		margin: 0 0 2rem 0;
+	}
+
+	.areas-title {
+		margin: 0 0 0.35rem 0;
+		font-size: 1.2rem;
+		color: #111827;
+	}
+
+	.areas-subtitle {
+		margin: 0 0 1rem 0;
+		color: #4b5563;
+		font-size: 1rem;
+		line-height: 1.55;
+	}
+
+	.featured-city {
+		display: block;
+		text-decoration: none;
+		border-radius: 16px;
+		padding: 1.25rem 1.25rem;
+		margin: 0 0 1rem 0;
+		background: rgba(99, 102, 241, 0.08);
+		border: 1px solid rgba(99, 102, 241, 0.22);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.featured-city:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+	}
+
+	.featured-city-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 0.35rem;
+	}
+
+	.featured-city-badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.25rem 0.6rem;
+		border-radius: 999px;
+		background: rgba(50, 69, 255, 0.15);
+		color: #3245ff;
+		font-weight: 700;
+		font-size: 0.75rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.featured-city-title {
+		margin: 0;
+		color: #111827;
+		font-size: 1.1rem;
+	}
+
+	.featured-city-subtitle {
+		margin: 0 0 0.5rem 0;
+		color: #475569;
+		line-height: 1.6;
+		font-size: 0.98rem;
+	}
+
+	.featured-city-meta {
+		margin: 0 0 0.75rem 0;
+		color: #64748b;
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.featured-city-cta {
+		display: inline-block;
+		color: #3245ff;
+		font-weight: 700;
+		font-size: 0.95rem;
+	}
+
+	.areas-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.area-pill {
+		display: inline-block;
+		padding: 0.6rem 0.9rem;
+		border-radius: 999px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		background: rgba(255, 255, 255, 0.85);
+		color: #334155;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.area-pill:hover {
+		border-color: rgba(99, 102, 241, 0.28);
 	}
 	
 	.service-content {

@@ -1,0 +1,475 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Footer from '../../../components/Footer.astro';
+import { getNearbyLocations, locations } from '../../../data/locations';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import { getEntry } from 'astro:content';
+import { portfolioItems } from '../../../data/portfolio';
+import type { PortfolioItem } from '../../../data/portfolio';
+
+type LocationContent = {
+	h1?: string;
+	heroSubtitle?: string;
+	introBullets?: string[];
+	painPoints?: string[];
+	processSteps?: string[];
+	faqs?: { q: string; a: string }[];
+	caseStudySlugs?: string[];
+	internalLinks?: { href: string; label: string }[];
+};
+
+export function getStaticPaths() {
+	return locations.map((location) => ({
+		params: { location: location.slug },
+		props: { location },
+	}));
+}
+
+const { location } = Astro.props as { location: (typeof locations)[number] };
+
+const entry = await getEntry('web_dev_locations', location.slug);
+const rendered = entry ? await entry.render() : null;
+const MarkdownContent = rendered?.Content;
+const fm = entry?.data as LocationContent | undefined;
+
+const defaultModules = {
+	heroSubtitle: 'Fast, clean websites — no builders, no bloat. 72-hour turnaround. No monthly fees.',
+	introBullets: [
+		'Modern design that fits your business',
+		'Mobile-first and fast loading',
+		'Basic SEO setup (titles/meta + indexing basics)',
+		'Contact form + clear calls-to-action',
+		'One-time build — you own it',
+	],
+	painPoints: ['Your current site looks dated or loads slow on mobile', 'You want leads, not a complicated platform'],
+	processSteps: [
+		'10-minute call to confirm pages + goal',
+		'You send logo/photos/copy (or I help)',
+		'I build and share a preview within 72 hours',
+		'Quick tweaks, then launch',
+	],
+	faqs: [
+		{
+			q: 'Is this a monthly service?',
+			a: 'No. It’s a one-time build. You own the site when we’re done.',
+		},
+		{
+			q: 'Can you help with copy and photos?',
+			a: 'Yep. Send what you have and I’ll help fill gaps so it still looks clean and professional.',
+		},
+	],
+};
+
+const h1 = fm?.h1 ?? `Web design in ${location.city}, ${location.regionLabel}`;
+const heroSubtitle = fm?.heroSubtitle ?? location.seo?.description ?? defaultModules.heroSubtitle;
+const introBullets = fm?.introBullets ?? defaultModules.introBullets;
+const painPoints = fm?.painPoints ?? defaultModules.painPoints;
+const processSteps = fm?.processSteps ?? defaultModules.processSteps;
+const faqs = fm?.faqs ?? defaultModules.faqs;
+const internalLinks = fm?.internalLinks ?? [];
+
+const nearby = getNearbyLocations(location.slug, 4);
+
+const title = location.seo?.title ?? `${h1} | Computer Tommy`;
+const description = location.seo?.description ?? heroSubtitle;
+const canonical = `https://computertommy.com/services/web-development/${location.slug}/`;
+
+const caseStudies = (fm?.caseStudySlugs ?? [])
+	.map((slug: string) => portfolioItems.find((p) => p.slug === slug))
+	.filter((p): p is PortfolioItem => Boolean(p));
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+	<section class="page">
+		<Breadcrumbs
+			items={[
+				{ href: '/', label: 'Home' },
+				{ href: '/services', label: 'Services' },
+				{ href: '/services/web-development', label: 'Web development' },
+			]}
+			current={`${location.city}, ${location.regionLabel}`}
+		/>
+
+		<header class="hero">
+			<h1>{h1}</h1>
+			<p>{heroSubtitle}</p>
+			<div class="hero-cta">
+				<a class="btn btn-primary" href="/contact">Tell me what you need →</a>
+				<a class="btn btn-secondary" href="/services/web-development">Web development service</a>
+			</div>
+		</header>
+
+		<div class="grid">
+			<article class="card">
+				<h2>What you get</h2>
+				<ul>{introBullets.map((b) => <li>{b}</li>)}</ul>
+			</article>
+
+			<article class="card">
+				<h2>How the 72 hours works</h2>
+				<ol class="steps">
+					{processSteps.map((s, idx) => (
+						<li>
+							<span class="step-num">{idx + 1}</span> {s}
+						</li>
+					))}
+				</ol>
+			</article>
+		</div>
+
+		<div class="grid grid-3">
+			<article class="card">
+				<h2>Common pain points</h2>
+				<ul>{painPoints.map((p) => <li>{p}</li>)}</ul>
+			</article>
+
+			<article class="card">
+				<h2>Local proof</h2>
+				<ul class="tight">
+					{location.proof?.localOffer ? <li><strong>Local offer:</strong> {location.proof.localOffer}</li> : null}
+					{location.proof?.counties?.length ? <li><strong>Counties:</strong> {location.proof.counties.join(', ')}</li> : null}
+					{location.proof?.serviceRadiusMiles ? (
+						<li>
+							<strong>Service radius:</strong> ~{location.proof.serviceRadiusMiles} miles
+						</li>
+					) : null}
+					{location.proof?.landmarks?.length ? <li><strong>Landmarks:</strong> {location.proof.landmarks.join(', ')}</li> : null}
+				</ul>
+				{location.notes?.length ? <p class="note">{location.notes.join(' ')}</p> : null}
+			</article>
+
+			<article class="card">
+				<h2>What I build here</h2>
+				<ul class="tight">
+					{(location.primaryServices ?? []).map((s) => (
+						<li>{s}</li>
+					))}
+				</ul>
+			</article>
+		</div>
+
+		{MarkdownContent ? (
+			<section class="md">
+				<MarkdownContent />
+			</section>
+		) : null}
+
+		{caseStudies.length ? (
+			<section class="case-studies">
+				<h2>Example work</h2>
+				<div class="case-grid">
+					{caseStudies.map((c) => (
+						<article class="case-card">
+							<h3>{c.title}</h3>
+							<p class="case-need">{c.whatTheyNeeded}</p>
+							<p class="case-result">{c.result}</p>
+							<a class="case-link" href={c.url} target="_blank" rel="noopener noreferrer">
+								View <span aria-hidden="true">→</span>
+							</a>
+						</article>
+					))}
+				</div>
+			</section>
+		) : null}
+
+		{faqs?.length ? (
+			<section class="faq">
+				<h2>FAQ</h2>
+				<div class="faq-grid">
+					{faqs.map((item) => (
+						<article class="faq-item">
+							<h3>{item.q}</h3>
+							<p>{item.a}</p>
+						</article>
+					))}
+				</div>
+			</section>
+		) : null}
+
+		{internalLinks.length ? (
+			<section class="nearby">
+				<h2>Next</h2>
+				<div class="nearby-links">
+					{internalLinks.map((l) => (
+						<a class="pill" href={l.href}>
+							{l.label}
+						</a>
+					))}
+				</div>
+			</section>
+		) : null}
+
+		{nearby.length ? (
+			<section class="nearby">
+				<h2>Nearby areas</h2>
+				<div class="nearby-links">
+					{nearby.map((n) => (
+						<a class="pill" href={`/services/web-development/${n.slug}/`}>
+							{n.city}, {n.regionLabel}
+						</a>
+					))}
+				</div>
+			</section>
+		) : null}
+	</section>
+
+	<Footer />
+</Layout>
+
+<style>
+	.page {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2.5rem 1.25rem 0;
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		color: #0f172a;
+	}
+
+	.hero h1 {
+		font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+		letter-spacing: -0.02em;
+		margin: 1rem 0 0.75rem;
+	}
+
+	.hero p {
+		margin: 0 0 1.25rem;
+		color: #475569;
+		line-height: 1.6;
+		font-size: 1.05rem;
+	}
+
+	.hero-cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 1.75rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.75rem 1.25rem;
+		font-size: 1rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 10px;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+	}
+
+	.btn:hover {
+		transform: translateY(-1px);
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
+		color: white;
+		box-shadow: 0 4px 14px rgba(50, 69, 255, 0.35);
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.85);
+		color: #334155;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.grid-3 {
+		margin-top: 1rem;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.card {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	}
+
+	.card h2 {
+		margin: 0 0 0.75rem;
+		font-size: 1.1rem;
+	}
+
+	.card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		color: #334155;
+		line-height: 1.65;
+	}
+
+	.tight {
+		padding-left: 1.1rem;
+		margin: 0;
+	}
+
+	.note {
+		margin: 0.9rem 0 0;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.md {
+		margin-top: 1.25rem;
+		color: #334155;
+		line-height: 1.7;
+	}
+
+	.case-studies {
+		margin-top: 1.5rem;
+	}
+
+	.case-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.case-card {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	}
+
+	.case-card h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.05rem;
+		letter-spacing: -0.01em;
+	}
+
+	.case-need,
+	.case-result {
+		margin: 0 0 0.5rem;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.case-result {
+		margin-bottom: 0.75rem;
+	}
+
+	.case-link {
+		color: #3245ff;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.case-link:hover {
+		text-decoration: underline;
+	}
+
+	.steps {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.steps li {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: #334155;
+	}
+
+	.step-num {
+		flex-shrink: 0;
+		width: 1.65rem;
+		height: 1.65rem;
+		border-radius: 999px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
+		color: white;
+		font-size: 0.8rem;
+		font-weight: 700;
+	}
+
+	.nearby {
+		margin-top: 1.5rem;
+	}
+
+	.nearby-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.pill {
+		display: inline-block;
+		padding: 0.55rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		background: rgba(255, 255, 255, 0.8);
+		color: #334155;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.pill:hover {
+		border-color: rgba(99, 102, 241, 0.28);
+	}
+
+	.pill-static:hover {
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	.faq {
+		margin-top: 1.5rem;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.faq-item {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	}
+
+	.faq-item h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.05rem;
+		letter-spacing: -0.01em;
+	}
+
+	.faq-item p {
+		margin: 0;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+
+		.grid-3 {
+			grid-template-columns: 1fr;
+		}
+
+		.case-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.faq-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+

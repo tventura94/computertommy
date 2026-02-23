@@ -1,5 +1,15 @@
 
 ---
+const {
+	title = 'Computer Tommy: Professional Website Design and Development',
+	description = 'Fast, clean websites and practical tooling for local businesses. 72-hour turnaround, no monthly fees.',
+	canonical,
+} = Astro.props as {
+	title?: string;
+	description?: string;
+	canonical?: string;
+};
+
 const localBusinessSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
@@ -26,7 +36,9 @@ const localBusinessSchema = {
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Computer Tommy: Professional Website Design and Development</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		{canonical ? <link rel="canonical" href={canonical} /> : null}
 		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 	</head>
 	<body>

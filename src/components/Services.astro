@@ -38,7 +38,10 @@ import background from '../assets/background.svg';
 						<li>Basic SEO so people can find you</li>
 						<li>One-time build, you own it</li>
 					</ul>
-					<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					<div class="service-links">
+						<a href="/services/web-development" class="service-link">Web development details <i class="fas fa-arrow-right"></i></a>
+						<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					</div>
 				</div>
 				
 				<div class="service-card">
@@ -54,7 +57,29 @@ import background from '../assets/background.svg';
 						<li>Simple databases if you need them</li>
 						<li>Internal dashboards</li>
 					</ul>
-					<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					<div class="service-links">
+						<a href="/services/tooling" class="service-link">Tooling details <i class="fas fa-arrow-right"></i></a>
+						<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					</div>
+				</div>
+
+				<div class="service-card">
+					<div class="service-icon">
+						<i class="fas fa-comments"></i>
+					</div>
+					<h2>Consulting</h2>
+					<p>
+						Tech decisions, audits, fixes, and guidance. If you’re stuck, I’ll help you get a clear plan and the next steps.
+					</p>
+					<ul class="service-features">
+						<li>Quick site/code audits</li>
+						<li>Performance + SEO troubleshooting</li>
+						<li>Practical guidance (no fluff)</li>
+					</ul>
+					<div class="service-links">
+						<a href="/services/consulting" class="service-link">Consulting details <i class="fas fa-arrow-right"></i></a>
+						<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					</div>
 				</div>
 				
 				<div class="service-card">
@@ -70,7 +95,10 @@ import background from '../assets/background.svg';
 						<li>Data or automation tools</li>
 						<li>Integration with what you already use</li>
 					</ul>
-					<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					<div class="service-links">
+						<a href="/services/ai" class="service-link">AI details <i class="fas fa-arrow-right"></i></a>
+						<a href="/contact" class="service-link">Tell me what you need <i class="fas fa-arrow-right"></i></a>
+					</div>
 				</div>
 			</div>
 			
@@ -245,7 +273,7 @@ import background from '../assets/background.svg';
 
 	.services-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 		gap: 2rem;
 		width: 100%;
 		margin-bottom: 3rem;
@@ -299,8 +327,14 @@ import background from '../assets/background.svg';
 		color: #3245ff;
 		text-decoration: none;
 		font-weight: 500;
-		margin-top: 1rem;
 		transition: transform 0.2s ease;
+	}
+
+	.service-links {
+		margin-top: 1rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
 	}
 
 	.service-link i {
