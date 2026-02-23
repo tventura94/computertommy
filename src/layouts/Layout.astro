@@ -1,5 +1,7 @@
 
 ---
+import logo from '../assets/computertommylogo.svg';
+
 const {
 	title = 'Computer Tommy: Professional Website Design and Development',
 	description = 'Fast, clean websites and practical tooling for local businesses. 72-hour turnaround, no monthly fees.',
@@ -12,12 +14,17 @@ const {
 	jsonLd?: unknown | unknown[];
 };
 
+const siteUrl = 'https://computertommy.com';
+const logoUrl = new URL(logo.src, siteUrl).toString();
+
 const localBusinessSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
 	'@id': 'https://computertommy.com/#localbusiness',
 	name: 'Computer Tommy',
 	url: 'https://computertommy.com',
+	image: logoUrl,
+	priceRange: '$300-$2500',
 	telephone: '+1-508-380-2013',
 	address: {
 		'@type': 'PostalAddress',
