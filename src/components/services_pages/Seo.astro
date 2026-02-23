@@ -3,6 +3,21 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
+
+type SeoServiceEntry = {
+  slug: string;
+  data: {
+    h1?: string;
+    heroSubtitle?: string;
+  };
+};
+
+const { getCollection } = await import('astro:content');
+const seoServices = (await (getCollection as unknown as (collection: string) => Promise<SeoServiceEntry[]>)(
+  'seo_services',
+))
+  .slice()
+  .sort((a, b) => (a.data.h1 ?? a.slug).localeCompare(b.data.h1 ?? b.slug));
 ---
 
 <div id="container">
@@ -39,7 +54,9 @@ import Breadcrumbs from '../Breadcrumbs.astro';
                                 <i class="fas fa-search"></i>
                             </div>
                             <div class="highlight-content">
-                                <h3>Technical SEO audit</h3>
+                                <h3>
+                                    <a class="inline-link" href="/services/seo/technical-seo-audit/">Technical SEO Audit</a>
+                                </h3>
                                 <p>Find what’s blocking rankings: indexing, broken links, sitemap/robots, and site structure issues.</p>
                             </div>
                         </div>
@@ -49,7 +66,9 @@ import Breadcrumbs from '../Breadcrumbs.astro';
                                 <i class="fas fa-tags"></i>
                             </div>
                             <div class="highlight-content">
-                                <h3>On-page cleanup</h3>
+                                <h3>
+                                    <a class="inline-link" href="/services/seo/onpage-cleanup/">On-page cleanup</a>
+                                </h3>
                                 <p>Titles, meta descriptions, headings, internal links, and content structure—cleaned up and consistent.</p>
                             </div>
                         </div>
@@ -59,7 +78,9 @@ import Breadcrumbs from '../Breadcrumbs.astro';
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div class="highlight-content">
-                                <h3>Local SEO</h3>
+                                <h3>
+                                    <a class="inline-link" href="/services/seo/local-seo/">Local SEO</a>
+                                </h3>
                                 <p>Google Business Profile basics, service-area targeting, and location signals that help you show up nearby.</p>
                             </div>
                         </div>
@@ -69,11 +90,27 @@ import Breadcrumbs from '../Breadcrumbs.astro';
                                 <i class="fas fa-tachometer-alt"></i>
                             </div>
                             <div class="highlight-content">
-                                <h3>Speed + Core Web Vitals</h3>
+                                <h3>
+                                    <a class="inline-link" href="/services/seo/speed-web-vitals/">Speed + Core Web Vitals</a>
+                                </h3>
                                 <p>Performance fixes that improve user experience and help with rankings—especially on mobile.</p>
                             </div>
                         </div>
                     </div>
+				</div>
+
+				<div class="service-detail-card seo-services">
+					<h2>SEO services</h2>
+					<p class="seo-services-subtitle">Pick what you need. Each one has a dedicated page with deliverables and next steps.</p>
+					<div class="seo-services-grid">
+						{seoServices.map((s) => (
+							<a class="seo-service-card" href={`/services/seo/${s.slug}/`}>
+								<h3>{s.data.h1 ?? s.slug}</h3>
+								{s.data.heroSubtitle ? <p>{s.data.heroSubtitle}</p> : null}
+								<span class="seo-service-cta">View details →</span>
+							</a>
+						))}
+					</div>
 				</div>
 				
 				<div class="service-detail-card">
@@ -260,6 +297,65 @@ import Breadcrumbs from '../Breadcrumbs.astro';
         width: 100%;
 	}
 
+	.inline-link {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.inline-link:hover {
+		text-decoration: underline;
+	}
+
+	.seo-services-subtitle {
+		margin: 0.25rem 0 1.25rem 0;
+		color: #4b5563;
+		line-height: 1.6;
+		max-width: 800px;
+	}
+
+	.seo-services-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.seo-service-card {
+		display: block;
+		text-decoration: none;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	}
+
+	.seo-service-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+		border-color: rgba(99, 102, 241, 0.25);
+	}
+
+	.seo-service-card h3 {
+		margin: 0 0 0.5rem 0;
+		font-size: 1.1rem;
+		color: #111827;
+	}
+
+	.seo-service-card p {
+		margin: 0 0 0.75rem 0;
+		color: #475569;
+		line-height: 1.6;
+		font-size: 0.98rem;
+	}
+
+	.seo-service-cta {
+		display: inline-block;
+		color: #3245ff;
+		font-weight: 700;
+		font-size: 0.95rem;
+	}
+
 	.service-highlights {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -425,6 +521,10 @@ import Breadcrumbs from '../Breadcrumbs.astro';
         .highlight-icon {
             margin-top: 0;
         }
+
+		.seo-services-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	@keyframes fadeIn {

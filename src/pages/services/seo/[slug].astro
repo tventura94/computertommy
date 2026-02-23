@@ -1,0 +1,273 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+
+type SeoServiceContent = {
+	h1?: string;
+	heroSubtitle?: string;
+	introBullets?: string[];
+	p1?: string;
+	p2?: string;
+	faqs?: { q: string; a: string }[];
+	internalLinks?: { href: string; label: string }[];
+};
+
+export async function getStaticPaths() {
+	const { getCollection } = await import('astro:content');
+	const entries = (await (getCollection as unknown as (collection: string) => Promise<{ slug: string }[]>)(
+		'seo_services',
+	)) as { slug: string }[];
+	return entries.map((entry) => ({
+		params: { slug: entry.slug },
+	}));
+}
+
+const { slug } = Astro.params as { slug: string };
+const { getEntry } = await import('astro:content');
+const entry = (await (getEntry as unknown as (collection: string, id: string) => Promise<any>)('seo_services', slug)) as
+	| { data: SeoServiceContent; render: () => Promise<{ Content: any }> }
+	| undefined;
+const data = entry?.data;
+const rendered = entry ? await entry.render() : null;
+const MarkdownContent = rendered?.Content;
+
+const h1 = data?.h1 ?? 'SEO service';
+const heroSubtitle = data?.heroSubtitle ?? 'Practical SEO help for small businesses.';
+const introBullets = data?.introBullets ?? [];
+const p1 = data?.p1;
+const p2 = data?.p2;
+const faqs = data?.faqs ?? [];
+const internalLinks = data?.internalLinks ?? [];
+
+const title = `${h1} | SEO optimization | Computer Tommy`;
+const description = data?.heroSubtitle ?? `${h1} — SEO optimization for small businesses.`;
+const canonical = `https://computertommy.com/services/seo/${slug}/`;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+	<section class="page">
+		<Breadcrumbs
+			items={[
+				{ href: '/', label: 'Home' },
+				{ href: '/services', label: 'Services' },
+				{ href: '/services/seo', label: 'SEO optimization' },
+			]}
+			current={h1}
+		/>
+
+		<header class="hero">
+			<h1>{h1}</h1>
+			<p class="subtitle">{heroSubtitle}</p>
+			<div class="hero-cta">
+				<a class="btn btn-primary" href="/contact">Tell me what you need →</a>
+				<a class="btn btn-secondary" href="/services/seo">All SEO services</a>
+			</div>
+		</header>
+
+		{introBullets.length ? (
+			<section class="card">
+				<h2>What’s included</h2>
+				<ul>
+					{introBullets.map((b) => (
+						<li>{b}</li>
+					))}
+				</ul>
+			</section>
+		) : null}
+
+		{p1 || p2 ? (
+			<section class="card prose">
+				{p1 ? <p>{p1}</p> : null}
+				{p2 ? <p>{p2}</p> : null}
+			</section>
+		) : null}
+
+		{MarkdownContent ? (
+			<section class="card prose">
+				<MarkdownContent />
+			</section>
+		) : null}
+
+		{faqs.length ? (
+			<section class="faq">
+				<h2>FAQ</h2>
+				<div class="faq-grid">
+					{faqs.map((item) => (
+						<article class="faq-item">
+							<h3>{item.q}</h3>
+							<p>{item.a}</p>
+						</article>
+					))}
+				</div>
+			</section>
+		) : null}
+
+		{internalLinks.length ? (
+			<section class="next">
+				<h2>Next</h2>
+				<div class="next-links">
+					{internalLinks.map((l) => (
+						<a class="pill" href={l.href}>
+							{l.label}
+						</a>
+					))}
+				</div>
+			</section>
+		) : null}
+	</section>
+
+	<Footer />
+</Layout>
+
+<style>
+	.page {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 2.5rem 1.25rem 0;
+		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+		color: #0f172a;
+	}
+
+	.hero h1 {
+		font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+		letter-spacing: -0.02em;
+		margin: 1rem 0 0.75rem;
+	}
+
+	.subtitle {
+		margin: 0 0 1.25rem;
+		color: #475569;
+		line-height: 1.6;
+		font-size: 1.05rem;
+	}
+
+	.hero-cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.75rem 1.25rem;
+		font-size: 1rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 10px;
+		transition: transform 0.15s ease, box-shadow 0.15s ease;
+	}
+
+	.btn:hover {
+		transform: translateY(-1px);
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
+		color: white;
+		box-shadow: 0 4px 14px rgba(50, 69, 255, 0.35);
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.85);
+		color: #334155;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.card {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		margin-top: 1rem;
+	}
+
+	.card h2 {
+		margin: 0 0 0.75rem;
+		font-size: 1.1rem;
+	}
+
+	.card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		color: #334155;
+		line-height: 1.65;
+	}
+
+	.prose :global(p) {
+		margin: 0 0 0.75rem;
+		color: #334155;
+		line-height: 1.7;
+	}
+
+	.prose :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.faq {
+		margin-top: 1.5rem;
+	}
+
+	.faq-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 0.75rem;
+	}
+
+	.faq-item {
+		background: rgba(255, 255, 255, 0.75);
+		border-radius: 14px;
+		padding: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	}
+
+	.faq-item h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.05rem;
+		letter-spacing: -0.01em;
+	}
+
+	.faq-item p {
+		margin: 0;
+		color: #475569;
+		line-height: 1.6;
+	}
+
+	.next {
+		margin-top: 1.5rem;
+	}
+
+	.next-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		margin-top: 0.75rem;
+	}
+
+	.pill {
+		display: inline-block;
+		padding: 0.55rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		background: rgba(255, 255, 255, 0.8);
+		color: #334155;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.pill:hover {
+		border-color: rgba(99, 102, 241, 0.28);
+	}
+
+	@media (max-width: 768px) {
+		.faq-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
