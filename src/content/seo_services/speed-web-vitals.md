@@ -28,8 +28,13 @@ internalLinks:
 ## What this service focuses on
 
 ### Core Web Vitals (the “scoreboard”)
-- **LCP (Largest Contentful Paint)**: your page looks “loaded” fast\n- **CLS (Cumulative Layout Shift)**: things don’t jump around as content loads\n- **INP (Interaction to Next Paint)**: taps/clicks feel responsive\n
+
+- **LCP (Largest Contentful Paint)**: your page looks “loaded” fast- **CLS (Cumulative Layout Shift)**: things don’t jump around as content loads- **INP (Interaction to Next Paint)**: taps/clicks feel responsive
+
 ### The usual bottlenecks
-- Oversized images and unoptimized formats\n- Too many third-party scripts (analytics, chat widgets, embeds)\n- Render-blocking CSS/JS\n- Builder bloat or heavy theme code\n
+
+- Oversized images and unoptimized formats- Too many third-party scripts (analytics, chat widgets, embeds)- Render-blocking CSS/JS- Builder bloat or heavy theme code
+
 ## What you’ll get
-- A short list of the biggest issues (ranked by impact)\n- Fixes implemented (or a clear plan if you want your dev to do it)\n- Before/after checks so you can see the improvement\n
+
+- A short list of the biggest issues (ranked by impact)- Fixes implemented (or a clear plan if you want your dev to do it)- Before/after checks so you can see the improvement
