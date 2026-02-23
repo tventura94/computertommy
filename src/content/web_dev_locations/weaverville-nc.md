@@ -20,8 +20,7 @@ faqs:
     a: Yes. Send whatever you have and I’ll build around it. If you don’t have much, I’ll keep the design clean and straightforward.
   - q: Is this a monthly service?
     a: No. It’s a one-time build. You own the site when we’re done.
-caseStudySlugs:
-  - guessmethod
+caseStudySlugs: []
 internalLinks:
   - href: /services/web-development
     label: Web development service details

@@ -53,6 +53,14 @@ export const portfolioItems: PortfolioItem[] = [
     result:
       "Simple site w/ a beautiful design to showcase their music and shows.",
   },
+  {
+    slug: "dizzys-glizzies",
+    title: "Dizzys Glizzies (Discontinued)",
+    category: "Collective / Community",
+    url: "https://dizzys-glizzies.netlify.app",
+    whatTheyNeeded: "A landing page for their restaurant.",
+    result: "A beautiful hot dog themed landing page!",
+  },
 
   {
     slug: "guessmethod",

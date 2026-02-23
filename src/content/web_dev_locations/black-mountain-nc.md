@@ -20,8 +20,7 @@ faqs:
     a: Yes. Many projects are for small independent businesses that want a clean online presence without overcomplicating it.
   - q: Are there ongoing contracts?
     a: No subscriptions required. It’s a single project and the finished site belongs to you.
-caseStudySlugs:
-  - guessmethod
+caseStudySlugs: []
 internalLinks:
   - href: /services/web-development
     label: Web development service details

@@ -20,8 +20,7 @@ faqs:
     a: No. Most projects are for independent businesses, contractors, and local shops in and around Hendersonville.
   - q: Will I be stuck paying every month?
     a: No ongoing contracts. Once the site is finished and paid for, it’s yours.
-caseStudySlugs:
-  - guessmethod
+caseStudySlugs: []
 internalLinks:
   - href: /services/web-development
     label: Web development service details
