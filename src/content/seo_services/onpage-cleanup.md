@@ -30,17 +30,21 @@ internalLinks:
 ## What “on-page cleanup” actually means
 
 ### Titles + meta descriptions
-Most sites either:\n- have generic titles (“Home”)\n- or they’re keyword-stuffed nonsense.\n\nWe rewrite them so they’re clear, consistent, and match what people actually search.\n
+
+Most sites either:- have generic titles (“Home”)- or they’re keyword-stuffed nonsense.We rewrite them so they’re clear, consistent, and match what people actually search.
 
 ### Headings and structure
-Headings aren’t just styling. They’re the outline of the page. When your H1/H2/H3 structure is clean, it’s easier for:\n- users to scan\n- Google to understand the page\n\nAnd you avoid the “every page looks the same” problem.\n
+
+Headings aren’t just styling. They’re the outline of the page. When your H1/H2/H3 structure is clean, it’s easier for:- users to scan- Google to understand the pageAnd you avoid the “every page looks the same” problem.
 
 ### Internal links that support your silos
-This is where the hierarchy pays off. We make sure pages link in a way that reinforces:\n- service hubs → service detail\n- service → location pages\n- proof/case studies\n\nThat keeps people moving and makes your site easier to crawl.\n
+
+This is where the hierarchy pays off. We make sure pages link in a way that reinforces:- service hubs → service detail- service → location pages- proof/case studiesThat keeps people moving and makes your site easier to crawl.
 
 ### Conversion cleanup
-If someone lands on the page and can’t tell what to do next, you lose the lead.\n\nWe make sure the page has:\n- a clear CTA\n- a simple contact/quote flow\n- trust signals (proof, FAQs, reviews)\n
+
+If someone lands on the page and can’t tell what to do next, you lose the lead.We make sure the page has:- a clear CTA- a simple contact/quote flow- trust signals (proof, FAQs, reviews)
 
 ## Output (what you get)
-- Updated titles/meta and headings on priority pages\n- Clean internal linking plan\n- A short list of remaining pages to update next\n
 
+- Updated titles/meta and headings on priority pages- Clean internal linking plan- A short list of remaining pages to update next
