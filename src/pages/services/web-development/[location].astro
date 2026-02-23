@@ -77,9 +77,79 @@ const canonical = `https://computertommy.com/services/web-development/${location
 const caseStudies = (fm?.caseStudySlugs ?? [])
 	.map((slug: string) => portfolioItems.find((p) => p.slug === slug))
 	.filter((p): p is PortfolioItem => Boolean(p));
+
+const localBusinessId = 'https://computertommy.com/#localbusiness';
+
+const breadcrumbSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'BreadcrumbList',
+	itemListElement: [
+		{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://computertommy.com/' },
+		{ '@type': 'ListItem', position: 2, name: 'Services', item: 'https://computertommy.com/services/' },
+		{ '@type': 'ListItem', position: 3, name: 'Web development', item: 'https://computertommy.com/services/web-development/' },
+		{ '@type': 'ListItem', position: 4, name: `${location.city}, ${location.regionLabel}`, item: canonical },
+	],
+};
+
+const serviceSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Service',
+	name: `Web design in ${location.city}, ${location.regionLabel}`,
+	serviceType: 'Web design and development',
+	provider: { '@id': localBusinessId },
+	areaServed: {
+		'@type': 'AdministrativeArea',
+		name: `${location.city}, ${location.regionLabel}`,
+	},
+	url: canonical,
+	description,
+};
+
+const caseStudyItemListSchema =
+	caseStudies.length
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'ItemList',
+				name: `Web development examples in ${location.city}, ${location.regionLabel}`,
+				itemListElement: caseStudies.map((c, idx) => ({
+					'@type': 'ListItem',
+					position: idx + 1,
+					item: {
+						'@type': 'CreativeWork',
+						name: c.title,
+						url: c.url,
+						description: `${c.whatTheyNeeded} ${c.result}`.trim(),
+					},
+				})),
+			}
+		: null;
+
+// Only emit FAQ schema when the FAQ content is truly page-specific (not default fallback).
+const faqSchema =
+	fm?.faqs?.length
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				mainEntity: fm.faqs.map((item) => ({
+					'@type': 'Question',
+					name: item.q,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: item.a,
+					},
+				})),
+			}
+		: null;
+
+const jsonLd = [
+	breadcrumbSchema,
+	serviceSchema,
+	...(caseStudyItemListSchema ? [caseStudyItemListSchema] : []),
+	...(faqSchema ? [faqSchema] : []),
+];
 ---
 
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} jsonLd={jsonLd}>
 	<section class="page">
 		<Breadcrumbs
 			items={[

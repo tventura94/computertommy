@@ -4,21 +4,24 @@ const {
 	title = 'Computer Tommy: Professional Website Design and Development',
 	description = 'Fast, clean websites and practical tooling for local businesses. 72-hour turnaround, no monthly fees.',
 	canonical,
+	jsonLd,
 } = Astro.props as {
 	title?: string;
 	description?: string;
 	canonical?: string;
+	jsonLd?: unknown | unknown[];
 };
 
 const localBusinessSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'LocalBusiness',
+	'@id': 'https://computertommy.com/#localbusiness',
 	name: 'Computer Tommy',
 	url: 'https://computertommy.com',
 	telephone: '+1-508-380-2013',
 	address: {
 		'@type': 'PostalAddress',
-		streetAddress: '10 Tunnel Rd',
+		streetAddress: '49 Joyner Ave',
 		addressLocality: 'Asheville',
 		addressRegion: 'NC',
 		postalCode: '28806',
@@ -26,6 +29,12 @@ const localBusinessSchema = {
 	},
 	sameAs: ['https://instagram.com/computertommy'],
 };
+
+const jsonLdArray = jsonLd
+	? Array.isArray(jsonLd)
+		? jsonLd
+		: [jsonLd]
+	: [];
 ---
 
 <!doctype html>
@@ -40,6 +49,9 @@ const localBusinessSchema = {
 		<meta name="description" content={description} />
 		{canonical ? <link rel="canonical" href={canonical} /> : null}
 		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+		{jsonLdArray.map((schema) => (
+			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		))}
 	</head>
 	<body>
 		<slot />
