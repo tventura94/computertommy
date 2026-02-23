@@ -117,7 +117,7 @@ const caseStudies = (fm?.caseStudySlugs ?? [])
 			</article>
 		</div>
 
-		<div class="grid grid-3">
+		<div class="grid grid-2" style ="margin-top: 1rem;">
 			<article class="card">
 				<h2>Common pain points</h2>
 				<ul>{painPoints.map((p) => <li>{p}</li>)}</ul>
@@ -138,14 +138,7 @@ const caseStudies = (fm?.caseStudySlugs ?? [])
 				{location.notes?.length ? <p class="note">{location.notes.join(' ')}</p> : null}
 			</article>
 
-			<article class="card">
-				<h2>What I build here</h2>
-				<ul class="tight">
-					{(location.primaryServices ?? []).map((s) => (
-						<li>{s}</li>
-					))}
-				</ul>
-			</article>
+			
 		</div>
 
 		{MarkdownContent ? (
