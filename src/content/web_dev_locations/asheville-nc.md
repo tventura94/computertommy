@@ -33,7 +33,7 @@ internalLinks:
   - href: /portfolio
     label: See sites I’ve built
   - href: /contact
-    label: Tell me what you need
+    label: Tell us what you need
 ---
 
 Asheville is competitive online. People bounce between Google Maps, Instagram, and “Asheville + [service]” searches—and if your site is slow, outdated, or unclear, they move on fast. If you just need a **clean website that works**, I’m a strong fit: no agency process, no months of meetings—just a fast build that makes your business look legit.
@@ -44,4 +44,4 @@ To make it feel locally grounded (and not like a copy/paste “city page”), we
 
 You also don’t need a bloated site to compete here. A small set of strong pages (home, services, about, contact) with tight copy and fast load times will usually outperform a big slow template—especially on mobile when someone is searching while they’re out near **Pack Square**, driving in from the **Blue Ridge Parkway**, or planning around landmarks like **Biltmore**.
 
-If you want proof I’m actually building in this area, check out the Asheville work linked on this page—projects like **Nathan King Tattoos** and **5th World**—and then tell me what you need. I’ll keep it simple, fast, and built to convert.
+If you want proof I’m actually building in this area, check out the Asheville work linked on this page—projects like **Nathan King Tattoos** and **5th World**—and then tell us what you need. I’ll keep it simple, fast, and built to convert.
