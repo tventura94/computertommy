@@ -11,6 +11,16 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "paintball-sample-site",
+    title: "Paintball Sample Site",
+    category: "Business site",
+    url: "https://paintball-sample-site.netlify.app/",
+    whatTheyNeeded:
+      "A site to fpr a paintball business to showcase their services.",
+    result:
+      "Simple site w/ a beautiful design to showcase their services and events.",
+  },
+  {
     slug: "fresh-grill-bbq",
     title: "Fresh Grills BBQ (Sample Site)",
     category: "Service site",
