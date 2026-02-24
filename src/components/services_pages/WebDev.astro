@@ -252,6 +252,14 @@ const otherLocations = locations
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 1rem;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	#container *,
+	#container *::before,
+	#container *::after {
+		box-sizing: inherit;
 	}
 
 	main {
@@ -274,8 +282,16 @@ const otherLocations = locations
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 0.75rem;
 		width: 100%;
 		margin-top: 0.25em;
+	}
+
+	.heading-container h1 {
+		min-width: 0;
+		flex: 1;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 	
 	h1 {
@@ -288,6 +304,11 @@ const otherLocations = locations
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
 	}
+
+	.logo img {
+		max-width: 100%;
+		height: auto;
+	}
 	
 	.back-link {
 		display: flex;
@@ -295,6 +316,7 @@ const otherLocations = locations
 		justify-content: center;
 		width: 40px;
 		height: 40px;
+		flex-shrink: 0;
 		border-radius: 50%;
 		background: rgba(255, 255, 255, 0.8);
 		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -361,7 +383,8 @@ const otherLocations = locations
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 1rem;
+		flex-wrap: wrap;
+		gap: 0.5rem 1rem;
 		margin-bottom: 0.35rem;
 	}
 
@@ -382,6 +405,8 @@ const otherLocations = locations
 		margin: 0;
 		color: #111827;
 		font-size: 1.1rem;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.featured-city-subtitle {
@@ -582,12 +607,43 @@ const otherLocations = locations
 	}
 
 	@media screen and (max-width: 768px) {
+		#container {
+			padding: 0 1rem;
+		}
+
 		#service-section {
 			padding: 2rem 0;
+		}
+
+		.heading-container {
+			position: relative;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.heading-container h1 {
+			padding-right: 48px; /* space for back button on same line */
+		}
+
+		.back-link {
+			position: absolute;
+			top: 0;
+			right: 0;
+			min-width: 44px;
+			min-height: 44px;
+		}
+
+		.service-areas {
+			padding: 1.25rem 1rem;
 		}
 		
 		h1 {
 			font-size: 1.8rem;
+		}
+		
+		.subtitle {
+			font-size: 1rem;
+			margin: 1.25rem 0 2rem;
 		}
 		
 		.service-detail-card {
@@ -596,10 +652,23 @@ const otherLocations = locations
 		
 		.button {
 			padding: 12px 20px;
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.cta-container .button {
+			width: 100%;
+			max-width: 320px;
 		}
 		
 		.cta-container {
 			padding: 1.5rem;
+		}
+
+		.cta-text {
+			font-size: 1.15rem;
 		}
 
         .highlight-item,
@@ -612,6 +681,136 @@ const otherLocations = locations
         .benefit-icon {
             margin-top: 0;
         }
+
+		.step {
+			gap: 0.75rem;
+		}
+
+		.step-number {
+			width: 32px;
+			height: 32px;
+			font-size: 0.9rem;
+		}
+
+		.step-content h3,
+		.step-content p,
+		.highlight-content p,
+		.benefit-content p,
+		.case-study p {
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		#container {
+			padding: 0 0.75rem;
+		}
+
+		#service-section {
+			padding: 1.5rem 0;
+		}
+
+		.logo img {
+			width: 90px;
+			height: auto;
+		}
+
+		.heading-container h1 {
+			padding-right: 44px;
+		}
+
+		.service-areas {
+			padding: 1rem 0.875rem;
+		}
+
+		h1 {
+			font-size: 1.5rem;
+		}
+
+		h2 {
+			font-size: 1.35rem;
+		}
+
+		.subtitle {
+			font-size: 0.95rem;
+			margin: 1rem 0 1.5rem;
+		}
+
+		.service-detail-card {
+			padding: 1.25rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.service-highlights,
+		.benefits-grid,
+		.case-studies-grid {
+			gap: 1.25rem;
+			margin-top: 1.5rem;
+		}
+
+		.cta-container {
+			padding: 1.25rem;
+			margin-top: 2rem;
+		}
+
+		.cta-container .button {
+			max-width: none;
+			width: 100%;
+		}
+
+		.cta-text {
+			font-size: 1.05rem;
+		}
+
+		.button {
+			padding: 12px 18px;
+			font-size: 1rem;
+		}
+
+		.area-pill {
+			padding: 0.5rem 0.75rem;
+			font-size: 0.875rem;
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+		}
+
+		.featured-city {
+			padding: 1rem;
+		}
+
+		.featured-city-title {
+			font-size: 1rem;
+		}
+
+		.featured-city-subtitle,
+		.featured-city-meta {
+			font-size: 0.9rem;
+		}
+	}
+
+	/* Extra small devices (e.g. 320px) */
+	@media screen and (max-width: 360px) {
+		#container {
+			padding: 0 0.5rem;
+		}
+
+		h1 {
+			font-size: 1.35rem;
+		}
+
+		h2 {
+			font-size: 1.2rem;
+		}
+
+		.service-areas {
+			padding: 0.875rem 0.75rem;
+		}
+
+		.areas-links {
+			gap: 0.5rem;
+		}
 	}
 
 	@keyframes fadeIn {

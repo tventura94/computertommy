@@ -165,6 +165,14 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 		max-width: 1200px;
 		margin: 0 auto;
 		padding: 0 1rem;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	#container *,
+	#container *::before,
+	#container *::after {
+		box-sizing: inherit;
 	}
 
 	main {
@@ -187,8 +195,16 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 0.75rem;
 		width: 100%;
 		margin-top: 0.25em;
+	}
+
+	.heading-container h1 {
+		min-width: 0;
+		flex: 1;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 	
 	h1 {
@@ -216,6 +232,12 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 		color: #4b5563;
 		font-size: 1.125rem;
 		transition: transform 0.2s ease, color 0.2s ease;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		min-width: 44px;
+		justify-content: center;
 	}
 	
 	.back-link:hover {
@@ -245,6 +267,8 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 		margin: 1.5rem 0 2.5rem 0;
 		color: #374151;
 		font-weight: 500;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
     .service-content {
@@ -397,8 +421,26 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 	}
 
 	@media screen and (max-width: 768px) {
+		#container {
+			padding: 0 1rem;
+		}
+
 		#service-section {
 			padding: 2rem 0;
+		}
+
+		.heading-container {
+			position: relative;
+		}
+
+		.heading-container h1 {
+			padding-right: 48px;
+		}
+
+		.back-link {
+			position: absolute;
+			top: 0;
+			right: 0;
 		}
 		
 		h1 {
@@ -411,10 +453,19 @@ import Breadcrumbs from '../Breadcrumbs.astro';
 		
 		.button {
 			padding: 12px 20px;
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
 		}
 		
 		.cta-container {
 			padding: 1.5rem;
+		}
+
+		.cta-container .button {
+			width: 100%;
+			max-width: 320px;
 		}
 
         .highlight-item {
@@ -425,6 +476,101 @@ import Breadcrumbs from '../Breadcrumbs.astro';
         .highlight-icon {
             margin-top: 0;
         }
+
+		.step-content p,
+		.highlight-content p,
+		.case-study p {
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+		}
+
+		.step-number {
+			width: 32px;
+			height: 32px;
+			font-size: 0.9rem;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		#container {
+			padding: 0 0.75rem;
+		}
+
+		#service-section {
+			padding: 1.5rem 0;
+		}
+
+		.heading-container h1 {
+			padding-right: 44px;
+		}
+
+		h1 {
+			font-size: 1.5rem;
+		}
+
+		h2 {
+			font-size: 1.35rem;
+		}
+
+		.subtitle {
+			font-size: 1.05rem;
+			margin: 1rem 0 2rem;
+		}
+
+		.service-detail-card {
+			padding: 1.25rem;
+			margin-bottom: 1.5rem;
+		}
+
+		.cta-container {
+			padding: 1.25rem;
+			margin-top: 2rem;
+		}
+
+		.cta-container .button {
+			max-width: none;
+			width: 100%;
+		}
+
+		.cta-text {
+			font-size: 1.1rem;
+		}
+
+		.button {
+			padding: 12px 18px;
+			font-size: 1rem;
+		}
+
+		.case-studies-grid {
+			gap: 1.25rem;
+		}
+
+		.case-study h3 {
+			font-size: 1.1rem;
+		}
+	}
+
+	@media screen and (max-width: 360px) {
+		#container {
+			padding: 0 0.5rem;
+		}
+
+		h1 {
+			font-size: 1.35rem;
+		}
+
+		h2 {
+			font-size: 1.2rem;
+		}
+
+		.service-detail-card {
+			padding: 1rem;
+		}
+
+		.cta-container {
+			padding: 1rem;
+			margin-top: 1.5rem;
+		}
 	}
 
 	@keyframes fadeIn {
