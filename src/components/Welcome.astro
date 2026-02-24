@@ -178,6 +178,14 @@ import background from '../assets/background.svg';
 		max-width: 720px;
 		margin: 0 auto;
 		padding: 0 1.5rem;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	#container *,
+	#container *::before,
+	#container *::after {
+		box-sizing: inherit;
 	}
 
 	main {
@@ -222,6 +230,8 @@ import background from '../assets/background.svg';
 		letter-spacing: -0.02em;
 		color: #0f172a;
 		margin: 0 0 1.25rem 0;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.hero-subtitle {
@@ -230,6 +240,8 @@ import background from '../assets/background.svg';
 		color: #64748b;
 		margin: 0 0 2rem 0;
 		max-width: 540px;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.hero-cta {
@@ -341,6 +353,8 @@ import background from '../assets/background.svg';
 		color: #0f172a;
 		margin: 0 0 1.5rem 0;
 		line-height: 1.3;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	/* Process */
@@ -591,8 +605,13 @@ import background from '../assets/background.svg';
 			padding: 2rem 0 3rem;
 		}
 
-		.hero .logo {
+		.hero .site-name {
 			margin-bottom: 2rem;
+		}
+
+		.site-name img {
+			max-width: 100px;
+			height: auto;
 		}
 
 		.hero-title {
@@ -607,11 +626,16 @@ import background from '../assets/background.svg';
 		.hero-cta {
 			flex-direction: column;
 			align-items: stretch;
+			gap: 0.75rem;
 		}
 
 		.btn {
 			text-align: center;
 			padding: 0.875rem 1.25rem;
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
 		}
 
 		.block {
@@ -620,6 +644,17 @@ import background from '../assets/background.svg';
 
 		.services-grid {
 			grid-template-columns: 1fr;
+			gap: 0.875rem;
+		}
+
+		.service-card {
+			padding: 1.25rem;
+		}
+
+		.service-card h3,
+		.service-card p {
+			word-wrap: break-word;
+			overflow-wrap: break-word;
 		}
 
 		.block-title {
@@ -630,8 +665,38 @@ import background from '../assets/background.svg';
 			padding: 1.5rem 1.25rem;
 		}
 
+		.process-list li {
+			font-size: 1rem;
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+		}
+
+		.step-num {
+			width: 1.5rem;
+			height: 1.5rem;
+			font-size: 0.75rem;
+		}
+
+		.block-pricing .pricing-card {
+			padding: 1.25rem 1.5rem;
+		}
+
+		.pricing-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.pricing-tier {
+			padding: 1.25rem;
+		}
+
 		.pricing-tier .btn {
 			width: 100%;
+			min-height: 44px;
+		}
+
+		.price {
+			font-size: 1.5rem;
 		}
 
 		.block-about .about-card {
@@ -639,6 +704,7 @@ import background from '../assets/background.svg';
 			padding: 1.5rem;
 			align-items: center;
 			text-align: center;
+			gap: 1.5rem;
 		}
 
 		.about-photo {
@@ -650,14 +716,149 @@ import background from '../assets/background.svg';
 			text-align: left;
 		}
 
+		.about-text p {
+			word-wrap: break-word;
+			overflow-wrap: break-word;
+		}
+
 		.why-grid {
 			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.why-card h3,
+		.why-card p {
+			word-wrap: break-word;
+			overflow-wrap: break-word;
 		}
 	}
 
 	@media screen and (max-width: 480px) {
+		#container {
+			padding: 0 0.75rem;
+		}
+
+		.hero {
+			padding: 1.5rem 0 2.5rem;
+		}
+
+		.hero .site-name {
+			margin-bottom: 1.5rem;
+		}
+
+		.site-name img {
+			max-width: 90px;
+		}
+
 		.hero-title {
 			font-size: 1.5rem;
+		}
+
+		.hero-subtitle {
+			font-size: 0.95rem;
+			margin-bottom: 1.25rem;
+		}
+
+		.block {
+			padding-top: 2rem;
+		}
+
+		.block-title {
+			font-size: 1.25rem;
+			margin-bottom: 1.25rem;
+		}
+
+		.service-card {
+			padding: 1rem 1.25rem;
+		}
+
+		.block-process .process-card {
+			padding: 1.25rem 1rem;
+		}
+
+		.pricing-lead {
+			font-size: 1rem;
+		}
+
+		.pricing-note {
+			font-size: 0.875rem;
+		}
+
+		.pricing-tier {
+			padding: 1rem 1.25rem;
+		}
+
+		.pricing-tier-header h3 {
+			font-size: 1rem;
+		}
+
+		.price {
+			font-size: 1.35rem;
+		}
+
+		.price-period {
+			font-size: 0.875rem;
+		}
+
+		.tier-features li {
+			font-size: 0.9rem;
+		}
+
+		.block-about .about-card {
+			padding: 1.25rem;
+		}
+
+		.about-photo {
+			width: 120px;
+			height: 120px;
+		}
+
+		.about-lead {
+			font-size: 1rem;
+		}
+
+		.about-text p {
+			font-size: 0.95rem;
+		}
+
+		.why-card {
+			padding: 1.25rem;
+		}
+
+		.why-card h3 {
+			font-size: 0.95rem;
+		}
+
+		.why-card p {
+			font-size: 0.875rem;
+		}
+
+		main {
+			padding-bottom: 3rem;
+		}
+	}
+
+	@media screen and (max-width: 360px) {
+		#container {
+			padding: 0 0.5rem;
+		}
+
+		.hero-title {
+			font-size: 1.35rem;
+		}
+
+		.block-title {
+			font-size: 1.15rem;
+		}
+
+		.service-card,
+		.pricing-tier {
+			padding: 1rem;
+		}
+
+		.about-photo {
+			width: 100px;
+			height: 100px;
 		}
 	}
 </style>
