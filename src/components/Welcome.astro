@@ -71,57 +71,9 @@ import background from '../assets/background.svg';
 			<span class="block-label">Pricing</span>
 			<h2 class="block-title">Simple pricing</h2>
 			<div class="pricing-card">
-				<p class="pricing-lead">Most small business sites land around <strong>$300–$600</strong> depending on what you need.</p>
-				<p class="pricing-note">We'll tell you the price upfront. No subscriptions, no surprise invoices.</p>
-			</div>
-			<div class="pricing-grid">
-				<article class="pricing-tier">
-					<header class="pricing-tier-header">
-						<h3>Small business site</h3>
-						<div class="price">$300+</div>
-						<div class="price-period">one-time. you own it.</div>
-					</header>
-					<ul class="tier-features">
-						<li>Responsive, clean design</li>
-						<li>Quick turnaround</li>
-						<li>Basic SEO</li>
-						<li>Contact form</li>
-						<li>No monthly fees</li>
-					</ul>
-					<a href="/contact" class="btn btn-primary">Tell us what you need →</a>
-				</article>
-
-				<article class="pricing-tier featured">
-					<header class="pricing-tier-header">
-						<h3>Full multi-page site</h3>
-						<div class="price">$1500+</div>
-						<div class="price-period">performance + SEO focused</div>
-					</header>
-					<ul class="tier-features">
-						<li>Full multi-page build (custom design)</li>
-						<li>Near-perfect PageSpeed scores</li>
-						<li>SEO optimization + structured data</li>
-						<li>Copywriting assistance</li>
-						<li>Tracking/analytics setup</li>
-						<li>CMS Integration (optional)</li>
-						<li>Option for continued support</li>
-					</ul>
-					<a href="/contact" class="btn btn-primary">Get a quote →</a>
-				</article>
-
-				<article class="pricing-tier">
-					<header class="pricing-tier-header">
-						<h3>Other stuff</h3>
-						<div class="price">Quote</div>
-						<div class="price-period">tools, apps, custom work</div>
-					</header>
-					<ul class="tier-features">
-						<li>Internal tools</li>
-						<li>AI or custom apps</li>
-						<li>SEO optimization</li>
-					</ul>
-					<a href="/contact" class="btn btn-secondary">Let's figure it out</a>
-				</article>
+				<p class="pricing-lead">Every job is quoted independently—no fixed tiers. We scope it, then give you a price.</p>
+				<p class="pricing-note">Rough ballpark: smaller sites often land around <strong>$600</strong>; 10–15 page sites tend to run around <strong>$2500</strong>. We'll tell you the price upfront. No subscriptions, no surprise invoices.</p>
+				<a href="/contact" class="btn btn-primary">Tell us what you need →</a>
 			</div>
 		</section>
 
@@ -402,24 +354,30 @@ import background from '../assets/background.svg';
 	.block-pricing .pricing-card {
 		background: rgba(99, 102, 241, 0.06);
 		border: 1px solid rgba(99, 102, 241, 0.15);
-		border-radius: 12px;
-		padding: 1.5rem 1.75rem;
-		max-width: 560px;
+		border-radius: 14px;
+		padding: 2.5rem 2.25rem;
+		max-width: 640px;
 	}
 
 	.pricing-lead {
-		font-size: 1.0625rem;
+		font-size: 1.35rem;
 		color: #0f172a;
 		font-weight: 500;
-		margin: 0 0 0.5rem 0;
+		margin: 0 0 1rem 0;
 		line-height: 1.5;
 	}
 
 	.pricing-note {
-		font-size: 0.9375rem;
+		font-size: 1.125rem;
 		color: #64748b;
 		margin: 0;
-		line-height: 1.5;
+		line-height: 1.6;
+	}
+
+	.block-pricing .pricing-card .btn {
+		margin-top: 1.5rem;
+		font-size: 1.0625rem;
+		padding: 0.875rem 1.75rem;
 	}
 
 	.pricing-grid {
@@ -678,7 +636,7 @@ import background from '../assets/background.svg';
 		}
 
 		.block-pricing .pricing-card {
-			padding: 1.25rem 1.5rem;
+			padding: 1.75rem 1.5rem;
 		}
 
 		.pricing-grid {
@@ -777,11 +735,11 @@ import background from '../assets/background.svg';
 		}
 
 		.pricing-lead {
-			font-size: 1rem;
+			font-size: 1.2rem;
 		}
 
 		.pricing-note {
-			font-size: 0.875rem;
+			font-size: 1rem;
 		}
 
 		.pricing-tier {
