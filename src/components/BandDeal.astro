@@ -1,0 +1,311 @@
+---
+---
+
+<div class="band-deal">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+	<header class="band-hero">
+		<div class="band-hero-inner">
+			<p class="band-badge">For musicians</p>
+			<h1 class="band-title">Your bands site.<br />One price. Done.</h1>
+			<p class="band-lead">Most low- to mid-tier bands never hit enough traffic to outgrow free hosting. So we charge a single small fee—you get a proper site, and you're set.</p>
+			<div class="band-price">
+				<span class="band-price-amount">$175</span>
+				<span class="band-price-note">one-time. you own it. no monthly anything.</span>
+			</div>
+			<a href="/contact" class="band-cta">Get your band site →</a>
+		</div>
+	</header>
+
+	<section class="band-includes">
+		<div class="band-includes-inner">
+			<h2 class="band-section-title">What you get</h2>
+			<ul class="band-features">
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> A clean, responsive site that actually looks good</li>
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> Contact form so venues and fans can reach you</li>
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> SeatGeek integration for shows and tickets</li>
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> Optional newsletter signup</li>
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> YouTube, Bandcamp, Spotify—wherever you live</li>
+				<li><span class="band-feature-icon" aria-hidden="true">◆</span> Social and music links in one place</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="band-why">
+		<div class="band-why-inner">
+			<h2 class="band-section-title">Why so cheap?</h2>
+			<p class="band-why-text">We're not cutting corners. We're cutting the stuff bands don't need. No big CMS, no ongoing maintenance. Your traffic fits comfortably on free-tier hosting. You pay once, we build it, you own it. That's it.</p>
+		</div>
+	</section>
+
+	<section class="band-cta-block">
+		<div class="band-cta-block-inner">
+			<p class="band-cta-label">Ready?</p>
+			<a href="/contact" class="band-cta band-cta-large">Get your band site for $175 →</a>
+			<p class="band-cta-or">OR just call or email!</p>
+		</div>
+	</section>
+
+	<section class="band-contact">
+		<div class="band-contact-inner">
+			<a href="computertommy.com" class="band-contact-link">← Home</a>
+			<a href="tel:5083802013" class="band-contact-link">508 380 2013</a>
+			<a href="mailto:tventura94@gmail.com" class="band-contact-link">tventura94@gmail.com</a>
+		</div>
+	</section>
+</div>
+
+<style>
+	.band-deal {
+		--band-bg: #0a0a0b;
+		--band-surface: #141416;
+		--band-border: rgba(255, 255, 255, 0.08);
+		--band-text: #e4e4e7;
+		--band-muted: #71717a;
+		--band-accent: #f59e0b;
+		--band-accent-dim: rgba(245, 158, 11, 0.15);
+		font-family: 'DM Sans', system-ui, sans-serif;
+		background: var(--band-bg);
+		color: var(--band-text);
+		min-height: 100%;
+		overflow-x: hidden;
+	}
+
+	.band-deal *,
+	.band-deal *::before,
+	.band-deal *::after {
+		box-sizing: border-box;
+	}
+
+	/* Hero */
+	.band-hero {
+		padding: clamp(3rem, 10vw, 5rem) 1.5rem clamp(4rem, 12vw, 6rem);
+		text-align: center;
+	}
+
+	.band-hero-inner {
+		max-width: 820px;
+		margin: 0 auto;
+	}
+
+	.band-badge {
+		display: inline-block;
+		font-size: 0.875rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--band-accent);
+		margin: 0 0 1.25rem 0;
+		padding: 0.4rem 0.9rem;
+		border: 1px solid var(--band-accent-dim);
+		border-radius: 999px;
+	}
+
+	.band-title {
+		font-family: 'Syne', sans-serif;
+		font-size: clamp(2.75rem, 7vw, 4.25rem);
+		font-weight: 800;
+		line-height: 1.15;
+		letter-spacing: -0.03em;
+		color: #fff;
+		margin: 0 0 1.25rem 0;
+	}
+
+	.band-lead {
+		font-size: 1.35rem;
+		line-height: 1.6;
+		color: var(--band-muted);
+		margin: 0 0 2rem 0;
+	}
+
+	.band-price {
+		margin-bottom: 2rem;
+	}
+
+	.band-price-amount {
+		display: block;
+		font-family: 'Syne', sans-serif;
+		font-size: clamp(3rem, 10vw, 4.5rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: var(--band-accent);
+		line-height: 1;
+	}
+
+	.band-price-note {
+		display: block;
+		font-size: 1.125rem;
+		color: var(--band-muted);
+		margin-top: 0.5rem;
+	}
+
+	.band-cta {
+		display: inline-block;
+		padding: 0.875rem 1.75rem;
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: var(--band-bg);
+		background: var(--band-accent);
+		border: none;
+		border-radius: 10px;
+		text-decoration: none;
+		transition: background 0.2s ease, transform 0.15s ease;
+	}
+
+	.band-cta:hover {
+		background: #e69509;
+		transform: translateY(-1px);
+	}
+
+	/* What you get */
+	.band-includes {
+		padding: 3rem 1.5rem;
+		background: var(--band-surface);
+		border-top: 1px solid var(--band-border);
+	}
+
+	.band-includes-inner {
+		max-width: 520px;
+		margin: 0 auto;
+	}
+
+	.band-section-title {
+		font-family: 'Syne', sans-serif;
+		font-size: 1.875rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		color: #fff;
+		margin: 0 0 1.5rem 0;
+		text-align: center;
+	}
+
+	.band-features {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.band-features li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		font-size: 1.4rem;
+		line-height: 1.55;
+		color: var(--band-text);
+	}
+
+	.band-feature-icon {
+		flex-shrink: 0;
+		color: var(--band-accent);
+		font-size: 0.6em;
+		vertical-align: middle;
+		margin-top: 0.35em;
+	}
+
+	/* Why so cheap */
+	.band-why {
+		padding: 3rem 1.5rem;
+		text-align: center;
+	}
+
+	.band-why-inner {
+		max-width: 480px;
+		margin: 0 auto;
+	}
+
+	.band-why-text {
+		font-size: 1.5rem;
+		line-height: 1.7;
+		color: var(--band-muted);
+		margin: 0;
+	}
+
+	/* Bottom CTA */
+	.band-cta-block {
+		padding: 3rem 1.5rem 4rem;
+		border-top: 1px solid var(--band-border);
+		text-align: center;
+	}
+
+	.band-cta-block-inner {
+		max-width: 400px;
+		margin: 0 auto;
+	}
+
+	.band-cta-label {
+		font-size: 1rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: var(--band-muted);
+		margin: 0 0 1rem 0;
+	}
+
+	.band-cta-large {
+		font-size: 1.2rem;
+		padding: 1rem 2rem;
+	}
+
+	.band-cta-or {
+		font-size: 1.125rem;
+		color: var(--band-muted);
+		margin: 1.25rem 0 0 0;
+	}
+
+	/* Contact */
+	.band-contact {
+		padding: 3rem 1.5rem 4rem;
+		border-top: 1px solid var(--band-border);
+		text-align: center;
+		background: var(--band-surface);
+	}
+
+	.band-contact-inner {
+		max-width: 400px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.band-contact-link {
+		font-size: 1.25rem;
+		color: var(--band-accent);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.band-contact-link:hover {
+		color: #e69509;
+	}
+
+	@media (max-width: 480px) {
+		.band-hero {
+			padding: 2rem 1rem 3rem;
+		}
+
+		.band-includes,
+		.band-why,
+		.band-cta-block,
+		.band-contact {
+			padding: 2rem 1rem;
+		}
+
+		.band-cta-block {
+			padding-bottom: 2rem;
+		}
+
+		.band-contact {
+			padding-bottom: 3rem;
+		}
+
+		.band-contact-link {
+			font-size: 1.125rem;
+		}
+	}
+</style>

@@ -8,6 +8,7 @@ const {
 	canonical,
 	image,
 	jsonLd,
+	noIndex = false,
 } = Astro.props as {
 	title?: string;
 	description?: string;
@@ -15,6 +16,8 @@ const {
 	/** Open Graph image URL (absolute, or path like /og.png). Falls back to logo. */
 	image?: string;
 	jsonLd?: unknown | unknown[];
+	/** When true, add robots noindex,nofollow and omit SEO meta/og/json-ld. */
+	noIndex?: boolean;
 };
 
 const siteUrl = 'https://computertommy.com';
@@ -60,24 +63,30 @@ const jsonLdArray = jsonLd
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<meta name="description" content={description} />
-		{canonical ? <link rel="canonical" href={canonical} /> : null}
-		<!-- Open Graph -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={ogUrl} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={ogImage} />
-		<meta property="og:site_name" content="Computer Tommy" />
-		<!-- Twitter Card -->
-		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={ogImage} />
-		<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-		{jsonLdArray.map((schema) => (
-			<script type="application/ld+json" set:html={JSON.stringify(schema)} />
-		))}
+		{noIndex ? (
+			<meta name="robots" content="noindex, nofollow" />
+		) : (
+			<>
+				<meta name="description" content={description} />
+				{canonical ? <link rel="canonical" href={canonical} /> : null}
+				<!-- Open Graph -->
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content={ogUrl} />
+				<meta property="og:title" content={title} />
+				<meta property="og:description" content={description} />
+				<meta property="og:image" content={ogImage} />
+				<meta property="og:site_name" content="Computer Tommy" />
+				<!-- Twitter Card -->
+				<meta name="twitter:card" content="summary" />
+				<meta name="twitter:title" content={title} />
+				<meta name="twitter:description" content={description} />
+				<meta name="twitter:image" content={ogImage} />
+				<script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+				{jsonLdArray.map((schema) => (
+					<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+				))}
+			</>
+		)}
 	</head>
 	<body>
 		<slot />
