@@ -223,12 +223,31 @@ const jsonLd = [
 				<div class="case-grid">
 					{caseStudies.map((c) => (
 						<article class="case-card">
-							<h3>{c.title}</h3>
-							<p class="case-need">{c.whatTheyNeeded}</p>
-							<p class="case-result">{c.result}</p>
-							<a class="case-link" href={c.url} target="_blank" rel="noopener noreferrer">
-								View <span aria-hidden="true">→</span>
-							</a>
+							<div class="case-preview">
+								<iframe
+									title={`Live preview of ${c.title}`}
+									data-src={c.url}
+									class="case-iframe"
+									aria-hidden="true"
+									tabindex="-1"
+									loading="lazy"
+								/>
+							</div>
+							<div class="case-body">
+								<span class="case-category">{c.category}</span>
+								<h3>{c.title}</h3>
+								<p class="case-need">{c.whatTheyNeeded}</p>
+								<p class="case-result">{c.result}</p>
+								<a
+									class="case-link"
+									href={c.url}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`Visit ${c.title} (opens in a new tab)`}
+								>
+									Visit site <span aria-hidden="true">→</span>
+								</a>
+							</div>
 						</article>
 					))}
 				</div>
@@ -393,11 +412,46 @@ const jsonLd = [
 	}
 
 	.case-card {
-		background: rgba(255, 255, 255, 0.75);
+		background: rgba(255, 255, 255, 0.85);
 		border-radius: 14px;
-		padding: 1.25rem;
+		overflow: hidden;
 		border: 1px solid rgba(0, 0, 0, 0.06);
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+		display: flex;
+		flex-direction: column;
+	}
+
+	.case-preview {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		background: #f3f4f6;
+		overflow: hidden;
+	}
+
+	.case-iframe {
+		position: absolute;
+		inset: 0;
+		border: none;
+		pointer-events: none;
+		transform: scale(0.5);
+		transform-origin: top left;
+		width: 200%;
+		height: 200%;
+	}
+
+	.case-body {
+		padding: 1.1rem 1.25rem 1.25rem;
+	}
+
+	.case-category {
+		display: inline-block;
+		font-size: 0.8rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: #3245ff;
+		font-weight: 700;
+		margin-bottom: 0.35rem;
 	}
 
 	.case-card h3 {
@@ -536,3 +590,19 @@ const jsonLd = [
 	}
 </style>
 
+<script>
+	function loadCaseStudyIframes() {
+		document.querySelectorAll<HTMLIFrameElement>('.case-iframe').forEach((iframe) => {
+			const src = iframe.getAttribute('data-src');
+			if (src && !iframe.src) iframe.src = src;
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', () => {
+			setTimeout(loadCaseStudyIframes, 150);
+		});
+	} else {
+		setTimeout(loadCaseStudyIframes, 150);
+	}
+</script>
