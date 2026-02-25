@@ -22,9 +22,9 @@ faqs:
     a: No. It’s a one-time build. You own the site when we’re done.
 caseStudySlugs: []
 internalLinks:
-  - href: /services/web-development
+  - href: /services/web-development/
     label: Web development service details
-  - href: /contact
+  - href: /contact/
     label: Get a quote
 ---
 

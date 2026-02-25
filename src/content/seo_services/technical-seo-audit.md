@@ -21,9 +21,9 @@ faqs:
   - q: Can you fix the issues too?
     a: Yep. If you want, I can take the audit results and implement the fixes (or work alongside your dev).
 internalLinks:
-  - href: /contact
+  - href: /contact/
     label: Request an SEO audit
-  - href: /services/seo
+  - href: /services/seo/
     label: Back to SEO services
 ---
 

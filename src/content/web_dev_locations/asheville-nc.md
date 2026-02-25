@@ -30,9 +30,9 @@ caseStudySlugs:
   - dizzys-glizzies
   - nathankingtattoos
 internalLinks:
-  - href: /portfolio
+  - href: /portfolio/
     label: See sites I’ve built
-  - href: /contact
+  - href: /contact/
     label: Tell us what you need
 ---
 

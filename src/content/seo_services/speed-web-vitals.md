@@ -19,7 +19,7 @@ faqs:
   - q: What pages do we optimize first?
     a: The pages people land on most (home, top service pages, key location pages).
 internalLinks:
-  - href: /contact
+  - href: /contact/
     label: Fix my site speed
   - href: /services/seo/technical-seo-audit/
     label: Start with a technical SEO audit

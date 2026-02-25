@@ -41,9 +41,9 @@ faqs:
     a: "No long-term contracts. The build is a single project and the site is yours."
 caseStudySlugs: []
 internalLinks:
-  - href: /services/web-development
+  - href: /services/web-development/
     label: Web development service details
-  - href: /contact
+  - href: /contact/
     label: Get a quote
 ---
 

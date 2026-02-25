@@ -22,9 +22,9 @@ faqs:
     a: No ongoing contracts. Once the site is finished and paid for, it’s yours.
 caseStudySlugs: []
 internalLinks:
-  - href: /services/web-development
+  - href: /services/web-development/
     label: Web development service details
-  - href: /contact
+  - href: /contact/
     label: Get a quote
 ---
 

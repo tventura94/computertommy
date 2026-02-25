@@ -22,9 +22,9 @@ faqs:
     a: No subscriptions required. It’s a single project and the finished site belongs to you.
 caseStudySlugs: []
 internalLinks:
-  - href: /services/web-development
+  - href: /services/web-development/
     label: Web development service details
-  - href: /contact
+  - href: /contact/
     label: Get a quote
 ---
 

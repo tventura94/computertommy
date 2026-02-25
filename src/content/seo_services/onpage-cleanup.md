@@ -19,7 +19,7 @@ faqs:
   - q: What pages should we start with?
     a: "Your money pages: home, top services, and the pages that should generate calls/quotes/orders."
 internalLinks:
-  - href: /contact
+  - href: /contact/
     label: Request on-page cleanup
   - href: /services/seo/technical-seo-audit/
     label: Start with a technical SEO audit

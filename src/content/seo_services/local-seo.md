@@ -19,7 +19,7 @@ faqs:
   - q: Can you help with reviews?
     a: Yep. Reviews are a huge local ranking signal. I can help you set up a straightforward process to request reviews and highlight them on the site.
 internalLinks:
-  - href: /contact
+  - href: /contact/
     label: Request local SEO help
   - href: /services/seo/technical-seo-audit/
     label: Start with a technical SEO Audit
