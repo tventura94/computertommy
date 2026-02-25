@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://computertommy.com/sitemap.xml
+Sitemap: https://computertommy.com/sitemap-index.xml
