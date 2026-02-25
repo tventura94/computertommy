@@ -22,7 +22,15 @@ const {
 
 const siteUrl = 'https://computertommy.com';
 const logoUrl = new URL(logo.src, siteUrl).toString();
-const ogUrl = canonical ?? siteUrl + '/';
+const pathname = Astro.url.pathname;
+const pathWithTrailingSlash =
+	pathname === '' || pathname === '/'
+		? '/'
+		: pathname.endsWith('/')
+			? pathname
+			: pathname + '/';
+const canonicalUrl = canonical ?? (siteUrl + pathWithTrailingSlash);
+const ogUrl = canonicalUrl;
 const ogImage = image
 	? image.startsWith('http') ? image : new URL(image, siteUrl).toString()
 	: logoUrl;
