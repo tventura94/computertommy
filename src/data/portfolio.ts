@@ -22,9 +22,9 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     slug: "fresh-grill-bbq",
-    title: "Fresh Grills BBQ (Sample Site)",
+    title: "Fresh Grills BBQ (Charlotte, NC)",
     category: "Service site",
-    url: "https://freshgrills.netlify.app/",
+    url: "https://cleangrillscharlotte.com/",
     whatTheyNeeded: "A site to showoff their services.",
     result: "Simple site w/ a beautiful design to showcase their services.",
   },
