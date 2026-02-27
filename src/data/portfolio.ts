@@ -22,7 +22,7 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     slug: "fresh-grill-bbq",
-    title: "Fresh Grills BBQ (Charlotte, NC)",
+    title: "Clean Grills BBQ (Charlotte, NC)",
     category: "Service site",
     url: "https://cleangrillscharlotte.com/",
     whatTheyNeeded: "A site to showoff their services.",
