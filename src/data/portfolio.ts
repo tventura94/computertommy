@@ -3,6 +3,8 @@ export interface PortfolioItem {
   title: string;
   category: string;
   url: string;
+  /** Optional preview image path (e.g. when site blocks iframe). */
+  previewImage?: string;
   /** What they needed (one sentence). */
   whatTheyNeeded: string;
   /** Result (one sentence). */
@@ -25,6 +27,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Clean Grills BBQ (Charlotte, NC)",
     category: "Service site",
     url: "https://cleangrillscharlotte.com/",
+    previewImage: "/portfolio/clean-grills-screenshot.png",
     whatTheyNeeded: "A site to showoff their services.",
     result: "Simple site w/ a beautiful design to showcase their services.",
   },

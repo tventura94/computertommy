@@ -30,13 +30,21 @@ import { portfolioItems } from '../data/portfolio';
 					{portfolioItems.map((item) => (
 						<article class="portfolio-card">
 							<div class="preview-wrap">
-								<iframe
-									title={`Live preview of ${item.title}`}
-									data-src={item.url}
-									class="preview-iframe"
-									aria-hidden="true"
-									tabindex="-1"
-								/>
+								{item.previewImage ? (
+									<img
+										src={item.previewImage}
+										alt={`Preview of ${item.title}`}
+										class="preview-img preview-img--static"
+									/>
+								) : (
+									<iframe
+										title={`Live preview of ${item.title}`}
+										data-src={item.url}
+										class="preview-iframe"
+										aria-hidden="true"
+										tabindex="-1"
+									/>
+								)}
 							</div>
 							<div class="card-body">
 								<span class="category">{item.category}</span>
@@ -170,6 +178,11 @@ import { portfolioItems } from '../data/portfolio';
 		height: 100%;
 		object-fit: cover;
 		z-index: 1;
+	}
+
+	.preview-img--static {
+		object-fit: cover;
+		object-position: top center;
 	}
 
 	/* When image fails to load (404), hide it so iframe shows */
