@@ -10,6 +10,9 @@ export default defineConfig({
   site: "https://computertommy.com/",
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ["devserver-preview--tiny-stroopwafel-ab121c.netlify.app"],
+    },
   },
   integrations: [sitemap()],
   trailingSlash: "always",
