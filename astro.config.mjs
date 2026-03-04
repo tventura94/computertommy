@@ -11,7 +11,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ["devserver-preview--tiny-stroopwafel-ab121c.netlify.app"],
+      allowedHosts: true, // Allow Netlify preview URLs and other hosts in dev
     },
   },
   integrations: [sitemap()],
