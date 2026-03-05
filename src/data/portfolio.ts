@@ -23,6 +23,23 @@ export const portfolioItems: PortfolioItem[] = [
       "Simple site w/ a beautiful design to showcase their services and events.",
   },
   {
+    slug: "jon-qcountry",
+    title: "Jon Qcountry",
+    category: "Band site",
+    url: "https://jonqcountry.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result:
+      "Clean band site with music, bio, shows, and contact. Site by Computer Tommy.",
+  },
+  {
+    slug: "rich-larocca-music",
+    title: "Rich LaRocca",
+    category: "Band site",
+    url: "https://richlaroccamusic.com/",
+    whatTheyNeeded: "An EPK (electronic press kit) for booking and promotion.",
+    result: "Rock, country, blues EPK with a focused entry experience.",
+  },
+  {
     slug: "fresh-grill-bbq",
     title: "Clean Grills BBQ (Charlotte, NC)",
     category: "Service site",
@@ -99,21 +116,5 @@ export const portfolioItems: PortfolioItem[] = [
     whatTheyNeeded: "A portfolio site to book sessions and show work.",
     result:
       "Simple site to showcase work and take inquiries. Built in a weekend.",
-  },
-  {
-    slug: "jon-qcountry",
-    title: "Jon Qcountry",
-    category: "Band site",
-    url: "https://jonqcountry.netlify.app/",
-    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
-    result: "Clean band site with music, bio, shows, and contact. Site by Computer Tommy.",
-  },
-  {
-    slug: "rich-larocca-music",
-    title: "Rich LaRocca",
-    category: "Band site",
-    url: "https://richlaroccamusic.com/",
-    whatTheyNeeded: "An EPK (electronic press kit) for booking and promotion.",
-    result: "Rock, country, blues EPK with a focused entry experience.",
   },
 ];
