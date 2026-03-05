@@ -39,15 +39,7 @@ export const portfolioItems: PortfolioItem[] = [
     whatTheyNeeded: "A clean app for their product.",
     result: "Built a simple, fast front-end they could ship with.",
   },
-  {
-    slug: "JSC PsyD",
-    title: "JSC PsyD (Sample Site)",
-    category: "Personal site",
-    url: "https://superlative-crumble-35189d.netlify.app/",
-    whatTheyNeeded: "A portfolio site to showcase work and take inquiries.",
-    result:
-      "Simple site to showcase work and take inquiries. Built in a weekend.",
-  },
+
   {
     slug: "future-hippies-of-funk",
     title: "Future Hippies of Funk (Sample Site)",
@@ -109,11 +101,19 @@ export const portfolioItems: PortfolioItem[] = [
       "Simple site to showcase work and take inquiries. Built in a weekend.",
   },
   {
-    slug: "junggpt",
-    title: "JungGPT",
-    category: "AI Agent",
-    url: "https://theragpt-client-git-master-tventura94s-projects.vercel.app/",
-    whatTheyNeeded: "A custom AI agent with a clean interface.",
-    result: "Working app they could use and iterate on.",
+    slug: "jon-qcountry",
+    title: "Jon Qcountry",
+    category: "Band site",
+    url: "https://jonqcountry.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact. Site by Computer Tommy.",
+  },
+  {
+    slug: "rich-larocca-music",
+    title: "Rich LaRocca",
+    category: "Band site",
+    url: "https://richlaroccamusic.com/",
+    whatTheyNeeded: "An EPK (electronic press kit) for booking and promotion.",
+    result: "Rock, country, blues EPK with a focused entry experience.",
   },
 ];
