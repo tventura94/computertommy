@@ -1,7 +1,5 @@
 
 ---
-import logo from '../assets/computertommylogo.svg';
-
 const {
 	title = 'Computer Tommy: Professional Website Design and Development',
 	description = 'Fast, clean websites and practical tooling for local businesses. No monthly fees.',
@@ -21,7 +19,8 @@ const {
 };
 
 const siteUrl = 'https://computertommy.com';
-const logoUrl = new URL(logo.src, siteUrl).toString();
+// Facebook and some crawlers do not reliably support SVG for og:image.
+const socialImageUrl = new URL('/computertommylogo.png', siteUrl).toString();
 const pathname = Astro.url.pathname;
 const pathWithTrailingSlash =
 	pathname === '' || pathname === '/'
@@ -33,7 +32,7 @@ const canonicalUrl = canonical ?? (siteUrl + pathWithTrailingSlash);
 const ogUrl = canonicalUrl;
 const ogImage = image
 	? image.startsWith('http') ? image : new URL(image, siteUrl).toString()
-	: logoUrl;
+	: socialImageUrl;
 
 const localBusinessSchema = {
 	'@context': 'https://schema.org',
@@ -41,7 +40,7 @@ const localBusinessSchema = {
 	'@id': 'https://computertommy.com/#localbusiness',
 	name: 'Computer Tommy',
 	url: 'https://computertommy.com',
-	image: logoUrl,
+	image: socialImageUrl,
 	priceRange: '$300-$2500',
 	telephone: '+1-508-380-2013',
 	address: {
