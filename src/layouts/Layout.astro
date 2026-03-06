@@ -105,7 +105,8 @@ const jsonLdArray = jsonLd
 			window.gtag = gtag;
 			gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied' });
 			gtag('js', new Date());
-			gtag('config', gaId);
+			// Send page_view manually so we can fire it precisely after consent.
+			gtag('config', gaId, { send_page_view: false });
 		</script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FJV8XHXV48"></script>
 	</head>
@@ -138,6 +139,15 @@ const jsonLdArray = jsonLd
 					}
 				}
 
+				function sendPageView() {
+					if (typeof window.gtag === 'function') {
+						window.gtag('event', 'page_view', {
+							page_path: window.location.pathname,
+							page_location: window.location.href,
+						});
+					}
+				}
+
 				function hideModal() {
 					if (modal) {
 						modal.classList.remove('cookie-consent-visible');
@@ -148,6 +158,7 @@ const jsonLdArray = jsonLd
 				function onAccept() {
 					try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch (e) {}
 					grantConsent();
+					sendPageView();
 					hideModal();
 				}
 
@@ -161,6 +172,7 @@ const jsonLdArray = jsonLd
 
 				if (consent === 'accepted') {
 					grantConsent();
+					sendPageView();
 					hideModal();
 				} else if (consent === 'rejected') {
 					hideModal();
