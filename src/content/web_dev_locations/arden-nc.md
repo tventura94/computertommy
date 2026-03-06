@@ -1,6 +1,6 @@
 ---
 h1: Web design in Arden, NC
-heroSubtitle: Clean, fast websites for Arden businesses — quick turnaround, no retainers, no bloated templates.
+heroSubtitle: Clean, fast websites for Arden businesses — no retainers, no bloated templates.
 introBullets:
   - Built for Arden service businesses and small teams
   - Optimized for mobile and local search

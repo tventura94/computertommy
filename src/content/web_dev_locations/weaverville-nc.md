@@ -1,6 +1,6 @@
 ---
 h1: Web design in Weaverville, NC
-heroSubtitle: Fast, clean websites for Weaverville businesses — 72-hour turnaround, no monthly fees, no builder junk.
+heroSubtitle: Fast, clean websites for Weaverville businesses — no monthly fees, no builder junk.
 introBullets:
   - Built for small local businesses around Weaverville
   - Fast, mobile-friendly, and easy to contact
@@ -13,7 +13,7 @@ painPoints:
 processSteps:
   - Quick call to confirm pages, service area, and priorities
   - You send logo/photos (or I keep it clean and minimal)
-  - I build and share a preview within 72 hours
+  - I build and share a preview quickly
   - We tweak, then go live
 faqs:
   - q: Can you work with my existing logo and photos?

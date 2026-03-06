@@ -1,6 +1,6 @@
 ---
 h1: Web design in Asheville, NC
-heroSubtitle: Fast custom websites for Asheville businesses — 72-hour turnaround, no monthly fees, clean performance-focused builds.
+heroSubtitle: Fast custom websites for Asheville businesses — no monthly fees, clean performance-focused builds.
 introBullets:
   - Clean, fast site that loads instantly on mobile
   - One-time build (you own it) — no Wix/Squarespace subscription trap
@@ -13,7 +13,7 @@ painPoints:
 processSteps:
   - 10-minute call to confirm pages + goal
   - You send logo/photos/copy (or I help)
-  - I build and share a preview within 72 hours
+  - I build and share a preview quickly
   - Quick tweaks, then launch
 faqs:
   - q: What kind of Asheville businesses do you build websites for?
@@ -24,8 +24,8 @@ faqs:
     a: Definitely. For visitor-heavy businesses, we can emphasize quick info (hours, location, booking, FAQs) while still keeping a clear path for locals who want to call, request a quote, or become a repeat customer.
   - q: Do you help with Google/SEO for Asheville searches?
     a: I’ll set up the basics that matter—fast performance, clean on-page SEO, and a structure that supports local intent. If you have a Google Business Profile, we can also make sure the site and listing reinforce each other.
-  - q: What does “72-hour turnaround” mean?
-    a: Once we’ve got the essentials (pages, offer, contact info, and any logo/photos), I can usually deliver a first version within 72 hours. Then we do quick revisions and launch.
+  - q: How quickly can you deliver a first version?
+    a: Once we’ve got the essentials (pages, offer, contact info, and any logo/photos), I can usually deliver a first version quickly. Then we do quick revisions and launch.
 caseStudySlugs:
   - dizzys-glizzies
   - nathankingtattoos
@@ -44,4 +44,4 @@ To make it feel locally grounded (and not like a copy/paste “city page”), we
 
 You also don’t need a bloated site to compete here. A small set of strong pages (home, services, about, contact) with tight copy and fast load times will usually outperform a big slow template—especially on mobile when someone is searching while they’re out near **Pack Square**, driving in from the **Blue Ridge Parkway**, or planning around landmarks like **Biltmore**.
 
-If you want proof I’m actually building in this area, check out the Asheville work linked on this page—projects like **Nathan King Tattoos** and **5th World**—and then tell us what you need. I’ll keep it simple, fast, and built to convert.
+If you want proof I’m actually building in this area, check out the Asheville work linked on this page—projects like **Nathan King Tattoos** and **Dizzy's Glizzies**—and then tell us what you need. I’ll keep it simple, fast, and built to convert.

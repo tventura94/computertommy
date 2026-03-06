@@ -1,6 +1,6 @@
 ---
 h1: Website design in Hendersonville, NC
-heroSubtitle: Straightforward, fast websites for Hendersonville businesses — quick turnaround, no subscriptions, no page-builder clutter.
+heroSubtitle: Straightforward, fast websites for Hendersonville businesses — no subscriptions, no page-builder clutter.
 introBullets:
   - Designed for Henderson County businesses and trades
   - Loads quickly on phones and older devices

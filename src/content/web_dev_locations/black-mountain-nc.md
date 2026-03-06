@@ -1,6 +1,6 @@
 ---
 h1: Web design in Black Mountain, NC
-heroSubtitle: Clean, fast websites for Black Mountain businesses — quick turnaround, no retainers, no page-builder bloat.
+heroSubtitle: Clean, fast websites for Black Mountain businesses — no retainers, no page-builder bloat.
 introBullets:
   - Built for local shops, trades, and creatives in Black Mountain
   - Fast on mobile and easy to navigate

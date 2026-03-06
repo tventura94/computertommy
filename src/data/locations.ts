@@ -34,7 +34,7 @@ export const locations: Location[] = [
     seo: {
       title: 'Web design in Asheville, NC | Computer Tommy',
       description:
-        'Fast custom websites for Asheville businesses. 72-hour turnaround, no monthly fees, clean performance-focused builds.',
+        'Fast custom websites for Asheville businesses. No monthly fees, clean performance-focused builds.',
       primaryKeyword: 'web design asheville nc',
       secondaryKeywords: ['asheville website developer', 'small business web designer asheville'],
     },
@@ -59,7 +59,7 @@ export const locations: Location[] = [
     seo: {
       title: 'Web design in Weaverville, NC | Computer Tommy',
       description:
-        'Fast, clean websites for Weaverville businesses. 72-hour turnaround, no monthly fees, no builder junk.',
+        'Fast, clean websites for Weaverville businesses. No monthly fees, no builder junk.',
       primaryKeyword: 'web design weaverville nc',
       secondaryKeywords: ['weaverville website developer', 'small business web designer weaverville'],
     },
@@ -78,7 +78,7 @@ export const locations: Location[] = [
     lng: -82.3212,
     seo: {
       title: 'Web design in Black Mountain, NC | Computer Tommy',
-      description: 'Fast, clean websites for Black Mountain businesses. 72-hour turnaround. No monthly fees.',
+      description: 'Fast, clean websites for Black Mountain businesses. No monthly fees.',
     },
     proof: {
       counties: ['Buncombe'],
@@ -93,7 +93,7 @@ export const locations: Location[] = [
     lng: -82.4609,
     seo: {
       title: 'Web design in Hendersonville, NC | Computer Tommy',
-      description: 'Fast, clean websites for Hendersonville businesses. 72-hour turnaround. No monthly fees.',
+      description: 'Fast, clean websites for Hendersonville businesses. No monthly fees.',
     },
     proof: {
       counties: ['Henderson'],
@@ -108,7 +108,7 @@ export const locations: Location[] = [
     lng: -82.5399,
     seo: {
       title: 'Web design in Arden, NC | Computer Tommy',
-      description: 'Fast, clean websites for Arden businesses. 72-hour turnaround. No monthly fees.',
+      description: 'Fast, clean websites for Arden businesses. No monthly fees.',
     },
     proof: {
       counties: ['Buncombe', 'Henderson'],
