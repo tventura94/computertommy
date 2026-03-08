@@ -67,6 +67,7 @@ const painPoints = fm?.painPoints ?? defaultModules.painPoints;
 const processSteps = fm?.processSteps ?? defaultModules.processSteps;
 const faqs = fm?.faqs ?? defaultModules.faqs;
 const internalLinks = fm?.internalLinks ?? [];
+const serviceName = h1.includes('|') ? h1.split('|')[0].trim() : h1;
 
 const nearby = getNearbyLocations(location.slug, 4);
 
@@ -79,6 +80,8 @@ const caseStudies = (fm?.caseStudySlugs ?? [])
 	.filter((p): p is PortfolioItem => Boolean(p));
 
 const localBusinessId = 'https://computertommy.com/#localbusiness';
+const phoneDisplay = '(508) 380-2013';
+const phoneHref = 'tel:+15083802013';
 
 const breadcrumbSchema = {
 	'@context': 'https://schema.org',
@@ -94,7 +97,7 @@ const breadcrumbSchema = {
 const serviceSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'Service',
-	name: `Web design in ${location.city}, ${location.regionLabel}`,
+	name: serviceName,
 	serviceType: 'Web design and development',
 	provider: { '@id': localBusinessId },
 	areaServed: {
@@ -165,9 +168,13 @@ const jsonLd = [
 				<p class="service-hero__label" aria-hidden="true">Web development · {location.city}, {location.regionLabel}</p>
 				<h1 class="service-hero__title">{h1}</h1>
 				<p class="service-hero__subtitle">{heroSubtitle}</p>
+				<p class="service-hero__contact">
+					Need web development in {location.city}, {location.regionLabel}?{' '}
+					<a href={phoneHref}>Call or text {phoneDisplay}</a> for a free estimate.
+				</p>
 				<div class="service-hero__cta">
-					<a class="btn btn-primary" href="/contact/">Get in touch →</a>
-					<a class="btn btn-secondary" href="/services/web-development/">Web development service</a>
+					<a class="btn btn-primary" href="/contact/">Get a {location.city} quote →</a>
+					<a class="btn btn-secondary" href={phoneHref}>Call or text {phoneDisplay}</a>
 				</div>
 			</div>
 		</header>
@@ -184,14 +191,23 @@ const jsonLd = [
 		</section>
 
 		<!-- How it works -->
-		<section class="service-section service-section--alt">
+		<section class="service-section service-section--alt service-section--process">
 			<div class="service-section__inner">
-				<span class="section-label">Process</span>
-				<h2 class="section-title">How it works</h2>
+				<div class="process-header">
+					<span class="section-label">Process</span>
+					<h2 class="section-title">How it works</h2>
+					<p class="process-lead">
+						A simple, low-friction process that keeps the project moving and gets your site live without
+						dragging things out.
+					</p>
+				</div>
 				<ol class="process-list">
 					{processSteps.map((s, idx) => (
 						<li class="process-list__item">
-							<span class="process-list__num" aria-hidden="true">{idx + 1}</span>
+							<div class="process-list__top">
+								<span class="process-list__num" aria-hidden="true">{idx + 1}</span>
+								<span class="process-list__step">Step {idx + 1}</span>
+							</div>
 							<span class="process-list__text">{s}</span>
 						</li>
 					))}
@@ -293,9 +309,15 @@ const jsonLd = [
 		<!-- CTA strip -->
 		<section class="service-cta-strip">
 			<div class="service-cta-strip__inner">
-				<h2 class="service-cta-strip__title">Ready to get started?</h2>
-				<p class="service-cta-strip__text">Tell us what you need and we’ll get back within 24 hours.</p>
-				<a class="btn btn-primary btn--large" href="/contact/">Get in touch →</a>
+				<h2 class="service-cta-strip__title">Need web development in {location.city}, {location.regionLabel}?</h2>
+				<p class="service-cta-strip__text">
+					Call or text {phoneDisplay} for a free estimate, or send a quick project note and I will follow
+					up within 24 hours.
+				</p>
+				<div class="service-cta-strip__actions">
+					<a class="btn btn-primary btn--large" href={phoneHref}>Call or text {phoneDisplay}</a>
+					<a class="btn btn-secondary btn--large" href="/contact/">Request a quote →</a>
+				</div>
 			</div>
 		</section>
 
@@ -388,6 +410,23 @@ const jsonLd = [
 		max-width: 42rem;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
+	}
+
+	.service-hero__contact {
+		margin: 0 0 1.25rem;
+		color: #334155;
+		font-size: 0.98rem;
+		line-height: 1.6;
+	}
+
+	.service-hero__contact a {
+		color: #0f172a;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.service-hero__contact a:hover {
+		text-decoration: underline;
 	}
 
 	.service-hero__cta {
@@ -527,48 +566,97 @@ const jsonLd = [
 	}
 
 	/* How it works */
+	.service-section--process {
+		background:
+			radial-gradient(circle at top left, rgba(99, 102, 241, 0.08), transparent 30%),
+			linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+	}
+
+	.process-header {
+		max-width: 42rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.process-lead {
+		margin: 0;
+		color: #475569;
+		line-height: 1.7;
+		font-size: 1rem;
+		max-width: 38rem;
+	}
+
 	.process-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 		gap: 1.25rem;
 	}
 
 	.process-list__item {
 		display: flex;
-		align-items: flex-start;
+		flex-direction: column;
 		gap: 1rem;
-		background: #fff;
-		padding: 1.25rem;
-		border-radius: 12px;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+		min-height: 100%;
+		background: rgba(255, 255, 255, 0.9);
+		padding: 1.35rem;
+		border-radius: 18px;
+		border: 1px solid rgba(99, 102, 241, 0.14);
+		box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+		backdrop-filter: blur(8px);
+		transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 	}
 
 	.service-section--alt .process-list__item {
-		background: #fff;
+		background: rgba(255, 255, 255, 0.9);
+	}
+
+	.process-list__item:hover {
+		transform: translateY(-2px);
+		border-color: rgba(79, 70, 229, 0.24);
+		box-shadow: 0 18px 36px rgba(15, 23, 42, 0.1);
+	}
+
+	.process-list__top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
 	}
 
 	.process-list__num {
 		flex-shrink: 0;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
+		width: 2.6rem;
+		height: 2.6rem;
+		border-radius: 14px;
 		background: linear-gradient(135deg, #3245ff 0%, #4f46e5 100%);
 		color: #fff;
-		font-size: 0.9rem;
-		font-weight: 700;
+		font-size: 1rem;
+		font-weight: 800;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+		box-shadow: 0 10px 20px rgba(50, 69, 255, 0.22);
+	}
+
+	.process-list__step {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.35rem 0.65rem;
+		border-radius: 999px;
+		background: rgba(79, 70, 229, 0.08);
+		color: #4338ca;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 	}
 
 	.process-list__text {
-		color: #334155;
-		line-height: 1.5;
-		font-size: 0.95rem;
+		color: #1e293b;
+		line-height: 1.7;
+		font-size: 1rem;
 	}
 
 	/* Pain points / Local proof blocks */
@@ -670,6 +758,13 @@ const jsonLd = [
 		color: #94a3b8;
 		margin: 0 0 1.5rem;
 		font-size: 1rem;
+	}
+
+	.service-cta-strip__actions {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
 	.service-cta-strip .btn-primary {
@@ -864,6 +959,10 @@ const jsonLd = [
 			padding: 1rem;
 		}
 
+		.process-list__top {
+			align-items: center;
+		}
+
 		.process-list__text {
 			word-wrap: break-word;
 			overflow-wrap: break-word;
@@ -901,6 +1000,10 @@ const jsonLd = [
 			gap: 0.75rem;
 		}
 
+		.service-cta-strip__actions {
+			flex-direction: column;
+		}
+
 		.service-hero__cta .btn {
 			width: 100%;
 			text-align: center;
@@ -915,6 +1018,15 @@ const jsonLd = [
 		}
 
 		.service-cta-strip .btn-primary {
+			min-height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			max-width: 320px;
+		}
+
+		.service-cta-strip .btn-secondary {
 			min-height: 44px;
 			display: inline-flex;
 			align-items: center;
@@ -971,6 +1083,11 @@ const jsonLd = [
 		}
 
 		.service-cta-strip .btn-primary {
+			max-width: none;
+			width: 100%;
+		}
+
+		.service-cta-strip .btn-secondary {
 			max-width: none;
 			width: 100%;
 		}

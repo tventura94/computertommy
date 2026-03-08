@@ -32,11 +32,11 @@ export const locations: Location[] = [
     lat: 35.5951,
     lng: -82.5515,
     seo: {
-      title: 'Web design in Asheville, NC | Computer Tommy',
+      title: 'Web Development in Asheville, NC | No Monthly Fees',
       description:
-        'Fast custom websites for Asheville businesses. No monthly fees, clean performance-focused builds.',
-      primaryKeyword: 'web design asheville nc',
-      secondaryKeywords: ['asheville website developer', 'small business web designer asheville'],
+        'Web development in Asheville, NC | Fast custom sites, local SEO structure, no monthly fees. Call or text (508) 380-2013 for a free website quote today.',
+      primaryKeyword: 'web development asheville nc',
+      secondaryKeywords: ['asheville web developer', 'small business website development asheville'],
     },
     proof: {
       landmarks: ['Biltmore', 'River Arts District', 'Pack Square'],
