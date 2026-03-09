@@ -79,7 +79,8 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Dizzys Glizzies (Discontinued)",
     category: "Collective / Community",
     url: "https://dizzys-glizzies.netlify.app",
-    whatTheyNeeded: "A landing page for their restaurant.",
+    whatTheyNeeded:
+      "A landing page for a discontinued late-night grub spot located at Imperial AVL.",
     result: "A beautiful hot dog themed landing page!",
   },
 
