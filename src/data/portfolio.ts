@@ -18,7 +18,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Business site",
     url: "https://paintball-sample-site.netlify.app/",
     whatTheyNeeded:
-      "A site to for a paintball business to showcase their services.",
+      "A site for a paintball business to showcase their services.",
     result:
       "Simple site w/ a beautiful design to showcase their services and events.",
   },
