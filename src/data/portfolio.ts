@@ -18,7 +18,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Business site",
     url: "https://paintball-sample-site.netlify.app/",
     whatTheyNeeded:
-      "A site to fpr a paintball business to showcase their services.",
+      "A site to for a paintball business to showcase their services.",
     result:
       "Simple site w/ a beautiful design to showcase their services and events.",
   },
@@ -28,8 +28,7 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Band site",
     url: "https://jonqcountry.netlify.app/",
     whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
-    result:
-      "Clean band site with music, bio, shows, and contact. Site by Computer Tommy.",
+    result: "Clean band site with music, bio, shows, and contact. ",
   },
   {
     slug: "rich-larocca-music",
