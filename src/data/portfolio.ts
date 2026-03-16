@@ -13,6 +13,16 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "parallel-carpentry",
+    title: "Parallel Carpentry",
+    category: "Business site",
+    url: "https://parallelcarpentry.com/",
+    whatTheyNeeded:
+      "A professional web presence to showcase kitchen remodels and attract local clients in Charlotte, NC.",
+    result:
+      "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
+  },
+  {
     slug: "paintball-sample-site",
     title: "Paintball Sample Site",
     category: "Business site",
