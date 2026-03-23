@@ -25,9 +25,9 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     slug: "paintball-sample-site",
-    title: "Paintball Sample Site",
+    title: "Ironridge Paintball",
     category: "Business site",
-    url: "https://paintball-sample-site.netlify.app/",
+    url: "https://ironridgepaintball.netlify.app/",
     whatTheyNeeded:
       "A site for a paintball business to showcase their services.",
     result:
