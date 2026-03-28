@@ -7,9 +7,39 @@ const currentYear = new Date().getFullYear();
     <div class="footer-container">
         <div class="footer-branding">
             <a href="/" class="footer-logo">
-                <img src={astroLogo.src} width="88" height="36" alt="Astro Homepage" />
+                <img src={astroLogo.src} width="88" height="36" alt="Computer Tommy" />
             </a>
             <p class="copyright">© {currentYear} Computer Tommy. All rights reserved.</p>
+        </div>
+        <div class="footer-links">
+            <div class="link-group">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="/services/web-development/">Web Development</a></li>
+                    <li><a href="/services/seo/">SEO</a></li>
+                    <li><a href="/services/ai/">AI</a></li>
+                    <li><a href="/services/tooling/">Tooling</a></li>
+                </ul>
+            </div>
+            <div class="link-group">
+                <h3>Web Development</h3>
+                <ul>
+                    <li><a href="/services/web-development/asheville-nc/">Asheville, NC</a></li>
+                    <li><a href="/services/web-development/weaverville-nc/">Weaverville, NC</a></li>
+                    <li><a href="/services/web-development/black-mountain-nc/">Black Mountain, NC</a></li>
+                    <li><a href="/services/web-development/hendersonville-nc/">Hendersonville, NC</a></li>
+                    <li><a href="/services/web-development/arden-nc/">Arden, NC</a></li>
+                </ul>
+            </div>
+            <div class="link-group">
+                <h3>SEO Services</h3>
+                <ul>
+                    <li><a href="/services/seo/local-seo/">Local SEO</a></li>
+                    <li><a href="/services/seo/technical-seo-audit/">Technical SEO Audit</a></li>
+                    <li><a href="/services/seo/speed-web-vitals/">Speed & Web Vitals</a></li>
+                    <li><a href="/services/seo/onpage-cleanup/">On-Page Cleanup</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-contact">
             <span class="contact-label">Contact</span>
@@ -37,17 +67,20 @@ const currentYear = new Date().getFullYear();
     .footer-container {
         max-width: 1200px;
         margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: flex-end;
-        gap: clamp(2rem, 4vw, 3rem);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        column-gap: clamp(2rem, 4vw, 3rem);
+        row-gap: clamp(1.5rem, 3vw, 2rem);
         width: 100%;
+        align-items: start;
     }
 
     .footer-branding {
-        flex: 0 1 auto;
-        min-width: 200px;
+        grid-column: 1;
+        grid-row: 2;
+        min-width: 0;
+        max-width: 100%;
     }
 
     .footer-logo {
@@ -74,11 +107,16 @@ const currentYear = new Date().getFullYear();
     }
 
     .footer-contact {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: end;
+        align-self: start;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 0.35rem;
         text-align: right;
+        min-width: 0;
     }
 
     .contact-label {
@@ -126,11 +164,21 @@ const currentYear = new Date().getFullYear();
     }
 
     .footer-links {
-        flex: 2 1 600px;
+        grid-column: 1 / -1;
+        grid-row: 1;
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
         gap: clamp(1.5rem, 3vw, 2rem);
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        /* Solid light surface so dark link text is readable (footer bar is translucent over a dark page) */
+        background: rgba(248, 250, 252, 0.96);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        border-radius: 12px;
+        padding: clamp(1.25rem, 3vw, 1.5rem) clamp(1rem, 2.5vw, 1.5rem);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
     }
 
     .link-group {
@@ -157,7 +205,7 @@ const currentYear = new Date().getFullYear();
     }
 
     .link-group a {
-        color: #4b5563;
+        color: #111827;
         text-decoration: none;
         transition: color 0.2s ease, transform 0.2s ease;
         display: inline-block;
@@ -193,10 +241,6 @@ const currentYear = new Date().getFullYear();
     }
 
     @media (prefers-color-scheme: dark) {
-        .link-group h3 {
-            color: #e5e7eb;
-        }
-        
         .copyright {
             color: #9ca3af;
         }
@@ -209,10 +253,6 @@ const currentYear = new Date().getFullYear();
             color: #385b8f;
             text-decoration-color: rgba(28, 46, 73, 0.35);
         }
-        
-        .link-group a {
-            color: #d1d5db;
-        }
     }
 
     @media (max-width: 768px) {
@@ -223,14 +263,16 @@ const currentYear = new Date().getFullYear();
         }
         
         .footer-container {
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            column-gap: 0;
+            row-gap: 2rem;
+            justify-items: center;
             text-align: center;
         }
 
         .footer-branding {
-            min-width: 0;
+            grid-column: 1;
+            grid-row: auto;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -251,6 +293,9 @@ const currentYear = new Date().getFullYear();
         }
 
         .footer-contact {
+            grid-column: 1;
+            grid-row: auto;
+            justify-self: center;
             align-items: center;
             text-align: center;
             width: 100%;
@@ -269,6 +314,8 @@ const currentYear = new Date().getFullYear();
         }
 
         .footer-links {
+            grid-column: 1;
+            grid-row: auto;
             flex-direction: column;
             gap: 1.5rem;
             width: 100%;
