@@ -6,48 +6,66 @@ import background from '../assets/background.svg';
 <div id="container">
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<main>
-		<!-- Hero: one clear focal block -->
 		<header class="hero">
 			<a href="/" class="site-name">
 				<img src={astroLogo.src} width="115" height="48" alt="ComputerTommy home" />
 			</a>
+
 			<div class="hero-content">
-				<h1 class="hero-title">We build simple, clean websites for local businesses that don't want to deal with agencies.</h1>
+				<h1 class="hero-title">
+Professional Web Design and Development for Local Service Businesses	| Computer Tommy			</h1>
+
 				<p class="hero-subtitle">
-					One-time build. No monthly fees. Real dude.  Easy process. You own the site.<br />
+					One-time build. No monthly fees. Real dude. Easy process. You own the site.
 				</p>
+
 				<div class="hero-cta">
-					<a href="/contact/" class="btn btn-primary">Tell us what you need →</a>
+					<a href="/contact/" class="btn btn-primary">Tell me what you need →</a>
 					<a href="/services/" class="btn btn-secondary">Services</a>
 					<a href="/about/" class="btn btn-secondary">About</a>
-					<a href="/portfolio/" class="btn btn-secondary">Sites We've built</a>
+					<a href="/portfolio/" class="btn btn-secondary">Portfolio</a>
 				</div>
 			</div>
 		</header>
 
-		<!-- Sections: clear blocks with labels -->
 		<section class="block block-services" id="services">
 			<span class="block-label">Services</span>
-			<h2 class="block-title">Pick what you need</h2>
+			<h2 class="block-title">Website work built for service businesses</h2>
+
 			<div class="services-grid">
 				<a class="service-card" href="/services/web-development/">
 					<h3>Web development</h3>
-					<p>Fast, clean, SEO-friendly sites for local businesses.</p>
-					<span class="service-link">View Web Dev →</span>
+					<p>
+						Custom websites built for local businesses that need something fast, clear, and
+						professional without dealing with an agency.
+					</p>
+					<span class="service-link">View Web Development →</span>
 				</a>
-				<a class="service-card" href="/services/tooling/">
-					<h3>Tooling</h3>
-					<p>Internal tools that save time (forms, dashboards, automations).</p>
-					<span class="service-link">View Tooling →</span>
-				</a>
+
 				<a class="service-card" href="/services/seo/">
 					<h3>SEO optimization</h3>
-					<p>Technical SEO + on-page cleanup so you get found and load fast.</p>
+					<p>
+						On-page and technical SEO work to help your website show up better for the local
+						searches that actually matter.
+					</p>
 					<span class="service-link">View SEO →</span>
 				</a>
+
+				<a class="service-card" href="/services/tooling/">
+					<h3>Tooling</h3>
+					<p>
+						Useful business tools like forms, quote flows, dashboards, and automations that
+						save time and cut down manual work.
+					</p>
+					<span class="service-link">View Tooling →</span>
+				</a>
+
 				<a class="service-card" href="/services/ai/">
 					<h3>AI</h3>
-					<p>Practical AI features and small automations (no hype).</p>
+					<p>
+						Practical AI features for small businesses that want real utility, not gimmicks
+						or overcomplicated systems.
+					</p>
 					<span class="service-link">View AI →</span>
 				</a>
 			</div>
@@ -55,58 +73,101 @@ import background from '../assets/background.svg';
 
 		<section class="block block-process" id="how-it-works">
 			<span class="block-label">How it works</span>
-			<h2 class="block-title">Five steps. No runaround.</h2>
+			<h2 class="block-title">Straightforward process. No agency runaround.</h2>
+
 			<div class="process-card">
 				<ol class="process-list">
-					<li><span class="step-num">1</span> You message us</li>
-					<li><span class="step-num">2</span> We talk for 10 minutes</li>
-					<li><span class="step-num">3</span> We quote it</li>
-					<li><span class="step-num">4</span> We build it</li>
-					<li><span class="step-num">5</span> You own it</li>
+					<li><span class="step-num">1</span> You reach out and tell me what you need</li>
+					<li><span class="step-num">2</span> We have a quick call and figure out scope</li>
+					<li><span class="step-num">3</span> I give you a clear upfront price</li>
+					<li><span class="step-num">4</span> I build the site or handle the work</li>
+					<li><span class="step-num">5</span> You get a finished site you control</li>
 				</ol>
 			</div>
 		</section>
 
 		<section class="block block-pricing" id="simple-pricing">
 			<span class="block-label">Pricing</span>
-			<h2 class="block-title">Simple pricing</h2>
+			<h2 class="block-title">Upfront pricing. No monthly trap.</h2>
+
 			<div class="pricing-card">
-				<p class="pricing-lead">Every job is quoted independently—no fixed tiers. We scope it, then give you a price.</p>
-				<p class="pricing-note">Rough ballpark: smaller sites often land around <strong>$600</strong>; 1-5 page sites run from <strong>$600</strong> to <strong>$3000</strong>. We'll tell you the price upfront. No subscriptions, no surprise invoices.</p>
-				<a href="/contact/" class="btn btn-primary">Tell us what you need →</a>
+				<p class="pricing-lead">
+					Every project is quoted based on what you actually need. No bloated packages. No
+					agency-style retainer just to keep the lights on.
+				</p>
+
+				<p class="pricing-note">
+					Smaller sites often land around <strong>$600</strong>. Most 1–5 page website builds
+					range from <strong>$600 to $3000</strong> depending on scope. You’ll know the price
+					up front before anything starts.
+				</p>
+
+				<a href="/contact/" class="btn btn-primary">Get a quote →</a>
 			</div>
 		</section>
 
 		<section class="block block-about" id="about-tom">
-			<span class="block-label">Who you're talking to</span>
-			<h2 class="block-title">Hi, I'm Tom.</h2>
+			<span class="block-label">Who you're working with</span>
+			<h2 class="block-title">Hi, I’m Tom.</h2>
+
 			<div class="about-card">
 				<div class="about-photo">
 					<img src="/tom.png" alt="Tom" loading="lazy" />
 				</div>
+
 				<div class="about-text">
-					<p class="about-lead">Bass player. Local. I build sites for bands and small businesses.</p>
-					<p>I hate monthly fee traps. I use modern tools (Netlify, etc.) and get you a clean site. You own it when we're done.</p>
-					<p>If that sounds like what you're looking for, <a href="/contact/">tell us what you're trying to build</a> and we'll go from there.</p>
+					<p class="about-lead">
+						I’m a web developer and web designer centered in Asheville, NC, who works directly with local service
+						businesses.
+					</p>
+
+					<p>
+						A lot of contractors and service business owners are used to people trying to
+						sell them on stuff they don’t need. That’s exactly why I keep this simple. You
+						work with one person, me. You can ask questions. You get direct answers. No account
+						manager. No handoff. No agency layers.
+					</p>
+
+					<p>
+						I build websites for businesses like remodelers, plumbers, electricians,
+						pressure washers, and other local service providers that need a solid online
+						presence without getting locked into huge monthly fees.
+					</p>
+
+					<p>
+						If that sounds like a better fit, <a href="/contact/">tell me what you’re trying to build</a>.
+					</p>
 				</div>
 			</div>
 		</section>
 
-		<section class="block block-why" id="why-not-builders">
-			<span class="block-label">Why not a builder?</span>
-			<h2 class="block-title">Why not just use Wix or Squarespace?</h2>
+		<section class="block block-why" id="why-work-with-me">
+			<span class="block-label">Why people hire me</span>
+			<h2 class="block-title">Why hire a solo web designer instead of an agency?</h2>
+
 			<div class="why-grid">
 				<article class="why-card">
-					<h3>No monthly fees</h3>
-					<p>Pay once, own your site. No subscription eating into your budget.</p>
+					<h3>Direct communication</h3>
+					<p>
+						You talk to the person doing the work. No middleman, no sales layer, no chasing
+						down answers.
+					</p>
 				</article>
+
 				<article class="why-card">
-					<h3>Clean, fast code</h3>
-					<p>No bloated drag-and-drop output. Just a simple site that loads fast.</p>
+					<h3>Better fit for local service businesses</h3>
+					<p>
+						I work with the kinds of businesses that care about leads, calls, and showing up
+						well online, not fancy presentations.
+					</p>
 				</article>
+
 				<article class="why-card">
-					<h3>No learning curve</h3>
-					<p>You don't have to figure out the builder. Tell us what you need; I build it.</p>
+					<h3>No bloated monthly fees</h3>
+					<p>
+						There’s an upfront build cost, then you pay for help when you actually need it
+						instead of getting stuck in an expensive retainer.
+					</p>
 				</article>
 			</div>
 		</section>
@@ -144,7 +205,6 @@ import background from '../assets/background.svg';
 		padding: 0 0 4rem 0;
 	}
 
-	/* ----- Hero ----- */
 	.hero {
 		padding: 3rem 0 4rem;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
@@ -237,12 +297,10 @@ import background from '../assets/background.svg';
 		border-color: rgba(0, 0, 0, 0.15);
 	}
 
-	/* ----- Section blocks ----- */
 	.block {
 		padding: 3.5rem 0 0;
 	}
 
-	/* Services */
 	.services-grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -309,7 +367,6 @@ import background from '../assets/background.svg';
 		overflow-wrap: break-word;
 	}
 
-	/* Process */
 	.block-process .process-card {
 		background: rgba(255, 255, 255, 0.7);
 		border-radius: 12px;
@@ -350,7 +407,6 @@ import background from '../assets/background.svg';
 		font-weight: 600;
 	}
 
-	/* Pricing */
 	.block-pricing .pricing-card {
 		background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%);
 		border: 2px solid rgba(99, 102, 241, 0.25);
@@ -458,7 +514,6 @@ import background from '../assets/background.svg';
 		width: fit-content;
 	}
 
-	/* About Tom */
 	.block-about .about-card {
 		display: flex;
 		gap: 2rem;
@@ -519,7 +574,6 @@ import background from '../assets/background.svg';
 		text-decoration: underline;
 	}
 
-	/* Why not builders */
 	.why-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
@@ -554,7 +608,6 @@ import background from '../assets/background.svg';
 		margin: 0;
 	}
 
-	/* ----- Responsive ----- */
 	@media screen and (max-width: 768px) {
 		#container {
 			padding: 0 1rem;
