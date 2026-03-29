@@ -27,7 +27,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Parallel Carpentry",
     category: "Business site",
     url: "https://parallelcarpentry.com/",
-    previewImage: "/portfolio/parallel-carpentry-screenshot.png",
+    previewImage: "/portfolio/parallel-carp.png",
     whatTheyNeeded:
       "A professional web presence to showcase kitchen remodels and attract local clients in Charlotte, NC.",
     result:
