@@ -13,6 +13,16 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "Kiefer Property Solutions",
+    title: "Kiefer Property Solutions",
+    category: "Business site",
+    url: "https://kieferpropertysolutions.com/",
+    previewImage: "/portfolio/kiefer-prop.png",
+    whatTheyNeeded: "A professional web presence to showcase their services.",
+    result:
+      "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
+  },
+  {
     slug: "parallel-carpentry",
     title: "Parallel Carpentry",
     category: "Business site",
