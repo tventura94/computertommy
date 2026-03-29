@@ -1,6 +1,12 @@
 ---
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
+import { locations } from '../data/locations';
+import { portfolioItems } from '../data/portfolio';
+
+const featuredWork = portfolioItems.filter((p) =>
+	['Kiefer Property Solutions', 'parallel-carpentry', 'fresh-grill-bbq'].includes(p.slug)
+);
 ---
 
 <div id="container">
@@ -20,7 +26,7 @@ Professional web design and development for local service businesses	| Computer 
 				</p>
 
 				<div class="hero-cta">
-					<a href="/contact/" class="btn btn-primary">Tell me what you need →</a>
+					<a href="/contact/" class="btn btn-primary">Tell me what you need &rarr;</a>
 					<a href="/services/" class="btn btn-secondary">Services</a>
 					<a href="/about/" class="btn btn-secondary">About</a>
 					<a href="/portfolio/" class="btn btn-secondary">Portfolio</a>
@@ -39,7 +45,7 @@ Professional web design and development for local service businesses	| Computer 
 						Custom websites built for local businesses that need something fast, clear, and
 						professional without dealing with an agency.
 					</p>
-					<span class="service-link">View Web Development →</span>
+					<span class="service-link">View Web Development &rarr;</span>
 				</a>
 
 				<a class="service-card" href="/services/seo/">
@@ -48,7 +54,7 @@ Professional web design and development for local service businesses	| Computer 
 						On-page and technical SEO work to help your website show up better for the local
 						searches that actually matter.
 					</p>
-					<span class="service-link">View SEO →</span>
+					<span class="service-link">View SEO &rarr;</span>
 				</a>
 
 				<a class="service-card" href="/services/tooling/">
@@ -57,7 +63,7 @@ Professional web design and development for local service businesses	| Computer 
 						Useful business tools like forms, quote flows, dashboards, and automations that
 						save time and cut down manual work.
 					</p>
-					<span class="service-link">View Tooling →</span>
+					<span class="service-link">View Tooling &rarr;</span>
 				</a>
 
 				<a class="service-card" href="/services/ai/">
@@ -66,8 +72,15 @@ Professional web design and development for local service businesses	| Computer 
 						Practical AI features for small businesses that want real utility, not gimmicks
 						or overcomplicated systems.
 					</p>
-					<span class="service-link">View AI →</span>
+					<span class="service-link">View AI &rarr;</span>
 				</a>
+			</div>
+
+			<div class="service-card-areas">
+				<span class="service-card-areas__label">Serving:</span>
+				{locations.map((l) => (
+					<a href={`/services/web-development/${l.slug}/`}>{l.city}, {l.regionLabel}</a>
+				))}
 			</div>
 		</section>
 
@@ -86,6 +99,30 @@ Professional web design and development for local service businesses	| Computer 
 			</div>
 		</section>
 
+		<section class="block block-work" id="recent-work">
+			<span class="block-label">Portfolio</span>
+			<h2 class="block-title">Recent work</h2>
+
+			<div class="work-grid">
+				{featuredWork.map((item) => (
+					<a class="work-card" href={item.url} target="_blank" rel="noopener noreferrer">
+						{item.previewImage ? (
+							<div class="work-preview">
+								<img src={item.previewImage} alt={item.title} loading="lazy" />
+							</div>
+						) : null}
+						<div class="work-body">
+							<span class="work-category">{item.category}</span>
+							<h3>{item.title}</h3>
+							<p>{item.whatTheyNeeded}</p>
+						</div>
+					</a>
+				))}
+			</div>
+
+			<a href="/portfolio/" class="btn btn-secondary" style="margin-top: 1.25rem;">View all projects &rarr;</a>
+		</section>
+
 		<section class="block block-pricing" id="simple-pricing">
 			<span class="block-label">Pricing</span>
 			<h2 class="block-title">Upfront pricing. No monthly trap.</h2>
@@ -97,18 +134,18 @@ Professional web design and development for local service businesses	| Computer 
 				</p>
 
 				<p class="pricing-note">
-					Smaller sites often land around <strong>$600</strong>. Most 1–5 page website builds
-					range from <strong>$600 to $3000</strong> depending on scope. You’ll know the price
+					Smaller sites often land around <strong>$600</strong>. Most 1&ndash;5 page website builds
+					range from <strong>$600 to $3000</strong> depending on scope. You'll know the price
 					up front before anything starts.
 				</p>
 
-				<a href="/contact/" class="btn btn-primary">Get a quote →</a>
+				<a href="/contact/" class="btn btn-primary">Get a quote &rarr;</a>
 			</div>
 		</section>
 
 		<section class="block block-about" id="about-tom">
 			<span class="block-label">Who you're working with</span>
-			<h2 class="block-title">Hi, I’m Tom.</h2>
+			<h2 class="block-title">Hi, I'm Tom.</h2>
 
 			<div class="about-card">
 				<div class="about-photo">
@@ -117,13 +154,13 @@ Professional web design and development for local service businesses	| Computer 
 
 				<div class="about-text">
 					<p class="about-lead">
-						I’m a web developer and web designer centered in Asheville, NC, who works directly with local service
+						I'm a web developer and web designer centered in <a href="/services/web-development/asheville-nc/">Asheville, NC</a>, who works directly with local service
 						businesses.
 					</p>
 
 					<p>
 						A lot of contractors and service business owners are used to people trying to
-						sell them on stuff they don’t need. That’s exactly why I keep this simple. You
+						sell them on stuff they don't need. That's exactly why I keep this simple. You
 						work with one person, me. You can ask questions. You get direct answers. No account
 						manager. No handoff. No agency layers.
 					</p>
@@ -135,7 +172,7 @@ Professional web design and development for local service businesses	| Computer 
 					</p>
 
 					<p>
-						If that sounds like a better fit, <a href="/contact/">tell me what you’re trying to build</a>.
+						If that sounds like a better fit, <a href="/contact/">tell me what you're trying to build</a>.
 					</p>
 				</div>
 			</div>
@@ -165,12 +202,13 @@ Professional web design and development for local service businesses	| Computer 
 				<article class="why-card">
 					<h3>No bloated monthly fees</h3>
 					<p>
-						There’s an upfront build cost, then you pay for help when you actually need it
+						There's an upfront build cost, then you pay for help when you actually need it
 						instead of getting stuck in an expensive retainer.
 					</p>
 				</article>
 			</div>
 		</section>
+
 	</main>
 </div>
 
@@ -346,6 +384,44 @@ Professional web design and development for local service businesses	| Computer 
 		font-size: 0.95rem;
 	}
 
+	.service-card-areas {
+		grid-column: 1 / -1;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 0.75rem;
+		padding: 0.75rem 1rem;
+		background: rgba(255, 255, 255, 0.5);
+		border-radius: 10px;
+		border: 1px solid rgba(0, 0, 0, 0.04);
+	}
+
+	.service-card-areas__label {
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #64748b;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	.service-card-areas a {
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: #4f46e5;
+		text-decoration: none;
+		padding: 0.25rem 0.65rem;
+		border-radius: 999px;
+		background: rgba(79, 70, 229, 0.06);
+		border: 1px solid rgba(79, 70, 229, 0.12);
+		transition: background 0.15s ease, border-color 0.15s ease;
+	}
+
+	.service-card-areas a:hover {
+		background: rgba(79, 70, 229, 0.12);
+		border-color: rgba(79, 70, 229, 0.25);
+	}
+
 	.block-label {
 		display: block;
 		font-size: 0.75rem;
@@ -405,6 +481,71 @@ Professional web design and development for local service businesses	| Computer 
 		justify-content: center;
 		font-size: 0.8125rem;
 		font-weight: 600;
+	}
+
+	/* Recent work */
+	.work-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.work-card {
+		display: flex;
+		flex-direction: column;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid rgba(0, 0, 0, 0.06);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+		text-decoration: none;
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	.work-card:hover {
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+		transform: translateY(-2px);
+	}
+
+	.work-preview {
+		aspect-ratio: 16 / 10;
+		overflow: hidden;
+		background: #f1f5f9;
+	}
+
+	.work-preview img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.work-body {
+		padding: 1rem 1.25rem;
+	}
+
+	.work-category {
+		display: inline-block;
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: #6366f1;
+		font-weight: 700;
+		margin-bottom: 0.2rem;
+	}
+
+	.work-card h3 {
+		margin: 0 0 0.3rem;
+		font-size: 1rem;
+		font-weight: 600;
+		color: #0f172a;
+		letter-spacing: -0.01em;
+	}
+
+	.work-card p {
+		margin: 0;
+		font-size: 0.875rem;
+		color: #64748b;
+		line-height: 1.45;
 	}
 
 	.block-pricing .pricing-card {
@@ -501,7 +642,7 @@ Professional web design and development for local service businesses	| Computer 
 	}
 
 	.tier-features li::before {
-		content: "✓";
+		content: "\2713";
 		position: absolute;
 		left: 0;
 		top: 0;
@@ -608,6 +749,34 @@ Professional web design and development for local service businesses	| Computer 
 		margin: 0;
 	}
 
+	/* Areas served */
+	.areas-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.area-pill {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.6rem 1.15rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.85);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		color: #334155;
+		text-decoration: none;
+		font-weight: 600;
+		font-size: 0.95rem;
+		transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+	}
+
+	.area-pill:hover {
+		border-color: rgba(79, 70, 229, 0.35);
+		color: #4338ca;
+		box-shadow: 0 2px 10px rgba(79, 70, 229, 0.12);
+		transform: translateY(-1px);
+	}
+
 	@media screen and (max-width: 768px) {
 		#container {
 			padding: 0 1rem;
@@ -687,6 +856,11 @@ Professional web design and development for local service businesses	| Computer 
 			width: 1.5rem;
 			height: 1.5rem;
 			font-size: 0.75rem;
+		}
+
+		.work-grid {
+			grid-template-columns: 1fr;
+			gap: 0.875rem;
 		}
 
 		.block-pricing .pricing-card {
@@ -843,6 +1017,16 @@ Professional web design and development for local service businesses	| Computer 
 
 		.why-card p {
 			font-size: 0.875rem;
+		}
+
+		.work-body {
+			padding: 0.875rem 1rem;
+		}
+
+		.area-pill {
+			padding: 0.5rem 0.875rem;
+			font-size: 0.875rem;
+			min-height: 44px;
 		}
 
 		main {
