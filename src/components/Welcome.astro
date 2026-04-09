@@ -24,7 +24,7 @@ const featuredWork = portfolioItems.filter((p) =>
 		<div class="hero-inner">
 			<div class="hero-headline-wrap">
 				<h1 class="hero-title">
-					Professional web design for local businesses.
+					Professional web developer for local businesses.
 				</h1>
 				<span class="badge badge-pink">NO FEES</span>
 				<span class="badge badge-yellow">FAST</span>
@@ -329,6 +329,7 @@ const featuredWork = portfolioItems.filter((p) =>
 
 	<!-- CTA -->
 	<section class="section cta-section">
+		<img src="/paint-trip.png" alt="" class="cta-bg" />
 		<div class="cta-inner">
 			<img class="cta-icon" src={astroLogo.src} alt="Computer Tommy" />
 			<h2>Ready to get your site built right?</h2>
@@ -1375,6 +1376,21 @@ const featuredWork = portfolioItems.filter((p) =>
 	   ═══════════════════════════════════════ */
 	.cta-section {
 		text-align: center;
+		position: relative;
+		overflow: visible;
+	}
+
+	.cta-bg {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		max-width: 800px;
+		height: auto;
+		opacity: 0.25;
+		pointer-events: none;
+		z-index: 0;
 	}
 
 	.cta-inner {
