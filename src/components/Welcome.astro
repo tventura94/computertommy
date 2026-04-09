@@ -5,7 +5,7 @@ import { locations } from '../data/locations';
 import { portfolioItems } from '../data/portfolio';
 
 const featuredWork = portfolioItems.filter((p) =>
-	['notle-client', 'Kiefer Property Solutions', 'fresh-grill-bbq'].includes(p.slug)
+	['notle-client', 'Kiefer Property Solutions', 'paintball-sample-site'].includes(p.slug)
 );
 ---
 
@@ -274,11 +274,13 @@ const featuredWork = portfolioItems.filter((p) =>
 		<div class="works-grid">
 			{featuredWork.map((item) => (
 				<a class="work-card" href={item.url} target="_blank" rel="noopener noreferrer">
-					{item.previewImage ? (
-						<div class="work-card-img">
+					<div class="work-card-img">
+						{item.previewImage ? (
 							<img src={item.previewImage} alt={item.title} loading="lazy" />
-						</div>
-					) : null}
+						) : (
+							<iframe src={item.url} title={item.title} loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+						)}
+					</div>
 					<div class="work-card-info">
 						<h3>{item.title}</h3>
 						<div class="work-meta">
@@ -1189,6 +1191,15 @@ const featuredWork = portfolioItems.filter((p) =>
 		height: 100%;
 		object-fit: cover;
 		transition: transform 0.5s ease;
+	}
+
+	.work-card-img iframe {
+		width: 1280px;
+		height: 800px;
+		border: none;
+		pointer-events: none;
+		transform-origin: top left;
+		transform: scale(0.3);
 	}
 
 	.work-card:hover .work-card-img img {
