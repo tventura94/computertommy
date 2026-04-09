@@ -15,7 +15,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     slug: "Kiefer Property Solutions",
     title: "Kiefer Property Solutions",
-    category: "Business site",
+    category: "Service site",
     url: "https://kieferpropertysolutions.com/",
     previewImage: "/portfolio/kiefer-prop.png",
     whatTheyNeeded: "A professional web presence to showcase their services.",

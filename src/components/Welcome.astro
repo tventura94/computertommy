@@ -5,7 +5,7 @@ import { locations } from '../data/locations';
 import { portfolioItems } from '../data/portfolio';
 
 const featuredWork = portfolioItems.filter((p) =>
-	['Kiefer Property Solutions', 'parallel-carpentry', 'fresh-grill-bbq'].includes(p.slug)
+	['notle-client', 'Kiefer Property Solutions', 'fresh-grill-bbq'].includes(p.slug)
 );
 ---
 
@@ -158,6 +158,7 @@ const featuredWork = portfolioItems.filter((p) =>
 
 	<!-- HOW IT WORKS -->
 	<section class="section slide-in-section" id="how-it-works">
+		<img src="/paint-strikes.png" alt="" class="process-bg" />
 		<div class="section-header slide-in-left">
 			<span class="section-eyebrow">
 				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
@@ -196,8 +197,71 @@ const featuredWork = portfolioItems.filter((p) =>
 		</div>
 	</section>
 
+	<!-- TESTIMONIALS -->
+	<section class="section slide-in-section testimonials-section" id="testimonials">
+		<img src="/paint-splat.png" alt="" class="testimonials-bg" />
+		<div class="section-header slide-in-left">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Testimonials.
+			</span>
+			<h2 class="section-title">What our clients say</h2>
+			<p class="section-desc">Real reviews from real clients. All 5 stars on Google.</p>
+		</div>
+
+		<div class="reviews-grid">
+			<div class="review-card review-card--highlight scale-in-child" style="--delay:0">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">I was in need of help with my website design. I reached out to Tommy he had me up and going in 2 days. The website is phenomenal!</p>
+				<div class="review-author">
+					<span class="review-name">Nicholas Kiefer</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:1">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">Tom produced A++ quality for my bands website, was easy to work with, can't recommend him enough!</p>
+				<div class="review-author">
+					<span class="review-name">Miles Duhamel</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:2">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">I needed a simple but good looking website and didn't want to pay monthly fees or a crazy price. Tom is an excellent and quick web developer and made everything how I wanted. The price was super reasonable too!</p>
+				<div class="review-author">
+					<span class="review-name">Chris Ver Voort</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:3">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">Tom was great! Explained everything to me and implemented it with zero hiccups. Didn't take a week. It literally took days.</p>
+				<div class="review-author">
+					<span class="review-name">Michael Birchfield</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:4">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">Very positive experience with Tommy. Quick to make changes as requested and very reasonable with his rates. Highly recommend this man.</p>
+				<div class="review-author">
+					<span class="review-name">Jon Q</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:5">
+				<div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+				<p class="review-text">Tom was great to deal with! Very professional, solid product, and a quick turnaround. We have continued to use him for updates and he has been very prompt. 5/5, totally recommend.</p>
+				<div class="review-author">
+					<span class="review-name">Matt Fuller</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- PORTFOLIO -->
-	<section class="section" id="recent-work">
+	<section class="section section--alt" id="recent-work">
 		<div class="section-header">
 			<span class="section-eyebrow">
 				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
@@ -270,7 +334,7 @@ const featuredWork = portfolioItems.filter((p) =>
 	</section>
 
 	<!-- WHY CHOOSE ME -->
-	<section class="section" id="why-work-with-me">
+	<section class="section section--alt" id="why-work-with-me">
 		<div class="section-header">
 			<span class="section-eyebrow">
 				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
@@ -306,7 +370,7 @@ const featuredWork = portfolioItems.filter((p) =>
 	</section>
 
 	<!-- ABOUT (Tom detail) -->
-	<section class="section" id="about-detail">
+	<section class="section section--tight" id="about-detail">
 		<div class="about-card-full">
 			<div class="about-photo-wrap">
 				<img src="/tom.png" alt="Tom" loading="lazy" />
@@ -543,6 +607,25 @@ const featuredWork = portfolioItems.filter((p) =>
 		max-width: 1100px;
 		margin: 0 auto;
 		padding: 5rem 1.5rem;
+	}
+
+	.section--tight {
+		padding-top: 1.5rem;
+	}
+
+	.section--alt {
+		background: var(--surface);
+		max-width: none;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.section--alt > * {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 	}
 
 	.section-header {
@@ -1008,6 +1091,25 @@ const featuredWork = portfolioItems.filter((p) =>
 		border-color: rgba(249, 115, 22, 0.4);
 	}
 
+	.process-bg {
+		position: absolute;
+		top: -10%;
+		right: -15%;
+		width: 130%;
+		height: auto;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 0;
+		mix-blend-mode: lighten;
+		transform: scale(0.85) rotate(3deg);
+		transition: opacity 1s ease, transform 1s ease;
+	}
+
+	.slide-in-section.is-visible .process-bg {
+		opacity: 0.2;
+		transform: scale(1) rotate(0deg);
+	}
+
 	/* ═══════════════════════════════════════
 	   Process / How it works
 	   ═══════════════════════════════════════ */
@@ -1314,6 +1416,82 @@ const featuredWork = portfolioItems.filter((p) =>
 	}
 
 	/* ═══════════════════════════════════════
+	   Testimonials / Reviews
+	   ═══════════════════════════════════════ */
+	.testimonials-section {
+		position: relative;
+	}
+
+	.testimonials-bg {
+		position: absolute;
+		top: -15%;
+		left: -20%;
+		width: 140%;
+		height: auto;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 0;
+		transform: scale(0.8) rotate(-5deg);
+		transition: opacity 1.2s ease, transform 1.2s ease;
+	}
+
+	.slide-in-section.is-visible .testimonials-bg {
+		opacity: 0.15;
+		transform: scale(1) rotate(0deg);
+	}
+
+	.reviews-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+
+	.review-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.review-card--highlight {
+		background: linear-gradient(135deg, rgba(249, 115, 22, 0.06), rgba(249, 115, 22, 0.02));
+		border-color: rgba(249, 115, 22, 0.2);
+	}
+
+	.review-stars {
+		color: var(--accent);
+		font-size: 1.25rem;
+		letter-spacing: 0.1em;
+	}
+
+	.review-text {
+		color: var(--text-muted);
+		font-size: 1.05rem;
+		line-height: 1.55;
+		margin: 0;
+		flex: 1;
+	}
+
+	.review-author {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding-top: 0.5rem;
+		border-top: 1px solid var(--border);
+	}
+
+	.review-name {
+		font-family: var(--font-display);
+		font-size: 1.1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		color: var(--text);
+	}
+
+	/* ═══════════════════════════════════════
 	   About detail card
 	   ═══════════════════════════════════════ */
 	.about-card-full {
@@ -1493,6 +1671,10 @@ const featuredWork = portfolioItems.filter((p) =>
 		}
 
 		.works-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.reviews-grid {
 			grid-template-columns: 1fr;
 		}
 
