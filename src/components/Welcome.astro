@@ -9,7 +9,17 @@ const featuredWork = portfolioItems.filter((p) =>
 );
 ---
 
-<div class="page-wrapper">
+<div class="page-wrapper" id="page-wrapper">
+	<script is:inline>
+	(function(){
+		var w = document.getElementById('page-wrapper');
+		if (!w) return;
+		var saved = localStorage.getItem('theme');
+		if (saved === 'light' || (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+			w.setAttribute('data-theme', 'light');
+		}
+	})();
+	</script>
 	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
 
 	<!-- HERO -->
@@ -17,9 +27,15 @@ const featuredWork = portfolioItems.filter((p) =>
 		<img src="/portfolio/bg-img-ct.png" alt="" class="hero-bg-img" />
 	</div>
 	<section class="hero">
-		<a href="/" class="logo-link">
-			<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
-		</a>
+		<div class="hero-nav">
+			<a href="/" class="logo-link">
+				<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
+			</a>
+			<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+			</button>
+		</div>
 
 		<div class="hero-inner">
 			<div class="hero-headline-wrap">
@@ -477,59 +493,23 @@ const featuredWork = portfolioItems.filter((p) =>
 
 <script is:inline>
 (function() {
+	/* Sticky stack layout only. Scroll-driven scale() was removed — it rescale’d card text every frame and looked like “wiggling”. */
 	var StackCards = function(element) {
 		this.element = element;
 		this.items = this.element.getElementsByClassName('js-stack-cards__item');
-		this.scrollingFn = false;
-		this.scrolling = false;
-		initStackCardsEffect(this);
+		setStackCards(this);
 		initStackCardsResize(this);
 	};
-
-	function initStackCardsEffect(element) {
-		setStackCards(element);
-		var observer = new IntersectionObserver(stackCardsCallback.bind(element), { threshold: [0, 1] });
-		observer.observe(element.element);
-	}
 
 	function initStackCardsResize(element) {
 		element.element.addEventListener('resize-stack-cards', function() {
 			setStackCards(element);
-			animateStackCards.bind(element);
 		});
-	}
-
-	function stackCardsCallback(entries) {
-		if (entries[0].isIntersecting) {
-			if (this.scrollingFn) return;
-			stackCardsInitEvent(this);
-		} else {
-			if (!this.scrollingFn) return;
-			window.removeEventListener('scroll', this.scrollingFn);
-			this.scrollingFn = false;
-		}
-	}
-
-	function stackCardsInitEvent(element) {
-		element.scrollingFn = stackCardsScrolling.bind(element);
-		window.addEventListener('scroll', element.scrollingFn);
-	}
-
-	function stackCardsScrolling() {
-		if (this.scrolling) return;
-		this.scrolling = true;
-		window.requestAnimationFrame(animateStackCards.bind(this));
 	}
 
 	function setStackCards(element) {
 		element.marginY = getComputedStyle(element.element).getPropertyValue('--stack-cards-gap');
 		getIntegerFromProperty(element);
-		element.elementHeight = element.element.offsetHeight;
-
-		var cardStyle = getComputedStyle(element.items[0]);
-		element.cardTop = Math.floor(parseFloat(cardStyle.getPropertyValue('top')));
-		element.cardHeight = Math.floor(parseFloat(cardStyle.getPropertyValue('height')));
-		element.windowHeight = window.innerHeight;
 
 		if (isNaN(element.marginY)) {
 			element.element.style.paddingBottom = '0px';
@@ -539,7 +519,7 @@ const featuredWork = portfolioItems.filter((p) =>
 
 		for (var i = 0; i < element.items.length; i++) {
 			if (isNaN(element.marginY)) {
-				element.items[i].style.transform = 'none;';
+				element.items[i].style.transform = 'none';
 			} else {
 				element.items[i].style.transform = 'translateY(' + element.marginY * i + 'px)';
 			}
@@ -554,37 +534,9 @@ const featuredWork = portfolioItems.filter((p) =>
 		element.element.removeChild(node);
 	}
 
-	function animateStackCards() {
-		if (isNaN(this.marginY)) {
-			this.scrolling = false;
-			return;
-		}
-
-		var top = this.element.getBoundingClientRect().top;
-
-		if (this.cardTop - top + this.element.windowHeight - this.elementHeight - this.cardHeight + this.marginY + this.marginY * this.items.length > 0) {
-			this.scrolling = false;
-			return;
-		}
-
-		for (var i = 0; i < this.items.length; i++) {
-			var scrolling = this.cardTop - top - i * (this.cardHeight + this.marginY);
-			if (scrolling > 0) {
-				var scaling = i == this.items.length - 1 ? 1 : (this.cardHeight - scrolling * 0.05) / this.cardHeight;
-				this.items[i].style.transform = 'translateY(' + this.marginY * i + 'px) scale(' + scaling + ')';
-			} else {
-				this.items[i].style.transform = 'translateY(' + this.marginY * i + 'px)';
-			}
-		}
-
-		this.scrolling = false;
-	}
-
 	var stackCards = document.getElementsByClassName('js-stack-cards');
-	var intersectionObserverSupported = ('IntersectionObserver' in window && 'IntersectionObserverEntry' in window && 'intersectionRatio' in window.IntersectionObserverEntry.prototype);
-	var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	if (stackCards.length > 0 && intersectionObserverSupported && !reducedMotion) {
+	if (stackCards.length > 0) {
 		var stackCardsArray = [];
 		for (var i = 0; i < stackCards.length; i++) {
 			(function(i) {
@@ -598,13 +550,32 @@ const featuredWork = portfolioItems.filter((p) =>
 		window.addEventListener('resize', function() {
 			clearTimeout(resizingId);
 			resizingId = setTimeout(function() {
-				for (var i = 0; i < stackCardsArray.length; i++) {
-					(function(i) { stackCardsArray[i].element.dispatchEvent(customEvent) })(i);
+				for (var j = 0; j < stackCardsArray.length; j++) {
+					stackCardsArray[j].element.dispatchEvent(customEvent);
 				}
 			}, 500);
 		});
 	}
 }());
+</script>
+
+<script is:inline>
+(function() {
+	var btn = document.getElementById('theme-toggle');
+	var wrapper = document.getElementById('page-wrapper');
+	if (!btn || !wrapper) return;
+
+	btn.addEventListener('click', function() {
+		var isLight = wrapper.getAttribute('data-theme') === 'light';
+		if (isLight) {
+			wrapper.removeAttribute('data-theme');
+			localStorage.setItem('theme', 'dark');
+		} else {
+			wrapper.setAttribute('data-theme', 'light');
+			localStorage.setItem('theme', 'light');
+		}
+	});
+})();
 </script>
 
 <style>
@@ -1644,6 +1615,7 @@ const featuredWork = portfolioItems.filter((p) =>
 		text-align: center;
 		position: relative;
 		overflow: visible;
+		isolation: isolate;
 	}
 
 	.cta-bg {
@@ -1660,6 +1632,8 @@ const featuredWork = portfolioItems.filter((p) =>
 	}
 
 	.cta-inner {
+		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -1830,5 +1804,193 @@ const featuredWork = portfolioItems.filter((p) =>
 			width: 100px;
 			height: 100px;
 		}
+	}
+
+	/* ═══════════════════════════════════════
+	   Hero nav bar (logo + toggle)
+	   ═══════════════════════════════════════ */
+	.hero-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	/* ═══════════════════════════════════════
+	   Theme toggle
+	   ═══════════════════════════════════════ */
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 50%;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		color: var(--text);
+		cursor: pointer;
+		transition: background 0.3s, border-color 0.3s, transform 0.15s;
+	}
+
+	.theme-toggle:hover {
+		border-color: rgba(255, 255, 255, 0.2);
+		transform: scale(1.08);
+	}
+
+	.theme-icon {
+		width: 1.15rem;
+		height: 1.15rem;
+	}
+
+	.theme-icon--moon {
+		display: none;
+	}
+
+	.page-wrapper[data-theme="light"] .theme-icon--sun {
+		display: none;
+	}
+
+	.page-wrapper[data-theme="light"] .theme-icon--moon {
+		display: block;
+	}
+
+	.page-wrapper[data-theme="light"] .theme-toggle:hover {
+		border-color: rgba(0, 0, 0, 0.25);
+	}
+
+	/* ═══════════════════════════════════════
+	   Light theme overrides
+	   ═══════════════════════════════════════ */
+	.page-wrapper[data-theme="light"] {
+		--bg: #f3f2ef;
+		--surface: #ffffff;
+		--border: rgba(0, 0, 0, 0.09);
+		--text: #14141a;
+		--text-muted: rgba(0, 0, 0, 0.52);
+		--accent: #d95d0c;
+		--accent-green: #15803d;
+		--accent-pink: #c2185b;
+		--accent-yellow: #ca8a04;
+		--accent-purple: #6d28d9;
+		background:
+			radial-gradient(ellipse 100% 60% at 50% -15%, rgba(249, 115, 22, 0.09), transparent 55%),
+			radial-gradient(ellipse 80% 50% at 100% 40%, rgba(167, 139, 250, 0.06), transparent 50%),
+			radial-gradient(ellipse 70% 45% at 0% 80%, rgba(244, 114, 182, 0.05), transparent 45%),
+			var(--bg);
+	}
+
+	.page-wrapper[data-theme="light"] .bg-blur {
+		opacity: 0.08;
+		filter: blur(100px);
+	}
+
+	.page-wrapper[data-theme="light"] .hero-bg-img {
+		opacity: 0.28;
+		filter: saturate(1.15) contrast(1.05);
+	}
+
+	/* Paint PNGs: normal blend keeps strokes vivid on light (multiply was washing color out) */
+	.page-wrapper[data-theme="light"] .process-bg {
+		mix-blend-mode: normal;
+		filter: saturate(1.2);
+	}
+
+	.page-wrapper[data-theme="light"] .slide-in-section.is-visible .process-bg {
+		opacity: 0.24;
+	}
+
+	.page-wrapper[data-theme="light"] .testimonials-bg {
+		filter: saturate(1.15);
+	}
+
+	.page-wrapper[data-theme="light"] .slide-in-section.is-visible .testimonials-bg {
+		opacity: 0.18;
+	}
+
+	.page-wrapper[data-theme="light"] .cta-bg {
+		mix-blend-mode: normal;
+		opacity: 0.42;
+		filter: saturate(1.25) contrast(1.05);
+	}
+
+	.page-wrapper[data-theme="light"] .section--alt {
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(248, 246, 242, 0.95) 100%);
+	}
+
+	.page-wrapper[data-theme="light"] .serving-bar {
+		background: rgba(255, 255, 255, 0.85);
+		border-color: rgba(0, 0, 0, 0.08);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	.page-wrapper[data-theme="light"] .location-pill {
+		background: rgba(217, 93, 12, 0.08);
+		border-color: rgba(217, 93, 12, 0.22);
+	}
+
+	.page-wrapper[data-theme="light"] .location-pill:hover {
+		background: rgba(217, 93, 12, 0.14);
+		border-color: rgba(217, 93, 12, 0.35);
+	}
+
+	.page-wrapper[data-theme="light"] .work-card-img,
+	.page-wrapper[data-theme="light"] .about-photo-wrap {
+		background: #e8e6e3;
+	}
+
+	.page-wrapper[data-theme="light"] .badge-yellow {
+		color: #14141a;
+	}
+
+	.page-wrapper[data-theme="light"] .badge-pink,
+	.page-wrapper[data-theme="light"] .badge-green {
+		color: #fff;
+	}
+
+	.page-wrapper[data-theme="light"] .svc-card {
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+	}
+
+	.page-wrapper[data-theme="light"] .reviews-grid {
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+	}
+
+	.page-wrapper[data-theme="light"] .work-card {
+		box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+	}
+
+	.page-wrapper[data-theme="light"] .work-card:hover {
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+		border-color: rgba(0, 0, 0, 0.12);
+	}
+
+	.page-wrapper[data-theme="light"] .why-card:hover {
+		border-color: rgba(0, 0, 0, 0.12);
+	}
+
+	.page-wrapper[data-theme="light"] .about-card-full {
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	.page-wrapper[data-theme="light"] .pricing-card {
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+	}
+
+	.page-wrapper[data-theme="light"] .works-cta-card {
+		background:
+			repeating-linear-gradient(
+				-45deg,
+				rgba(255, 255, 255, 0.4),
+				rgba(255, 255, 255, 0.4) 8px,
+				rgba(0, 0, 0, 0.028) 8px,
+				rgba(0, 0, 0, 0.028) 9px
+			);
+		border-color: rgba(0, 0, 0, 0.1);
+	}
+
+	.page-wrapper[data-theme="light"] .process-step {
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 	}
 </style>
