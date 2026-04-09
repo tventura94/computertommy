@@ -13,6 +13,9 @@ const featuredWork = portfolioItems.filter((p) =>
 	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
 
 	<!-- HERO -->
+	<div class="hero-bg">
+		<img src="/portfolio/bg-img-ct.png" alt="" class="hero-bg-img" />
+	</div>
 	<section class="hero">
 		<a href="/" class="logo-link">
 			<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
@@ -657,6 +660,21 @@ const featuredWork = portfolioItems.filter((p) =>
 	/* ═══════════════════════════════════════
 	   Hero
 	   ═══════════════════════════════════════ */
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.hero-bg-img {
+		width: 100%;
+		height: auto;
+		opacity: 0.3;
+	}
+
 	.hero {
 		position: relative;
 		z-index: 1;
