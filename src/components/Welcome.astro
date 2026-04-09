@@ -476,8 +476,10 @@ const featuredWork = portfolioItems.filter((p) =>
 
 <script is:inline>
 (function() {
-	var sections = document.querySelectorAll('.fade-in-section, .slide-in-section');
-	if (sections.length && 'IntersectionObserver' in window) {
+	if (!('IntersectionObserver' in window)) return;
+	function observe(selector, options) {
+		var sections = document.querySelectorAll(selector);
+		if (!sections.length) return;
 		var obs = new IntersectionObserver(function(entries) {
 			entries.forEach(function(e) {
 				if (e.isIntersecting) {
@@ -485,9 +487,12 @@ const featuredWork = portfolioItems.filter((p) =>
 					obs.unobserve(e.target);
 				}
 			});
-		}, { threshold: 0.15 });
+		}, options);
 		sections.forEach(function(s) { obs.observe(s); });
 	}
+	/* About block: require more of the section in view so “Who you’re working with” doesn’t animate while still below the fold. */
+	observe('.fade-in-section', { threshold: 0.35, rootMargin: '0px 0px -12% 0px' });
+	observe('.slide-in-section', { threshold: 0.15 });
 })();
 </script>
 
@@ -889,9 +894,9 @@ const featuredWork = portfolioItems.filter((p) =>
 	   ═══════════════════════════════════════ */
 	.fade-in-child {
 		opacity: 0;
-		transform: translateY(30px);
-		transition: opacity 0.8s ease, transform 0.8s ease;
-		transition-delay: calc(var(--delay, 0) * 0.15s);
+		transform: translateY(24px);
+		transition: opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1), transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+		transition-delay: calc(var(--delay, 0) * 0.22s);
 	}
 
 	.fade-in-section.is-visible .fade-in-child {
