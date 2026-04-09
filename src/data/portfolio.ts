@@ -71,7 +71,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     slug: "notle-client",
     title: "Notle.ai",
-    category: "Software",
+    category: "Software site",
     previewImage: "/portfolio/notle-screenshot.png",
     url: "https://notle-client.vercel.app/",
     whatTheyNeeded: "A clean app for their product.",
