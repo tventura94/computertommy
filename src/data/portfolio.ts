@@ -24,7 +24,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "so-close-band",
     title: "So Close",
     category: "Band site",
-    url: "https://soclsose-band.netlify.app/",
+    url: "https://soclose-band.netlify.app/",
     whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
     result: "Clean band site with music, bio, shows, and contact.",
   },
