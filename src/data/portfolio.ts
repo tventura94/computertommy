@@ -13,6 +13,30 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "swong-band",
+    title: "Swong",
+    category: "Band site",
+    url: "https://swongband.com/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
+    slug: "so-close-band",
+    title: "So Close",
+    category: "Band site",
+    url: "https://soclsose-band.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
+    slug: "sharat3",
+    title: "Sharat 3",
+    category: "Band site",
+    url: "https://sharat3.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
     slug: "Kiefer Property Solutions",
     title: "Kiefer Property Solutions",
     category: "Business site",
