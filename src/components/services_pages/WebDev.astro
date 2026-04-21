@@ -4,23 +4,129 @@ import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import ThemeToggleButton from '../ThemeToggleButton.astro';
+import { businessLogos } from '../../data/businessLogos';
 import { locations } from '../../data/locations';
+import { webdevTradePhotos } from '../../data/webdevTrades';
 
 const cityPageLinks = locations
 	.slice()
 	.sort((a, b) => a.city.localeCompare(b.city))
 	.map((l) => ({ href: `/services/web-development/${l.slug}/`, label: `${l.city}, ${l.regionLabel}` }));
 
-const includedItems = [
-	'Custom 3 to 5 page build: homepage designed around your main offer plus service pages that match how people search',
-	'Mobile-first layout, tap targets, and phone-first calls to action where they matter',
-	'Contact and quote form setup plus click-to-call on key pages',
-	'Fast static pages with clean HTML instead of heavy builder output',
-	'Basic on-page local SEO: titles, headings, meta descriptions, and internal links Google can follow',
-	'Service page structure built for local intent and room to add location pages later',
-	'Metadata setup and sensible internal linking between related services',
-	'Google Business Profile alignment so your site URL and important pages match what you list publicly',
-	'Launch-ready site you own, with support so the site is crawlable and usable from day one',
+const deliverableFeature = {
+	title: 'A 1 to 10 page site built for how people hire you.',
+	desc: 'Three to five pages, custom to you. Homepage centers your main offer, with service pages shaped around real search intent instead of filler.',
+};
+
+const deliverablePillars = [
+	{
+		icon: 'fa-bullseye',
+		title: 'Conversion',
+		bullets: [
+			'Mobile-first layout and tap targets where the phone is the sales floor.',
+			'Click-to-call and quote paths placed where people actually decide.',
+			'Short contact and quote forms so visitors finish instead of bouncing.',
+		],
+	},
+	{
+		icon: 'fa-chart-line',
+		title: 'SEO foundation',
+		bullets: [
+			'Titles, headings, and metadata Google can read without guessing.',
+			'Internal links that connect services instead of orphaning them.',
+			'Page hierarchy ready when you want city or neighborhood pages.',
+		],
+	},
+	{
+		icon: 'fa-bolt',
+		title: 'Performance',
+		bullets: [
+			'Fast, clean codebase. Pages load fast and stay easy for Google to read.',
+			'No bloated builder output stealing speed before the first real headline.',
+		],
+	},
+	{
+		icon: 'fa-rocket',
+		title: 'Launch setup',
+		bullets: [
+			'Launch-ready and yours. No platform lock-in to stay online.',
+			'Goes live structured to be usable, crawlable, and ready to grow.',
+			'Google Business Profile alignment so listings and URLs line up.',
+		],
+	},
+];
+
+const buildProcessSteps: {
+	num: string;
+	title: string;
+	body: string;
+	paymentNote?: string;
+}[] = [
+	{
+		num: '01',
+		title: 'Learn the business',
+		body: 'First I get clear on what you do, where the business is stuck, what services matter most, and what a win actually looks like. That gives the project direction before any design starts.',
+	},
+	{
+		num: '02',
+		title: 'Audit the local market',
+		body: 'Then I look at your area, your competitors, local search results, and how similar businesses are positioning themselves. From that, I build a plan of attack around structure, priorities, and what the site needs to compete.',
+	},
+	{
+		num: '03',
+		title: 'Review the plan together',
+		body: 'I bring that plan back to you so we can go over it, adjust anything needed, and make sure we agree on the direction before the build starts.',
+	},
+	{
+		num: '04',
+		title: 'Deposit paid, build begins',
+		body: 'Once we are aligned, the first payment is made and I start designing the site. If I cannot build you something you are happy with, you get your money back.',
+		paymentNote: 'Deposit locks your start date. Balance is due at launch after you approve the site.',
+	},
+	{
+		num: '05',
+		title: 'Design revision loop',
+		body: 'We go back and forth on the design until it feels right. The goal is not to force a template on you. The goal is to land on something clear, credible, and worth putting in front of customers.',
+	},
+	{
+		num: '06',
+		title: 'Copy, keywords, and positioning',
+		body: 'Once the design is locked in, I refine the copy, do keyword research, study what is working for competitors, and tighten the messaging so the site lines up with real search behavior and real buyers.',
+	},
+	{
+		num: '07',
+		title: 'Technical SEO and performance',
+		body: 'After the content is in place, I go through the technical side: headings, metadata, internal links, crawlability, page speed, mobile behavior, and the rest of the details that make the site usable and search-friendly.',
+	},
+	{
+		num: '08',
+		title: 'Final approval and launch',
+		body: 'When everything looks right and runs right, the remaining balance is paid and the site is ready to deploy.',
+		paymentNote: 'You sign off before anything goes live. No launch until you say it is ready.',
+	},
+];
+
+const underperformProblems = [
+	{
+		icon: 'fa-image',
+		title: 'Weak first impression',
+		desc: 'Outdated design, awkward spacing, and weak trust signals before anyone scrolls.',
+	},
+	{
+		icon: 'fa-route',
+		title: 'Poor conversion path',
+		desc: 'Hidden phone number, soft call to action, and no obvious next step on mobile.',
+	},
+	{
+		icon: 'fa-comments',
+		title: 'Generic messaging',
+		desc: 'Copy that tries to say everything and does not land anywhere specific.',
+	},
+	{
+		icon: 'fa-map-marked-alt',
+		title: 'No local SEO structure',
+		desc: 'Pages and headings do not help Google map what you do to where you do it.',
+	},
 ];
 
 const faqItems = [
@@ -90,7 +196,58 @@ const faqItems = [
 			</div>
 		</section>
 
-		<section class="section" aria-labelledby="who-for-heading">
+		{businessLogos.length > 0 && (
+			<section class="section logo-carousel-section" aria-labelledby="social-proof-heading">
+				<h2 class="visually-hidden" id="social-proof-heading">Recent client sites</h2>
+				<p class="logo-carousel-eyebrow">Trusted businesses we have built for</p>
+				<div class="logo-carousel-viewport">
+					<div class="logo-carousel-track">
+						<div class="logo-carousel-group">
+							{businessLogos.map((item) => (
+								<a
+									class="logo-carousel-item"
+									href={item.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`${item.title} website`}
+								>
+									<img
+										src={item.logo.src}
+										width={item.logo.width ?? 200}
+										height={item.logo.height ?? 48}
+										alt=""
+										loading="lazy"
+										decoding="async"
+									/>
+								</a>
+							))}
+						</div>
+						<div class="logo-carousel-group" aria-hidden="true">
+							{businessLogos.map((item) => (
+								<a
+									class="logo-carousel-item"
+									href={item.href}
+									tabindex="-1"
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<img
+										src={item.logo.src}
+										width={item.logo.width ?? 200}
+										height={item.logo.height ?? 48}
+										alt=""
+										loading="lazy"
+										decoding="async"
+									/>
+								</a>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+		)}
+
+		<section class="section who-for-section" aria-labelledby="who-for-heading">
 			<div class="section-header">
 				<span class="section-eyebrow">Who this is for</span>
 				<h2 class="section-title" id="who-for-heading">The trades we build for most.</h2>
@@ -99,7 +256,31 @@ const faqItems = [
 				</p>
 			</div>
 
-			<p class="trade-chips-label">Examples of who we work with:</p>
+			<div class="who-for-visual" aria-labelledby="who-for-examples-heading">
+				<p class="who-for-visual-heading" id="who-for-examples-heading">Examples of who we work with</p>
+				<div class="who-for-mosaic-wrap">
+					<div class="who-for-mosaic">
+						{webdevTradePhotos.map((trade, i) => (
+							<figure class:list={['who-for-card', `who-for-card--${i + 1}`]}>
+								<img
+									class="who-for-card-img"
+									src={trade.image.src}
+									width={trade.image.width}
+									height={trade.image.height}
+									alt={trade.alt}
+									loading="lazy"
+									decoding="async"
+									fetchpriority="low"
+									sizes="(max-width: 380px) 42vw, (max-width: 520px) 38vw, (max-width: 768px) 34vw, (max-width: 900px) 28vw, 280px"
+								/>
+								<figcaption class="who-for-card-label">{trade.title}</figcaption>
+							</figure>
+						))}
+					</div>
+				</div>
+			</div>
+
+			<p class="trade-chips-label trade-chips-label--more">More trades and service types:</p>
 			<ul class="trade-chips">
 				<li>Junk removal</li>
 				<li>Pressure washing</li>
@@ -111,116 +292,196 @@ const faqItems = [
 				<li>HVAC and other home services</li>
 			</ul>
 
-			<div class="two-col">
-				<div class="prose-block">
+			<div class="two-col two-col--who-need">
+				<div class="prose-block prose-block--needs">
 					<h3 class="prose-block-title">What those businesses usually need</h3>
-					<ul class="prose-list">
-						<li>A homepage that states the main offer in seconds, not paragraphs of filler</li>
-						<li>Service pages that match how people search (by job type and sometimes by area)</li>
-						<li>Phone-first actions: click-to-call, short forms, and obvious next steps on mobile</li>
-						<li>Proof: photos, short testimonials, or project context so visitors feel safe hiring you</li>
-						<li>Clean technical setup so Google can crawl the site and users are not waiting on bloated scripts</li>
+					<ul class="prose-list prose-list--scan">
+						<li>
+							<i class="fas fa-check-circle prose-scan-icon prose-scan-icon--needs" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Homepage that sells fast.</strong>
+								<span class="prose-scan-detail">Main offer in seconds, not filler paragraphs.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-check-circle prose-scan-icon prose-scan-icon--needs" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Service pages for real searches.</strong>
+								<span class="prose-scan-detail">By job type and sometimes by area.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-check-circle prose-scan-icon prose-scan-icon--needs" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Phone-first actions.</strong>
+								<span class="prose-scan-detail">Click-to-call, short forms, obvious next steps on mobile.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-check-circle prose-scan-icon prose-scan-icon--needs" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Proof people can trust.</strong>
+								<span class="prose-scan-detail">Photos, testimonials, or real project context.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-check-circle prose-scan-icon prose-scan-icon--needs" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Clean technical base.</strong>
+								<span class="prose-scan-detail">Crawlable pages without bloated script stacks.</span>
+							</div>
+						</li>
 					</ul>
 				</div>
-				<div class="prose-block prose-block--accent">
-					<h3 class="prose-block-title">Common problems we fix</h3>
-					<ul class="prose-list">
-						<li>Old sites that look dated or break on small screens</li>
-						<li>No clear call to action above the fold</li>
-						<li>Slow builder sites with bloated code and generic templates</li>
-						<li>Pages that do not target specific services or service areas</li>
-						<li>Weak trust signals: cluttered layout, vague copy, or no proof of real work</li>
+				<div class="prose-block prose-block--pain">
+					<p class="prose-block-eyebrow">What we hear most</p>
+					<h3 class="prose-block-title prose-block-title--pain">Common problems we fix</h3>
+					<ul class="prose-list prose-list--scan prose-list--pain">
+						<li>
+							<i class="fas fa-exclamation-circle prose-scan-icon prose-scan-icon--pain" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Looks dated or breaks on mobile.</strong>
+								<span class="prose-scan-detail">Layouts that quietly lose leads.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-exclamation-circle prose-scan-icon prose-scan-icon--pain" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>No clear CTA above the fold.</strong>
+								<span class="prose-scan-detail">Visitors leave without a next step.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-exclamation-circle prose-scan-icon prose-scan-icon--pain" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Slow builder bloat.</strong>
+								<span class="prose-scan-detail">Heavy code and generic templates.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-exclamation-circle prose-scan-icon prose-scan-icon--pain" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Thin or vague pages.</strong>
+								<span class="prose-scan-detail">Nothing that ranks for specific services or towns.</span>
+							</div>
+						</li>
+						<li>
+							<i class="fas fa-exclamation-circle prose-scan-icon prose-scan-icon--pain" aria-hidden="true"></i>
+							<div class="prose-scan-body">
+								<strong>Weak trust signals.</strong>
+								<span class="prose-scan-detail">Clutter, vague copy, or no proof of real work.</span>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</section>
 
-		<section class="section section-alt" aria-labelledby="underperform-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Straight talk</span>
-				<h2 class="section-title" id="underperform-heading">Why most local service websites underperform.</h2>
-			</div>
-			<div class="opinion-card">
-				<p>
-					Most small business websites fail for simple reasons: they look dated, bury the phone number, use weak headlines, and treat every visitor the same. A strong local service site explains the offer fast, makes trust easy, and guides people toward calling or requesting a quote. It also needs enough structure for Google to understand what service you offer and where you offer it. We build with that outcome in mind, not generic agency slides.
-				</p>
+		<section class="section section-alt underperform-section" aria-labelledby="underperform-heading">
+			<div class="underperform-layout">
+				<div class="underperform-intro">
+					<span class="section-eyebrow">Straight talk</span>
+					<h2 class="section-title underperform-heading" id="underperform-heading">
+						Why most local service websites underperform.
+					</h2>
+					<p class="underperform-deck">A lot of them fail in the same predictable ways.</p>
+				</div>
+				<ul class="underperform-stack" role="list">
+					{underperformProblems.map((item) => (
+						<li class="underperform-card">
+							<div class="underperform-card-icon" aria-hidden="true">
+								<i class:list={['fas', item.icon]}></i>
+							</div>
+							<div class="underperform-card-body">
+								<h3 class="underperform-card-title">{item.title}</h3>
+								<p class="underperform-card-desc">{item.desc}</p>
+							</div>
+						</li>
+					))}
+				</ul>
 			</div>
 		</section>
 
-		<section class="section" aria-labelledby="included-heading">
+		<section class="section deliverables-section" aria-labelledby="included-heading">
 			<div class="section-header">
 				<span class="section-eyebrow">Deliverables</span>
 				<h2 class="section-title" id="included-heading">What is included in a web development build.</h2>
-				<p class="section-lead">
-					Concrete items you can expect on a typical local service site. Scope adjusts if you need fewer pages or a larger build.
+				<p class="section-lead deliverables-lead">
+					What you actually get in a typical build, and why each block earns its place. Scope tightens or grows once we align on the pages you need.
 				</p>
 			</div>
-			<ul class="checklist">
-				{includedItems.map((item) => (
-					<li>
-						<i class="fas fa-check checklist-icon" aria-hidden="true"></i>
-						<span>{item}</span>
+
+			<article class="deliverable-feature-card" aria-labelledby="deliverable-feature-title">
+				<div class="deliverable-feature-accent" aria-hidden="true"></div>
+				<div class="deliverable-feature-inner">
+					<p class="deliverable-feature-eyebrow">Core scope</p>
+					<h3 class="deliverable-feature-title" id="deliverable-feature-title">{deliverableFeature.title}</h3>
+					<p class="deliverable-feature-desc">{deliverableFeature.desc}</p>
+				</div>
+			</article>
+
+			<div class="deliverable-pillars">
+				{deliverablePillars.map((pillar) => (
+					<article class="deliverable-pillar">
+						<div class="deliverable-pillar-head">
+							<div class="deliverable-pillar-icon" aria-hidden="true">
+								<i class:list={['fas', pillar.icon]}></i>
+							</div>
+							<h3 class="deliverable-pillar-title">{pillar.title}</h3>
+						</div>
+						<ul class="deliverable-pillar-list">
+							{pillar.bullets.map((line) => (
+								<li>{line}</li>
+							))}
+						</ul>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="section section-alt process-section" aria-labelledby="build-process-heading">
+			<div class="section-header process-section__header">
+				<span class="section-eyebrow">Process</span>
+				<h2 class="section-title" id="build-process-heading">From discovery to launch.</h2>
+				<p class="section-lead process-section__lead">
+					A practical build process shaped around your business, your market, and what actually needs to happen to get the site live.
+				</p>
+			</div>
+			<ol class="process-timeline">
+				{buildProcessSteps.map((step) => (
+					<li class="process-timeline-item">
+						<div class="process-timeline-marker">
+							<span class="process-timeline-num">{step.num}</span>
+						</div>
+						<div class="process-timeline-body">
+							<h3 class="process-timeline-title">{step.title}</h3>
+							<p class="process-timeline-desc">{step.body}</p>
+							{step.paymentNote && <p class="process-payment-note">{step.paymentNote}</p>}
+						</div>
 					</li>
 				))}
-			</ul>
+			</ol>
 		</section>
 
-		<section class="section section-alt" aria-labelledby="local-process-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Local SEO websites</span>
-				<h2 class="section-title" id="local-process-heading">How we build local business websites.</h2>
-				<p class="section-lead">
-					Every step ties to the outcome: more qualified traffic and easier contact from people in your market.
-				</p>
-			</div>
-			<div class="process-grid process-grid--local">
-				<div class="process-step">
-					<span class="step-number">01</span>
-					<h4>Main service, main city first</h4>
-					<p>We lock in what you sell first and where you want to win first, so the site hierarchy matches real search behavior.</p>
-				</div>
-				<div class="process-step">
-					<span class="step-number">02</span>
-					<h4>Pages that deserve to rank</h4>
-					<p>We structure the site around pages that earn traffic: core services, proof, and contact paths, not endless thin pages.</p>
-				</div>
-				<div class="process-step">
-					<span class="step-number">03</span>
-					<h4>Copy for intent and conversion</h4>
-					<p>Headlines and body copy speak to what someone typed or tapped for, not filler that could apply to any business.</p>
-				</div>
-				<div class="process-step">
-					<span class="step-number">04</span>
-					<h4>Fast HTML and internal links</h4>
-					<p>Clean markup, fast loads, and sensible internal linking so users and crawlers both see a clear picture of your services.</p>
-				</div>
-				<div class="process-step">
-					<span class="step-number">05</span>
-					<h4>Launch ready for Google and customers</h4>
-					<p>We launch with metadata, forms, and calls to action in place so the site is usable and crawlable from day one.</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="section" aria-labelledby="types-heading">
+		<section class="section site-types-section" aria-labelledby="types-heading">
 			<div class="section-header">
 				<span class="section-eyebrow">Site types</span>
 				<h2 class="section-title" id="types-heading">What we can build for service businesses.</h2>
 			</div>
-			<div class="grid-cards">
-				<div class="info-card">
+			<div class="grid-cards grid-cards--site-types">
+				<div class="info-card info-card--site-type">
 					<h3>Core business sites</h3>
 					<p>Multi-page sites for companies that need home, services, about, and contact with room to grow.</p>
 				</div>
-				<div class="info-card">
+				<div class="info-card info-card--site-type">
 					<h3>Service-heavy layouts</h3>
 					<p>When you offer several distinct jobs, we give each one a clear page instead of one long wall of text.</p>
 				</div>
-				<div class="info-card">
+				<div class="info-card info-card--site-type">
 					<h3>Landing pages</h3>
 					<p>Focused pages for ads, seasonal offers, or a single high-intent service.</p>
 				</div>
-				<div class="info-card">
+				<div class="info-card info-card--site-type">
 					<h3>Solo operator brands</h3>
 					<p>Compact sites for owner-led crews who need credibility and a phone number in the right places.</p>
 				</div>
@@ -284,7 +545,7 @@ const faqItems = [
 		<section class="section location-note-section" aria-labelledby="city-pages-heading">
 			<h2 class="visually-hidden" id="city-pages-heading">City-specific pages</h2>
 			<p class="location-note">
-				<strong>City and neighborhood detail</strong> lives on dedicated location pages (local references, market context, and why hire you there). This page stays focused on the service, deliverables, and process.
+				<strong>Cities and neighborhoods.
 			</p>
 			<ul class="city-link-list">
 				{cityPageLinks.map((link) => (
@@ -303,6 +564,50 @@ const faqItems = [
 		</section>
 	</main>
 </div>
+
+<script>
+	function initProcessStepReveal() {
+		const section = document.querySelector('.process-section');
+		if (!section) return;
+
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+		const items = Array.from(section.querySelectorAll('.process-timeline-item'));
+		if (!items.length) return;
+
+		const markAlreadyVisible = () => {
+			const mark = window.innerHeight * 0.88;
+			for (const el of items) {
+				const r = el.getBoundingClientRect();
+				if (r.top < mark && r.bottom > -12) el.classList.add('process-timeline-item--visible');
+			}
+		};
+
+		markAlreadyVisible();
+		section.classList.add('process-section--reveal');
+
+		const obs = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					if (!entry.isIntersecting) continue;
+					entry.target.classList.add('process-timeline-item--visible');
+					obs.unobserve(entry.target);
+				}
+			},
+			{ root: null, rootMargin: '0px 0px -10% 0px', threshold: [0, 0.1] }
+		);
+
+		for (const el of items) {
+			if (!el.classList.contains('process-timeline-item--visible')) obs.observe(el);
+		}
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initProcessStepReveal, { once: true });
+	} else {
+		initProcessStepReveal();
+	}
+</script>
 
 <style>
 	.bg-blur {
@@ -342,10 +647,15 @@ const faqItems = [
 		z-index: 1;
 	}
 
+	/* Inner column is --section-max-inner; max-width includes horizontal padding so it matches section-alt children */
 	.section {
-		max-width: 1100px;
+		--section-max-inner: 1100px;
+		--section-pad-x: 1.5rem;
+		box-sizing: border-box;
+		width: 100%;
+		max-width: calc(var(--section-max-inner) + 2 * var(--section-pad-x));
 		margin: 0 auto;
-		padding: 4rem 1.5rem;
+		padding: 4rem var(--section-pad-x);
 	}
 
 	.section-alt {
@@ -354,9 +664,29 @@ const faqItems = [
 	}
 
 	.section-alt > * {
-		max-width: 1100px;
+		max-width: var(--section-max-inner);
 		margin-left: auto;
 		margin-right: auto;
+	}
+
+	/* Cool slate + cyan/indigo wash (scoped: not other section-alt bands) */
+	.process-section.section-alt {
+		position: relative;
+		isolation: isolate;
+		overflow-x: clip;
+		background:
+			radial-gradient(ellipse 110% 95% at 100% -5%, rgba(34, 211, 238, 0.14) 0%, transparent 46%),
+			radial-gradient(ellipse 95% 90% at -8% 108%, rgba(129, 140, 248, 0.16) 0%, transparent 52%),
+			radial-gradient(ellipse 70% 55% at 55% 42%, rgba(56, 189, 248, 0.08) 0%, transparent 48%),
+			linear-gradient(168deg, #12121f 0%, #14141f 42%, #0d0f18 100%);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.05),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+	}
+
+	.process-section.section-alt > * {
+		position: relative;
+		z-index: 1;
 	}
 
 	.hero {
@@ -391,7 +721,8 @@ const faqItems = [
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
 		color: var(--text-muted);
-		margin-bottom: 0.5rem;
+		margin-bottom: var(--type-space-after-eyebrow);
+		line-height: var(--type-leading-display-tight);
 	}
 
 	.hero-title,
@@ -401,37 +732,272 @@ const faqItems = [
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
 		margin: 0;
+		text-wrap: balance;
 	}
 
 	.hero-title {
 		font-size: clamp(2.4rem, 8vw, 5.5rem);
-		line-height: 0.95;
+		line-height: var(--type-leading-hero);
 	}
 
 	.section-title {
 		font-size: clamp(2rem, 6vw, 4rem);
-		line-height: 1;
+		line-height: var(--type-leading-section);
 	}
 
 	.section-lead {
 		color: var(--text-muted);
 		font-size: clamp(1rem, 1.8vw, 1.2rem);
-		line-height: 1.6;
+		line-height: var(--type-leading-body-relaxed);
 		max-width: 720px;
-		margin: 0.75rem 0 0;
+		margin: var(--type-space-after-title) 0 0;
+		letter-spacing: 0.01em;
 	}
 
 	.hero-desc {
 		color: var(--text-muted);
 		font-size: clamp(1rem, 2vw, 1.3rem);
-		line-height: 1.55;
+		line-height: var(--type-leading-body);
 		max-width: 700px;
 		margin: 1rem 0 1.5rem;
+		letter-spacing: 0.01em;
 	}
 
 	.section-header {
 		max-width: 760px;
 		margin-bottom: 2rem;
+	}
+
+	.logo-carousel-section {
+		padding-top: 2.25rem;
+		padding-bottom: 3rem;
+	}
+
+	.logo-carousel-eyebrow {
+		margin: 0 0 1.5rem;
+		font-family: var(--font-display);
+		font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--accent);
+		text-align: center;
+	}
+
+	.logo-carousel-viewport {
+		overflow: hidden;
+	}
+
+	.logo-carousel-track {
+		display: flex;
+		width: max-content;
+		animation: logo-carousel-marquee 55s linear infinite;
+		will-change: transform;
+	}
+
+	.logo-carousel-group {
+		display: flex;
+		flex-wrap: nowrap;
+		align-items: center;
+		gap: clamp(2rem, 5vw, 4.5rem);
+		padding-right: clamp(2rem, 5vw, 4.5rem);
+	}
+
+	.logo-carousel-item {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 0 auto;
+		text-decoration: none;
+		opacity: 0.92;
+		transition: opacity 0.2s;
+	}
+
+	.logo-carousel-item:hover {
+		opacity: 1;
+	}
+
+	.logo-carousel-item:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 6px;
+		border-radius: 4px;
+	}
+
+	.logo-carousel-item img {
+		display: block;
+		width: auto;
+		height: auto;
+		max-height: clamp(56px, 9vw, 96px);
+		max-width: min(240px, 32vw);
+		object-fit: contain;
+		object-position: center;
+	}
+
+	@keyframes logo-carousel-marquee {
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.logo-carousel-track {
+			animation: none;
+			will-change: auto;
+		}
+
+		.logo-carousel-viewport {
+			mask-image: none;
+			overflow-x: auto;
+			overflow-y: hidden;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: thin;
+		}
+
+		.logo-carousel-group:last-child {
+			display: none;
+		}
+
+		.logo-carousel-group {
+			flex-wrap: wrap;
+			justify-content: center;
+			padding-right: 0;
+			row-gap: 0.75rem;
+		}
+	}
+
+	.who-for-visual {
+		margin: 0 0 2.5rem;
+		width: 100%;
+		min-width: 0;
+	}
+
+	.who-for-visual-heading {
+		margin: 0 0 1rem;
+		font-size: 0.8rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--accent);
+	}
+
+	.who-for-mosaic-wrap {
+		margin: 0.35rem 0 2.75rem;
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+		padding: 0;
+		overflow-x: hidden;
+	}
+
+	.who-for-mosaic {
+		position: relative;
+		width: 100%;
+		min-width: 0;
+		height: clamp(280px, 38vw, 420px);
+		overflow: visible;
+	}
+
+	.who-for-card {
+		position: absolute;
+		width: clamp(76px, min(21vw, 26%), 220px);
+		aspect-ratio: 4 / 5;
+		height: auto;
+		margin: 0;
+		padding: 0;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		box-shadow:
+			0 20px 50px rgba(0, 0, 0, 0.55),
+			0 0 0 1px rgba(0, 0, 0, 0.35);
+		z-index: 1;
+	}
+
+	.who-for-card-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.who-for-card-label {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0;
+		padding: 0.55rem 0.65rem 0.65rem;
+		font-family: var(--font-display);
+		font-size: clamp(0.75rem, 1.45vw, 0.98rem);
+		font-weight: 400;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		text-align: center;
+		line-height: var(--type-leading-display-tight);
+		color: #fff;
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+		background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.35) 55%, transparent 100%);
+		z-index: 2;
+	}
+
+	:global(html[data-theme='light']) .who-for-card-label {
+		background: linear-gradient(to top, rgba(20, 20, 26, 0.88) 0%, rgba(20, 20, 26, 0.4) 60%, transparent 100%);
+	}
+
+	.trade-chips-label--more {
+		margin-top: 0.25rem;
+	}
+
+	/* z-index matches card order so each photo to the right stacks above the last (no buried tiles) */
+	.who-for-card--1 {
+		left: -1%;
+		top: 22%;
+		transform: rotate(-11deg);
+		z-index: 1;
+	}
+
+	.who-for-card--2 {
+		left: 9%;
+		top: 2%;
+		transform: rotate(6deg);
+		z-index: 2;
+	}
+
+	.who-for-card--3 {
+		left: 24%;
+		top: 18%;
+		transform: rotate(-4deg);
+		z-index: 3;
+	}
+
+	.who-for-card--4 {
+		left: 40%;
+		top: 0%;
+		transform: rotate(8deg);
+		z-index: 4;
+	}
+
+	.who-for-card--5 {
+		left: 54%;
+		top: 20%;
+		transform: rotate(-7deg);
+		z-index: 5;
+	}
+
+	.who-for-card--6 {
+		left: 69%;
+		top: 8%;
+		transform: rotate(5deg);
+		z-index: 6;
+	}
+
+	:global(html[data-theme='light']) .who-for-card {
+		border-color: rgba(0, 0, 0, 0.08);
+		box-shadow:
+			0 16px 40px rgba(0, 0, 0, 0.12),
+			0 0 0 1px rgba(0, 0, 0, 0.06);
 	}
 
 	.btn-solid,
@@ -525,6 +1091,12 @@ const faqItems = [
 		align-items: start;
 	}
 
+	.two-col--who-need {
+		gap: 1.35rem;
+		align-items: stretch;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+	}
+
 	.prose-block {
 		background: var(--surface);
 		border: 1px solid var(--border);
@@ -532,9 +1104,27 @@ const faqItems = [
 		padding: 1.35rem 1.5rem;
 	}
 
-	.prose-block--accent {
-		border-color: rgba(249, 115, 22, 0.35);
-		background: rgba(249, 115, 22, 0.06);
+	.prose-block--needs {
+		border-color: var(--border);
+		background: var(--surface);
+	}
+
+	.prose-block--pain {
+		border: 2px solid rgba(249, 115, 22, 0.5);
+		background: linear-gradient(155deg, rgba(249, 115, 22, 0.16) 0%, rgba(249, 115, 22, 0.05) 45%, var(--surface) 100%);
+		box-shadow:
+			0 0 0 1px rgba(249, 115, 22, 0.12),
+			0 16px 48px rgba(0, 0, 0, 0.28);
+		padding: 1.5rem 1.35rem 1.45rem;
+	}
+
+	.prose-block-eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--accent);
 	}
 
 	.prose-block-title {
@@ -543,14 +1133,24 @@ const faqItems = [
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
+		line-height: var(--type-leading-display-tight);
 		margin: 0 0 0.85rem;
+		text-wrap: balance;
+	}
+
+	.prose-block-title--pain {
+		font-size: clamp(1.45rem, 3.2vw, 1.85rem);
+		line-height: var(--type-leading-display);
+		margin-bottom: 1.1rem;
+		color: var(--text);
+		text-wrap: balance;
 	}
 
 	.prose-list {
 		margin: 0;
 		padding-left: 1.15rem;
 		color: var(--text-muted);
-		line-height: 1.55;
+		line-height: var(--type-leading-body);
 	}
 
 	.prose-list li {
@@ -561,47 +1161,329 @@ const faqItems = [
 		margin-bottom: 0;
 	}
 
-	.opinion-card {
-		max-width: 820px;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 1.5rem 1.75rem;
-		background: var(--bg);
-	}
-
-	.opinion-card p {
-		margin: 0;
-		font-size: clamp(1.02rem, 1.6vw, 1.15rem);
-		line-height: 1.65;
-		color: var(--text-muted);
-	}
-
-	.checklist {
+	.prose-list--scan {
 		list-style: none;
 		padding: 0;
-		margin: 0 0 1.5rem;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.65rem;
+		gap: 0.55rem;
 	}
 
-	.checklist li {
+	.prose-list--scan li {
 		display: flex;
-		gap: 0.75rem;
 		align-items: flex-start;
-		padding: 0.85rem 1rem;
+		gap: 0.75rem;
+		margin: 0;
+		padding: 0.72rem 0.85rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--border);
+		background: rgba(255, 255, 255, 0.03);
+	}
+
+	.prose-list--pain li {
+		border-color: rgba(249, 115, 22, 0.28);
+		background: rgba(0, 0, 0, 0.18);
+	}
+
+	.prose-scan-icon {
+		flex-shrink: 0;
+		width: 1.15rem;
+		text-align: center;
+		margin-top: 0.12rem;
+		font-size: 1.05rem;
+		line-height: 1;
+	}
+
+	.prose-scan-icon--needs {
+		color: #86efac;
+		opacity: 0.95;
+	}
+
+	.prose-scan-icon--pain {
+		color: #fb923c;
+	}
+
+	.prose-scan-body {
+		min-width: 0;
+		flex: 1;
+	}
+
+	.prose-list--scan strong {
+		display: block;
+		font-size: 1.02rem;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		color: var(--text);
+		line-height: var(--type-leading-subhead);
+		margin-bottom: 0.2rem;
+	}
+
+	.prose-scan-detail {
+		display: block;
+		font-size: 0.9rem;
+		line-height: var(--type-leading-ui);
+		color: var(--text-muted);
+		letter-spacing: 0.01em;
+	}
+
+	.prose-list--pain .prose-scan-detail {
+		color: rgba(255, 255, 255, 0.72);
+	}
+
+	:global(html[data-theme='light']) .prose-list--pain .prose-scan-detail {
+		color: rgba(0, 0, 0, 0.58);
+	}
+
+	:global(html[data-theme='light']) .prose-block--pain {
+		background: linear-gradient(155deg, rgba(217, 93, 12, 0.12) 0%, #ffffff 50%, #fafaf8 100%);
+		border-color: rgba(217, 93, 12, 0.42);
+		box-shadow:
+			0 0 0 1px rgba(217, 93, 12, 0.1),
+			0 14px 40px rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme='light']) .prose-list--pain li {
+		background: rgba(217, 93, 12, 0.07);
+		border-color: rgba(217, 93, 12, 0.22);
+	}
+
+	:global(html[data-theme='light']) .prose-list--scan li {
+		background: rgba(0, 0, 0, 0.02);
+	}
+
+	:global(html[data-theme='light']) .prose-scan-icon--needs {
+		color: #15803d;
+		opacity: 1;
+	}
+
+	.underperform-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+		gap: 2.5rem 3rem;
+		align-items: start;
+	}
+
+	.underperform-intro {
+		position: sticky;
+		top: 1rem;
+		padding-right: 0.5rem;
+	}
+
+	.underperform-heading {
+		max-width: 16ch;
+		margin-top: 0.35rem;
+	}
+
+	.underperform-deck {
+		margin: 1.1rem 0 0;
+		font-size: clamp(1.05rem, 2vw, 1.2rem);
+		line-height: var(--type-leading-body);
+		color: var(--text-muted);
+		max-width: 32ch;
+		letter-spacing: 0.01em;
+	}
+
+	.underperform-stack {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.underperform-card {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+		padding: 1.1rem 1.15rem 1.15rem 1.05rem;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+		border-left: 3px solid var(--accent);
+		background: rgba(0, 0, 0, 0.22);
+		box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+	}
+
+	.underperform-card-icon {
+		flex-shrink: 0;
+		width: 2.5rem;
+		height: 2.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radius-sm);
+		background: rgba(249, 115, 22, 0.12);
+		color: var(--accent);
+		font-size: 1.05rem;
+	}
+
+	.underperform-card-body {
+		min-width: 0;
+	}
+
+	.underperform-card-title {
+		margin: 0 0 0.4rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		line-height: var(--type-leading-display-tight);
+		color: var(--text);
+	}
+
+	.underperform-card-desc {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: var(--type-leading-body);
+		color: var(--text-muted);
+		letter-spacing: 0.01em;
+	}
+
+	.deliverables-section .section-header {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.deliverables-section .section-lead {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.deliverables-lead {
+		max-width: 38rem;
+	}
+
+	.deliverable-feature-card {
+		display: flex;
+		gap: 0;
+		margin: 0 0 1.75rem;
+		border-radius: var(--radius);
+		overflow: hidden;
+		border: 1px solid rgba(249, 115, 22, 0.35);
+		background: linear-gradient(135deg, rgba(249, 115, 22, 0.12) 0%, var(--surface) 42%, var(--surface) 100%);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+	}
+
+	.deliverable-feature-accent {
+		width: 5px;
+		flex-shrink: 0;
+		background: linear-gradient(180deg, #fb923c, #ea580c);
+	}
+
+	.deliverable-feature-inner {
+		padding: 1.5rem 1.5rem 1.55rem 1.35rem;
+		min-width: 0;
+	}
+
+	.deliverable-feature-eyebrow {
+		margin: 0 0 0.45rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		color: var(--accent);
+	}
+
+	.deliverable-feature-title {
+		margin: 0 0 0.65rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.55rem, 3.5vw, 2.35rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: var(--type-leading-display);
+		color: var(--text);
+		max-width: 22ch;
+		text-wrap: balance;
+	}
+
+	.deliverable-feature-desc {
+		margin: 0;
+		font-size: clamp(1rem, 1.8vw, 1.12rem);
+		line-height: var(--type-leading-body);
+		color: var(--text-muted);
+		max-width: 42rem;
+		letter-spacing: 0.01em;
+	}
+
+	.deliverable-pillars {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem 1.15rem;
+	}
+
+	.deliverable-pillar {
 		background: var(--surface);
 		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-		font-size: 0.98rem;
-		line-height: 1.5;
-		color: var(--text-muted);
+		border-radius: var(--radius);
+		padding: 1.25rem 1.3rem 1.35rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		min-height: 0;
 	}
 
-	.checklist-icon {
+	.deliverable-pillar-head {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.deliverable-pillar-icon {
+		width: 2.35rem;
+		height: 2.35rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radius-sm);
+		background: rgba(255, 255, 255, 0.06);
 		color: var(--accent);
-		margin-top: 0.15rem;
+		font-size: 1rem;
 		flex-shrink: 0;
+	}
+
+	.deliverable-pillar-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		line-height: var(--type-leading-display-tight);
+		color: var(--text);
+	}
+
+	.deliverable-pillar-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+	}
+
+	.deliverable-pillar-list li {
+		position: relative;
+		padding-left: 1.05rem;
+		font-size: 0.92rem;
+		line-height: var(--type-leading-compact);
+		color: var(--text-muted);
+		letter-spacing: 0.01em;
+	}
+
+	.deliverable-pillar-list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 50%;
+		background: var(--accent);
+		opacity: 0.85;
 	}
 
 	.grid-cards {
@@ -628,58 +1510,249 @@ const faqItems = [
 	.info-card p {
 		color: var(--text-muted);
 		margin: 0;
-		line-height: 1.55;
+		line-height: var(--type-leading-body);
+		letter-spacing: 0.01em;
 	}
 
-	.process-grid {
+	.site-types-section {
+		padding-top: 4.5rem;
+		padding-bottom: 4.5rem;
+	}
+
+	.grid-cards--site-types {
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+		gap: 1.5rem 1.75rem;
+	}
+
+	@media (min-width: 900px) {
+		.grid-cards--site-types {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 1.75rem 2rem;
+		}
+	}
+
+	.info-card--site-type {
+		position: relative;
+		padding: 2.15rem 2rem 2.15rem 2.15rem;
+		border-radius: calc(var(--radius) + 2px);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background:
+			radial-gradient(ellipse 90% 70% at 100% 0%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+			radial-gradient(ellipse 70% 60% at 0% 100%, rgba(249, 115, 22, 0.12) 0%, transparent 48%),
+			linear-gradient(155deg, rgba(99, 102, 241, 0.08) 0%, transparent 38%),
+			var(--surface);
+		box-shadow:
+			0 8px 36px rgba(0, 0, 0, 0.28),
+			inset 0 1px 0 rgba(255, 255, 255, 0.07);
+		overflow: hidden;
+		isolation: isolate;
+		transition:
+			transform 0.22s ease,
+			box-shadow 0.22s ease,
+			border-color 0.22s ease;
+	}
+
+	.info-card--site-type::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 5px;
+		border-radius: calc(var(--radius) + 2px) 0 0 calc(var(--radius) + 2px);
+		background: linear-gradient(180deg, #22d3ee 0%, #f97316 52%, #a855f7 100%);
+		opacity: 0.95;
+		z-index: 0;
+	}
+
+	.info-card--site-type h3,
+	.info-card--site-type p {
+		position: relative;
+		z-index: 1;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.info-card--site-type:hover {
+			transform: translateY(-4px);
+			border-color: rgba(34, 211, 238, 0.28);
+			box-shadow:
+				0 16px 48px rgba(0, 0, 0, 0.38),
+				0 0 0 1px rgba(34, 211, 238, 0.12),
+				inset 0 1px 0 rgba(255, 255, 255, 0.09);
+		}
+	}
+
+	.info-card--site-type h3 {
+		font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+		margin: 0 0 0.85rem;
+		letter-spacing: 0.03em;
+		line-height: var(--type-leading-display-tight);
+		text-wrap: balance;
+	}
+
+	.info-card--site-type p {
+		font-size: clamp(1.05rem, 2vw, 1.22rem);
+		line-height: var(--type-leading-body-relaxed);
+		max-width: 38ch;
+		letter-spacing: 0.01em;
+	}
+
+	.process-section.section {
+		padding-top: 5rem;
+		padding-bottom: 5.5rem;
+	}
+
+	.process-section .section-header {
+		max-width: 52rem;
+		margin-bottom: 2.75rem;
+	}
+
+	.process-section .section-eyebrow {
+		font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+		margin-bottom: 0.65rem;
+		line-height: var(--type-leading-display-tight);
+	}
+
+	.process-section .section-title {
+		font-size: clamp(2.35rem, 7vw, 4.75rem);
+		line-height: var(--type-leading-section);
+	}
+
+	.process-section__lead {
+		max-width: 46rem;
+		font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+		line-height: var(--type-leading-body-relaxed);
+		margin-top: 1rem;
+		letter-spacing: 0.01em;
+	}
+
+	.process-timeline {
+		list-style: none;
+		margin: 0 auto;
+		padding: 0;
+		max-width: 50rem;
+	}
+
+	.process-timeline-item {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-		gap: 0.6rem;
+		grid-template-columns: clamp(3.25rem, 9vw, 4.5rem) minmax(0, 1fr);
+		gap: 1.25rem 1.75rem;
+		padding-bottom: 2.75rem;
 	}
 
-	.process-grid--local {
-		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	.process-timeline-item:last-child {
+		padding-bottom: 0;
 	}
 
-	.process-step {
-		background: var(--bg);
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 1.4rem;
+	@media (prefers-reduced-motion: no-preference) {
+		.process-section.process-section--reveal .process-timeline-item {
+			opacity: 0;
+			transform: translate3d(0, 20px, 0);
+		}
+
+		.process-section.process-section--reveal .process-timeline-item.process-timeline-item--visible {
+			opacity: 1;
+			transform: translate3d(0, 0, 0);
+			transition:
+				opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+				transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+		}
 	}
 
-	.step-number {
-		display: block;
-		font-size: 1.8rem;
+	.process-timeline-marker {
+		position: relative;
+		text-align: right;
+		padding-right: 0.65rem;
+	}
+
+	.process-timeline-marker::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		top: 2.5rem;
+		width: 3px;
+		height: calc(100% + 2.75rem);
+		background: linear-gradient(to bottom, rgba(249, 115, 22, 0.45), rgba(249, 115, 22, 0.12));
+		pointer-events: none;
+	}
+
+	.process-timeline-item:last-child .process-timeline-marker::after {
+		display: none;
+	}
+
+	.process-timeline-num {
+		display: inline-block;
+		font-size: clamp(1.45rem, 3.2vw, 2rem);
 		font-weight: 800;
 		color: var(--accent);
 		letter-spacing: -0.03em;
-		margin-bottom: 0.35rem;
+		line-height: var(--type-leading-heading);
+		font-variant-numeric: tabular-nums;
 	}
 
-	.process-step h4 {
-		margin: 0 0 0.45rem;
-		font-size: 1.02rem;
+	.process-timeline-title {
+		margin: 0 0 0.65rem;
+		font-size: clamp(1.2rem, 2.6vw, 1.55rem);
 		font-weight: 700;
+		line-height: var(--type-leading-heading);
+		letter-spacing: -0.01em;
+		text-wrap: balance;
 	}
 
-	.process-step p {
+	.process-timeline-desc {
 		margin: 0;
 		color: var(--text-muted);
-		font-size: 0.95rem;
-		line-height: 1.5;
+		font-size: clamp(1.08rem, 2.1vw, 1.28rem);
+		line-height: var(--type-leading-body-relaxed);
+		letter-spacing: 0.01em;
+	}
+
+	.process-payment-note {
+		margin: 1.1rem 0 0;
+		padding: 0.85rem 1.15rem;
+		font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+		line-height: var(--type-leading-ui);
+		color: var(--text-muted);
+		border-left: 4px solid rgba(249, 115, 22, 0.65);
+		background: rgba(249, 115, 22, 0.08);
+		border-radius: 0 var(--radius) var(--radius) 0;
+	}
+
+	.process-section .process-timeline-marker::after {
+		background: linear-gradient(
+			to bottom,
+			rgba(34, 211, 238, 0.55),
+			rgba(99, 102, 241, 0.22)
+		);
+	}
+
+	.process-section .process-timeline-num {
+		color: #5eead4;
+		text-shadow: 0 0 28px rgba(45, 212, 191, 0.22);
+	}
+
+	.process-section .process-payment-note {
+		border-left-color: rgba(56, 189, 248, 0.65);
+		background: rgba(56, 189, 248, 0.1);
 	}
 
 	.compare-wrap {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
 		overflow-x: auto;
+		overscroll-behavior-x: contain;
 		border-radius: var(--radius);
 		border: 1px solid var(--border);
+		contain: inline-size;
 	}
 
 	.compare-table {
 		width: 100%;
 		border-collapse: collapse;
 		font-size: 0.95rem;
+		line-height: var(--type-leading-table);
+		table-layout: fixed;
 		min-width: 520px;
 	}
 
@@ -689,6 +1762,7 @@ const faqItems = [
 		text-align: left;
 		vertical-align: top;
 		border-bottom: 1px solid var(--border);
+		overflow-wrap: break-word;
 	}
 
 	.compare-table th {
@@ -716,6 +1790,28 @@ const faqItems = [
 		background: rgba(0, 0, 0, 0.15);
 	}
 
+	@media (max-width: 640px) {
+		.compare-wrap {
+			overflow-x: visible;
+			contain: none;
+		}
+
+		.compare-table {
+			min-width: 0;
+			font-size: 0.875rem;
+		}
+
+		.compare-table th {
+			font-size: 0.95rem;
+			letter-spacing: 0.03em;
+		}
+
+		.compare-table th,
+		.compare-table td {
+			padding: 0.65rem 0.45rem;
+		}
+	}
+
 	.faq-list {
 		margin: 0;
 		padding: 0;
@@ -734,6 +1830,7 @@ const faqItems = [
 	.faq-item dt {
 		font-weight: 700;
 		font-size: 1.05rem;
+		line-height: var(--type-leading-subhead);
 		margin: 0 0 0.5rem;
 		color: var(--text);
 	}
@@ -741,8 +1838,9 @@ const faqItems = [
 	.faq-item dd {
 		margin: 0;
 		color: var(--text-muted);
-		line-height: 1.55;
+		line-height: var(--type-leading-body);
 		font-size: 0.98rem;
+		letter-spacing: 0.01em;
 	}
 
 	.location-note-section {
@@ -753,9 +1851,10 @@ const faqItems = [
 	.location-note {
 		margin: 0;
 		font-size: 0.95rem;
-		line-height: 1.65;
+		line-height: var(--type-leading-body-relaxed);
 		color: var(--text-muted);
 		max-width: 900px;
+		letter-spacing: 0.01em;
 	}
 
 	.city-link-list {
@@ -814,8 +1913,43 @@ const faqItems = [
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
 		font-size: clamp(2rem, 6vw, 4rem);
-		line-height: 1;
+		line-height: var(--type-leading-section);
 		margin: 0 0 1.2rem;
+		text-wrap: balance;
+	}
+
+	@media (max-width: 900px) {
+		.two-col {
+			grid-template-columns: 1fr;
+		}
+
+		.two-col--who-need {
+			display: flex;
+			flex-direction: column;
+			gap: 1.15rem;
+		}
+
+		.prose-block--pain {
+			order: -1;
+		}
+
+		.underperform-layout {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.underperform-intro {
+			position: static;
+			padding-right: 0;
+		}
+
+		.underperform-heading {
+			max-width: none;
+		}
+
+		.underperform-deck {
+			max-width: none;
+		}
 	}
 
 	@media (max-width: 768px) {
@@ -828,7 +1962,9 @@ const faqItems = [
 		}
 
 		.section {
-			padding: 3rem 1rem;
+			--section-pad-x: 1.25rem;
+			padding-top: 3rem;
+			padding-bottom: 3rem;
 		}
 
 		.hero {
@@ -849,8 +1985,130 @@ const faqItems = [
 			min-height: 46px;
 		}
 
-		.two-col {
+		.who-for-mosaic {
+			height: clamp(240px, 48vw, 360px);
+		}
+
+		.who-for-card {
+			width: clamp(68px, min(26vw, 30%), 175px);
+		}
+
+		.who-for-card--1 {
+			left: -3%;
+			top: 28%;
+			transform: rotate(-9deg);
+		}
+
+		.who-for-card--2 {
+			left: 6%;
+			top: 5%;
+			transform: rotate(5deg);
+		}
+
+		.who-for-card--3 {
+			left: 20%;
+			top: 22%;
+			transform: rotate(-3deg);
+		}
+
+		.who-for-card--4 {
+			left: 34%;
+			top: 2%;
+			transform: rotate(7deg);
+		}
+
+		.who-for-card--5 {
+			left: 48%;
+			top: 24%;
+			transform: rotate(-6deg);
+		}
+
+		.who-for-card--6 {
+			left: 62%;
+			top: 10%;
+			transform: rotate(4deg);
+		}
+
+		.deliverable-pillars {
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.section {
+			--section-pad-x: 1rem;
+		}
+
+		.who-for-mosaic-wrap {
+			margin-bottom: 1.75rem;
+			padding-inline: 0;
+		}
+
+		.who-for-mosaic {
+			height: clamp(200px, 58vw, 300px);
+		}
+
+		.who-for-card {
+			width: clamp(80px, 32vw, 160px);
+		}
+
+		.who-for-card--5,
+		.who-for-card--6 {
+			display: none;
+		}
+
+		.who-for-card--1 {
+			left: -2%;
+			top: 18%;
+			transform: rotate(-8deg);
+		}
+
+		.who-for-card--2 {
+			left: 18%;
+			top: 0%;
+			transform: rotate(5deg);
+		}
+
+		.who-for-card--3 {
+			left: 38%;
+			top: 20%;
+			transform: rotate(-3deg);
+		}
+
+		.who-for-card--4 {
+			left: 58%;
+			top: 6%;
+			transform: rotate(6deg);
+		}
+	}
+
+	@media (max-width: 380px) {
+		.who-for-mosaic {
+			height: clamp(180px, 62vw, 260px);
+		}
+
+		.who-for-card {
+			width: clamp(72px, 36vw, 140px);
+		}
+
+		.who-for-card--1 {
+			left: -4%;
+			top: 22%;
+		}
+
+		.who-for-card--2 {
+			left: 14%;
+			top: 2%;
+		}
+
+		.who-for-card--3 {
+			left: 34%;
+			top: 22%;
+		}
+
+		.who-for-card--4 {
+			left: 54%;
+			top: 8%;
 		}
 	}
 </style>

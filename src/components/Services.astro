@@ -1,6 +1,8 @@
 ---
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
+import ThemeToggleButton from './ThemeToggleButton.astro';
 import { locations } from '../data/locations';
 
 const eyebrowIcon = 'M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z';
@@ -49,10 +51,13 @@ const services = [
 			<a href="/" class="logo-link">
 				<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
 			</a>
-			<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme">
-				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-			</button>
+			<div class="hero-nav-end">
+				<ThemeToggleButton />
+				<a href="/" class="btn-outline btn-small" aria-label="Back to home">
+					<i class="fas fa-arrow-left"></i>
+					<span>Home</span>
+				</a>
+			</div>
 		</div>
 
 		<div class="services-hero-inner fade-in-section">
@@ -67,7 +72,6 @@ const services = [
 				</p>
 			</div>
 			<div class="hero-actions fade-in-child" style="--delay:3">
-				<a href="/" class="btn-outline">&larr; Home</a>
 				<a href="/contact/" class="btn-solid">Tell me what you need &rarr;</a>
 			</div>
 		</div>
@@ -270,6 +274,12 @@ const services = [
 		justify-content: space-between;
 	}
 
+	.hero-nav-end {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+
 	.logo-link {
 		display: inline-flex;
 		align-items: center;
@@ -386,6 +396,15 @@ const services = [
 		color: var(--bg);
 		border-color: var(--text);
 		transform: translateY(-1px);
+	}
+
+	.btn-small {
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		gap: 0.55rem;
 	}
 
 	.btn-lg {

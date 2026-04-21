@@ -62,7 +62,6 @@ const contactJsonLd = {
 					<div
 						class="calendly-inline-widget"
 						data-url="https://calendly.com/tventura94"
-						style="min-width: 320px; height: 700px;"
 					/>
 				</div>
 				<p class="calendly-fallback">
@@ -237,7 +236,7 @@ const contactJsonLd = {
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		overflow: hidden;
+		overflow: visible;
 		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
 	}
 
@@ -245,10 +244,17 @@ const contactJsonLd = {
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 	}
 
+	/* Calendly needs a tall box so the iframe is not trapped in an inner scroll (flow is often 900px+). */
 	.calendly-inline-widget {
 		width: 100%;
 		min-width: 320px;
-		min-height: 700px;
+		min-height: 1180px;
+		height: 1180px;
+	}
+
+	.calendly-inline-widget :global(iframe) {
+		min-height: 1180px !important;
+		height: 1180px !important;
 	}
 
 	.calendly-fallback {
@@ -379,7 +385,13 @@ const contactJsonLd = {
 		}
 
 		.calendly-inline-widget {
-			min-height: 620px;
+			min-height: 1120px;
+			height: 1120px;
+		}
+
+		.calendly-inline-widget :global(iframe) {
+			min-height: 1120px !important;
+			height: 1120px !important;
 		}
 	}
 </style>
