@@ -278,7 +278,7 @@ html[data-theme='light'] .themed-subpage .checklist li {
 	border-color: var(--border);
 }
 
-html[data-theme='light'] .themed-subpage .calendly-card {
+html[data-theme='light'] .themed-subpage .contact-form-card {
 	background: #ffffff;
 	border-color: var(--border);
 }
