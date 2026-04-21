@@ -1,13 +1,17 @@
 ---
 export type Crumb = { href: string; label: string };
 
-const { items, current } = Astro.props as {
+const { items, current, variant = 'default' } = Astro.props as {
 	items: Crumb[];
 	current?: string;
+	/** Use on dark pages (matches portfolio / service hub styling). */
+	variant?: 'default' | 'dark';
 };
+
+const isDark = variant === 'dark';
 ---
 
-<nav class="breadcrumbs" aria-label="Breadcrumb">
+<nav class:list={['breadcrumbs', isDark && 'breadcrumbs--dark']} aria-label="Breadcrumb">
 	<ol>
 		{items.map((item) => (
 			<li>
@@ -47,7 +51,7 @@ const { items, current } = Astro.props as {
 	}
 
 	.breadcrumbs li + li::before {
-		content: "/";
+		content: '/';
 		color: #94a3b8;
 	}
 
@@ -65,5 +69,51 @@ const { items, current } = Astro.props as {
 		color: #475569;
 		font-weight: 600;
 	}
-</style>
 
+	/* Dark pages (portfolio, service hubs, SEO slug, location pages) */
+	.breadcrumbs--dark {
+		margin: 0;
+	}
+
+	.breadcrumbs--dark ol {
+		color: rgba(255, 255, 255, 0.65);
+		font-family: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+	}
+
+	.breadcrumbs--dark a {
+		color: #f97316;
+	}
+
+	.breadcrumbs--dark a:hover {
+		text-decoration: underline;
+	}
+
+	.breadcrumbs--dark span {
+		color: #f0f0f5;
+	}
+
+	.breadcrumbs--dark li + li::before {
+		color: rgba(255, 255, 255, 0.28);
+	}
+
+	:global(html[data-theme='light']) .breadcrumbs.breadcrumbs--dark ol {
+		color: rgba(0, 0, 0, 0.55);
+		font-family: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+	}
+
+	:global(html[data-theme='light']) .breadcrumbs.breadcrumbs--dark a {
+		color: #c2410c;
+	}
+
+	:global(html[data-theme='light']) .breadcrumbs.breadcrumbs--dark a:hover {
+		text-decoration: underline;
+	}
+
+	:global(html[data-theme='light']) .breadcrumbs.breadcrumbs--dark span {
+		color: #14141a;
+	}
+
+	:global(html[data-theme='light']) .breadcrumbs.breadcrumbs--dark li + li::before {
+		color: rgba(0, 0, 0, 0.22);
+	}
+</style>

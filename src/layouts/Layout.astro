@@ -1,5 +1,6 @@
-
 ---
+import '../styles/global.css';
+
 const {
 	title = 'Computer Tommy: Professional Website Design and Development',
 	description = 'Fast, clean websites and practical tooling for local businesses. No monthly fees.',
@@ -64,6 +65,19 @@ const jsonLdArray = jsonLd
 
 <html lang="en">
 	<head>
+		<script is:inline>
+			(function () {
+				try {
+					var h = document.documentElement;
+					var s = localStorage.getItem('theme');
+					if (s === 'light' || (!s && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+						h.setAttribute('data-theme', 'light');
+					} else {
+						h.removeAttribute('data-theme');
+					}
+				} catch (e) {}
+			})();
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -194,6 +208,22 @@ const jsonLdArray = jsonLd
 					});
 				}
 			});
+		</script>
+		<script is:inline>
+			(function () {
+				document.addEventListener('click', function (e) {
+					var btn = e.target.closest('[data-theme-toggle]');
+					if (!btn) return;
+					var h = document.documentElement;
+					if (h.getAttribute('data-theme') === 'light') {
+						h.removeAttribute('data-theme');
+						localStorage.setItem('theme', 'dark');
+					} else {
+						h.setAttribute('data-theme', 'light');
+						localStorage.setItem('theme', 'light');
+					}
+				});
+			})();
 		</script>
 	</body>
 </html>

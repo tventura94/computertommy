@@ -39,7 +39,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     slug: "Kiefer Property Solutions",
     title: "Kiefer Property Solutions",
-    category: "Business site",
+    category: "Service site",
     url: "https://kieferpropertysolutions.com/",
     previewImage: "/portfolio/kiefer-prop.png",
     whatTheyNeeded: "A professional web presence to showcase their services.",
@@ -95,7 +95,7 @@ export const portfolioItems: PortfolioItem[] = [
   {
     slug: "notle-client",
     title: "Notle.ai",
-    category: "Software",
+    category: "Software site",
     previewImage: "/portfolio/notle-screenshot.png",
     url: "https://notle-client.vercel.app/",
     whatTheyNeeded: "A clean app for their product.",
@@ -163,5 +163,29 @@ export const portfolioItems: PortfolioItem[] = [
     whatTheyNeeded: "A portfolio site to book sessions and show work.",
     result:
       "Simple site to showcase work and take inquiries. Built in a weekend.",
+  },
+  {
+    slug: "swong-band",
+    title: "Swong",
+    category: "Band site",
+    url: "https://swongband.com/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
+    slug: "so-close-band",
+    title: "So Close",
+    category: "Band site",
+    url: "https://soclsose-band.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
+    slug: "sharat3",
+    title: "Sharat 3",
+    category: "Band site",
+    url: "https://sharat3.netlify.app/",
+    whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
+    result: "Clean band site with music, bio, shows, and contact.",
   },
 ];

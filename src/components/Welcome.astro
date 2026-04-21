@@ -5,1056 +5,1925 @@ import { locations } from '../data/locations';
 import { portfolioItems } from '../data/portfolio';
 
 const featuredWork = portfolioItems.filter((p) =>
-	['Kiefer Property Solutions', 'parallel-carpentry', 'fresh-grill-bbq'].includes(p.slug)
+	['notle-client', 'Kiefer Property Solutions', 'paintball-sample-site'].includes(p.slug)
 );
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<header class="hero">
-			<a href="/" class="site-name">
-				<img src={astroLogo.src} width="115" height="48" alt="ComputerTommy home" />
+<div class="page-wrapper" id="page-wrapper">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+
+	<!-- HERO -->
+	<div class="hero-bg">
+		<img src="/portfolio/bg-img-ct.png" alt="" class="hero-bg-img" />
+	</div>
+	<section class="hero">
+		<div class="hero-nav">
+			<a href="/" class="logo-link">
+				<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
 			</a>
+			<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme">
+				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+			</button>
+		</div>
 
-			<div class="hero-content">
+		<div class="hero-inner">
+			<div class="hero-headline-wrap">
 				<h1 class="hero-title">
-Professional web design and development for local service businesses	| Computer Tommy			</h1>
+					Professional web developer for local businesses.
+				</h1>
+				<span class="badge badge-pink">NO FEES</span>
+				<span class="badge badge-yellow">FAST</span>
+				<span class="badge badge-green">PERSONAL</span>
+			</div>
 
-				<p class="hero-subtitle">
-					One-time build. No monthly fees. Real dude. Easy process. You own the site.
+			<div class="hero-foot">
+				<p class="hero-desc">
+					One-time build. No monthly fees. Real dude. Easy process. You own the site. Based in Asheville, NC.
 				</p>
-
-				<div class="hero-cta">
-					<a href="/contact/" class="btn btn-primary">Tell me what you need &rarr;</a>
-					<a href="/services/" class="btn btn-secondary">Services</a>
-					<a href="/about/" class="btn btn-secondary">About</a>
-					<a href="/portfolio/" class="btn btn-secondary">Portfolio</a>
+				<div class="hero-actions">
+					<a href="/contact/" class="btn-solid">Tell me what you need &rarr;</a>
+					<a href="/services/" class="btn-outline">Services</a>
+					<a href="/portfolio/" class="btn-outline">Portfolio</a>
 				</div>
 			</div>
-		</header>
+		</div>
+	</section>
 
-		<section class="block block-services" id="services">
-			<span class="block-label">Services</span>
-			<h2 class="block-title">Website work built for service businesses</h2>
+	<!-- ABOUT -->
+	<section class="section" id="about-tom">
+		<div class="section-center fade-in-section">
+			<span class="section-eyebrow fade-in-child" style="--delay:0">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Who you're working with.
+			</span>
+			<p class="about-text fade-in-child" style="--delay:1">
+				I'm Tom — a web developer in <a href="/services/web-development/asheville-nc/">Asheville, NC</a> who works directly with local service businesses. No middleman. No agency layers. You work with one person, me. You can ask questions. You get direct answers. I build websites for remodelers, plumbers, electricians, pressure washers, and other local service providers.
+			</p>
+		</div>
+	</section>
 
-			<div class="services-grid">
-				<a class="service-card" href="/services/web-development/">
-					<h3>Web development</h3>
-					<p>
-						Custom websites built for local businesses that need something fast, clear, and
-						professional without dealing with an agency.
-					</p>
-					<span class="service-link">View Web Development &rarr;</span>
-				</a>
+	<!-- SERVICES -->
+	<section class="section" id="services">
+		<div class="section-header">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Our services.
+			</span>
+			<h2 class="section-title">What I do.</h2>
+			<p class="section-desc">Website work built for local service businesses that need something fast, clear, and professional.</p>
+		</div>
 
-				<a class="service-card" href="/services/seo/">
-					<h3>SEO optimization</h3>
-					<p>
-						On-page and technical SEO work to help your website show up better for the local
-						searches that actually matter.
-					</p>
-					<span class="service-link">View SEO &rarr;</span>
-				</a>
-
-				<a class="service-card" href="/services/tooling/">
-					<h3>Tooling</h3>
-					<p>
-						Useful business tools like forms, quote flows, dashboards, and automations that
-						save time and cut down manual work.
-					</p>
-					<span class="service-link">View Tooling &rarr;</span>
-				</a>
-
-				<a class="service-card" href="/services/ai/">
-					<h3>AI</h3>
-					<p>
-						Practical AI features for small businesses that want real utility, not gimmicks
-						or overcomplicated systems.
-					</p>
-					<span class="service-link">View AI &rarr;</span>
-				</a>
-			</div>
-
-			<div class="service-card-areas">
-				<span class="service-card-areas__label">Serving:</span>
-				{locations.map((l) => (
-					<a href={`/services/web-development/${l.slug}/`}>{l.city}, {l.regionLabel}</a>
-				))}
-			</div>
-		</section>
-
-		<section class="block block-process" id="how-it-works">
-			<span class="block-label">How it works</span>
-			<h2 class="block-title">Straightforward process. No agency runaround.</h2>
-
-			<div class="process-card">
-				<ol class="process-list">
-					<li><span class="step-num">1</span> You reach out and tell me what you need</li>
-					<li><span class="step-num">2</span> We have a quick call and figure out scope</li>
-					<li><span class="step-num">3</span> I give you a clear upfront price</li>
-					<li><span class="step-num">4</span> I build the site or handle the work</li>
-					<li><span class="step-num">5</span> You get a finished site you control</li>
-				</ol>
-			</div>
-		</section>
-
-		<section class="block block-work" id="recent-work">
-			<span class="block-label">Portfolio</span>
-			<h2 class="block-title">Recent work</h2>
-
-			<div class="work-grid">
-				{featuredWork.map((item) => (
-					<a class="work-card" href={item.url} target="_blank" rel="noopener noreferrer">
-						{item.previewImage ? (
-							<div class="work-preview">
-								<img src={item.previewImage} alt={item.title} loading="lazy" />
-							</div>
-						) : null}
-						<div class="work-body">
-							<span class="work-category">{item.category}</span>
-							<h3>{item.title}</h3>
-							<p>{item.whatTheyNeeded}</p>
+		<ul class="stack-cards js-stack-cards">
+			<li class="stack-cards__item js-stack-cards__item">
+				<a href="/services/web-development/" class="svc-card">
+					<div class="svc-card-content">
+						<div class="svc-card-text">
+							<h3>Web Development</h3>
+							<p>Custom websites built for local businesses that need something fast, clear, and professional without dealing with an agency.</p>
 						</div>
-					</a>
+						<ul class="svc-tags">
+							<li>Custom Sites</li>
+							<li>Responsive</li>
+							<li>Performance</li>
+						</ul>
+					</div>
+					<div class="svc-card-img">
+						<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000" alt="Web Development" loading="lazy" />
+					</div>
+				</a>
+			</li>
+
+			<li class="stack-cards__item js-stack-cards__item">
+				<a href="/services/seo/" class="svc-card">
+					<div class="svc-card-content">
+						<div class="svc-card-text">
+							<h3>SEO Optimization</h3>
+							<p>On-page and technical SEO work to help your website show up better for the local searches that actually matter.</p>
+						</div>
+						<ul class="svc-tags">
+							<li>Local SEO</li>
+							<li>Technical</li>
+							<li>Analytics</li>
+						</ul>
+					</div>
+					<div class="svc-card-img">
+						<img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1000" alt="SEO Optimization" loading="lazy" />
+					</div>
+				</a>
+			</li>
+
+			<li class="stack-cards__item js-stack-cards__item">
+				<a href="/services/tooling/" class="svc-card">
+					<div class="svc-card-content">
+						<div class="svc-card-text">
+							<h3>Tooling</h3>
+							<p>Useful business tools like forms, quote flows, dashboards, and automations that save time and cut down manual work.</p>
+						</div>
+						<ul class="svc-tags">
+							<li>Forms</li>
+							<li>Dashboards</li>
+							<li>Automation</li>
+						</ul>
+					</div>
+					<div class="svc-card-img">
+						<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Tooling" loading="lazy" />
+					</div>
+				</a>
+			</li>
+
+			<li class="stack-cards__item js-stack-cards__item">
+				<a href="/services/ai/" class="svc-card">
+					<div class="svc-card-content">
+						<div class="svc-card-text">
+							<h3>AI Workflows</h3>
+							<p>Practical AI features for small businesses that want real utility, not gimmicks or overcomplicated systems.</p>
+						</div>
+						<ul class="svc-tags">
+							<li>Chatbots</li>
+							<li>Content</li>
+							<li>Workflows</li>
+						</ul>
+					</div>
+					<div class="svc-card-img">
+						<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000" alt="AI" loading="lazy" />
+					</div>
+				</a>
+			</li>
+		</ul>
+
+		<div class="serving-bar">
+			<span class="serving-label">Serving:</span>
+			<div class="serving-pills">
+				{locations.map((l) => (
+					<a href={`/services/web-development/${l.slug}/`} class="location-pill">{l.city}, {l.regionLabel}</a>
 				))}
 			</div>
+		</div>
+	</section>
 
-			<a href="/portfolio/" class="btn btn-secondary" style="margin-top: 1.25rem;">View all projects &rarr;</a>
-		</section>
+	<!-- HOW IT WORKS -->
+	<section class="section slide-in-section" id="how-it-works">
+		<img src="/paint-strikes.png" alt="" class="process-bg" />
+		<div class="section-header slide-in-left">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				How it works.
+			</span>
+			<h2 class="section-title">No agency runaround.</h2>
+			<p class="section-desc">Straightforward process from start to finish. You always know where things stand.</p>
+		</div>
 
-		<section class="block block-pricing" id="simple-pricing">
-			<span class="block-label">Pricing</span>
-			<h2 class="block-title">Upfront pricing. No monthly trap.</h2>
-
-			<div class="pricing-card">
-				<p class="pricing-lead">
-					Every project is quoted based on what you actually need. No bloated packages. No
-					agency-style retainer just to keep the lights on.
-				</p>
-
-				<p class="pricing-note">
-					Smaller sites often land around <strong>$600</strong>. Most 1&ndash;5 page website builds
-					range from <strong>$600 to $3000</strong> depending on scope. You'll know the price
-					up front before anything starts.
-				</p>
-
-				<a href="/contact/" class="btn btn-primary">Get a quote &rarr;</a>
+		<div class="process-grid">
+			<div class="process-step scale-in-child" style="--delay:0">
+				<span class="step-number">01</span>
+				<h4>You reach out</h4>
+				<p>Tell me what you need. A quick message is all it takes.</p>
 			</div>
-		</section>
+			<div class="process-step scale-in-child" style="--delay:1">
+				<span class="step-number">02</span>
+				<h4>We scope it out</h4>
+				<p>A quick call to figure out what you need and how it should work.</p>
+			</div>
+			<div class="process-step scale-in-child" style="--delay:2">
+				<span class="step-number">03</span>
+				<h4>Clear upfront price</h4>
+				<p>You get a fixed price before anything starts. No surprises.</p>
+			</div>
+			<div class="process-step scale-in-child" style="--delay:3">
+				<span class="step-number">04</span>
+				<h4>I build it</h4>
+				<p>I handle the work — design, code, SEO, the whole thing.</p>
+			</div>
+			<div class="process-step scale-in-child" style="--delay:4">
+				<span class="step-number">05</span>
+				<h4>You own it</h4>
+				<p>You get a finished site you control. No lock-in. No subscriptions.</p>
+			</div>
+		</div>
+	</section>
 
-		<section class="block block-about" id="about-tom">
-			<span class="block-label">Who you're working with</span>
-			<h2 class="block-title">Hi, I'm Tom.</h2>
+	<!-- TESTIMONIALS -->
+	<section class="section slide-in-section testimonials-section" id="testimonials">
+		<img src="/paint-splat.png" alt="" class="testimonials-bg" />
+		<div class="section-header slide-in-left">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+				Google Reviews.
+			</span>
+			<h2 class="section-title">Don't take my word for it.</h2>
+			<p class="section-desc">All 5-star reviews on Google.</p>
+		</div>
 
-			<div class="about-card">
-				<div class="about-photo">
-					<img src="/tom.png" alt="Tom" loading="lazy" />
+		<div class="reviews-grid">
+			<div class="review-card scale-in-child" style="--delay:0">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"I was in need of help with my website design. I reached out to Tommy he had me up and going in 2 days. The website is phenomenal!"</p>
+					<span class="review-name">Nicholas K.</span>
 				</div>
+			</div>
 
-				<div class="about-text">
-					<p class="about-lead">
-						I'm a web developer and web designer centered in <a href="/services/web-development/asheville-nc/">Asheville, NC</a>, who works directly with local service
-						businesses.
-					</p>
-
-					<p>
-						A lot of contractors and service business owners are used to people trying to
-						sell them on stuff they don't need. That's exactly why I keep this simple. You
-						work with one person, me. You can ask questions. You get direct answers. No account
-						manager. No handoff. No agency layers.
-					</p>
-
-					<p>
-						I build websites for businesses like remodelers, plumbers, electricians,
-						pressure washers, and other local service providers that need a solid online
-						presence without getting locked into huge monthly fees.
-					</p>
-
-					<p>
-						If that sounds like a better fit, <a href="/contact/">tell me what you're trying to build</a>.
-					</p>
+			<div class="review-card scale-in-child" style="--delay:1">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"Tom produced A++ quality for my bands website, was easy to work with, can't recommend him enough!"</p>
+					<span class="review-name">Miles D.</span>
 				</div>
 			</div>
-		</section>
 
-		<section class="block block-why" id="why-work-with-me">
-			<span class="block-label">Why people hire me</span>
-			<h2 class="block-title">Why hire a solo web designer instead of an agency?</h2>
-
-			<div class="why-grid">
-				<article class="why-card">
-					<h3>Direct communication</h3>
-					<p>
-						You talk to the person doing the work. No middleman, no sales layer, no chasing
-						down answers.
-					</p>
-				</article>
-
-				<article class="why-card">
-					<h3>Better fit for local service businesses</h3>
-					<p>
-						I work with the kinds of businesses that care about leads, calls, and showing up
-						well online, not fancy presentations.
-					</p>
-				</article>
-
-				<article class="why-card">
-					<h3>No bloated monthly fees</h3>
-					<p>
-						There's an upfront build cost, then you pay for help when you actually need it
-						instead of getting stuck in an expensive retainer.
-					</p>
-				</article>
+			<div class="review-card scale-in-child" style="--delay:2">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"I needed a simple but good looking website and didn't want to pay monthly fees or a crazy price. Tom is an excellent and quick web developer and made everything how I wanted. The price was super reasonable too!"</p>
+					<span class="review-name">Chris V.</span>
+				</div>
 			</div>
-		</section>
 
-	</main>
+			<div class="review-card scale-in-child" style="--delay:3">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"Tom was great! Explained everything to me and implemented it with zero hiccups. Didn't take a week. It literally took days."</p>
+					<span class="review-name">Michael B.</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:4">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"Very positive experience with Tommy. Quick to make changes as requested and very reasonable with his rates. Highly recommend this man."</p>
+					<span class="review-name">Jon Q.</span>
+				</div>
+			</div>
+
+			<div class="review-card scale-in-child" style="--delay:5">
+				<div class="review-inner">
+					<div class="review-head">
+						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+						</div>
+					</div>
+					<p class="review-text">"Tom was great to deal with! Very professional, solid product, and a quick turnaround. We have continued to use him for updates and he has been very prompt. 5/5, totally recommend."</p>
+					<span class="review-name">Matt F.</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- PORTFOLIO -->
+	<section class="section section--alt" id="recent-work">
+		<div class="section-header">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Recent work.
+			</span>
+			<h2 class="section-title">Latest projects</h2>
+			<p class="section-desc">From ultra-fast landing pages to full business sites — here's some of what I've built recently.</p>
+		</div>
+
+		<div class="works-grid">
+			{featuredWork.map((item) => (
+				<a class="work-card" href={item.url} target="_blank" rel="noopener noreferrer">
+					<div class="work-card-img">
+						{item.previewImage ? (
+							<img src={item.previewImage} alt={item.title} loading="lazy" />
+						) : (
+							<iframe src={item.url} title={item.title} loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+						)}
+					</div>
+					<div class="work-card-info">
+						<h3>{item.title}</h3>
+						<div class="work-meta">
+							<div class="work-meta-item">
+								<span class="work-meta-label">Category</span>
+								<span class="work-meta-value">{item.category}</span>
+							</div>
+						</div>
+						<p>{item.whatTheyNeeded}</p>
+						<span class="work-card-link">View Site</span>
+					</div>
+				</a>
+			))}
+		</div>
+
+		<div class="works-cta-card">
+			<h4>See all my work</h4>
+			<a href="/portfolio/" class="btn-outline">All Projects &rarr;</a>
+		</div>
+	</section>
+
+	<!-- PRICING -->
+	<section class="pricing-section" id="simple-pricing">
+		<div class="pricing-layout">
+			<div class="pricing-sticky">
+				<span class="section-eyebrow">
+					<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+					Pricing.
+				</span>
+				<h2 class="section-title">Upfront pricing. No monthly trap.</h2>
+				<a href="/contact/" class="btn-solid">Get a quote &rarr;</a>
+			</div>
+
+			<div class="pricing-scroll">
+				<div class="pricing-card">
+					<span class="pricing-card-label">The approach</span>
+					<p class="pricing-card-text">Every project is quoted based on what you actually need. No bloated packages. No agency-style retainer just to keep the lights on.</p>
+				</div>
+				<div class="pricing-card">
+					<span class="pricing-card-label">Typical range</span>
+					<p class="pricing-card-text">Smaller sites often land around <strong>$600</strong>. Most 1&ndash;5 page website builds range from <strong>$600 to $3,000</strong> depending on scope.</p>
+				</div>
+				<div class="pricing-card">
+					<span class="pricing-card-label">No surprises</span>
+					<p class="pricing-card-text">You'll know the price up front before anything starts. No hidden costs, no scope creep charges, no monthly trap.</p>
+				</div>
+				<div class="pricing-card">
+					<span class="pricing-card-label">You own it</span>
+					<p class="pricing-card-text">Once it's built, it's yours. No lock-in, no proprietary platforms. You get the code and full control.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- WHY CHOOSE ME -->
+	<section class="section section--alt" id="why-work-with-me">
+		<div class="section-header">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Why hire me.
+			</span>
+			<h2 class="section-title">Choose solo. Choose better.</h2>
+			<p class="section-desc">Why hire a solo web designer instead of an agency?</p>
+		</div>
+
+		<div class="why-grid">
+			<div class="why-card">
+				<div class="why-icon why-icon--green">
+					<svg viewBox="0 0 170 170" fill="currentColor"><path d="M139.82 54.96c-13.41 0-41.92 19.7-52.18 27.12 7.42-10.27 27.12-38.78 27.12-52.18 0-16.52-13.39-29.9-29.9-29.9s-29.9 13.39-29.9 29.9c0 13.41 19.7 41.92 27.12 52.18C71.81 74.66 43.3 54.96 29.9 54.96 13.38 54.96 0 68.35 0 84.86s13.39 29.9 29.9 29.9c13.41 0 41.92-19.7 52.19-27.12-7.42 10.26-27.12 38.78-27.12 52.19 0 16.52 13.39 29.9 29.9 29.9s29.9-13.39 29.9-29.9c0-13.41-19.7-41.92-27.12-52.19 10.27 7.42 38.78 27.12 52.18 27.12 16.52 0 29.9-13.39 29.9-29.9s-13.39-29.9-29.9-29.9z"/></svg>
+				</div>
+				<h4>Direct Communication</h4>
+				<p>You talk to the person doing the work. No middleman, no sales layer, no chasing down answers.</p>
+			</div>
+			<div class="why-card">
+				<div class="why-icon why-icon--purple">
+					<svg viewBox="0 0 175 169" fill="currentColor"><path d="M152.29 66.686c-8.7-2.83-26.4.53-41.31 4.38 14.33-5.65 30.62-13.34 36-20.74 10.29-14.16 7.15-33.98-7.01-44.27s-33.98-7.15-44.27 7.01c-5.38 7.4-7.65 25.28-8.6 40.65-.95-15.37-3.22-33.24-8.6-40.65-10.29-14.16-30.11-17.3-44.27-7.01s-17.3 30.11-7.01 44.27c5.38 7.4 21.67 15.09 36 20.74-14.91-3.85-32.61-7.21-41.31-4.38-16.65 5.41-25.76 23.29-20.35 39.93 5.41 16.65 23.29 25.76 39.93 20.35 8.71-2.83 21.06-15.97 30.87-27.85-8.27 13-16.95 28.8-16.95 37.96 0 17.5 14.19 31.69 31.69 31.69s31.69-14.19 31.69-31.69c0-9.16-8.68-24.97-16.95-37.96 9.8 11.89 22.16 25.02 30.87 27.85 16.65 5.41 34.53-3.7 39.93-20.35 5.41-16.65-3.7-34.53-20.35-39.93"/></svg>
+				</div>
+				<h4>Built for Service Businesses</h4>
+				<p>I work with businesses that care about leads, calls, and showing up well online — not fancy presentations.</p>
+			</div>
+			<div class="why-card">
+				<div class="why-icon why-icon--orange">
+					<svg viewBox="0 0 166 166" fill="currentColor"><path d="M165.16 82.58c0-10.78-8.74-19.53-19.53-19.53h-15.91l11.25-11.25c7.63-7.63 7.63-19.99 0-27.61-7.63-7.63-19.99-7.63-27.61 0l-11.25 11.25V19.53C102.11 8.75 93.37 0 82.58 0 71.8 0 63.05 8.74 63.05 19.53v15.91L51.8 24.19c-7.63-7.63-19.99-7.63-27.61 0s-7.63 19.99 0 27.61l11.25 11.25H19.53C8.75 63.05 0 71.79 0 82.58c0 10.78 8.74 19.53 19.53 19.53h15.91l-11.25 11.25c-7.63 7.63-7.63 19.99 0 27.61 7.63 7.63 19.99 7.63 27.61 0l11.25-11.25v15.92c0 10.78 8.74 19.53 19.53 19.53 10.78 0 19.53-8.74 19.53-19.53v-15.91l11.25 11.25c7.63 7.63 19.99 7.63 27.61 0 7.63-7.63 7.63-19.99 0-27.61l-11.25-11.25h15.91c10.78 0 19.53-8.74 19.53-19.53z"/></svg>
+				</div>
+				<h4>No Bloated Monthly Fees</h4>
+				<p>There's an upfront build cost, then you pay for help when you actually need it instead of an expensive retainer.</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ABOUT (Tom detail) -->
+	<section class="section section--tight" id="about-detail">
+		<div class="about-card-full">
+			<div class="about-photo-wrap">
+				<img src="/tom.png" alt="Tom" loading="lazy" />
+			</div>
+			<div class="about-detail-text">
+				<h3>Hi, I'm Tom.</h3>
+				<p>
+					I'm a web developer and web designer centered in <a href="/services/web-development/asheville-nc/">Asheville, NC</a>, who works directly with local service businesses.
+				</p>
+				<p>
+					A lot of contractors and service business owners are used to people trying to sell them stuff they don't need. That's exactly why I keep this simple. You work with one person, me.
+				</p>
+				<p>
+					I build websites for remodelers, plumbers, electricians, pressure washers, and other local service providers that need a solid online presence without huge monthly fees.
+				</p>
+				<a href="/contact/" class="btn-solid">Tell me what you're trying to build &rarr;</a>
+			</div>
+		</div>
+	</section>
+
+	<!-- CTA -->
+	<section class="section cta-section">
+		<img src="/paint-trip.png" alt="" class="cta-bg" />
+		<div class="cta-inner">
+			<img class="cta-icon" src={astroLogo.src} alt="Computer Tommy" />
+			<h2>Ready to get your site built right?</h2>
+			<a href="/contact/" class="btn-solid btn-lg">Start a Project &rarr;</a>
+		</div>
+	</section>
 </div>
 
+<script is:inline>
+(function() {
+	if (!('IntersectionObserver' in window)) return;
+	function observe(selector, options) {
+		var sections = document.querySelectorAll(selector);
+		if (!sections.length) return;
+		var obs = new IntersectionObserver(function(entries) {
+			entries.forEach(function(e) {
+				if (e.isIntersecting) {
+					e.target.classList.add('is-visible');
+					obs.unobserve(e.target);
+				}
+			});
+		}, options);
+		sections.forEach(function(s) { obs.observe(s); });
+	}
+	/* About block: require more of the section in view so “Who you’re working with” doesn’t animate while still below the fold. */
+	observe('.fade-in-section', { threshold: 0.35, rootMargin: '0px 0px -12% 0px' });
+	observe('.slide-in-section', { threshold: 0.15 });
+})();
+</script>
+
+<script is:inline>
+(function() {
+	/* Sticky stack layout only. Scroll-driven scale() was removed — it rescale’d card text every frame and looked like “wiggling”. */
+	var StackCards = function(element) {
+		this.element = element;
+		this.items = this.element.getElementsByClassName('js-stack-cards__item');
+		setStackCards(this);
+		initStackCardsResize(this);
+	};
+
+	function initStackCardsResize(element) {
+		element.element.addEventListener('resize-stack-cards', function() {
+			setStackCards(element);
+		});
+	}
+
+	function setStackCards(element) {
+		element.marginY = getComputedStyle(element.element).getPropertyValue('--stack-cards-gap');
+		getIntegerFromProperty(element);
+
+		if (isNaN(element.marginY)) {
+			element.element.style.paddingBottom = '0px';
+		} else {
+			element.element.style.paddingBottom = (element.marginY * (element.items.length - 1)) + 'px';
+		}
+
+		for (var i = 0; i < element.items.length; i++) {
+			if (isNaN(element.marginY)) {
+				element.items[i].style.transform = 'none';
+			} else {
+				element.items[i].style.transform = 'translateY(' + element.marginY * i + 'px)';
+			}
+		}
+	}
+
+	function getIntegerFromProperty(element) {
+		var node = document.createElement('div');
+		node.setAttribute('style', 'opacity:0; visibility: hidden; position: absolute; height:' + element.marginY);
+		element.element.appendChild(node);
+		element.marginY = parseInt(getComputedStyle(node).getPropertyValue('height'));
+		element.element.removeChild(node);
+	}
+
+	var stackCards = document.getElementsByClassName('js-stack-cards');
+
+	if (stackCards.length > 0) {
+		var stackCardsArray = [];
+		for (var i = 0; i < stackCards.length; i++) {
+			(function(i) {
+				stackCardsArray.push(new StackCards(stackCards[i]));
+			})(i);
+		}
+
+		var resizingId = false;
+		var customEvent = new CustomEvent('resize-stack-cards');
+
+		window.addEventListener('resize', function() {
+			clearTimeout(resizingId);
+			resizingId = setTimeout(function() {
+				for (var j = 0; j < stackCardsArray.length; j++) {
+					stackCardsArray[j].element.dispatchEvent(customEvent);
+				}
+			}, 500);
+		});
+	}
+}());
+</script>
+
 <style>
-	#background {
+	/* ═══════════════════════════════════════
+	   Design system tokens
+	   ═══════════════════════════════════════ */
+	.page-wrapper {
+		--bg: #0b0b0f;
+		--surface: #141419;
+		--border: rgba(255, 255, 255, 0.08);
+		--text: #f0f0f5;
+		--text-muted: rgba(255, 255, 255, 0.55);
+		--accent: #f97316;
+		--accent-green: #4ade80;
+		--accent-pink: #f472b6;
+		--accent-yellow: #facc15;
+		--accent-purple: #a78bfa;
+		--radius: 16px;
+		--radius-sm: 10px;
+		--font: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+		--font-display: 'Bebas Neue', Impact, sans-serif;
+
+		font-family: var(--font);
+		background: var(--bg);
+		color: var(--text);
+		min-height: 100vh;
+		position: relative;
+		overflow-x: clip;
+		box-sizing: border-box;
+	}
+
+	.page-wrapper *,
+	.page-wrapper *::before,
+	.page-wrapper *::after {
+		box-sizing: inherit;
+	}
+
+	.bg-blur {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
-		filter: blur(100px);
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.15;
+		pointer-events: none;
 	}
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		min-height: 100%;
-		max-width: 960px;
+	/* ═══════════════════════════════════════
+	   Shared section
+	   ═══════════════════════════════════════ */
+	.section {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
 		margin: 0 auto;
-		padding: 0 1.5rem;
-		overflow-x: hidden;
-		box-sizing: border-box;
+		padding: 5rem 1.5rem;
 	}
 
-	#container *,
-	#container *::before,
-	#container *::after {
-		box-sizing: inherit;
+	.section--tight {
+		padding-top: 3.5rem;
+		padding-bottom: 2rem;
 	}
 
-	main {
-		padding: 0 0 4rem 0;
+	.section--alt {
+		background: var(--surface);
+		max-width: none;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
-	.hero {
-		padding: 3rem 0 4rem;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	.section--alt > * {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
 	}
 
-	.hero .site-name {
+	.section-header {
+		max-width: 760px;
+		margin-bottom: 3rem;
+	}
+
+	.section-eyebrow {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.75rem;
-		text-decoration: none;
-		margin-bottom: 2.5rem;
-		transition: opacity 0.2s ease;
-		opacity: 0.95;
-	}
-
-	.hero .site-name:hover {
-		opacity: 1;
-	}
-
-	.site-name-text {
-		font-size: 1.25rem;
-		font-weight: 600;
-		color: #0f172a;
-		letter-spacing: -0.02em;
-	}
-
-	.hero-content {
-		max-width: 640px;
-	}
-
-	.hero-title {
-		font-size: clamp(1.75rem, 4.5vw, 2.5rem);
-		font-weight: 700;
-		line-height: 1.25;
-		letter-spacing: -0.02em;
-		color: #0f172a;
-		margin: 0 0 1.25rem 0;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-	}
-
-	.hero-subtitle {
-		font-size: 1.125rem;
-		line-height: 1.6;
-		color: #64748b;
-		margin: 0 0 2rem 0;
-		max-width: 540px;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-	}
-
-	.hero-cta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-	}
-
-	.btn {
-		display: inline-block;
-		padding: 0.75rem 1.5rem;
-		font-size: 1rem;
-		font-weight: 500;
-		text-decoration: none;
-		border-radius: 8px;
-		transition: transform 0.15s ease, box-shadow 0.15s ease;
-	}
-
-	.btn:hover {
-		transform: translateY(-1px);
-	}
-
-	.btn-primary {
-		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
-		color: white;
-		box-shadow: 0 4px 14px rgba(50, 69, 255, 0.35);
-	}
-
-	.btn-primary:hover {
-		box-shadow: 0 6px 20px rgba(50, 69, 255, 0.4);
-	}
-
-	.btn-secondary {
-		background: rgba(255, 255, 255, 0.85);
-		color: #334155;
-		border: 1px solid rgba(0, 0, 0, 0.1);
-	}
-
-	.btn-secondary:hover {
-		background: rgba(255, 255, 255, 0.95);
-		border-color: rgba(0, 0, 0, 0.15);
-	}
-
-	.block {
-		padding: 3.5rem 0 0;
-	}
-
-	.services-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
-	}
-
-	.service-card {
-		display: block;
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 14px;
-		padding: 1.5rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-		text-decoration: none;
-		transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-	}
-
-	.service-card:hover {
-		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-		transform: translateY(-2px);
-		border-color: rgba(99, 102, 241, 0.25);
-	}
-
-	.service-card h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.05rem;
-		font-weight: 700;
-		color: #0f172a;
-		letter-spacing: -0.01em;
-	}
-
-	.service-card p {
-		margin: 0 0 0.9rem 0;
-		color: #64748b;
-		font-size: 0.95rem;
-		line-height: 1.5;
-	}
-
-	.service-link {
-		display: inline-block;
-		color: #6366f1;
-		font-weight: 600;
-		font-size: 0.95rem;
-	}
-
-	.service-card-areas {
-		grid-column: 1 / -1;
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
 		gap: 0.5rem;
-		margin-top: 0.75rem;
-		padding: 0.75rem 1rem;
-		background: rgba(255, 255, 255, 0.5);
-		border-radius: 10px;
-		border: 1px solid rgba(0, 0, 0, 0.04);
-	}
-
-	.service-card-areas__label {
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: #64748b;
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		font-weight: 400;
+		color: var(--text-muted);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
+		margin-bottom: 0.75rem;
 	}
 
-	.service-card-areas a {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: #4f46e5;
-		text-decoration: none;
-		padding: 0.25rem 0.65rem;
-		border-radius: 999px;
-		background: rgba(79, 70, 229, 0.06);
-		border: 1px solid rgba(79, 70, 229, 0.12);
-		transition: background 0.15s ease, border-color 0.15s ease;
+	.eyebrow-icon {
+		width: 1.1em;
+		height: 1.1em;
+		color: var(--accent);
+		flex-shrink: 0;
 	}
 
-	.service-card-areas a:hover {
-		background: rgba(79, 70, 229, 0.12);
-		border-color: rgba(79, 70, 229, 0.25);
-	}
-
-	.block-label {
-		display: block;
-		font-size: 0.75rem;
-		font-weight: 600;
-		letter-spacing: 0.08em;
+	.section-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		color: var(--text);
+		margin: 0 0 1rem 0;
 		text-transform: uppercase;
-		color: #6366f1;
-		margin-bottom: 0.5rem;
 	}
 
-	.block-title {
-		font-size: 1.5rem;
-		font-weight: 700;
-		letter-spacing: -0.02em;
-		color: #0f172a;
-		margin: 0 0 1.5rem 0;
-		line-height: 1.3;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-	}
-
-	.block-process .process-card {
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 12px;
-		padding: 1.75rem 2rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-	}
-
-	.process-list {
-		list-style: none;
-		padding: 0;
+	.section-desc {
+		font-size: clamp(1rem, 2vw, 1.35rem);
+		color: var(--text-muted);
+		line-height: 1.55;
 		margin: 0;
+		max-width: 600px;
+	}
+
+	.section-center {
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: 0.875rem;
-	}
-
-	.process-list li {
-		display: flex;
 		align-items: center;
-		gap: 1rem;
-		font-size: 1.0625rem;
-		color: #334155;
-		line-height: 1.4;
+		gap: 1.5rem;
 	}
 
-	.step-num {
-		flex-shrink: 0;
-		width: 1.75rem;
-		height: 1.75rem;
-		background: linear-gradient(135deg, #3245ff 0%, #6366f1 100%);
-		color: white;
-		border-radius: 50%;
+	/* ═══════════════════════════════════════
+	   Buttons
+	   ═══════════════════════════════════════ */
+	.btn-solid {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 0.8125rem;
-		font-weight: 600;
+		padding: 0.8rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		font-family: var(--font);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		border-radius: var(--radius);
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+		transition: background 0.3s, color 0.3s, transform 0.15s;
+		cursor: pointer;
 	}
 
-	/* Recent work */
-	.work-grid {
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.8rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		font-family: var(--font);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		border-radius: var(--radius);
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.15s;
+		cursor: pointer;
+	}
+
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.btn-lg {
+		padding: 1rem 2.5rem;
+		font-size: 1.125rem;
+	}
+
+	/* ═══════════════════════════════════════
+	   Hero
+	   ═══════════════════════════════════════ */
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.hero-bg-img {
+		width: 100%;
+		height: auto;
+		opacity: 0.3;
+	}
+
+	.hero {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 2rem 1.5rem 4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.logo-link {
+		display: inline-flex;
+		align-items: center;
+		text-decoration: none;
+		opacity: 0.92;
+		transition: opacity 0.2s;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.hero-headline-wrap {
+		position: relative;
+	}
+
+	.hero-title {
+		font-family: var(--font-display);
+		font-size: clamp(3rem, 9vw, 8rem);
+		font-weight: 400;
+		line-height: 0.95;
+		letter-spacing: 0.02em;
+		color: var(--text);
+		margin: 0;
+	}
+
+	.badge {
+		position: absolute;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(1rem, 2.5vw, 1.75rem);
+		padding: 0.2em 0.6em;
+		border-radius: 6px;
+		color: #000;
+		z-index: 2;
+		pointer-events: none;
+		letter-spacing: 0.04em;
+	}
+
+	.badge-pink {
+		background: var(--accent-pink);
+		top: -2.5rem;
+		left: 0;
+		transform: rotate(-12deg);
+	}
+
+	.badge-yellow {
+		background: var(--accent-yellow);
+		top: -1rem;
+		right: 2rem;
+		transform: rotate(10deg);
+	}
+
+	.badge-green {
+		background: var(--accent-green);
+		bottom: 0;
+		right: 15%;
+		transform: rotate(-6deg);
+	}
+
+	.hero-foot {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.hero-desc {
+		font-size: clamp(1rem, 2vw, 1.35rem);
+		color: var(--text-muted);
+		line-height: 1.55;
+		max-width: 540px;
+		margin: 0;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	/* ═══════════════════════════════════════
+	   Fade-in on scroll
+	   ═══════════════════════════════════════ */
+	.fade-in-child {
+		opacity: 0;
+		transform: translateY(24px);
+		transition: opacity 1.15s cubic-bezier(0.22, 1, 0.36, 1), transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+		transition-delay: calc(var(--delay, 0) * 0.22s);
+	}
+
+	.fade-in-section.is-visible .fade-in-child {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* Slide-in from left (header) */
+	.slide-in-left {
+		opacity: 0;
+		transform: translateX(-60px);
+		transition: opacity 0.7s ease, transform 0.7s ease;
+	}
+
+	.slide-in-section.is-visible .slide-in-left {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	/* Scale-in (process step cards) */
+	.scale-in-child {
+		opacity: 0;
+		transform: scale(0.85);
+		transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+		transition-delay: calc(var(--delay, 0) * 0.1s + 0.3s);
+	}
+
+	.slide-in-section.is-visible .scale-in-child {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	/* ═══════════════════════════════════════
+	   About (intro)
+	   ═══════════════════════════════════════ */
+	.about-text {
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 4vw, 3rem);
+		font-weight: 400;
+		color: var(--text);
+		line-height: 1.15;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.about-text a {
+		color: var(--accent);
+		text-decoration: none;
+		transition: opacity 0.2s;
+	}
+
+	.about-text a:hover {
+		text-decoration: underline;
+		opacity: 0.85;
+	}
+
+	/* ═══════════════════════════════════════
+	   Services — CodyHouse stacking cards
+	   ═══════════════════════════════════════ */
+	.stack-cards {
+		--stack-cards-gap: 1.25rem;
+		--stack-cards-item-ratio: 3/1;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.stack-cards__item {
+		position: sticky;
+		top: 2rem;
+		height: 0;
+		padding-bottom: calc(100% / (var(--stack-cards-item-ratio)));
+		transform-origin: center top;
+	}
+
+	.stack-cards__item > * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.svc-card {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
+		grid-template-columns: 1fr;
+		gap: 2px;
+		background: var(--text);
+		border-radius: var(--radius);
+		padding: 2px;
+		overflow: hidden;
+		text-decoration: none;
+		color: inherit;
+		height: 100%;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+	}
+
+	@media (min-width: 768px) {
+		.svc-card {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.svc-card {
+			grid-template-columns: 2fr 1fr;
+		}
+	}
+
+	.svc-card-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 2rem;
+		background: var(--bg);
+		padding: 1.5rem;
+		border-radius: var(--radius);
+	}
+
+	@media (min-width: 768px) {
+		.svc-card-content {
+			padding: 3rem;
+		}
+	}
+
+	.svc-card-img {
+		overflow: hidden;
+		border-radius: var(--radius);
+		min-height: 200px;
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.svc-card-img {
+			min-height: 300px;
+		}
+	}
+
+	.svc-card-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.7s ease;
+	}
+
+	.svc-card:hover .svc-card-img img {
+		transform: scale(1.05);
+	}
+
+	.svc-card-text h3 {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4vw, 3.5rem);
+		font-weight: 400;
+		margin: 0 0 1rem;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.svc-card-text p {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.5vw, 1.35rem);
+		line-height: 1.55;
+		margin: 0;
+		max-width: 600px;
+	}
+
+	.svc-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.svc-tags li {
+		padding: 0.5rem 1rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		font-size: 1rem;
+		color: var(--text-muted);
+	}
+
+	.serving-bar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+		padding: 1rem 1.25rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+	}
+
+	.serving-label {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--text-muted);
+	}
+
+	.serving-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.location-pill {
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: var(--accent);
+		text-decoration: none;
+		padding: 0.3rem 0.7rem;
+		border-radius: 999px;
+		background: rgba(249, 115, 22, 0.08);
+		border: 1px solid rgba(249, 115, 22, 0.2);
+		transition: background 0.2s, border-color 0.2s;
+	}
+
+	.location-pill:hover {
+		background: rgba(249, 115, 22, 0.16);
+		border-color: rgba(249, 115, 22, 0.4);
+	}
+
+	.process-bg {
+		position: absolute;
+		top: -10%;
+		right: -15%;
+		width: 130%;
+		height: auto;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 0;
+		mix-blend-mode: lighten;
+		transform: scale(0.85) rotate(3deg);
+		transition: opacity 1s ease, transform 1s ease;
+	}
+
+	.slide-in-section.is-visible .process-bg {
+		opacity: 0.2;
+		transform: scale(1) rotate(0deg);
+	}
+
+	/* ═══════════════════════════════════════
+	   Process / How it works
+	   ═══════════════════════════════════════ */
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 0.5rem;
+	}
+
+	.process-step {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.75rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.step-number {
+		font-size: 2rem;
+		font-weight: 800;
+		color: var(--accent);
+		letter-spacing: -0.03em;
+		line-height: 1;
+	}
+
+	.process-step h4 {
+		font-size: 1.1rem;
+		font-weight: 700;
+		margin: 0;
+		color: var(--text);
+	}
+
+	.process-step p {
+		color: var(--text-muted);
+		font-size: 0.95rem;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	/* ═══════════════════════════════════════
+	   Works / Portfolio
+	   ═══════════════════════════════════════ */
+	.works-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 0.5rem;
 	}
 
 	.work-card {
 		display: flex;
 		flex-direction: column;
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 12px;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
 		overflow: hidden;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 		text-decoration: none;
-		transition: box-shadow 0.2s ease, transform 0.2s ease;
+		color: inherit;
+		transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
 	}
 
 	.work-card:hover {
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-		transform: translateY(-2px);
+		border-color: rgba(255, 255, 255, 0.18);
+		transform: translateY(-3px);
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 	}
 
-	.work-preview {
+	.work-card-img {
 		aspect-ratio: 16 / 10;
 		overflow: hidden;
-		background: #f1f5f9;
+		background: #1a1a22;
 	}
 
-	.work-preview img {
+	.work-card-img img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: transform 0.5s ease;
 	}
 
-	.work-body {
-		padding: 1rem 1.25rem;
+	.work-card-img iframe {
+		width: 1280px;
+		height: 800px;
+		border: none;
+		pointer-events: none;
+		transform-origin: top left;
+		transform: scale(0.3);
 	}
 
-	.work-category {
-		display: inline-block;
-		font-size: 0.7rem;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: #6366f1;
-		font-weight: 700;
-		margin-bottom: 0.2rem;
+	.work-card:hover .work-card-img img {
+		transform: scale(1.06);
 	}
 
-	.work-card h3 {
-		margin: 0 0 0.3rem;
-		font-size: 1rem;
-		font-weight: 600;
-		color: #0f172a;
-		letter-spacing: -0.01em;
-	}
-
-	.work-card p {
-		margin: 0;
-		font-size: 0.875rem;
-		color: #64748b;
-		line-height: 1.45;
-	}
-
-	.block-pricing .pricing-card {
-		background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0.06) 100%);
-		border: 2px solid rgba(99, 102, 241, 0.25);
-		border-radius: 16px;
-		padding: 3rem 2.5rem;
-		max-width: 640px;
-		box-shadow: 0 8px 32px rgba(99, 102, 241, 0.12);
-	}
-
-	.pricing-lead {
-		font-size: 1.5rem;
-		color: #0f172a;
-		font-weight: 600;
-		margin: 0 0 1rem 0;
-		line-height: 1.45;
-	}
-
-	.pricing-note {
-		font-size: 1.2rem;
-		color: #475569;
-		margin: 0;
-		line-height: 1.6;
-	}
-
-	.block-pricing .pricing-card .btn {
-		margin-top: 1.75rem;
-		font-size: 1.125rem;
-		padding: 1rem 2rem;
-	}
-
-	.pricing-grid {
-		margin-top: 1.25rem;
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
-	}
-
-	.pricing-tier {
-		background: rgba(255, 255, 255, 0.75);
-		border-radius: 14px;
+	.work-card-info {
 		padding: 1.5rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.75rem;
+		flex: 1;
 	}
 
-	.pricing-tier.featured {
-		border-color: rgba(99, 102, 241, 0.28);
-		background: rgba(99, 102, 241, 0.06);
-	}
-
-	.pricing-tier-header h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.05rem;
-		font-weight: 700;
-		color: #0f172a;
-		letter-spacing: -0.01em;
-	}
-
-	.price {
+	.work-card-info h3 {
+		font-family: var(--font-display);
 		font-size: 1.75rem;
-		font-weight: 800;
-		color: #0f172a;
-		line-height: 1.1;
-		letter-spacing: -0.02em;
-	}
-
-	.price-period {
-		margin-top: 0.25rem;
-		color: #64748b;
-		font-size: 0.9375rem;
-		line-height: 1.4;
-	}
-
-	.tier-features {
-		list-style: none;
-		padding: 0;
+		font-weight: 400;
+		text-transform: uppercase;
 		margin: 0;
+		letter-spacing: 0.02em;
+	}
+
+	.work-meta {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.work-meta-item {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
 	}
 
-	.tier-features li {
-		position: relative;
-		padding-left: 1.25rem;
-		color: #334155;
+	.work-meta-label {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		letter-spacing: 0.06em;
+	}
+
+	.work-meta-value {
+		color: var(--text);
+		font-weight: 500;
+	}
+
+	.work-card-info p {
+		color: var(--text-muted);
 		font-size: 0.95rem;
-		line-height: 1.45;
+		line-height: 1.5;
+		margin: 0;
 	}
 
-	.tier-features li::before {
-		content: "\2713";
-		position: absolute;
-		left: 0;
-		top: 0;
-		color: #6366f1;
-		font-weight: 700;
-	}
-
-	.pricing-tier .btn {
+	.work-card-link {
+		display: inline-flex;
+		align-items: center;
 		margin-top: auto;
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--text);
+		text-transform: uppercase;
+		padding: 0.6rem 1.5rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		transition: background 0.2s, border-color 0.2s;
 		width: fit-content;
 	}
 
-	.block-about .about-card {
+	.work-card:hover .work-card-link {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+	}
+
+	.works-cta-card {
+		margin-top: 1.5rem;
 		display: flex;
-		gap: 2rem;
-		align-items: flex-start;
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 16px;
-		padding: 2rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-	}
-
-	.about-photo {
-		flex-shrink: 0;
-		width: 160px;
-		height: 160px;
-		border-radius: 12px;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+		padding: 3rem 2rem;
+		border: 2px solid var(--border);
+		border-radius: var(--radius);
+		text-align: center;
+		position: relative;
 		overflow: hidden;
-		background: #e2e8f0;
+		background:
+			repeating-linear-gradient(
+				-45deg,
+				transparent,
+				transparent 8px,
+				rgba(255, 255, 255, 0.03) 8px,
+				rgba(255, 255, 255, 0.03) 9px
+			);
 	}
 
-	.about-photo img {
+	.works-cta-card h4 {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+	}
+
+	/* ═══════════════════════════════════════
+	   Pricing
+	   ═══════════════════════════════════════ */
+	.pricing-section {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 5rem 1.5rem;
+	}
+
+	.pricing-layout {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: start;
+	}
+
+	.pricing-sticky {
+		position: sticky;
+		top: 3rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.pricing-sticky .btn-solid {
+		width: fit-content;
+		margin-top: 0.5rem;
+	}
+
+	.pricing-scroll {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.pricing-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.pricing-card-label {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--accent);
+	}
+
+	.pricing-card-text {
+		font-size: 1.1rem;
+		color: var(--text-muted);
+		line-height: 1.6;
+		margin: 0;
+	}
+
+	.pricing-card-text strong {
+		color: var(--text);
+		font-weight: 600;
+	}
+
+	/* ═══════════════════════════════════════
+	   Why choose me
+	   ═══════════════════════════════════════ */
+	.why-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 0.5rem;
+	}
+
+	.why-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2rem 1.75rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		transition: border-color 0.3s, transform 0.2s;
+	}
+
+	.why-card:hover {
+		border-color: rgba(255, 255, 255, 0.15);
+		transform: translateY(-2px);
+	}
+
+	.why-icon {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
+
+	.why-icon svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.why-icon--green {
+		color: var(--accent-green);
+	}
+
+	.why-icon--purple {
+		color: var(--accent-purple);
+	}
+
+	.why-icon--orange {
+		color: var(--accent);
+	}
+
+	.why-card h4 {
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+	}
+
+	.why-card p {
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	/* ═══════════════════════════════════════
+	   Testimonials / Reviews
+	   ═══════════════════════════════════════ */
+	.testimonials-section {
+		position: relative;
+	}
+
+	.testimonials-bg {
+		position: absolute;
+		top: -15%;
+		left: -20%;
+		width: 140%;
+		height: auto;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 0;
+		transform: scale(0.8) rotate(-5deg);
+		transition: opacity 1.2s ease, transform 1.2s ease;
+	}
+
+	.slide-in-section.is-visible .testimonials-bg {
+		opacity: 0.15;
+		transform: scale(1) rotate(0deg);
+	}
+
+	.reviews-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2px;
+		background: var(--text);
+		border-radius: var(--radius);
+		padding: 2px;
+		overflow: hidden;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+	}
+
+	.review-card {
+		background: var(--bg);
+		border-radius: calc(var(--radius) - 2px);
+	}
+
+	.review-inner {
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		gap: 1rem;
+		height: 100%;
+	}
+
+	.review-head {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.google-g {
+		width: 1.25rem;
+		height: 1.25rem;
+		flex-shrink: 0;
+	}
+
+	.review-stars {
+		display: flex;
+		gap: 2px;
+	}
+
+	.review-stars svg {
+		width: 1rem;
+		height: 1rem;
+	}
+
+	.review-text {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.5vw, 1.15rem);
+		line-height: 1.6;
+		margin: 0;
+		flex: 1;
+	}
+
+	.review-name {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		color: var(--text);
+	}
+
+	/* ═══════════════════════════════════════
+	   About detail card
+	   ═══════════════════════════════════════ */
+	.about-card-full {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 2.5rem;
+		align-items: start;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2.5rem;
+	}
+
+	.about-photo-wrap {
+		width: 180px;
+		height: 180px;
+		border-radius: 14px;
+		overflow: hidden;
+		background: #1a1a22;
+		flex-shrink: 0;
+	}
+
+	.about-photo-wrap img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 
-	.about-text {
-		flex: 1;
-		min-width: 0;
+	.about-detail-text h3 {
+		font-family: var(--font-display);
+		font-size: 2.25rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		margin: 0 0 1rem;
 	}
 
-	.about-lead {
-		font-size: 1.0625rem;
-		font-weight: 600;
-		color: #0f172a;
-		margin: 0 0 0.75rem 0;
-		line-height: 1.5;
-	}
-
-	.about-text p {
-		font-size: 1rem;
-		color: #475569;
+	.about-detail-text p {
+		color: var(--text-muted);
+		font-size: 1.05rem;
 		line-height: 1.6;
-		margin: 0 0 0.75rem 0;
+		margin: 0 0 0.75rem;
 	}
 
-	.about-text p:last-child {
-		margin-bottom: 0;
-	}
-
-	.about-text a {
-		color: #6366f1;
+	.about-detail-text a:not(.btn-solid) {
+		color: var(--accent);
 		text-decoration: none;
 		font-weight: 500;
 	}
 
-	.about-text a:hover {
+	.about-detail-text a:not(.btn-solid):hover {
 		text-decoration: underline;
 	}
 
-	.why-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1.25rem;
+	.about-detail-text .btn-solid {
+		margin-top: 1rem;
 	}
 
-	.why-card {
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 12px;
-		padding: 1.5rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	/* ═══════════════════════════════════════
+	   CTA
+	   ═══════════════════════════════════════ */
+	.cta-section {
+		text-align: center;
+		position: relative;
+		overflow: visible;
+		isolation: isolate;
 	}
 
-	.why-card:hover {
-		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-		transform: translateY(-2px);
+	.cta-bg {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		max-width: 800px;
+		height: auto;
+		opacity: 0.25;
+		pointer-events: none;
+		z-index: 0;
 	}
 
-	.why-card h3 {
-		font-size: 1rem;
-		font-weight: 600;
-		color: #0f172a;
-		margin: 0 0 0.5rem 0;
+	.cta-inner {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+		max-width: 640px;
+		margin: 0 auto;
 	}
 
-	.why-card p {
-		font-size: 0.9375rem;
-		color: #64748b;
-		line-height: 1.5;
+	.cta-icon {
+		width: 8rem;
+		height: auto;
+		opacity: 0.9;
+	}
+
+	.cta-inner h2 {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.02em;
 		margin: 0;
 	}
 
-	/* Areas served */
-	.areas-pills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-	}
-
-	.area-pill {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.6rem 1.15rem;
-		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.85);
-		border: 1px solid rgba(0, 0, 0, 0.08);
-		color: #334155;
-		text-decoration: none;
-		font-weight: 600;
-		font-size: 0.95rem;
-		transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-	}
-
-	.area-pill:hover {
-		border-color: rgba(79, 70, 229, 0.35);
-		color: #4338ca;
-		box-shadow: 0 2px 10px rgba(79, 70, 229, 0.12);
-		transform: translateY(-1px);
-	}
-
-	@media screen and (max-width: 768px) {
-		#container {
-			padding: 0 1rem;
-		}
-
+	/* ═══════════════════════════════════════
+	   Responsive
+	   ═══════════════════════════════════════ */
+	@media (max-width: 768px) {
 		.hero {
-			padding: 2rem 0 3rem;
+			padding: 1.5rem 1rem 3rem;
 		}
 
-		.hero .site-name {
-			margin-bottom: 2rem;
-		}
-
-		.site-name img {
-			max-width: 100px;
+		.logo-link img {
+			width: 100px;
 			height: auto;
 		}
 
-		.hero-title {
-			font-size: 1.625rem;
+		.section {
+			padding: 3rem 1rem;
 		}
 
-		.hero-subtitle {
-			font-size: 1rem;
-			margin-bottom: 1.5rem;
+		.badge-yellow {
+			right: 0.5rem;
 		}
 
-		.hero-cta {
+		.badge-green {
+			right: 5%;
+		}
+
+		.hero-actions {
 			flex-direction: column;
 			align-items: stretch;
-			gap: 0.75rem;
 		}
 
-		.btn {
+		.hero-actions .btn-solid,
+		.hero-actions .btn-outline {
 			text-align: center;
-			padding: 0.875rem 1.25rem;
-			min-height: 44px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
+			min-height: 48px;
 		}
 
-		.block {
-			padding-top: 2.5rem;
-		}
-
-		.services-grid {
+		.about-card-full {
 			grid-template-columns: 1fr;
-			gap: 0.875rem;
-		}
-
-		.service-card {
-			padding: 1.25rem;
-		}
-
-		.service-card h3,
-		.service-card p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-
-		.block-title {
-			font-size: 1.35rem;
-		}
-
-		.block-process .process-card {
-			padding: 1.5rem 1.25rem;
-		}
-
-		.process-list li {
-			font-size: 1rem;
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-
-		.step-num {
-			width: 1.5rem;
-			height: 1.5rem;
-			font-size: 0.75rem;
-		}
-
-		.work-grid {
-			grid-template-columns: 1fr;
-			gap: 0.875rem;
-		}
-
-		.block-pricing .pricing-card {
-			padding: 2rem 1.5rem;
-		}
-
-		.pricing-grid {
-			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-
-		.pricing-tier {
-			padding: 1.25rem;
-		}
-
-		.pricing-tier .btn {
-			width: 100%;
-			min-height: 44px;
-		}
-
-		.price {
-			font-size: 1.5rem;
-		}
-
-		.block-about .about-card {
-			flex-direction: column;
-			padding: 1.5rem;
-			align-items: center;
 			text-align: center;
-			gap: 1.5rem;
+			padding: 1.75rem;
 		}
 
-		.about-photo {
+		.about-photo-wrap {
 			width: 140px;
 			height: 140px;
+			margin: 0 auto;
 		}
 
-		.about-text {
+		.about-detail-text {
 			text-align: left;
 		}
 
-		.about-text p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
+		.stack-cards {
+			--stack-cards-gap: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
 		}
 
-		.why-grid {
+		.stack-cards__item {
+			position: relative;
+			top: auto;
+			height: auto;
+			padding-bottom: 0;
+		}
+
+		.stack-cards__item > * {
+			position: relative;
+			height: auto;
+		}
+
+		.svc-card {
+			height: auto;
+		}
+
+		.works-grid {
 			grid-template-columns: 1fr;
-			gap: 1rem;
 		}
 
-		.why-card h3,
-		.why-card p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
+		.reviews-grid {
+			grid-template-columns: 1fr;
+			border-radius: var(--radius-sm);
+		}
+
+		.pricing-layout {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.pricing-sticky {
+			position: relative;
+			top: auto;
 		}
 	}
 
-	@media screen and (max-width: 480px) {
-		#container {
-			padding: 0 0.75rem;
-		}
-
+	@media (max-width: 480px) {
 		.hero {
-			padding: 1.5rem 0 2.5rem;
+			padding: 1rem 0.75rem 2.5rem;
 		}
 
-		.hero .site-name {
-			margin-bottom: 1.5rem;
-		}
-
-		.site-name img {
-			max-width: 90px;
+		.section {
+			padding: 2.5rem 0.75rem;
 		}
 
 		.hero-title {
-			font-size: 1.5rem;
+			font-size: 2.2rem;
 		}
 
-		.hero-subtitle {
-			font-size: 0.95rem;
-			margin-bottom: 1.25rem;
+		.badge {
+			font-size: 0.75rem;
 		}
 
-		.block {
-			padding-top: 2rem;
+		.section-title {
+			font-size: 1.75rem;
 		}
 
-		.block-title {
-			font-size: 1.25rem;
-			margin-bottom: 1.25rem;
+		.process-grid {
+			grid-template-columns: 1fr 1fr;
 		}
 
-		.service-card {
-			padding: 1rem 1.25rem;
-		}
-
-		.block-process .process-card {
-			padding: 1.25rem 1rem;
-		}
-
-		.pricing-lead {
-			font-size: 1.3rem;
-		}
-
-		.pricing-note {
-			font-size: 1.1rem;
-		}
-
-		.pricing-tier {
-			padding: 1rem 1.25rem;
-		}
-
-		.pricing-tier-header h3 {
-			font-size: 1rem;
-		}
-
-		.price {
-			font-size: 1.35rem;
-		}
-
-		.price-period {
-			font-size: 0.875rem;
-		}
-
-		.tier-features li {
-			font-size: 0.9rem;
-		}
-
-		.block-about .about-card {
-			padding: 1.25rem;
-		}
-
-		.about-photo {
+		.about-photo-wrap {
 			width: 120px;
 			height: 120px;
 		}
 
-		.about-lead {
-			font-size: 1rem;
-		}
-
-		.about-text p {
-			font-size: 0.95rem;
-		}
-
-		.why-card {
-			padding: 1.25rem;
-		}
-
-		.why-card h3 {
-			font-size: 0.95rem;
-		}
-
-		.why-card p {
-			font-size: 0.875rem;
-		}
-
-		.work-body {
-			padding: 0.875rem 1rem;
-		}
-
-		.area-pill {
-			padding: 0.5rem 0.875rem;
-			font-size: 0.875rem;
-			min-height: 44px;
-		}
-
-		main {
-			padding-bottom: 3rem;
-		}
-	}
-
-	@media screen and (max-width: 360px) {
-		#container {
-			padding: 0 0.5rem;
-		}
-
-		.hero-title {
+		.svc-card-text h3 {
 			font-size: 1.35rem;
 		}
 
-		.block-title {
-			font-size: 1.15rem;
+		.works-cta-card {
+			padding: 2rem 1rem;
+		}
+	}
+
+	@media (max-width: 360px) {
+		.hero-title {
+			font-size: 1.85rem;
 		}
 
-		.service-card,
-		.pricing-tier {
-			padding: 1rem;
+		.process-grid {
+			grid-template-columns: 1fr;
 		}
 
-		.about-photo {
+		.about-photo-wrap {
 			width: 100px;
 			height: 100px;
 		}
+	}
+
+	/* ═══════════════════════════════════════
+	   Hero nav bar (logo + toggle)
+	   ═══════════════════════════════════════ */
+	.hero-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	/* ═══════════════════════════════════════
+	   Light theme overrides
+	   ═══════════════════════════════════════ */
+	:global(html[data-theme="light"]) .page-wrapper {
+		--bg: #f3f2ef;
+		--surface: #ffffff;
+		--border: rgba(0, 0, 0, 0.09);
+		--text: #14141a;
+		--text-muted: rgba(0, 0, 0, 0.52);
+		--accent: #d95d0c;
+		--accent-green: #15803d;
+		--accent-pink: #c2185b;
+		--accent-yellow: #ca8a04;
+		--accent-purple: #6d28d9;
+		background:
+			radial-gradient(ellipse 100% 60% at 50% -15%, rgba(249, 115, 22, 0.09), transparent 55%),
+			radial-gradient(ellipse 80% 50% at 100% 40%, rgba(167, 139, 250, 0.06), transparent 50%),
+			radial-gradient(ellipse 70% 45% at 0% 80%, rgba(244, 114, 182, 0.05), transparent 45%),
+			var(--bg);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .bg-blur {
+		opacity: 0.08;
+		filter: blur(100px);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .hero-bg-img {
+		opacity: 0.28;
+		filter: saturate(1.15) contrast(1.05);
+	}
+
+	/* Paint PNGs: normal blend keeps strokes vivid on light (multiply was washing color out) */
+	:global(html[data-theme="light"]) .page-wrapper .process-bg {
+		mix-blend-mode: normal;
+		filter: saturate(1.2);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .slide-in-section.is-visible .process-bg {
+		opacity: 0.24;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .testimonials-bg {
+		filter: saturate(1.15);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .slide-in-section.is-visible .testimonials-bg {
+		opacity: 0.18;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .cta-bg {
+		mix-blend-mode: normal;
+		opacity: 0.42;
+		filter: saturate(1.25) contrast(1.05);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .section--alt {
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(248, 246, 242, 0.95) 100%);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .serving-bar {
+		background: rgba(255, 255, 255, 0.85);
+		border-color: rgba(0, 0, 0, 0.08);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .location-pill {
+		background: rgba(217, 93, 12, 0.08);
+		border-color: rgba(217, 93, 12, 0.22);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .location-pill:hover {
+		background: rgba(217, 93, 12, 0.14);
+		border-color: rgba(217, 93, 12, 0.35);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-card-img,
+	:global(html[data-theme="light"]) .page-wrapper .about-photo-wrap {
+		background: #e8e6e3;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .badge-yellow {
+		color: #14141a;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .badge-pink,
+	:global(html[data-theme="light"]) .page-wrapper .badge-green {
+		color: #fff;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .svc-card {
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .reviews-grid {
+		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-card {
+		box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-card:hover {
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+		border-color: rgba(0, 0, 0, 0.12);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .why-card:hover {
+		border-color: rgba(0, 0, 0, 0.12);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .about-card-full {
+		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .pricing-card {
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .works-cta-card {
+		background:
+			repeating-linear-gradient(
+				-45deg,
+				rgba(255, 255, 255, 0.4),
+				rgba(255, 255, 255, 0.4) 8px,
+				rgba(0, 0, 0, 0.028) 8px,
+				rgba(0, 0, 0, 0.028) 9px
+			);
+		border-color: rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .process-step {
+		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 	}
 </style>

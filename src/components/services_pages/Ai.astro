@@ -3,590 +3,666 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
+import ThemeToggleButton from '../ThemeToggleButton.astro';
+
+const whoFit = [
+	'Local service businesses that want callers and texters handled faster without adding headcount',
+	'Owners who want an AI agent on the phone, in SMS, or on the website with clear scripts and handoff rules',
+	'Teams ready to connect LLMs to real tools: CRM fields, calendars, webhooks, ticketing, and your own data',
+];
+
+const capabilities = [
+	{
+		icon: 'fa-project-diagram',
+		title: 'Applied AI pipelines',
+		body: 'We design and build pipelines end to end: ingest, retrieval, tool calls, model steps, logging, retries, and human handoff when the case needs a person.',
+	},
+	{
+		icon: 'fa-microchip',
+		title: 'Modern LLMs',
+		body: 'We work comfortably with current hosted models and APIs (for example OpenAI, Anthropic, Google Gemini, and others) and help you pick the right model for cost, speed, and quality.',
+	},
+	{
+		icon: 'fa-robot',
+		title: 'AI agents for your business',
+		body: 'From single-channel helpers to multi-step agents: goals, tools, memory where it helps, and guardrails so the agent stays inside what you allow.',
+	},
+	{
+		icon: 'fa-headset',
+		title: 'Voice and voicemail AI agents',
+		body: 'Automated AI voicemail and call flows that greet callers, qualify leads, capture job details, and route or schedule without losing the human option.',
+	},
+	{
+		icon: 'fa-mobile-alt',
+		title: 'Text agents',
+		body: 'SMS agents for missed-call follow-up, appointment reminders, or scripted conversations that match your tone and escalate when needed.',
+	},
+	{
+		icon: 'fa-comments',
+		title: 'Chat agents',
+		body: 'Website or portal chat that answers from your approved content, books or captures leads, and hands off cleanly to your team.',
+	},
+];
+
+const useCases = [
+	{
+		title: 'After-hours calls for a contractor',
+		body: 'An AI voicemail agent collects job type, ZIP, and urgency, then texts the homeowner a confirmation and notifies your on-call line for emergencies.',
+	},
+	{
+		title: 'Missed-call text agent',
+		body: 'When nobody picks up, an SMS agent sends a short reply with booking or estimate links and logs the lead in your sheet or CRM.',
+	},
+	{
+		title: 'Website chat that books',
+		body: 'A chat agent answers FAQs from your real pricing and service pages, then offers slots or a form so you stop losing mobile visitors.',
+	},
+	{
+		title: 'Pipeline behind the scenes',
+		body: 'Transcripts, tags, and summaries flow into Slack, HubSpot, GoHighLevel, or a database so dispatch and sales see one thread, not ten tabs.',
+	},
+];
+
+const processSteps = [
+	{
+		n: '01',
+		title: 'Define the agent and channels',
+		body: 'Voice, SMS, chat, or all three. We lock goals, scripts, what it may promise, and when it must transfer to a human or voicemail.',
+	},
+	{
+		n: '02',
+		title: 'Design the AI pipeline',
+		body: 'Steps, tools, retrieval, and model choices wired together so each request is traceable and you can change one piece without rebuilding everything.',
+	},
+	{
+		n: '03',
+		title: 'Integrate LLMs and providers',
+		body: 'We connect the LLMs and telephony or messaging providers you need, with keys stored properly and fallbacks if an API is slow or down.',
+	},
+	{
+		n: '04',
+		title: 'Test like a real customer',
+		body: 'Role-play calls, texts, and chats against your scenarios until tone, handoff, and data capture feel right for your market.',
+	},
+	{
+		n: '05',
+		title: 'Launch, monitor, improve',
+		body: 'We go live with logging and simple dashboards so you can tune prompts, routing, and business rules as real traffic comes in.',
+	},
+];
+
+const faqItems = [
+	{
+		q: 'Can you build an AI agent that answers my phones?',
+		a: 'Yes. We can scope voicemail and call-routing agents that use modern speech and LLM backends, with scripts and escalation paths you approve. Compliance and carrier rules vary, so we plan that up front.',
+	},
+	{
+		q: 'Which LLMs do you support?',
+		a: 'We are comfortable with the major hosted APIs and models available today. The right choice depends on latency, cost, and whether you need voice, long context, or strict tool use.',
+	},
+	{
+		q: 'How is this different from a generic chatbot widget?',
+		a: 'We build applied pipelines and agents tied to your services, area, and tools. That means retrieval from your content, CRM or calendar actions, and behavior you can iterate on, not a one-size script.',
+	},
+	{
+		q: 'What does a first agent or pipeline cost?',
+		a: 'After a short scope call you get a fixed price for a defined channel or flow. Larger multi-channel programs split into phases so you can ship voice or SMS first, then add chat or back-office steps.',
+	},
+];
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="service-section">
-			<a href="/" class="logo">
-				<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
-			</a>
-			
-			<div class="heading-container">
-				<h1>AI Development Services</h1>
-				<a href="/services/" class="back-link" aria-label="Back to services">
-					<i class="fas fa-arrow-left"></i>
+<div class="themed-subpage">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+	<img src="/paint-splat.png" alt="" class="paint-strikes-bg" aria-hidden="true" />
+	<main class="page">
+		<section class="hero section">
+			<div class="hero-nav">
+				<a href="/" class="logo-link">
+					<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
 				</a>
+				<div class="hero-nav-end">
+					<ThemeToggleButton />
+					<a href="/services/" class="btn-outline btn-small" aria-label="Back to services">
+						<i class="fas fa-arrow-left"></i>
+						<span>Services</span>
+					</a>
+				</div>
 			</div>
 
-			<Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]} current="AI" />
-			
-			<p class="subtitle">
-				Custom AI solutions that give your business a competitive edge without the complexity of building AI systems from scratch.
-			</p>
-			
-			<div class="service-content">
-				<div class="service-detail-card">
-					<h2>How We Can Help</h2>
-					<p>
-						Artificial Intelligence doesn't have to be complicated or expensive. We build practical AI solutions that solve real business problems and create tangible value for your company.
-					</p>
-                    
-                    <div class="service-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Custom AI Solutions</h3>
-                                <p>We develop AI systems tailored to your specific business needs, from chatbots to predictive analytics.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-comment-dots"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Conversational AI</h3>
-                                <p>Implement intelligent chatbots and virtual assistants that understand customer intent and provide helpful responses.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Data Analysis & Predictions</h3>
-                                <p>Use AI to analyze your business data, identify patterns, and make accurate predictions about future trends.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-plug"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>API Integration</h3>
-                                <p>Seamlessly integrate AI capabilities with your existing software systems and business workflows.</p>
-                            </div>
-                        </div>
-                    </div>
+			<div class="hero-content">
+				<span class="section-eyebrow">Applied AI for service businesses</span>
+				<h1 class="hero-title">AI pipelines and agents for calls, texts, and chat.</h1>
+				<p class="hero-desc">
+					We build applied AI: pipelines and agents on top of modern LLMs, wired into how you already work. That includes automated AI voicemail agents, SMS text agents, website chat agents, and anything that helps a local service business capture and qualify leads without drowning in busywork. For non-model automation and dashboards alone, see tooling and web development.
+				</p>
+				<div class="hero-actions">
+					<a href="/contact/" class="btn-solid">Plan an AI agent or pipeline</a>
+					<a href="/services/tooling/" class="btn-outline">Tooling and automation</a>
 				</div>
-				
-				<div class="service-detail-card">
-					<h2>Our AI Development Process</h2>
-					<div class="process-steps">
-						<div class="step">
-							<div class="step-number">1</div>
-							<div class="step-content">
-								<h3>Needs Assessment</h3>
-								<p>We work with you to identify the specific business challenges that AI can help solve.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">2</div>
-							<div class="step-content">
-								<h3>Solution Design</h3>
-								<p>We design an AI solution that addresses your needs using appropriate technologies and frameworks.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">3</div>
-							<div class="step-content">
-								<h3>Development & Training</h3>
-								<p>We build and train the AI model with relevant data to ensure accurate results.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">4</div>
-							<div class="step-content">
-								<h3>Integration & Deployment</h3>
-								<p>We integrate the AI solution with your existing systems and deploy it for production use.</p>
-							</div>
-						</div>
-                        <div class="step">
-							<div class="step-number">5</div>
-							<div class="step-content">
-								<h3>Monitoring & Refinement</h3>
-								<p>We continuously monitor the AI's performance and refine it to improve accuracy and results.</p>
-							</div>
-						</div>
+			</div>
+
+			<div class="crumbs-wrap">
+				<Breadcrumbs
+					variant="dark"
+					items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]}
+					current="AI"
+				/>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="who-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Who this is for</span>
+				<h2 class="section-title" id="who-heading">Service businesses that want AI in the field, not in a slide deck.</h2>
+				<p class="section-lead">
+					We help you design and ship AI agents and pipelines using current LLMs and voice or messaging providers. You get clear behavior, handoff rules, and integrations your team can rely on. We are not here to train foundation models; we are here to put applied AI to work for calls, texts, chats, and back-office steps.
+				</p>
+			</div>
+			<ul class="checklist who-list">
+				{whoFit.map((line) => (
+					<li>
+						<i class="fas fa-check checklist-icon" aria-hidden="true"></i>
+						<span>{line}</span>
+					</li>
+				))}
+			</ul>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="cap-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">What we build</span>
+				<h2 class="section-title" id="cap-heading">Applied AI, pipelines, and agents.</h2>
+				<p class="section-lead">
+					Everything below is work we can scope with you end to end: architecture, prompts, tools, telephony or SMS hooks, and launch support for local service companies.
+				</p>
+			</div>
+			<div class="grid-cards">
+				{capabilities.map((c) => (
+					<div class="info-card">
+						<i class:list={['fas', c.icon, 'icon']} aria-hidden="true"></i>
+						<h3>{c.title}</h3>
+						<p>{c.body}</p>
 					</div>
-				</div>
-				
-				<div class="service-detail-card case-studies">
-					<h2>What You Can Build With AI</h2>
-					<div class="case-studies-grid">
-                        <div class="case-study">
-                            <h3>Customer Service Automation</h3>
-                            <p>AI-powered chatbots that can handle common customer inquiries 24/7, freeing up your staff to focus on complex cases.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Sales Prediction Models</h3>
-                            <p>AI systems that analyze historical sales data to predict future demand, helping you optimize inventory and staffing.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Content Recommendation</h3>
-                            <p>AI that analyzes user behavior to recommend relevant products or content, increasing engagement and sales.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Document Processing</h3>
-                            <p>AI tools that can extract information from forms, invoices, and other documents, reducing manual data entry.</p>
-                        </div>
-                    </div>
-				</div>
-				
-				<div class="cta-container">
-					<p class="cta-text">Ready to harness the power of AI for your business?</p>
-					<a href="/contact/" class="button primary">Get a Custom Quote</a>
-				</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="use-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Examples</span>
+				<h2 class="section-title" id="use-heading">How service businesses use these agents.</h2>
+			</div>
+			<div class="examples-grid">
+				{useCases.map((u) => (
+					<article class="example-card">
+						<h3>{u.title}</h3>
+						<p>{u.body}</p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="process-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Process</span>
+				<h2 class="section-title" id="process-heading">How we ship agents and pipelines.</h2>
+			</div>
+			<div class="process-grid">
+				{processSteps.map((step) => (
+					<div class="process-step">
+						<span class="step-number">{step.n}</span>
+						<h4>{step.title}</h4>
+						<p>{step.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section faq-section" aria-labelledby="faq-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">FAQ</span>
+				<h2 class="section-title" id="faq-heading">Straight answers.</h2>
+			</div>
+			<dl class="faq-list">
+				{faqItems.map((item) => (
+					<div class="faq-item">
+						<dt>{item.q}</dt>
+						<dd>{item.a}</dd>
+					</div>
+				))}
+			</dl>
+		</section>
+
+		<section class="section cta-section">
+			<div class="cta-inner">
+				<h2>Want an AI agent on voice, SMS, or chat?</h2>
+				<p class="cta-lead">
+					Tell us what channel you want first and what a win looks like. We help with everything you need to create the agent, connect LLMs, and run a pipeline you can trust.
+				</p>
+				<a href="/contact/" class="btn-solid">Get in touch</a>
 			</div>
 		</section>
 	</main>
 </div>
 
 <style>
-	#background {
+	.bg-blur {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
-		filter: blur(100px);
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.16;
+		pointer-events: none;
 	}
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		min-height: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-		overflow-x: hidden;
-		box-sizing: border-box;
+	.paint-strikes-bg {
+		position: fixed;
+		left: 38%;
+		top: 8%;
+		width: min(230vw, 2400px);
+		height: auto;
+		max-width: none;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.2;
+		mix-blend-mode: lighten;
+		transform: translateX(-50%) rotate(-3deg);
 	}
 
-	#container *,
-	#container *::before,
-	#container *::after {
-		box-sizing: inherit;
-	}
-
-	main {
-		min-height: 100%;
+	.hero-nav-end {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		gap: 0.65rem;
 	}
 
-	#service-section {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 3rem 0;
-		width: 100%;
+	.page {
 		position: relative;
+		z-index: 1;
 	}
 
-	.heading-container {
+	.section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	.section-alt {
+		max-width: none;
+		background: var(--surface);
+	}
+
+	.section-alt > * {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero {
+		padding-top: 2rem;
+	}
+
+	.hero-nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		width: 100%;
-		margin-top: 0.25em;
+		margin-bottom: 2rem;
 	}
 
-	.heading-container h1 {
-		min-width: 0;
-		flex: 1;
+	.logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		text-decoration: none;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-content {
+		max-width: 900px;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.hero-title,
+	.section-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
 	}
-	
-	h1 {
-		font-size: 2.5rem;
-		margin: 0;
-		line-height: 1.2;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+
+	.hero-title {
+		font-size: clamp(2.4rem, 8vw, 5.5rem);
+		line-height: 0.95;
 	}
-	
-	h2 {
-		font-size: 1.75rem;
-		margin: 0 0 1rem 0;
-		color: #111827;
+
+	.section-title {
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
 	}
-	
-	h3 {
-		font-size: 1.25rem;
-		margin: 0 0 0.5rem 0;
-		color: #111827;
+
+	.section-lead {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.8vw, 1.2rem);
+		line-height: 1.6;
+		max-width: 720px;
+		margin: 0.75rem 0 0;
 	}
-	
-	.back-link {
-		color: #4b5563;
-		font-size: 1.125rem;
-		transition: transform 0.2s ease, color 0.2s ease;
-		flex-shrink: 0;
+
+	.hero-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 2vw, 1.3rem);
+		line-height: 1.55;
+		max-width: 700px;
+		margin: 1rem 0 1.5rem;
+	}
+
+	.section-header {
+		max-width: 760px;
+		margin-bottom: 2rem;
+	}
+
+	.btn-solid,
+	.btn-outline {
 		display: inline-flex;
 		align-items: center;
-		min-height: 44px;
-		min-width: 44px;
 		justify-content: center;
-	}
-	
-	.back-link:hover {
-		color: #111827;
-		transform: translateX(-3px);
-	}
-
-	p {
-		color: #4b5563;
-		font-size: 1.125rem;
-		line-height: 1.6;
-		letter-spacing: -0.006em;
-		margin: 0 0 1rem 0;
+		gap: 0.55rem;
+		padding: 0.78rem 1.6rem;
+		border-radius: var(--radius);
+		text-decoration: none;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.9rem;
+		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
 	}
 
-	.logo {
-		transition: transform 0.2s ease;
+	.btn-solid {
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
 	}
 
-	.logo:hover {
-		transform: scale(1.05);
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	.subtitle {
-		font-size: 1.3rem;
-		max-width: 800px;
-		margin: 1.5rem 0 2.5rem 0;
-		color: #374151;
-		font-weight: 500;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
+	.btn-outline {
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
 	}
 
-    .service-content {
-        width: 100%;
-    }
-
-	.service-detail-card {
-		background: rgba(255, 255, 255, 0.8);
-		border-radius: 16px;
-		padding: 2rem;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-		margin-bottom: 2rem;
-        width: 100%;
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	.service-highlights {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem;
-		margin-top: 2rem;
+	.btn-small {
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
 	}
 
-	.highlight-item {
+	.hero-actions {
 		display: flex;
-		gap: 1.5rem;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
-	.highlight-icon {
-		font-size: 2rem;
-		color: #3245ff;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-        flex-shrink: 0;
-        margin-top: 0.25rem;
+	.crumbs-wrap {
+		margin-top: 1.2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
 	}
 
-	.highlight-content {
-		flex: 1;
-	}
-
-	.process-steps {
+	.checklist {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
+		gap: 0.65rem;
+		max-width: 52rem;
 	}
 
-	.step {
+	.checklist li {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
+		align-items: flex-start;
+		padding: 0.85rem 1rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		font-size: 0.98rem;
+		line-height: 1.5;
+		color: var(--text-muted);
+	}
+
+	.checklist-icon {
+		color: var(--accent);
+		margin-top: 0.15rem;
+		flex-shrink: 0;
+	}
+
+	.who-list {
+		margin-top: 0.5rem;
+	}
+
+	.grid-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 0.7rem;
+	}
+
+	.info-card {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem;
+	}
+
+	.info-card h3 {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-weight: 400;
+		font-size: 1.2rem;
+		line-height: 1.15;
+		margin: 0 0 0.5rem;
+	}
+
+	.info-card p {
+		color: var(--text-muted);
+		margin: 0;
+		line-height: 1.55;
+		font-size: 0.96rem;
+	}
+
+	.icon {
+		color: var(--accent);
+		font-size: 1.45rem;
+		margin-bottom: 0.8rem;
+		display: block;
+	}
+
+	.examples-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.example-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem 1.5rem;
+	}
+
+	.example-card h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.15rem;
+		margin: 0 0 0.6rem;
+		line-height: 1.2;
+	}
+
+	.example-card p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.98rem;
+		line-height: 1.6;
+	}
+
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 0.6rem;
+	}
+
+	.process-step {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.4rem;
 	}
 
 	.step-number {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
+		display: block;
+		font-size: 1.8rem;
+		font-weight: 800;
+		color: var(--accent);
+		letter-spacing: -0.03em;
+		margin-bottom: 0.35rem;
+		line-height: 1;
+	}
+
+	.process-step h4 {
+		margin: 0 0 0.45rem;
+		font-size: 1.02rem;
+		font-weight: 700;
+	}
+
+	.process-step p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.faq-list {
+		margin: 0;
+		padding: 0;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: bold;
-		flex-shrink: 0;
+		flex-direction: column;
+		gap: 0.75rem;
 	}
 
-	.step-content {
-		flex: 1;
+	.faq-item {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface);
+		padding: 1.15rem 1.35rem;
 	}
 
-	.step-content p {
-		margin-bottom: 0;
+	.faq-item dt {
+		font-weight: 700;
+		font-size: 1.02rem;
+		margin: 0 0 0.5rem;
+		color: var(--text);
 	}
 
-    .case-studies-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        margin-top: 2rem;
-    }
+	.faq-item dd {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 0.97rem;
+	}
 
-    .case-study {
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .case-study h3 {
-        margin-top: 0;
-    }
-
-    .case-study p {
-        margin-bottom: 0;
-    }
-
-	.cta-container {
-		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
-		border-radius: 16px;
-		padding: 2rem;
+	.cta-section {
 		text-align: center;
-		margin-top: 3rem;
 	}
 
-	.cta-text {
-		font-size: 1.3rem;
-		font-weight: 500;
-		margin-bottom: 1.5rem;
-		color: #111827;
+	.cta-inner {
+		max-width: 760px;
+		margin: 0 auto;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		border-radius: var(--radius);
+		padding: 2.2rem 1.5rem;
 	}
 
-	.button {
-		padding: 14px 28px;
-		border-radius: 8px;
-		text-decoration: none;
-		font-weight: 500;
-		font-size: 1.1rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		display: inline-block;
+	.cta-inner h2 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
+		margin: 0 0 0.75rem;
 	}
 
-	.button:hover {
-		transform: translateY(-2px);
+	.cta-lead {
+		margin: 0 auto 1.35rem;
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.55;
+		max-width: 520px;
 	}
 
-	.button.primary {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
-	}
+	@media (max-width: 768px) {
+		.paint-strikes-bg {
+			top: 4%;
+			left: 36%;
+			width: 290vw;
+			transform: translateX(-50%) rotate(-2deg);
+			opacity: 0.14;
+		}
 
-	@media screen and (max-width: 992px) {
-		.service-highlights,
-        .case-studies-grid {
+		.section {
+			padding: 3rem 1rem;
+		}
+
+		.hero {
+			padding-top: 1.4rem;
+		}
+
+		.hero-nav {
+			margin-bottom: 1.3rem;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.btn-solid,
+		.btn-outline {
+			min-height: 46px;
+		}
+
+		.process-grid {
 			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
-
-		h1 {
-			font-size: 2rem;
-		}
-		
-		h2 {
-			font-size: 1.5rem;
-		}
-		
-		.subtitle {
-			font-size: 1.1rem;
 		}
 	}
-
-	@media screen and (max-width: 768px) {
-		#container {
-			padding: 0 1rem;
-		}
-
-		#service-section {
-			padding: 2rem 0;
-		}
-
-		.heading-container {
-			position: relative;
-		}
-
-		.heading-container h1 {
-			padding-right: 48px;
-		}
-
-		.back-link {
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		
-		h1 {
-			font-size: 1.8rem;
-		}
-		
-		.service-detail-card {
-			padding: 1.5rem;
-		}
-		
-		.button {
-			padding: 12px 20px;
-			min-height: 44px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-		}
-		
-		.cta-container {
-			padding: 1.5rem;
-		}
-
-		.cta-container .button {
-			width: 100%;
-			max-width: 320px;
-		}
-
-        .highlight-item {
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .highlight-icon {
-            margin-top: 0;
-        }
-
-		.step-content p,
-		.highlight-content p,
-		.case-study p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-
-		.step-number {
-			width: 32px;
-			height: 32px;
-			font-size: 0.9rem;
-		}
-	}
-
-	@media screen and (max-width: 480px) {
-		#container {
-			padding: 0 0.75rem;
-		}
-
-		#service-section {
-			padding: 1.5rem 0;
-		}
-
-		.heading-container h1 {
-			padding-right: 44px;
-		}
-
-		h1 {
-			font-size: 1.5rem;
-		}
-
-		h2 {
-			font-size: 1.35rem;
-		}
-
-		.subtitle {
-			font-size: 1.05rem;
-			margin: 1rem 0 2rem;
-		}
-
-		.service-detail-card {
-			padding: 1.25rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.cta-container {
-			padding: 1.25rem;
-			margin-top: 2rem;
-		}
-
-		.cta-container .button {
-			max-width: none;
-			width: 100%;
-		}
-
-		.cta-text {
-			font-size: 1.1rem;
-		}
-
-		.button {
-			padding: 12px 18px;
-			font-size: 1rem;
-		}
-
-		.case-studies-grid {
-			gap: 1.25rem;
-		}
-
-		.case-study h3 {
-			font-size: 1.1rem;
-		}
-	}
-
-	@media screen and (max-width: 360px) {
-		#container {
-			padding: 0 0.5rem;
-		}
-
-		h1 {
-			font-size: 1.35rem;
-		}
-
-		h2 {
-			font-size: 1.2rem;
-		}
-
-		.service-detail-card {
-			padding: 1rem;
-		}
-
-		.cta-container {
-			padding: 1rem;
-			margin-top: 1.5rem;
-		}
-	}
-
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-
-	#service-section > * {
-		animation: fadeIn 0.5s ease-out forwards;
-		opacity: 0;
-	}
-
-	#service-section > *:nth-child(1) { animation-delay: 0.1s; }
-	#service-section > *:nth-child(2) { animation-delay: 0.2s; }
-	#service-section > *:nth-child(3) { animation-delay: 0.3s; }
-	#service-section > *:nth-child(4) { animation-delay: 0.4s; }
 </style>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

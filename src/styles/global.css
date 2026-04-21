@@ -1,1 +1,4 @@
 @import "tailwindcss";
+@import "@fontsource/bebas-neue";
+@import "@fontsource-variable/outfit";
+@import "./site-theme.css";

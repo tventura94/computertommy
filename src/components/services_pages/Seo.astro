@@ -3,704 +3,955 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
+import ThemeToggleButton from '../ThemeToggleButton.astro';
 
 type SeoServiceEntry = {
-  slug: string;
-  data: {
-    h1?: string;
-    heroSubtitle?: string;
-  };
+	slug: string;
+	data: {
+		h1?: string;
+		heroSubtitle?: string;
+	};
 };
 
 const { getCollection } = await import('astro:content');
-const seoServices = (await (getCollection as unknown as (collection: string) => Promise<SeoServiceEntry[]>)(
-  'seo_services',
-))
-  .slice()
-  .sort((a, b) => (a.data.h1 ?? a.slug).localeCompare(b.data.h1 ?? b.slug));
+const seoServices = (
+	await (getCollection as unknown as (collection: string) => Promise<SeoServiceEntry[]>)('seo_services')
+)
+	.slice()
+	.sort((a, b) => (a.data.h1 ?? a.slug).localeCompare(b.data.h1 ?? b.slug));
+
+const slugIcon: Record<string, string> = {
+	'technical-seo-audit': 'fa-search',
+	'onpage-cleanup': 'fa-tags',
+	'local-seo': 'fa-map-marker-alt',
+	'speed-web-vitals': 'fa-tachometer-alt',
+};
+
+const seoCards = seoServices.map((s) => ({
+	...s,
+	icon: slugIcon[s.slug] ?? 'fa-file-lines',
+}));
+
+const whoFit = [
+	'Local service businesses that need more calls and quote requests, not random traffic from people who will never hire you',
+	'Owners who want to know what competitors rank for, what pages they lean on, and what it actually takes to compete in their towns',
+	'Teams ready for research-first SEO: market audit, realistic keyword targets, and work tied back to leads you can measure',
+];
+
+const localSeoMeansBullets = [
+	'Which keywords have real local intent',
+	'Which services deserve their own pages',
+	'What your competitors are already targeting',
+	'Where keyword difficulty is realistic',
+	'How your Google Business Profile supports the website',
+	'Where your site is losing leads because the design or offer is weak',
+];
+
+const approachBlocks = [
+	{
+		title: 'Local market and competitor audit',
+		body: 'I review the businesses already ranking in your area, the pages they are using, the services they emphasize, and how strong their websites and profiles are. That gives us a real picture of what you are up against.',
+	},
+	{
+		title: 'Keyword research and opportunity mapping',
+		body: 'I look at search volume, keyword difficulty, service intent, and location intent to figure out what is worth targeting first. Some keywords look good on paper but will not bring leads. Some lower-volume terms are exactly the ones that drive calls. I build around the second type.',
+	},
+	{
+		title: 'On-page SEO recommendations',
+		body: 'Once the market is clear, I decide how the site should be structured. That includes service pages, title tags, headings, internal links, local relevance, and conversion-focused page layouts that make it easy for people to contact you.',
+	},
+	{
+		title: 'Technical SEO and crawl health',
+		body: 'I audit sites with Screaming Frog to catch crawl problems, broken links, indexation issues, metadata problems, thin pages, duplicate elements, redirect problems, and other technical issues that can hold rankings back.',
+	},
+
+];
+
+const includedItems = [
+	{
+		title: 'Local SEO strategy',
+		body: 'A research-driven plan based on your market, your services, and the keywords most likely to drive actual leads.',
+	},
+	{
+		title: 'Keyword targeting',
+		body: 'Keyword research using tools like Semrush, Ahrefs, Google Search Console, and Google Business Profile insights to identify realistic opportunities.',
+	},
+	{
+		title: 'Competitor analysis',
+		body: 'A review of what top competitors are targeting, how they structure their pages, where they are stronger, and where they are beatable.',
+	},
+	{
+		title: 'On-page SEO',
+		body: 'Titles, headings, service-page targeting, internal linking, local relevance, and page structure built around the market audit.',
+	},
+	{
+		title: 'Technical SEO',
+		body: 'Full crawl-based review with Screaming Frog to catch site issues that affect performance, indexing, or usability.',
+	},
+	{
+		title: 'Google Business Profile optimization',
+		body: 'Optimization recommendations so your Google Business Profile supports the website and helps reinforce local relevance.',
+	},
+	{
+		title: 'Backlink recommendations',
+		body: 'Clear recommendations from the audit on where authority gaps exist and what types of backlinks or citation opportunities make the most sense for your market.',
+	},
+	{
+		title: 'SEO handoff guides',
+		body: 'For one-time fee builds, guides so you can continue improving rankings after launch and understand how to maintain momentum.',
+	},
+];
+
+const gbpBullets = [
+	'Category alignment',
+	'Service alignment',
+	'Location and service area consistency',
+	'Relevance between the site and GBP',
+	'Opportunities to strengthen local trust signals',
+	'Content and update recommendations where appropriate',
+];
+
+const oneTimeGuideBullets = [
+	'How to keep pages optimized',
+	'How to expand service or location targeting',
+	'How to think about future content',
+	'How to keep your GBP aligned',
+	'What to monitor in Search Console',
+	'Where authority gaps may need attention later',
+];
+
+const toolsList = ['Semrush', 'Ahrefs', 'Google Search Console', 'Google Business Profile', 'Screaming Frog'];
+
+const faqItems = [
+	{
+		q: 'Do you guarantee rankings?',
+		a: 'No. Nobody honest should. What I can do is give you a realistic picture of your market, show where the opportunities are, and improve the site and local presence around the searches that matter.',
+	},
+	{
+		q: 'Do you only work with local service businesses?',
+		a: 'That is the core focus. Local service companies have a very specific type of SEO problem, and that is the niche I build around.',
+	},
+	{
+		q: 'Do you offer Google Business Profile optimization?',
+		a: 'Yes. I treat GBP as part of the local SEO system, not as a separate afterthought.',
+	},
+	{
+		q: 'Do backlinks matter for local SEO?',
+		a: 'Sometimes yes, sometimes less than people think. It depends on the market. That is why I make backlink recommendations based on the audit instead of pushing the same answer to every client.',
+	},
+	{
+		q: 'What if I only want a one-time website build?',
+		a: 'That is fine. I provide SEO guides with one-time builds so you have direction after launch.',
+	},
+];
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="service-section">
-			<a href="/" class="logo">
-				<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
-			</a>
-			
-			<div class="heading-container">
-				<h1>SEO Optimization</h1>
-				<a href="/services/" class="back-link" aria-label="Back to services">
-					<i class="fas fa-arrow-left"></i>
+<div class="themed-subpage">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+	<img src="/paint-splat.png" alt="" class="paint-strikes-bg" aria-hidden="true" />
+	<main class="page">
+		<section class="hero section">
+			<div class="hero-nav">
+				<a href="/" class="logo-link">
+					<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
 				</a>
+				<div class="hero-nav-end">
+					<ThemeToggleButton />
+					<a href="/services/" class="btn-outline btn-small" aria-label="Back to services">
+						<i class="fas fa-arrow-left"></i>
+						<span>Services</span>
+					</a>
+				</div>
 			</div>
 
-			<Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]} current="SEO optimization" />
-			
-			<p class="subtitle">
-				Technical SEO fixes + on-page cleanup so you get found, load fast, and convert better. Straightforward, small-business friendly.
-			</p>
-			
-			<div class="service-content">
-				<div class="service-detail-card">
-					<h2>How We Can Help</h2>
-					<p>
-						If your site is slow, confusing, or not showing up in search, SEO can feel like a black box. I focus on the practical stuff that moves the needle: clean structure, fast pages, solid on-page basics, and local SEO so people nearby can find you.
-					</p>
-                    
-                    <div class="service-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>
-                                    <a class="inline-link" href="/services/seo/technical-seo-audit/">Technical SEO Audit</a>
-                                </h3>
-                                <p>Find what’s blocking rankings: indexing, broken links, sitemap/robots, and site structure issues.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-tags"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>
-                                    <a class="inline-link" href="/services/seo/onpage-cleanup/">On-page cleanup</a>
-                                </h3>
-                                <p>Titles, meta descriptions, headings, internal links, and content structure—cleaned up and consistent.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>
-                                    <a class="inline-link" href="/services/seo/local-seo/">Local SEO</a>
-                                </h3>
-                                <p>Google Business Profile basics, service-area targeting, and location signals that help you show up nearby.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-tachometer-alt"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>
-                                    <a class="inline-link" href="/services/seo/speed-web-vitals/">Speed + Core Web Vitals</a>
-                                </h3>
-                                <p>Performance fixes that improve user experience and help with rankings—especially on mobile.</p>
-                            </div>
-                        </div>
-                    </div>
+			<div class="hero-content">
+				<span class="section-eyebrow">Local SEO for service businesses</span>
+				<h1 class="hero-title">More calls, more quote requests, and a website built around the searches that actually bring in work.</h1>
+				<p class="hero-desc">
+					I help local service businesses figure out what people in their market are searching, what competitors are ranking for, and what it will take to compete. Every SEO decision I make is tied back to one thing: getting the phone to ring.
+				</p>
+				<p class="hero-desc hero-desc--tight">
+					I start with a local market audit, map the best keyword opportunities by service and location, review competitor pages and listings, and build from there. No vague SEO package. No empty ranking promises. Just a practical plan based on your market.
+				</p>
+				<div class="hero-actions">
+					<a href="/contact/" class="btn-solid">Request an SEO audit</a>
+					<a href="/services/web-development/" class="btn-outline">Web development</a>
 				</div>
+			</div>
 
-				<div class="service-detail-card seo-services">
-					<h2>SEO services</h2>
-					<p class="seo-services-subtitle">Pick what you need. Each one has a dedicated page with deliverables and next steps.</p>
-					<div class="seo-services-grid">
-						{seoServices.map((s) => (
-							<a class="seo-service-card" href={`/services/seo/${s.slug}/`}>
-								<h3>{s.data.h1 ?? s.slug}</h3>
-								{s.data.heroSubtitle ? <p>{s.data.heroSubtitle}</p> : null}
-								<span class="seo-service-cta">View details →</span>
-							</a>
-						))}
+			<div class="crumbs-wrap">
+				<Breadcrumbs
+					variant="dark"
+					items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]}
+					current="SEO"
+				/>
+			</div>
+		</section>
+
+	
+
+		<section class="section section-alt" aria-labelledby="local-seo-means-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">What local SEO means here</span>
+				<h2 class="section-title" id="local-seo-means-heading">SEO built for local service businesses</h2>
+				<p class="section-lead">
+					Local SEO is not the same as broad national SEO. If you run a service business, you do not need random traffic from people who will never call you. You need visibility for the searches that show buying intent in the towns and service areas you actually want to work in.
+				</p>
+			</div>
+			<p class="seo-prose-intro">That means I look at:</p>
+			<ul class="seo-prose-list">
+				{localSeoMeansBullets.map((line) => (
+					<li>{line}</li>
+				))}
+			</ul>
+			<p class="seo-prose-outro">
+				The goal is not just rankings. The goal is rankings that turn into calls.
+			</p>
+		</section>
+
+		<section class="section" aria-labelledby="approach-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Strategy, then execution</span>
+				<h2 class="section-title" id="approach-heading">How I approach local SEO</h2>
+				<p class="section-lead">
+					I do not start with guesses or generic keyword lists. Every project starts with a local audit so I can see what is happening in your actual market.
+				</p>
+			</div>
+			<div class="grid-cards">
+				{approachBlocks.map((c) => (
+					<div class="info-card">
+						<h3>{c.title}</h3>
+						<p>{c.body}</p>
 					</div>
-				</div>
-				
-				<div class="service-detail-card">
-					<h2>SEO optimization process</h2>
-					<div class="process-steps">
-						<div class="step">
-							<div class="step-number">1</div>
-							<div class="step-content">
-								<h3>Quick audit</h3>
-								<p>I check what’s happening now: pages, structure, search visibility, and the biggest obvious issues.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">2</div>
-							<div class="step-content">
-								<h3>Fix the foundations</h3>
-								<p>Indexing basics, sitemap/robots, broken links, redirects, and page-level technical cleanup.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">3</div>
-							<div class="step-content">
-								<h3>On-page improvements</h3>
-								<p>Titles/meta, headings, internal linking, and copy structure—focused on what you actually do.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">4</div>
-							<div class="step-content">
-								<h3>Local signals</h3>
-								<p>Google Business Profile basics and location/service targeting so nearby customers can find you.</p>
-							</div>
-						</div>
-                        <div class="step">
-							<div class="step-number">5</div>
-							<div class="step-content">
-								<h3>Measure + iterate</h3>
-								<p>We check results, adjust pages, and keep improving what’s working.</p>
-							</div>
-						</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="included-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Deliverables</span>
+				<h2 class="section-title" id="included-heading">What is included</h2>
+				<p class="section-lead">
+					One system: research first, then recommendations and fixes tied to leads. Here is what that covers.
+				</p>
+			</div>
+			<div class="grid-cards included-grid">
+				{includedItems.map((item) => (
+					<div class="info-card">
+						<h3>{item.title}</h3>
+						<p>{item.body}</p>
 					</div>
-				</div>
-				
-				<div class="service-detail-card case-studies">
-					<h2>What I optimize</h2>
-					<div class="case-studies-grid">
-                        <div class="case-study">
-                            <h3>On-page SEO</h3>
-                            <p>Titles, meta descriptions, headings, internal links, and page structure—clean and consistent.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Technical SEO</h3>
-                            <p>Indexing, sitemaps, robots, broken links, redirects, and site structure improvements.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Local SEO</h3>
-                            <p>Google Business Profile basics and location/service targeting for nearby searches.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Performance</h3>
-                            <p>Speed fixes and Core Web Vitals improvements—especially important on mobile.</p>
-                        </div>
-                    </div>
-				</div>
-				
-				<div class="cta-container">
-					<p class="cta-text">Want your site to rank better and load faster?</p>
-					<a href="/contact/" class="button primary">Request an SEO audit</a>
-				</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="gbp-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Listings</span>
+				<h2 class="section-title" id="gbp-heading">Google Business Profile optimization</h2>
+			</div>
+			<div class="seo-prose-block">
+				<p>
+					Your website and your Google Business Profile should support each other, not tell two different stories. I include Google Business Profile optimization as part of the local SEO process so your services, categories, descriptions, and service areas line up with what the website is targeting.
+				</p>
+				<p>That includes looking at:</p>
+				<ul class="seo-prose-list seo-prose-list--compact">
+					{gbpBullets.map((line) => (
+						<li>{line}</li>
+					))}
+				</ul>
+				<p class="seo-prose-outro seo-prose-outro--flush">
+					A lot of local businesses treat the website and GBP as separate things. They should work together.
+				</p>
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="backlinks-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Authority</span>
+				<h2 class="section-title" id="backlinks-heading">Backlink recommendations from the audit</h2>
+			</div>
+			<div class="seo-prose-block">
+				<p>
+					Not every market is won on on-page SEO alone. Some local spaces are light enough that better structure, better targeting, and a stronger GBP can move the needle. Others require stronger authority signals to compete. That is why I include backlink recommendations in my audits.
+				</p>
+				<p>
+					I look at the competitive gap and tell you where links or citations may actually matter. That way you are not blindly buying junk links or wasting money on things that do nothing.
+				</p>
+				<p class="seo-prose-outro seo-prose-outro--flush">
+					The point is not to pad a report with off-page SEO language. The point is to tell you what your market actually requires.
+				</p>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="technical-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Performance</span>
+				<h2 class="section-title" id="technical-heading">Technical SEO and speed matter</h2>
+			</div>
+			<div class="seo-prose-block">
+				<p>
+					A slow, messy website can kill rankings and conversions at the same time. I run technical and on-page audits through Screaming Frog and build websites with speed in mind from the start. I use Astro for builds, which helps keep sites lean, fast, and easier to optimize for performance.
+				</p>
+				<p>
+					That means your site is built on a cleaner foundation, with less bloat and a better chance of loading quickly on mobile, which matters for both rankings and lead generation.
+				</p>
+				<p class="seo-prose-outro seo-prose-outro--flush">
+					Fast sites do not just look better in a report. They make it easier for people to stay on the page and call.
+				</p>
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="guides-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">One-time builds</span>
+				<h2 class="section-title" id="guides-heading">SEO guides for one-time builds</h2>
+			</div>
+			<div class="seo-prose-block">
+				<p>Not every client wants a monthly SEO engagement. For one-time fee website builds, I include SEO guides so you have a practical roadmap for what to do after launch. That can include:</p>
+				<ul class="seo-prose-list seo-prose-list--compact">
+					{oneTimeGuideBullets.map((line) => (
+						<li>{line}</li>
+					))}
+				</ul>
+				<p class="seo-prose-outro seo-prose-outro--flush">
+					That way you are not left with a finished website and no idea how to keep moving forward.
+				</p>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="tools-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Data, not guesses</span>
+				<h2 class="section-title" id="tools-heading">Tools I use</h2>
+				<p class="section-lead">
+					I use industry-standard tools to audit performance, research keywords, and evaluate local competition. Tools are not the service by themselves, but they help me make decisions based on real data instead of assumptions.
+				</p>
+			</div>
+			<ul class="tools-list">
+				{toolsList.map((name) => (
+					<li>{name}</li>
+				))}
+			</ul>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="why-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Why this is different</span>
+				<h2 class="section-title" id="why-heading">Why this approach is different</h2>
+			</div>
+			<div class="seo-prose-block">
+				<p>
+					A lot of SEO services sell dashboards, generic reports, and vague monthly activity. That is not how I work.
+				</p>
+				<p>
+					I focus on local service businesses, I start with your actual market, and I build around the pages and searches most likely to bring in work. I am not interested in sending you vanity metrics that make things look active while your phone stays quiet.
+				</p>
+				<p class="seo-prose-outro seo-prose-outro--flush">
+					My job is to help you make better local SEO decisions and turn that into more calls.
+				</p>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="deep-dives-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Go deeper</span>
+				<h2 class="section-title" id="deep-dives-heading">Service detail pages</h2>
+				<p class="section-lead">
+					Each focus area has its own page with specifics on deliverables and how it fits the larger plan.
+				</p>
+			</div>
+			<div class="seo-pillar-grid">
+				{seoCards.map((s) => (
+					<a class="seo-pillar-card" href={`/services/seo/${s.slug}/`}>
+						<i class:list={['fas', s.icon, 'pillar-icon']} aria-hidden="true"></i>
+						<h3>{s.data.h1 ?? s.slug}</h3>
+						{s.data.heroSubtitle ? <p>{s.data.heroSubtitle}</p> : null}
+						<span class="pillar-cta">View details</span>
+					</a>
+				))}
+			</div>
+		</section>
+
+		<section class="section faq-section" aria-labelledby="faq-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">FAQ</span>
+				<h2 class="section-title" id="faq-heading">Questions we hear a lot</h2>
+			</div>
+			<dl class="faq-list">
+				{faqItems.map((item) => (
+					<div class="faq-item">
+						<dt>{item.q}</dt>
+						<dd>{item.a}</dd>
+					</div>
+				))}
+			</dl>
+		</section>
+
+		<section class="section related-section" aria-labelledby="related-heading">
+			<h2 class="section-title section-title--sm" id="related-heading">Related services</h2>
+			<p class="related-lead">
+				Strong local SEO still needs a site Google can crawl and that customers trust. If you need a new build or faster pages, pair this with{' '}
+				<a href="/services/web-development/">web development</a>. For automation and internal tools, see{' '}
+				<a href="/services/tooling/">tooling</a>.
+			</p>
+		</section>
+
+		<section class="section cta-section">
+			<div class="cta-inner">
+				<h2>Want an honest look at your local SEO?</h2>
+				<p class="cta-lead">
+					I will review your market, your competitors, your site structure, and where your biggest opportunities are. Then I will show you what is worth fixing first.
+				</p>
+				<a href="/contact/" class="btn-solid">Request an SEO audit</a>
 			</div>
 		</section>
 	</main>
 </div>
 
 <style>
-	#background {
+	.bg-blur {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
-		filter: blur(100px);
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.16;
+		pointer-events: none;
 	}
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		min-height: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-		overflow-x: hidden;
-		box-sizing: border-box;
+	.paint-strikes-bg {
+		position: fixed;
+		left: 38%;
+		top: 8%;
+		width: min(230vw, 2400px);
+		height: auto;
+		max-width: none;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.2;
+		mix-blend-mode: lighten;
+		transform: translateX(-50%) rotate(-3deg);
 	}
 
-	#container *,
-	#container *::before,
-	#container *::after {
-		box-sizing: inherit;
-	}
-
-	main {
-		min-height: 100%;
+	.hero-nav-end {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		gap: 0.65rem;
 	}
 
-	#service-section {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 3rem 0;
-		width: 100%;
+	.page {
 		position: relative;
+		z-index: 1;
 	}
 
-	.heading-container {
+	.section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	.section-alt {
+		max-width: none;
+		background: var(--surface);
+	}
+
+	.section-alt > * {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero {
+		padding-top: 2rem;
+	}
+
+	.hero-nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		width: 100%;
-		margin-top: 0.25em;
+		margin-bottom: 2rem;
 	}
 
-	.heading-container h1 {
-		min-width: 0;
-		flex: 1;
+	.logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		text-decoration: none;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-content {
+		max-width: 900px;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.hero-title,
+	.section-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
 	}
-	
-	h1 {
-		font-size: 2.5rem;
-		margin: 0;
-		line-height: 1.2;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+
+	.hero-title {
+		font-size: clamp(2.4rem, 8vw, 5.5rem);
+		line-height: 0.95;
 	}
-	
-	h2 {
-		font-size: 1.75rem;
-		margin: 0 0 1rem 0;
-		color: #111827;
+
+	.section-title {
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
 	}
-	
-	h3 {
-		font-size: 1.25rem;
-		margin: 0 0 0.5rem 0;
-		color: #111827;
+
+	.section-title--sm {
+		font-size: clamp(1.6rem, 4vw, 2.5rem);
+		margin-bottom: 0.65rem;
 	}
-	
-	.back-link {
-		color: #4b5563;
-		font-size: 1.125rem;
-		transition: transform 0.2s ease, color 0.2s ease;
-		flex-shrink: 0;
+
+	.section-lead {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.8vw, 1.2rem);
+		line-height: 1.6;
+		max-width: 720px;
+		margin: 0.75rem 0 0;
+	}
+
+	.hero-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 2vw, 1.3rem);
+		line-height: 1.55;
+		max-width: 700px;
+		margin: 1rem 0 1.5rem;
+	}
+
+	.hero-desc--tight {
+		margin-top: -0.35rem;
+	}
+
+	.section-header {
+		max-width: 760px;
+		margin-bottom: 2rem;
+	}
+
+	.btn-solid,
+	.btn-outline {
 		display: inline-flex;
 		align-items: center;
-		min-height: 44px;
-		min-width: 44px;
 		justify-content: center;
-	}
-	
-	.back-link:hover {
-		color: #111827;
-		transform: translateX(-3px);
-	}
-
-	p {
-		color: #4b5563;
-		font-size: 1.125rem;
-		line-height: 1.6;
-		letter-spacing: -0.006em;
-		margin: 0 0 1rem 0;
-	}
-
-	.logo {
-		transition: transform 0.2s ease;
-	}
-
-	.logo:hover {
-		transform: scale(1.05);
-	}
-
-	.subtitle {
-		font-size: 1.3rem;
-		max-width: 800px;
-		margin: 1.5rem 0 2.5rem 0;
-		color: #374151;
-		font-weight: 500;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-	}
-
-    .service-content {
-        width: 100%;
-    }
-
-	.service-detail-card {
-		background: rgba(255, 255, 255, 0.8);
-		border-radius: 16px;
-		padding: 2rem;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-		margin-bottom: 2rem;
-        width: 100%;
-	}
-
-	.inline-link {
-		color: inherit;
+		gap: 0.55rem;
+		padding: 0.78rem 1.6rem;
+		border-radius: var(--radius);
 		text-decoration: none;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.9rem;
+		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
 	}
 
-	.inline-link:hover {
-		text-decoration: underline;
+	.btn-solid {
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
 	}
 
-	.seo-services-subtitle {
-		margin: 0.25rem 0 1.25rem 0;
-		color: #4b5563;
-		line-height: 1.6;
-		max-width: 800px;
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	.seo-services-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
+	.btn-outline {
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
 	}
 
-	.seo-service-card {
-		display: block;
-		text-decoration: none;
-		background: rgba(255, 255, 255, 0.7);
-		border-radius: 14px;
-		padding: 1.25rem;
-		border: 1px solid rgba(0, 0, 0, 0.06);
-		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-		transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	.seo-service-card:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-		border-color: rgba(99, 102, 241, 0.25);
+	.btn-small {
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
 	}
 
-	.seo-service-card h3 {
-		margin: 0 0 0.5rem 0;
-		font-size: 1.1rem;
-		color: #111827;
-	}
-
-	.seo-service-card p {
-		margin: 0 0 0.75rem 0;
-		color: #475569;
-		line-height: 1.6;
-		font-size: 0.98rem;
-	}
-
-	.seo-service-cta {
-		display: inline-block;
-		color: #3245ff;
-		font-weight: 700;
-		font-size: 0.95rem;
-	}
-
-	.service-highlights {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	.highlight-item {
+	.hero-actions {
 		display: flex;
-		gap: 1.5rem;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
-	.highlight-icon {
-		font-size: 2rem;
-		color: #3245ff;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-        flex-shrink: 0;
-        margin-top: 0.25rem;
+	.crumbs-wrap {
+		margin-top: 1.2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
 	}
 
-	.highlight-content {
-		flex: 1;
-	}
-
-	.process-steps {
+	.checklist {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
+		gap: 0.65rem;
+		max-width: 52rem;
 	}
 
-	.step {
+	.checklist li {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
+		align-items: flex-start;
+		padding: 0.85rem 1rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		font-size: 0.98rem;
+		line-height: 1.5;
+		color: var(--text-muted);
 	}
 
-	.step-number {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: bold;
+	.checklist-icon {
+		color: var(--accent);
+		margin-top: 0.15rem;
 		flex-shrink: 0;
 	}
 
-	.step-content {
-		flex: 1;
+	.who-list {
+		margin-top: 0.5rem;
 	}
 
-	.step-content p {
+	.trade-chips-label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--text-muted);
+		margin: 2rem 0 0.65rem;
+	}
+
+	.trade-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2rem;
+	}
+
+	.trade-chips li {
+		padding: 0.4rem 0.85rem;
+		border-radius: 999px;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		font-size: 0.9rem;
+		color: var(--text);
+	}
+
+	.seo-prose-intro {
+		margin: 0 0 0.75rem;
+		font-weight: 600;
+		color: var(--text);
+		font-size: 1rem;
+	}
+
+	.seo-prose-list {
+		margin: 0 0 1.25rem;
+		padding-left: 1.25rem;
+		color: var(--text-muted);
+		line-height: 1.65;
+		max-width: 42rem;
+	}
+
+	.seo-prose-list li {
+		margin-bottom: 0.45rem;
+	}
+
+	.seo-prose-list li:last-child {
 		margin-bottom: 0;
 	}
 
-    .case-studies-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    .case-study {
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .case-study h3 {
-        margin-top: 0;
-    }
-
-    .case-study p {
-        margin-bottom: 0;
-    }
-
-	.cta-container {
-		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
-		border-radius: 16px;
-		padding: 2rem;
-		text-align: center;
-		margin-top: 3rem;
+	.seo-prose-list--compact {
+		margin-bottom: 1rem;
 	}
 
-	.cta-text {
-		font-size: 1.3rem;
-		font-weight: 500;
-		margin-bottom: 1.5rem;
-		color: #111827;
+	.seo-prose-outro {
+		margin: 0;
+		font-size: clamp(1.02rem, 1.5vw, 1.12rem);
+		font-weight: 600;
+		color: var(--text);
+		line-height: 1.55;
+		max-width: 42rem;
 	}
 
-	.button {
-		padding: 14px 28px;
-		border-radius: 8px;
+	.seo-prose-outro--flush {
+		margin-top: 0.25rem;
+	}
+
+	.seo-prose-block {
+		max-width: 42rem;
+	}
+
+	.seo-prose-block p {
+		margin: 0 0 1rem;
+		color: var(--text-muted);
+		line-height: 1.65;
+		font-size: clamp(1rem, 1.6vw, 1.08rem);
+	}
+
+	.seo-prose-block p:last-child {
+		margin-bottom: 0;
+	}
+
+	.tools-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		max-width: 42rem;
+	}
+
+	.tools-list li {
+		padding: 0.5rem 1rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--border);
+		background: var(--surface);
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--text);
+	}
+
+	.section-alt .tools-list li {
+		background: var(--bg);
+	}
+
+	.seo-pillar-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.seo-pillar-card {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 		text-decoration: none;
-		font-weight: 500;
-		font-size: 1.1rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		display: inline-block;
+		color: inherit;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem 1.4rem;
+		transition: border-color 0.2s, transform 0.15s;
+		min-height: 100%;
 	}
 
-	.button:hover {
+	.seo-pillar-card:hover {
+		border-color: rgba(249, 115, 22, 0.45);
 		transform: translateY(-2px);
 	}
 
-	.button.primary {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	.pillar-icon {
+		color: var(--accent);
+		font-size: 1.45rem;
+		margin-bottom: 0.75rem;
 	}
 
-	@media screen and (max-width: 992px) {
-		.service-highlights,
-        .case-studies-grid {
-			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
-
-		h1 {
-			font-size: 2rem;
-		}
-		
-		h2 {
-			font-size: 1.5rem;
-		}
-		
-		.subtitle {
-			font-size: 1.1rem;
-		}
+	.seo-pillar-card h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.2rem;
+		line-height: 1.15;
+		margin: 0 0 0.5rem;
 	}
 
-	@media screen and (max-width: 768px) {
-		#container {
-			padding: 0 1rem;
+	.seo-pillar-card p {
+		margin: 0 0 1rem;
+		color: var(--text-muted);
+		font-size: 0.96rem;
+		line-height: 1.55;
+		flex: 1;
+	}
+
+	.pillar-cta {
+		font-size: 0.82rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--accent);
+	}
+
+	.grid-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 0.7rem;
+	}
+
+	.included-grid {
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	}
+
+	.info-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem;
+	}
+
+	.info-card h3 {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-weight: 400;
+		font-size: 1.35rem;
+		margin: 0 0 0.5rem;
+	}
+
+	.info-card p {
+		color: var(--text-muted);
+		margin: 0;
+		line-height: 1.55;
+		font-size: 0.96rem;
+	}
+
+	.section-alt .grid-cards .info-card {
+		background: var(--bg);
+	}
+
+	.faq-list {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.faq-item {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--surface);
+		padding: 1.15rem 1.35rem;
+	}
+
+	.faq-item dt {
+		font-weight: 700;
+		font-size: 1.02rem;
+		margin: 0 0 0.5rem;
+		color: var(--text);
+	}
+
+	.faq-item dd {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 0.97rem;
+	}
+
+	.related-section {
+		padding-top: 2rem;
+		padding-bottom: 2rem;
+	}
+
+	.related-lead {
+		margin: 0;
+		max-width: 720px;
+		color: var(--text-muted);
+		line-height: 1.65;
+		font-size: 1rem;
+	}
+
+	.related-lead a {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.related-lead a:hover {
+		text-decoration: underline;
+	}
+
+	.cta-section {
+		text-align: center;
+	}
+
+	.cta-inner {
+		max-width: 760px;
+		margin: 0 auto;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		border-radius: var(--radius);
+		padding: 2.2rem 1.5rem;
+	}
+
+	.cta-inner h2 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
+		margin: 0 0 0.75rem;
+	}
+
+	.cta-lead {
+		margin: 0 auto 1.35rem;
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.55;
+		max-width: 520px;
+	}
+
+	@media (max-width: 768px) {
+		.paint-strikes-bg {
+			top: 4%;
+			left: 36%;
+			width: 290vw;
+			transform: translateX(-50%) rotate(-2deg);
+			opacity: 0.14;
 		}
 
-		#service-section {
-			padding: 2rem 0;
+		.section {
+			padding: 3rem 1rem;
 		}
 
-		.heading-container {
-			position: relative;
+		.hero {
+			padding-top: 1.4rem;
 		}
 
-		.heading-container h1 {
-			padding-right: 48px;
+		.hero-nav {
+			margin-bottom: 1.3rem;
 		}
 
-		.back-link {
-			position: absolute;
-			top: 0;
-			right: 0;
-		}
-		
-		h1 {
-			font-size: 1.8rem;
-		}
-		
-		.service-detail-card {
-			padding: 1.5rem;
-		}
-		
-		.button {
-			padding: 12px 20px;
-			min-height: 44px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-		}
-		
-		.cta-container {
-			padding: 1.5rem;
-		}
-
-		.cta-container .button {
-			width: 100%;
-			max-width: 320px;
-		}
-
-        .highlight-item {
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .highlight-icon {
-            margin-top: 0;
-        }
-
-		.seo-services-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.seo-service-card {
-			min-height: 44px;
-			display: flex;
+		.hero-actions {
 			flex-direction: column;
-			align-items: flex-start;
-			justify-content: center;
+			align-items: stretch;
 		}
 
-		.step-content p,
-		.highlight-content p,
-		.case-study p,
-		.seo-service-card h3,
-		.seo-service-card p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-
-		.step-number {
-			width: 32px;
-			height: 32px;
-			font-size: 0.9rem;
+		.btn-solid,
+		.btn-outline {
+			min-height: 46px;
 		}
 	}
-
-	@media screen and (max-width: 480px) {
-		#container {
-			padding: 0 0.75rem;
-		}
-
-		#service-section {
-			padding: 1.5rem 0;
-		}
-
-		.heading-container h1 {
-			padding-right: 44px;
-		}
-
-		h1 {
-			font-size: 1.5rem;
-		}
-
-		h2 {
-			font-size: 1.35rem;
-		}
-
-		.subtitle {
-			font-size: 1.05rem;
-			margin: 1rem 0 2rem;
-		}
-
-		.service-detail-card {
-			padding: 1.25rem;
-			margin-bottom: 1.5rem;
-		}
-
-		.cta-container {
-			padding: 1.25rem;
-			margin-top: 2rem;
-		}
-
-		.cta-container .button {
-			max-width: none;
-			width: 100%;
-		}
-
-		.cta-text {
-			font-size: 1.1rem;
-		}
-
-		.button {
-			padding: 12px 18px;
-			font-size: 1rem;
-		}
-
-		.seo-service-card {
-			padding: 1rem;
-		}
-
-		.seo-service-card h3 {
-			font-size: 1rem;
-		}
-
-		.case-studies-grid {
-			gap: 1.25rem;
-		}
-	}
-
-	@media screen and (max-width: 360px) {
-		#container {
-			padding: 0 0.5rem;
-		}
-
-		h1 {
-			font-size: 1.35rem;
-		}
-
-		h2 {
-			font-size: 1.2rem;
-		}
-
-		.service-detail-card {
-			padding: 1rem;
-		}
-
-		.cta-container {
-			padding: 1rem;
-			margin-top: 1.5rem;
-		}
-	}
-
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-
-	#service-section > * {
-		animation: fadeIn 0.5s ease-out forwards;
-		opacity: 0;
-	}
-
-	#service-section > *:nth-child(1) { animation-delay: 0.1s; }
-	#service-section > *:nth-child(2) { animation-delay: 0.2s; }
-	#service-section > *:nth-child(3) { animation-delay: 0.3s; }
-	#service-section > *:nth-child(4) { animation-delay: 0.4s; }
 </style>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
