@@ -3,651 +3,828 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
+import ThemeToggleButton from '../ThemeToggleButton.astro';
+
+const whoFit = [
+	'Local service businesses (contractors, cleaners, detailers, landscapers, and similar crews)',
+	'Owner-operators and small teams where leads still hit one inbox or one phone',
+	'Shops that already get calls and form fills but lose follow-ups in the shuffle',
+	'Teams that want fewer tabs, fewer manual copy-paste steps, and clearer job status',
+];
+
+const painOutcomes = [
+	{
+		title: 'Stop manually replying to every lead',
+		body: 'You get the same five questions after hours. We set up instant email replies, SMS where it fits, and routing so the right person sees the lead.',
+	},
+	{
+		title: 'Follow up on missed calls automatically',
+		body: 'Missed-call text-back and simple scripts so a new lead gets a clear next step instead of voicemail limbo.',
+	},
+	{
+		title: 'Keep estimates from falling through',
+		body: 'Lightweight pipelines from inquiry to booked job so nothing sits in limbo because someone forgot to update a spreadsheet.',
+	},
+	{
+		title: 'Track jobs and requests in one place',
+		body: 'Small internal boards or admin views for status, notes, and who owns the next step, without buying a giant field-service suite you will not use.',
+	},
+	{
+		title: 'Cut repetitive admin work',
+		body: 'Automations for review requests after a completed job, appointment reminders, and recurring internal tasks that should not need a human click every time.',
+	},
+];
+
+const offerBlocks = [
+	{
+		title: 'Automated email follow-up',
+		body: 'Instant replies after a form submit, templated sequences for common questions, and handoff rules so your crew sees new work fast.',
+	},
+	{
+		title: 'Missed-call text-back workflows',
+		body: 'When you miss a ring, a polite text goes out with your hours and a link to book or request a quote.',
+	},
+	{
+		title: 'Lead intake that routes itself',
+		body: 'Forms that tag urgency, service type, or ZIP, then notify the right inbox, Slack channel, or sheet row.',
+	},
+	{
+		title: 'Internal dashboards',
+		body: 'Jobs, leads, and follow-up status in one view so owners are not guessing from five different apps.',
+	},
+	{
+		title: 'Review request automations',
+		body: 'Send a review link after a job closes, with timing and wording that match how you already ask in person.',
+	},
+	{
+		title: 'Quote and estimate workflows',
+		body: 'Stages from inquiry to sent estimate to won or lost, with reminders so busy weeks do not bury revenue.',
+	},
+	{
+		title: 'CRM cleanup and admin helpers',
+		body: 'Small scripts or panels to dedupe leads, normalize fields, or sync only the data you actually use.',
+	},
+	{
+		title: 'Lead and conversion reporting',
+		body: 'Simple charts for form volume, calls, and booked jobs sourced from the systems you already trust.',
+	},
+];
+
+const concreteExamples = [
+	{
+		title: 'Contact form with instant email and SMS confirmation',
+		body: 'A visitor submits your site form. They get an immediate email receipt, optional SMS confirmation, and your team gets a routed notification with the job type they picked.',
+	},
+	{
+		title: 'Missed-call text for new leads',
+		body: 'If you miss a call during the day, the number gets a short text with a booking link and your typical response time.',
+	},
+	{
+		title: 'Lead dashboard',
+		body: 'One screen for form submissions, call-back requests, and follow-up status so the owner can see what is still open at a glance.',
+	},
+	{
+		title: 'Review request after job complete',
+		body: 'When a job is marked done in your sheet or admin tool, a timed message goes to the customer with your review link.',
+	},
+	{
+		title: 'Estimate pipeline',
+		body: 'Leads move from inquiry to quote sent to approved or lost, with notes and dates so nothing disappears between crew members.',
+	},
+	{
+		title: 'Simple admin panel',
+		body: 'Update inventory counts, appointment blocks, or customer notes without touching the live website code.',
+	},
+];
+
+const integrations = [
+	'Your existing website and contact forms',
+	'Business email (Google Workspace, Microsoft 365, or SMTP you already pay for)',
+	'SMS through carriers like Twilio when you want text-back or alerts',
+	'Webhooks and HTTPS endpoints between tools',
+	'Google Sheets or Airtable when a shared table is the right source of truth',
+	'Calendly or other booking links you already use',
+	'HubSpot, GoHighLevel, or similar CRMs when we only need specific objects or webhooks',
+	'Zapier or Make.com only when a connector saves weeks of custom code',
+];
+
+const processSteps = [
+	{
+		n: '01',
+		title: 'Map the real lead path',
+		body: 'Calls, texts, forms, and referrals. We document where leads enter today and where they leak tomorrow.',
+	},
+	{
+		n: '02',
+		title: 'Pick systems you already use',
+		body: 'We prefer wiring into email, SMS, sheets, or your CRM instead of forcing a new platform on the team.',
+	},
+	{
+		n: '03',
+		title: 'Build the smallest fix first',
+		body: 'One workflow that saves real hours beats a giant roadmap. We ship the narrow version, then expand.',
+	},
+	{
+		n: '04',
+		title: 'Test with real jobs or leads',
+		body: 'Dry runs with your actual phone numbers, inboxes, and tags so launch day is boring.',
+	},
+	{
+		n: '05',
+		title: 'Train, launch, tune',
+		body: 'Short documentation, a walkthrough for whoever runs dispatch or sales, and a plan for tweaks after the first busy week.',
+	},
+];
+
+const compareRows = [
+	{ custom: 'Matches your exact process', shelf: 'You bend the process to match the product' },
+	{ custom: 'You only pay for what you use', shelf: 'Bundles and seats you do not need' },
+	{ custom: 'Connects the few tools you rely on', shelf: 'Forces everything into one vendor vision' },
+	{ custom: 'Simple screens your crew will actually open', shelf: 'Menus and features nobody asked for' },
+	{ custom: 'Owned logic you can extend later', shelf: 'Workflows that break when the vendor changes pricing or limits' },
+];
+
+const faqItems = [
+	{
+		q: 'Why not just use Zapier or Make?',
+		a: 'Zapier is great for glue. We still use it when it is the honest answer. Custom work helps when zaps multiply, error handling gets scary, or you need one screen that matches how your crew actually works.',
+	},
+	{
+		q: 'Will you replace my CRM or GoHighLevel?',
+		a: 'Usually no. We extend what you have: cleaner intake, automations, dashboards, and handoffs. Rip-and-replace is a last resort, not a default.',
+	},
+	{
+		q: 'How long does a first build take?',
+		a: 'Small automations or a focused dashboard often land in days to a couple weeks once scope is clear. Bigger internal apps get a phased plan so you get value early.',
+	},
+	{
+		q: 'What does pricing look like?',
+		a: 'Fixed scope, fixed price after we agree on deliverables. You are not buying an open-ended retainer for vague automation work.',
+	},
+];
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="service-section">
-			<a href="/" class="logo">
-				<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
-			</a>
-			
-			<div class="heading-container">
-				<h1>Internal Tool Development</h1>
-				<a href="/services/" class="back-link" aria-label="Back to services">
-					<i class="fas fa-arrow-left"></i>
+<div class="themed-subpage">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+	<img src="/paint-splat.png" alt="" class="paint-strikes-bg" aria-hidden="true" />
+	<main class="page">
+		<section class="hero section">
+			<div class="hero-nav">
+				<a href="/" class="logo-link">
+					<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
 				</a>
+				<div class="hero-nav-end">
+					<ThemeToggleButton />
+					<a href="/services/" class="btn-outline btn-small" aria-label="Back to services">
+						<i class="fas fa-arrow-left"></i>
+						<span>Services</span>
+					</a>
+				</div>
 			</div>
 
-			<Breadcrumbs items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]} current="Tooling" />
-			
-			<p class="subtitle">
-				Custom internal applications that streamline your business processes, automate repetitive tasks, and boost productivity.
-			</p>
-			
-			<div class="service-content">
-				<div class="service-detail-card">
-					<h2>How We Can Help</h2>
-					<p>
-						Off-the-shelf software doesn't always meet your specific business needs. We build custom internal tools that solve your unique challenges and integrate seamlessly with your workflows.
-					</p>
-                    
-                    <div class="service-highlights">
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-tasks"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Workflow Automation</h3>
-                                <p>We build tools that automate repetitive tasks, reducing errors and freeing up your team's time for more valuable work.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-database"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Database Applications</h3>
-                                <p>Custom database solutions that organize your information and make it accessible when and where you need it.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-chart-bar"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Reporting Dashboards</h3>
-                                <p>Interactive dashboards that provide real-time insights into your business performance and key metrics.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="highlight-item">
-                            <div class="highlight-icon">
-                                <i class="fas fa-cogs"></i>
-                            </div>
-                            <div class="highlight-content">
-                                <h3>Process Optimization</h3>
-                                <p>We analyze your current processes and develop tools that eliminate bottlenecks and improve efficiency.</p>
-                            </div>
-                        </div>
-                    </div>
+			<div class="hero-content">
+				<span class="section-eyebrow">Custom internal tools for local service businesses</span>
+				<h1 class="hero-title">Business automation and internal tools that match how you work.</h1>
+				<p class="hero-desc">
+					Practical automations, dashboards, and workflows for Western NC service businesses: lead follow-up, missed-call texts, quote tracking, and admin work you should not be doing by hand. No vague enterprise pitch, and no bloated platform you will not finish setting up.
+				</p>
+				<div class="hero-actions">
+					<a href="/contact/" class="btn-solid">Describe your workflow</a>
+					<a href="/services/web-development/" class="btn-outline">Web development</a>
 				</div>
-				
-				<div class="service-detail-card">
-					<h2>Our Development Process</h2>
-					<div class="process-steps">
-						<div class="step">
-							<div class="step-number">1</div>
-							<div class="step-content">
-								<h3>Requirements Gathering</h3>
-								<p>We work closely with your team to understand your processes, pain points, and goals for the tool.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">2</div>
-							<div class="step-content">
-								<h3>Design & Prototyping</h3>
-								<p>We create wireframes and interactive prototypes to refine the tool's functionality and user experience.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">3</div>
-							<div class="step-content">
-								<h3>Development</h3>
-								<p>We build the tool using modern technologies that ensure reliability, security, and ease of maintenance.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">4</div>
-							<div class="step-content">
-								<h3>Testing & Deployment</h3>
-								<p>We thoroughly test the tool and deploy it to your environment, ensuring seamless integration.</p>
-							</div>
-						</div>
-                        <div class="step">
-							<div class="step-number">5</div>
-							<div class="step-content">
-								<h3>Training & Support</h3>
-								<p>We provide training for your team and ongoing support to ensure the tool continues to meet your needs.</p>
-							</div>
-						</div>
+			</div>
+
+			<div class="crumbs-wrap">
+				<Breadcrumbs
+					variant="dark"
+					items={[{ href: '/', label: 'Home' }, { href: '/services/', label: 'Services' }]}
+					current="Internal tools & automation"
+				/>
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="who-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Who this is for</span>
+				<h2 class="section-title" id="who-heading">Built for small teams that lose time to admin.</h2>
+				<p class="section-lead">
+					These builds are a strong fit for local service businesses, owner-operators, and lean crews who need clearer lead follow-up, customer messaging, job status, and day-to-day workflow. Not a fit for every Fortune 500 procurement cycle, and not a replacement for a full product engineering department.
+				</p>
+			</div>
+			<ul class="checklist who-list">
+				{whoFit.map((line) => (
+					<li>
+						<i class="fas fa-check checklist-icon" aria-hidden="true"></i>
+						<span>{line}</span>
+					</li>
+				))}
+			</ul>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="outcomes-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Outcomes</span>
+				<h2 class="section-title" id="outcomes-heading">Problems we fix with automation and small internal apps.</h2>
+				<p class="section-lead">
+					Copy here is about what goes wrong in the field, not abstract software categories.
+				</p>
+			</div>
+			<div class="grid-cards">
+				{painOutcomes.map((item) => (
+					<div class="info-card">
+						<h3>{item.title}</h3>
+						<p>{item.body}</p>
 					</div>
-				</div>
-				
-				<div class="service-detail-card case-studies">
-					<h2>Common Internal Tools We Build</h2>
-					<div class="case-studies-grid">
-                        <div class="case-study">
-                            <h3>Employee Portals</h3>
-                            <p>Centralized platforms where employees can access information, submit requests, and manage their work efficiently.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Inventory Management Systems</h3>
-                            <p>Tools that track inventory levels, orders, and supply chain information in real-time to optimize stock levels.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>CRM Extensions</h3>
-                            <p>Custom functionality that extends your existing CRM to better match your sales process and customer journey.</p>
-                        </div>
-                        <div class="case-study">
-                            <h3>Approval Workflows</h3>
-                            <p>Digital systems that streamline approval processes, ensuring nothing falls through the cracks and keeping projects moving.</p>
-                        </div>
-                    </div>
-				</div>
-				
-				<div class="cta-container">
-					<p class="cta-text">Ready to streamline your business with custom internal tools?</p>
-					<a href="/contact/" class="button primary">Discuss Your Needs</a>
-				</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="build-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">What we build</span>
+				<h2 class="section-title" id="build-heading">Concrete tools and automations.</h2>
+				<p class="section-lead">
+					Each line below is something we have scoped or shipped for service businesses. If your need is adjacent, we can usually adapt the same patterns.
+				</p>
+			</div>
+			<div class="grid-cards">
+				{offerBlocks.map((block) => (
+					<div class="info-card">
+						<h3>{block.title}</h3>
+						<p>{block.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="examples-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Examples</span>
+				<h2 class="section-title" id="examples-heading">What the output can look like.</h2>
+				<p class="section-lead">
+					Specific builds so the page carries real informational weight, not a generic capability list.
+				</p>
+			</div>
+			<div class="examples-grid">
+				{concreteExamples.map((ex) => (
+					<article class="example-card">
+						<h3>{ex.title}</h3>
+						<p>{ex.body}</p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="integrations-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Systems</span>
+				<h2 class="section-title" id="integrations-heading">What we connect to.</h2>
+				<p class="section-lead">
+					You keep the tools you already pay for. We wire the parts that matter so data moves without someone babysitting exports.
+				</p>
+			</div>
+			<ul class="checklist">
+				{integrations.map((line) => (
+					<li>
+						<i class="fas fa-link checklist-icon" aria-hidden="true"></i>
+						<span>{line}</span>
+					</li>
+				))}
+			</ul>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="process-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Process</span>
+				<h2 class="section-title" id="process-heading">How we ship automation for service businesses.</h2>
+			</div>
+			<div class="process-grid">
+				{processSteps.map((step) => (
+					<div class="process-step">
+						<span class="step-number">{step.n}</span>
+						<h4>{step.title}</h4>
+						<p>{step.body}</p>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section class="section" aria-labelledby="compare-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Comparison</span>
+				<h2 class="section-title" id="compare-heading">Custom internal tools vs forcing an all-in-one platform.</h2>
+				<p class="section-lead">
+					Zapier, GoHighLevel, HubSpot, Airtable, and the rest can be the right answer. This page exists for when you need something tighter, local, and built around one business instead of every vertical on earth.
+				</p>
+			</div>
+			<div class="compare-wrap">
+				<table class="compare-table">
+					<thead>
+						<tr>
+							<th scope="col">Custom build</th>
+							<th scope="col">Typical off-the-shelf path</th>
+						</tr>
+					</thead>
+					<tbody>
+						{compareRows.map((row) => (
+							<tr>
+								<td>{row.custom}</td>
+								<td>{row.shelf}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<section class="section section-alt faq-section" aria-labelledby="faq-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">FAQ</span>
+				<h2 class="section-title" id="faq-heading">Straight answers.</h2>
+			</div>
+			<dl class="faq-list">
+				{faqItems.map((item) => (
+					<div class="faq-item">
+						<dt>{item.q}</dt>
+						<dd>{item.a}</dd>
+					</div>
+				))}
+			</dl>
+		</section>
+
+		<section class="section cta-section">
+			<div class="cta-inner">
+				<h2>Tell me what leaks time today.</h2>
+				<p class="cta-lead">One paragraph about the workflow is enough to start. We reply with what is realistic and what it would take.</p>
+				<a href="/contact/" class="btn-solid">Start a tooling conversation</a>
 			</div>
 		</section>
 	</main>
 </div>
 
 <style>
-	#background {
+	.bg-blur {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
-		filter: blur(100px);
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.16;
+		pointer-events: none;
 	}
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		min-height: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
-		overflow-x: hidden;
-		box-sizing: border-box;
+	.paint-strikes-bg {
+		position: fixed;
+		left: 38%;
+		top: 8%;
+		width: min(230vw, 2400px);
+		height: auto;
+		max-width: none;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.2;
+		mix-blend-mode: lighten;
+		transform: translateX(-50%) rotate(-3deg);
 	}
 
-	#container *,
-	#container *::before,
-	#container *::after {
-		box-sizing: inherit;
-	}
-
-	main {
-		min-height: 100%;
+	.hero-nav-end {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		gap: 0.65rem;
 	}
 
-	#service-section {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 3rem 0;
-		width: 100%;
+	.page {
 		position: relative;
+		z-index: 1;
 	}
 
-	.heading-container {
+	.section {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	.section-alt {
+		max-width: none;
+		background: var(--surface);
+	}
+
+	.section-alt > * {
+		max-width: 1100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero {
+		padding-top: 2rem;
+	}
+
+	.hero-nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 0.75rem;
-		width: 100%;
-		margin-top: 0.25em;
+		margin-bottom: 2rem;
 	}
 
-	.heading-container h1 {
-		min-width: 0;
-		flex: 1;
+	.logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		text-decoration: none;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-content {
+		max-width: 900px;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.hero-title,
+	.section-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
 	}
-	
-	h1 {
-		font-size: 2.5rem;
-		font-weight: 700;
-		margin: 0;
-		line-height: 1.2;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+
+	.hero-title {
+		font-size: clamp(2.4rem, 8vw, 5.5rem);
+		line-height: 0.95;
 	}
-	
-	.back-link {
-		display: flex;
+
+	.section-title {
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
+	}
+
+	.section-lead {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.8vw, 1.2rem);
+		line-height: 1.6;
+		max-width: 720px;
+		margin: 0.75rem 0 0;
+	}
+
+	.hero-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 2vw, 1.3rem);
+		line-height: 1.55;
+		max-width: 700px;
+		margin: 1rem 0 1.5rem;
+	}
+
+	.section-header {
+		max-width: 760px;
+		margin-bottom: 2rem;
+	}
+
+	.btn-solid,
+	.btn-outline {
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 40px;
-		height: 40px;
-		flex-shrink: 0;
-		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.8);
-		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-		color: #333;
+		gap: 0.55rem;
+		padding: 0.78rem 1.6rem;
+		border-radius: var(--radius);
 		text-decoration: none;
-		transition: all 0.2s ease;
-	}
-	
-	.back-link:hover {
-		background: rgba(255, 255, 255, 1);
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		transform: translateY(-2px);
-	}
-	
-	.subtitle {
-		font-size: 1.25rem;
-		color: #4b5563;
-		margin: 1.5rem 0 2.5rem;
-		max-width: 800px;
-		line-height: 1.6;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-	}
-	
-	.service-content {
-		width: 100%;
-	}
-	
-	.service-detail-card {
-		background: rgba(255, 255, 255, 0.8);
-		border-radius: 16px;
-		padding: 2rem;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-		margin-bottom: 2rem;
-		width: 100%;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.9rem;
+		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
 	}
 
-	h2 {
-		font-size: 1.8rem;
-		margin-top: 0;
-		margin-bottom: 1rem;
-		color: #111827;
+	.btn-solid {
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
 	}
 
-	h3 {
-		font-size: 1.25rem;
-		margin-bottom: 0.5rem;
-		color: #111827;
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	p {
-		color: #4b5563;
-		line-height: 1.6;
-		margin-bottom: 1rem;
+	.btn-outline {
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
 	}
 
-	.service-highlights {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem;
-		margin-top: 2rem;
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
 	}
 
-	.highlight-item {
+	.btn-small {
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
+	}
+
+	.hero-actions {
 		display: flex;
-		gap: 1.5rem;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
-	.highlight-icon {
-		font-size: 2rem;
-		color: #3245ff;
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		flex-shrink: 0;
-		margin-top: 0.25rem;
+	.crumbs-wrap {
+		margin-top: 1.2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
 	}
 
-	.highlight-content {
-		flex: 1;
-	}
-
-	.highlight-content h3 {
-		margin-top: 0;
-	}
-
-	.highlight-content p {
-		margin-bottom: 0;
-	}
-
-	.process-steps {
+	.checklist {
+		list-style: none;
+		padding: 0;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
+		gap: 0.65rem;
+		max-width: 52rem;
 	}
 
-	.step {
+	.checklist li {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
+		align-items: flex-start;
+		padding: 0.85rem 1rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		font-size: 0.98rem;
+		line-height: 1.5;
+		color: var(--text-muted);
+	}
+
+	.section-alt .checklist li {
+		background: var(--bg);
+	}
+
+	.checklist-icon {
+		color: var(--accent);
+		margin-top: 0.15rem;
+		flex-shrink: 0;
+	}
+
+	.who-list {
+		margin-top: 0.5rem;
+	}
+
+	.grid-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 0.7rem;
+	}
+
+	.info-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem;
+	}
+
+	.section-alt .info-card {
+		background: var(--bg);
+	}
+
+	.info-card h3 {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		font-weight: 400;
+		font-size: 1.2rem;
+		line-height: 1.15;
+		margin: 0 0 0.5rem;
+	}
+
+	.info-card p {
+		color: var(--text-muted);
+		margin: 0;
+		line-height: 1.55;
+		font-size: 0.96rem;
+	}
+
+	.examples-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.example-card {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem 1.5rem;
+	}
+
+	.example-card h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.15rem;
+		margin: 0 0 0.6rem;
+		line-height: 1.2;
+	}
+
+	.example-card p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.98rem;
+		line-height: 1.6;
+	}
+
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 0.6rem;
+	}
+
+	.process-step {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.4rem;
 	}
 
 	.step-number {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
+		display: block;
+		font-size: 1.8rem;
+		font-weight: 800;
+		color: var(--accent);
+		letter-spacing: -0.03em;
+		margin-bottom: 0.35rem;
+		line-height: 1;
+	}
+
+	.process-step h4 {
+		margin: 0 0 0.45rem;
+		font-size: 1.02rem;
+		font-weight: 700;
+	}
+
+	.process-step p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.compare-wrap {
+		overflow-x: auto;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+	}
+
+	.compare-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.95rem;
+		min-width: 520px;
+	}
+
+	.compare-table th,
+	.compare-table td {
+		padding: 0.85rem 1rem;
+		text-align: left;
+		vertical-align: top;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.compare-table th {
+		font-family: var(--font-display);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		font-size: 1.05rem;
+		font-weight: 400;
+		background: var(--surface);
+		color: var(--text);
+	}
+
+	.compare-table tbody tr:last-child td {
+		border-bottom: none;
+	}
+
+	.compare-table td {
+		color: var(--text-muted);
+		width: 50%;
+	}
+
+	.compare-table tbody tr:nth-child(even) td {
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	.faq-list {
+		margin: 0;
+		padding: 0;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: bold;
-		flex-shrink: 0;
+		flex-direction: column;
+		gap: 0.75rem;
 	}
 
-	.step-content {
-		flex: 1;
+	.faq-item {
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--bg);
+		padding: 1.15rem 1.35rem;
 	}
 
-	.step-content h3 {
-		margin-top: 0;
+	.faq-item dt {
+		font-weight: 700;
+		font-size: 1.02rem;
+		margin: 0 0 0.5rem;
+		color: var(--text);
 	}
 
-	.step-content p {
-		margin-bottom: 0;
+	.faq-item dd {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 0.97rem;
 	}
 
-	.case-studies-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem;
-		margin-top: 2rem;
-	}
-
-	.case-study {
-		background: rgba(255, 255, 255, 0.5);
-		border-radius: 12px;
-		padding: 1.5rem;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-	}
-
-	.case-study h3 {
-		margin-top: 0;
-	}
-
-	.case-study p {
-		margin-bottom: 0;
-	}
-
-	.cta-container {
-		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
-		border-radius: 16px;
-		padding: 2rem;
+	.cta-section {
 		text-align: center;
-		margin-top: 3rem;
 	}
 
-	.cta-text {
-		font-size: 1.3rem;
-		font-weight: 500;
-		margin-bottom: 1.5rem;
-		color: #111827;
+	.cta-inner {
+		max-width: 760px;
+		margin: 0 auto;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		border-radius: var(--radius);
+		padding: 2.2rem 1.5rem;
 	}
 
-	.button {
-		padding: 14px 28px;
-		border-radius: 8px;
-		text-decoration: none;
-		font-weight: 500;
-		font-size: 1.1rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		display: inline-block;
+	.cta-inner h2 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: clamp(2rem, 6vw, 4rem);
+		line-height: 1;
+		margin: 0 0 0.75rem;
 	}
 
-	.button:hover {
-		transform: translateY(-2px);
+	.cta-lead {
+		margin: 0 auto 1.35rem;
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.55;
+		max-width: 520px;
 	}
 
-	.button.primary {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
-	}
+	@media (max-width: 768px) {
+		.paint-strikes-bg {
+			top: 4%;
+			left: 36%;
+			width: 290vw;
+			transform: translateX(-50%) rotate(-2deg);
+			opacity: 0.14;
+		}
 
-	@media screen and (max-width: 992px) {
-		.service-highlights,
-		.case-studies-grid {
+		.section {
+			padding: 3rem 1rem;
+		}
+
+		.hero {
+			padding-top: 1.4rem;
+		}
+
+		.hero-nav {
+			margin-bottom: 1.3rem;
+		}
+
+		.hero-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.btn-solid,
+		.btn-outline {
+			min-height: 46px;
+		}
+
+		.process-grid {
 			grid-template-columns: 1fr;
-			gap: 1.5rem;
-		}
-
-		h1 {
-			font-size: 2rem;
-			text-align: center;
-		}
-		
-		h2 {
-			font-size: 1.5rem;
-			text-align: center;
-		}
-		
-		.subtitle {
-			font-size: 1.1rem;
-			text-align: center;
-			margin-left: auto;
-			margin-right: auto;
 		}
 	}
-
-	@media screen and (max-width: 768px) {
-		#container {
-			display: flex;
-			flex-direction: column;
-			height: auto;
-			padding: 0 1rem;
-		}
-
-		#service-section {
-			padding: 2rem 0;
-			align-items: center;
-		}
-		
-		h1 {
-			font-size: 1.8rem;
-			text-align: center;
-			width: 100%;
-		}
-		
-		.subtitle {
-			text-align: center;
-			width: 100%;
-		}
-		
-		.heading-container {
-			flex-direction: column-reverse;
-			gap: 1rem;
-			margin-bottom: 1rem;
-		}
-		
-		.service-detail-card {
-			padding: 1.5rem;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		
-		.button {
-			text-align: center;
-			max-width: 280px;
-			width: 100%;
-			padding: 12px 20px;
-			font-size: 1rem;
-			margin: 0 auto;
-			min-height: 44px;
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-		}
-		
-		.cta-container {
-			padding: 1.5rem;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		
-		.service-content {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.service-highlights {
-			grid-template-columns: 1fr;
-			width: 100%;
-			gap: 1.5rem;
-		}
-		
-		.case-studies-grid {
-			grid-template-columns: 1fr;
-			width: 100%;
-			gap: 1.5rem;
-		}
-
-		.highlight-item {
-			flex-direction: column;
-			gap: 0.75rem;
-			text-align: center;
-			align-items: center;
-		}
-
-		.highlight-icon {
-			margin-top: 0;
-		}
-		
-		.highlight-content {
-			text-align: center;
-		}
-		
-		.step {
-			flex-direction: column;
-			align-items: center;
-			text-align: center;
-		}
-		
-		.step-content {
-			text-align: center;
-		}
-		
-		.case-study {
-			text-align: center;
-		}
-		
-		.process-steps {
-			align-items: center;
-		}
-		
-		p {
-			text-align: center;
-		}
-		
-		h2, h3 {
-			text-align: center;
-			width: 100%;
-		}
-		
-		.logo {
-			align-self: center;
-			margin-bottom: 1rem;
-		}
-	}
-
-	@media screen and (max-width: 480px) {
-		#container {
-			padding: 0 0.75rem;
-		}
-
-		#service-section {
-			padding: 1.5rem 0;
-		}
-		
-		h1 {
-			font-size: 1.5rem;
-		}
-		
-		.service-detail-card {
-			padding: 1.25rem;
-			margin-bottom: 1.5rem;
-		}
-		
-		.button {
-			padding: 12px 18px;
-			font-size: 1rem;
-			max-width: none;
-		}
-		
-		p {
-			font-size: 0.95rem;
-		}
-		
-		h2 {
-			font-size: 1.35rem;
-			margin-bottom: 1rem;
-		}
-		
-		h3 {
-			font-size: 1.1rem;
-		}
-
-		.cta-container {
-			padding: 1.25rem;
-			margin-top: 2rem;
-		}
-
-		.cta-text {
-			font-size: 1.1rem;
-		}
-
-		.step-number {
-			width: 32px;
-			height: 32px;
-			font-size: 0.9rem;
-		}
-
-		.step-content p,
-		.highlight-content p,
-		.case-study p {
-			word-wrap: break-word;
-			overflow-wrap: break-word;
-		}
-	}
-
-	@media screen and (max-width: 360px) {
-		#container {
-			padding: 0 0.5rem;
-		}
-
-		h1 {
-			font-size: 1.35rem;
-		}
-
-		h2 {
-			font-size: 1.2rem;
-		}
-
-		.service-detail-card {
-			padding: 1rem;
-		}
-	}
-
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-
-	#service-section > * {
-		animation: fadeIn 0.5s ease-out forwards;
-		opacity: 0;
-	}
-
-	#service-section > *:nth-child(1) { animation-delay: 0.1s; }
-	#service-section > *:nth-child(2) { animation-delay: 0.2s; }
-	#service-section > *:nth-child(3) { animation-delay: 0.3s; }
-	#service-section > *:nth-child(4) { animation-delay: 0.4s; }
 </style>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>

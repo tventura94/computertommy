@@ -1,0 +1,241 @@
+/* Dark service/portfolio/SEO slug/location shells (not the home Welcome wrapper) */
+
+.themed-subpage,
+#loc-page.themed-subpage {
+	--bg: #0b0b0f;
+	--surface: #141419;
+	--border: rgba(255, 255, 255, 0.1);
+	--text: #f0f0f5;
+	--text-muted: rgba(255, 255, 255, 0.65);
+	--accent: #f97316;
+	--radius: 16px;
+	--radius-sm: 10px;
+	--font: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+	--font-display: 'Bebas Neue', Impact, sans-serif;
+
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font);
+	min-height: 100vh;
+	position: relative;
+	overflow-x: clip;
+	box-sizing: border-box;
+}
+
+.themed-subpage *,
+.themed-subpage *::before,
+.themed-subpage *::after,
+#loc-page.themed-subpage *,
+#loc-page.themed-subpage *::before,
+#loc-page.themed-subpage *::after {
+	box-sizing: inherit;
+}
+
+html[data-theme='light'] .themed-subpage,
+html[data-theme='light'] #loc-page.themed-subpage {
+	--bg: #f3f2ef;
+	--surface: #ffffff;
+	--border: rgba(0, 0, 0, 0.09);
+	--text: #14141a;
+	--text-muted: rgba(0, 0, 0, 0.52);
+	--accent: #d95d0c;
+	background:
+		radial-gradient(ellipse 100% 60% at 50% -15%, rgba(249, 115, 22, 0.09), transparent 55%),
+		radial-gradient(ellipse 80% 50% at 100% 40%, rgba(167, 139, 250, 0.06), transparent 50%),
+		radial-gradient(ellipse 70% 45% at 0% 80%, rgba(244, 114, 182, 0.05), transparent 45%),
+		var(--bg);
+}
+
+html[data-theme='light'] .themed-subpage .bg-blur {
+	opacity: 0.08;
+	filter: blur(100px);
+}
+
+html[data-theme='light'] .themed-subpage .paint-strikes-bg {
+	mix-blend-mode: normal;
+	opacity: 0.22;
+	filter: saturate(1.1) contrast(1.02);
+}
+
+html[data-theme='light'] .themed-subpage .portfolio-brush-bg {
+	mix-blend-mode: normal;
+	opacity: 0.26;
+	filter: saturate(1.1) contrast(1.02);
+}
+
+html[data-theme='light'] .themed-subpage .section-alt {
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(248, 246, 242, 0.95) 100%);
+}
+
+html[data-theme='light'] .themed-subpage .opinion-card {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .prose-block {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .prose-block--accent {
+	background: rgba(217, 93, 12, 0.08);
+	border-color: rgba(217, 93, 12, 0.22);
+}
+
+html[data-theme='light'] .themed-subpage .info-card,
+html[data-theme='light'] .themed-subpage .process-step,
+html[data-theme='light'] .themed-subpage .example-card {
+	background: #fafaf8;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .faq-item {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .compare-table th {
+	background: #f1f0ec;
+	color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .compare-table tbody tr:nth-child(even) td,
+html[data-theme='light'] .themed-subpage .compare-table tbody tr:nth-child(even) th {
+	background: rgba(0, 0, 0, 0.03);
+}
+
+html[data-theme='light'] .site-theme .md-wrap {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .md-wrap h2,
+html[data-theme='light'] .themed-subpage .md-wrap h3 {
+	color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .md-wrap p,
+html[data-theme='light'] .themed-subpage .md-wrap li {
+	color: var(--text-muted);
+}
+
+html[data-theme='light'] .themed-subpage .md-wrap strong {
+	color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .md-wrap pre {
+	background: #f1f0ec;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .cta-inner {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .seo-pillar-card {
+	background: #fafaf8;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .solo-points li {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .link-pill {
+	background: #fff;
+	border-color: var(--border);
+	color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .link-pill--primary {
+	background: var(--text);
+	color: #fff;
+	border-color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .link-pill--primary:hover {
+	background: transparent;
+	color: var(--text);
+}
+
+html[data-theme='light'] .themed-subpage .portfolio-card {
+	background: #fff;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .preview-wrap {
+	background: #e8e6e3;
+	border-bottom-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .checklist li {
+	background: #fafaf8;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .section-alt .grid-cards .info-card {
+	background: #fafaf8;
+}
+
+html[data-theme='light'] .site-footer {
+	--bg: #e8e6e3;
+	--surface: #ffffff;
+	--border: rgba(0, 0, 0, 0.08);
+	--text: #14141a;
+	--text-muted: rgba(0, 0, 0, 0.52);
+	--accent: #d95d0c;
+}
+
+html[data-theme='light'] .site-footer .footer-card {
+	background: #fff;
+}
+
+html[data-theme='light'] .site-footer .footer-nav-list li {
+	border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Theme toggle: home (.page-wrapper) and themed subpages */
+.page-wrapper .theme-toggle,
+.themed-subpage .theme-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	background: var(--surface);
+	color: var(--text);
+	cursor: pointer;
+	transition: background 0.3s, border-color 0.3s, transform 0.15s;
+}
+
+.page-wrapper .theme-toggle:hover,
+.themed-subpage .theme-toggle:hover {
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: scale(1.08);
+}
+
+html[data-theme='light'] .page-wrapper .theme-toggle:hover,
+html[data-theme='light'] .themed-subpage .theme-toggle:hover {
+	border-color: rgba(0, 0, 0, 0.25);
+}
+
+.theme-toggle .theme-icon {
+	width: 1.15rem;
+	height: 1.15rem;
+}
+
+.theme-toggle .theme-icon--moon {
+	display: none;
+}
+
+html[data-theme='light'] .theme-toggle .theme-icon--sun {
+	display: none;
+}
+
+html[data-theme='light'] .theme-toggle .theme-icon--moon {
+	display: block;
+}

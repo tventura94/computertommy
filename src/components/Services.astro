@@ -38,16 +38,6 @@ const services = [
 ---
 
 <div class="page-wrapper" id="page-wrapper">
-	<script is:inline>
-	(function () {
-		var w = document.getElementById('page-wrapper');
-		if (!w) return;
-		var saved = localStorage.getItem('theme');
-		if (saved === 'light' || (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-			w.setAttribute('data-theme', 'light');
-		}
-	})();
-	</script>
 	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
 
 	<div class="hero-bg">
@@ -59,7 +49,7 @@ const services = [
 			<a href="/" class="logo-link">
 				<img src={astroLogo.src} width="130" height="52" alt="ComputerTommy home" />
 			</a>
-			<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle light and dark theme">
+			<button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme">
 				<svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
 				<svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 			</button>
@@ -189,24 +179,6 @@ const services = [
 	   past the first card, so nothing showed. Use threshold 0 so the first card appears as soon as the grid enters view. */
 	observe('#services-cards-observe', { threshold: 0, rootMargin: '0px 0px 8% 0px' });
 	observe('.slide-in-section', { threshold: 0.15 });
-})();
-</script>
-
-<script is:inline>
-(function () {
-	var btn = document.getElementById('theme-toggle');
-	var wrapper = document.getElementById('page-wrapper');
-	if (!btn || !wrapper) return;
-	btn.addEventListener('click', function () {
-		var isLight = wrapper.getAttribute('data-theme') === 'light';
-		if (isLight) {
-			wrapper.removeAttribute('data-theme');
-			localStorage.setItem('theme', 'dark');
-		} else {
-			wrapper.setAttribute('data-theme', 'light');
-			localStorage.setItem('theme', 'light');
-		}
-	});
 })();
 </script>
 
@@ -779,47 +751,7 @@ const services = [
 		margin: 0;
 	}
 
-	.theme-toggle {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.5rem;
-		height: 2.5rem;
-		border-radius: 50%;
-		border: 1px solid var(--border);
-		background: var(--surface);
-		color: var(--text);
-		cursor: pointer;
-		transition: background 0.3s, border-color 0.3s, transform 0.15s;
-	}
-
-	.theme-toggle:hover {
-		border-color: rgba(255, 255, 255, 0.2);
-		transform: scale(1.08);
-	}
-
-	.theme-icon {
-		width: 1.15rem;
-		height: 1.15rem;
-	}
-
-	.theme-icon--moon {
-		display: none;
-	}
-
-	.page-wrapper[data-theme='light'] .theme-icon--sun {
-		display: none;
-	}
-
-	.page-wrapper[data-theme='light'] .theme-icon--moon {
-		display: block;
-	}
-
-	.page-wrapper[data-theme='light'] .theme-toggle:hover {
-		border-color: rgba(0, 0, 0, 0.25);
-	}
-
-	.page-wrapper[data-theme='light'] {
+	:global(html[data-theme='light']) .page-wrapper {
 		--bg: #f3f2ef;
 		--surface: #ffffff;
 		--border: rgba(0, 0, 0, 0.09);
@@ -837,48 +769,48 @@ const services = [
 			var(--bg);
 	}
 
-	.page-wrapper[data-theme='light'] .bg-blur {
+	:global(html[data-theme='light']) .page-wrapper .bg-blur {
 		opacity: 0.08;
 		filter: blur(100px);
 	}
 
-	.page-wrapper[data-theme='light'] .hero-bg-img {
+	:global(html[data-theme='light']) .page-wrapper .hero-bg-img {
 		opacity: 0.28;
 		filter: saturate(1.15) contrast(1.05);
 	}
 
-	.page-wrapper[data-theme='light'] .cta-bg {
+	:global(html[data-theme='light']) .page-wrapper .cta-bg {
 		mix-blend-mode: normal;
 		opacity: 0.42;
 		filter: saturate(1.25) contrast(1.05);
 	}
 
-	.page-wrapper[data-theme='light'] .serving-bar {
+	:global(html[data-theme='light']) .page-wrapper .serving-bar {
 		background: rgba(255, 255, 255, 0.85);
 		border-color: rgba(0, 0, 0, 0.08);
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 	}
 
-	.page-wrapper[data-theme='light'] .location-pill {
+	:global(html[data-theme='light']) .page-wrapper .location-pill {
 		background: rgba(217, 93, 12, 0.08);
 		border-color: rgba(217, 93, 12, 0.22);
 	}
 
-	.page-wrapper[data-theme='light'] .location-pill:hover {
+	:global(html[data-theme='light']) .page-wrapper .location-pill:hover {
 		background: rgba(217, 93, 12, 0.14);
 		border-color: rgba(217, 93, 12, 0.35);
 	}
 
-	.page-wrapper[data-theme='light'] .service-page-card:hover {
+	:global(html[data-theme='light']) .page-wrapper .service-page-card:hover {
 		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
 		border-color: rgba(0, 0, 0, 0.12);
 	}
 
-	.page-wrapper[data-theme='light'] .service-page-card__thumb {
+	:global(html[data-theme='light']) .page-wrapper .service-page-card__thumb {
 		background: #e8e6e3;
 	}
 
-	.page-wrapper[data-theme='light'] .pricing-card {
+	:global(html[data-theme='light']) .page-wrapper .pricing-card {
 		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 	}
 
