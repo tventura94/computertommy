@@ -6,6 +6,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ThemeToggleButton from '../components/ThemeToggleButton.astro';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
+import tradesRoofer from '../assets/trades/roofer.jpg';
 
 const contactJsonLd = {
 	'@context': 'https://schema.org',
@@ -48,6 +49,16 @@ const contactJsonLd = {
 					<p class="hero-desc">
 						Send a note about your project, timeline, or questions. I read every message and reply directly. You can also email or call if you prefer.
 					</p>
+					<div class="hero-direct-contact" aria-label="Email and phone">
+						<a class="hero-direct-link" href="mailto:letsbuild@computertommy.com">
+							<i class="fas fa-envelope" aria-hidden="true"></i>
+							<span>letsbuild@computertommy.com</span>
+						</a>
+						<a class="hero-direct-link" href="tel:+15083802013">
+							<i class="fas fa-phone" aria-hidden="true"></i>
+							<span>(508) 380-2013</span>
+						</a>
+					</div>
 				</div>
 
 				<div class="crumbs-wrap">
@@ -58,43 +69,52 @@ const contactJsonLd = {
 			<section class="section contact-form-section" aria-labelledby="contact-form-heading">
 				<h2 class="visually-hidden" id="contact-form-heading">Send a message</h2>
 				<div class="contact-form-card">
-					<form
-						class="contact-netlify-form"
-						name="contact"
-						method="POST"
-						data-netlify="true"
-						netlify-honeypot="bot-field"
-						action="/thank-you/"
-					>
-						<input type="hidden" name="form-name" value="contact" />
-						<p class="hp-field">
-							<label>
-								Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
-							</label>
-						</p>
+					<div class="contact-form-card__grid">
+						<div class="contact-form-card__form-wrap">
+							<form
+								class="contact-netlify-form"
+								name="contact"
+								method="POST"
+								data-netlify="true"
+								netlify-honeypot="bot-field"
+								action="/thank-you/"
+							>
+								<input type="hidden" name="form-name" value="contact" />
+								<p class="hp-field">
+									<label>
+										Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+									</label>
+								</p>
 
-						<div class="form-field">
-							<label for="contact-name">Name</label>
-							<input id="contact-name" name="name" type="text" autocomplete="name" required />
+								<div class="form-field">
+									<label for="contact-name">Name</label>
+									<input id="contact-name" name="name" type="text" autocomplete="name" required />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-email">Email</label>
+									<input id="contact-email" name="email" type="email" autocomplete="email" required />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-phone">Phone <span class="field-hint">(optional)</span></label>
+									<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-message">How can I help?</label>
+									<textarea id="contact-message" name="message" rows="6" required></textarea>
+								</div>
+
+								<button type="submit" class="btn-solid">Send message</button>
+							</form>
 						</div>
-
-						<div class="form-field">
-							<label for="contact-email">Email</label>
-							<input id="contact-email" name="email" type="email" autocomplete="email" required />
-						</div>
-
-						<div class="form-field">
-							<label for="contact-phone">Phone <span class="field-hint">(optional)</span></label>
-							<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
-						</div>
-
-						<div class="form-field">
-							<label for="contact-message">How can I help?</label>
-							<textarea id="contact-message" name="message" rows="6" required></textarea>
-						</div>
-
-						<button type="submit" class="btn-solid">Send message</button>
-					</form>
+						<div
+							class="contact-form-card__visual"
+							style={`--contact-visual-bg: url(${tradesRoofer.src})`}
+							aria-hidden="true"
+						></div>
+					</div>
 				</div>
 			</section>
 
@@ -222,6 +242,35 @@ const contactJsonLd = {
 		margin: 1rem 0 0;
 	}
 
+	.hero-direct-contact {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.65rem 1.35rem;
+		margin-top: 1.35rem;
+		max-width: 640px;
+	}
+
+	.hero-direct-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		line-height: 1.35;
+	}
+
+	.hero-direct-link:hover {
+		text-decoration: underline;
+	}
+
+	.hero-direct-link i {
+		font-size: 0.95em;
+		opacity: 0.95;
+	}
+
 	.btn-outline {
 		display: inline-flex;
 		align-items: center;
@@ -279,6 +328,10 @@ const contactJsonLd = {
 		border-top: 1px solid var(--border);
 	}
 
+	.section.contact-form-section {
+		max-width: 1100px;
+	}
+
 	.contact-form-section {
 		padding-top: 0.5rem;
 	}
@@ -289,11 +342,57 @@ const contactJsonLd = {
 		border-radius: var(--radius);
 		overflow: hidden;
 		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-		padding: 1.75rem 1.5rem 2rem;
+		padding: 0;
 	}
 
 	html[data-theme='light'] .contact-form-card {
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+	}
+
+	.contact-form-card__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto minmax(200px, 32vw);
+		align-items: stretch;
+	}
+
+	.contact-form-card__form-wrap {
+		padding: 1.75rem 1.5rem 2rem;
+		min-width: 0;
+	}
+
+	.contact-form-card__visual {
+		position: relative;
+		margin: 0;
+		min-height: 0;
+		background-color: #1a1d24;
+		background-image: var(--contact-visual-bg);
+		background-size: cover;
+		background-position: center 28%;
+		background-repeat: no-repeat;
+		border-top: 1px solid var(--border);
+	}
+
+	.contact-form-card__visual::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: linear-gradient(
+			180deg,
+			rgba(0, 0, 0, 0.12) 0%,
+			transparent 35%,
+			rgba(0, 0, 0, 0.18) 100%
+		);
+	}
+
+	html[data-theme='light'] .contact-form-card__visual::after {
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			transparent 40%,
+			rgba(0, 0, 0, 0.12) 100%
+		);
 	}
 
 	.contact-netlify-form {
@@ -301,6 +400,24 @@ const contactJsonLd = {
 		flex-direction: column;
 		gap: 1.15rem;
 		max-width: 36rem;
+	}
+
+	@media (min-width: 900px) {
+		.contact-form-card__grid {
+			grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
+			grid-template-rows: minmax(420px, 1fr);
+		}
+
+		.contact-form-card__form-wrap {
+			padding: 1.85rem 1.75rem 2rem 2rem;
+		}
+
+		.contact-form-card__visual {
+			min-height: min(620px, 82vh);
+			border-top: none;
+			border-left: 1px solid var(--border);
+			background-position: center 22%;
+		}
 	}
 
 	.hp-field {
@@ -473,7 +590,11 @@ const contactJsonLd = {
 			margin-bottom: 1.35rem;
 		}
 
-		.contact-form-card {
+		.contact-form-card__grid {
+			grid-template-rows: auto minmax(180px, 40vw);
+		}
+
+		.contact-form-card__form-wrap {
 			padding: 1.35rem 1.15rem 1.6rem;
 		}
 	}
