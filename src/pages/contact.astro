@@ -1,11 +1,385 @@
 ---
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ThemeToggleButton from '../components/ThemeToggleButton.astro';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
-import Layout from '../layouts/Layout.astro';
-import ContactComponent from '../components/Contact.astro';
+
+const contactJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'ContactPage',
+	name: 'Contact | Computer Tommy',
+	url: 'https://computertommy.com/contact/',
+	description:
+		'Book a free intro call or reach Computer Tommy by email or phone for Asheville web design and small business sites.',
+};
 ---
 
-<Layout canonical="https://computertommy.com/contact/">
-    <ContactComponent />
+<Layout
+	title="Contact | Computer Tommy"
+	description="Book a free intro call on Calendly, or email and call for Asheville web design, fast sites, and small business builds."
+	canonical="https://computertommy.com/contact/"
+	image="/computertommylogo.png"
+	jsonLd={contactJsonLd}
+>
+	<div class="themed-subpage">
+		<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+		<img src="/paint-trip.png" alt="" class="contact-trip-bg" aria-hidden="true" />
+		<main class="page">
+			<section class="section hero-section">
+				<div class="hero-nav">
+					<a href="/" class="logo-link">
+						<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Home" />
+					</a>
+					<div class="hero-nav-end">
+						<ThemeToggleButton />
+						<a href="/" class="btn-outline btn-small" aria-label="Back to home">
+							<i class="fas fa-arrow-left"></i>
+							<span>Home</span>
+						</a>
+					</div>
+				</div>
+
+				<div class="hero-content">
+					<span class="section-eyebrow">Get in touch</span>
+					<h1 class="hero-title">Book a call</h1>
+					<p class="hero-desc">
+						Pick a time that works for you. We will talk through what you need and whether it is a fit. If you
+						prefer not to use the scheduler, email or call anytime.
+					</p>
+				</div>
+
+				<div class="crumbs-wrap">
+					<Breadcrumbs variant="dark" items={[{ href: '/', label: 'Home' }]} current="Contact" />
+				</div>
+			</section>
+
+			<section class="section cal-section" aria-labelledby="cal-heading">
+				<h2 class="visually-hidden" id="cal-heading">Schedule an appointment</h2>
+				<div class="calendly-card">
+					<div
+						class="calendly-inline-widget"
+						data-url="https://calendly.com/tventura94"
+						style="min-width: 320px; height: 700px;"
+					/>
+				</div>
+				<p class="calendly-fallback">
+					<a href="https://calendly.com/tventura94" target="_blank" rel="noopener noreferrer">
+						Open the scheduler in a new tab
+					</a>
+					if the embed does not load.
+				</p>
+			</section>
+
+			<section class="section section-alt direct-section" aria-labelledby="direct-heading">
+				<div class="contact-direct-card">
+					<h2 class="direct-title" id="direct-heading">Email or phone</h2>
+					<p class="direct-lede">
+						Same inbox and number for project questions, timelines, and follow ups.
+					</p>
+					<ul class="direct-list">
+						<li>
+							<span class="direct-label">Email</span>
+							<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>
+						</li>
+						<li>
+							<span class="direct-label">Phone</span>
+							<a href="tel:+15083802013">(508) 380-2013</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</main>
+	</div>
+	<Footer />
+	<script is:inline async src="https://assets.calendly.com/assets/external/widget.js"></script>
 </Layout>
+
+<style>
+	.bg-blur {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.16;
+		pointer-events: none;
+	}
+
+	/* Full-bleed paint trip: landscape brush stroke on black, reads as atmosphere */
+	.contact-trip-bg {
+		position: fixed;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 38%;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.5;
+		mix-blend-mode: lighten;
+		transform: translateY(6vh);
+	}
+
+	.hero-nav-end {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+
+	.page {
+		position: relative;
+		z-index: 1;
+	}
+
+	.section {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 1.5rem 4rem;
+	}
+
+	.hero-section {
+		padding-top: 2rem;
+		padding-bottom: 0.5rem;
+	}
+
+	.hero-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+	}
+
+	.logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		text-decoration: none;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-content {
+		max-width: 720px;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.hero-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+		font-size: clamp(2.4rem, 8vw, 4.25rem);
+		line-height: 0.95;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
+	}
+
+	.hero-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		line-height: 1.55;
+		max-width: 640px;
+		margin: 1rem 0 0;
+	}
+
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
+		border-radius: var(--radius);
+		text-decoration: none;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
+	}
+
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.crumbs-wrap {
+		margin-top: 1.2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
+	}
+
+	.cal-section {
+		padding-top: 0.5rem;
+	}
+
+	.calendly-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		overflow: hidden;
+		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+	}
+
+	html[data-theme='light'] .calendly-card {
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+	}
+
+	.calendly-inline-widget {
+		width: 100%;
+		min-width: 320px;
+		min-height: 700px;
+	}
+
+	.calendly-fallback {
+		margin: 1rem 0 0;
+		font-size: 0.92rem;
+		color: var(--text-muted);
+		text-align: center;
+	}
+
+	.calendly-fallback a {
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.calendly-fallback a:hover {
+		text-decoration: underline;
+	}
+
+	.section-alt {
+		max-width: none;
+		background: var(--surface);
+		padding-top: 3rem;
+		padding-bottom: 4rem;
+		border-top: 1px solid var(--border);
+	}
+
+	.direct-section > * {
+		max-width: 960px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+
+	.contact-direct-card {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.75rem 1.5rem 1.85rem;
+	}
+
+	html[data-theme='light'] .contact-direct-card {
+		background: rgba(255, 255, 255, 0.85);
+	}
+
+	.direct-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		font-size: 1.5rem;
+		margin: 0 0 0.5rem;
+		color: var(--text);
+	}
+
+	.direct-lede {
+		margin: 0 0 1.25rem;
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.direct-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.direct-list li {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.5rem 1rem;
+	}
+
+	.direct-label {
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--text-muted);
+		min-width: 4.5rem;
+	}
+
+	.direct-list a {
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+		font-size: 1.05rem;
+	}
+
+	.direct-list a:hover {
+		text-decoration: underline;
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	@media (max-width: 768px) {
+		.contact-trip-bg {
+			object-position: center 35%;
+			opacity: 0.42;
+			transform: translateY(5vh);
+		}
+
+		.section {
+			padding: 0 1rem 3rem;
+		}
+
+		.hero-section {
+			padding-top: 1.4rem;
+		}
+
+		.hero-nav {
+			margin-bottom: 1.35rem;
+		}
+
+		.calendly-inline-widget {
+			min-height: 620px;
+		}
+	}
+</style>

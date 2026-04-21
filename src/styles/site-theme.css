@@ -57,6 +57,13 @@ html[data-theme='light'] .themed-subpage .paint-strikes-bg {
 	filter: saturate(1.1) contrast(1.02);
 }
 
+/* Contact page: paint-trip (black + horizontal stroke) */
+html[data-theme='light'] .themed-subpage .contact-trip-bg {
+	mix-blend-mode: soft-light;
+	opacity: 0.28;
+	filter: saturate(1.05) contrast(1.02);
+}
+
 html[data-theme='light'] .themed-subpage .portfolio-brush-bg {
 	mix-blend-mode: normal;
 	opacity: 0.26;
@@ -172,6 +179,11 @@ html[data-theme='light'] .themed-subpage .preview-wrap {
 
 html[data-theme='light'] .themed-subpage .checklist li {
 	background: #fafaf8;
+	border-color: var(--border);
+}
+
+html[data-theme='light'] .themed-subpage .calendly-card {
+	background: #ffffff;
 	border-color: var(--border);
 }
 
