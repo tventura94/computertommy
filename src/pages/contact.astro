@@ -6,6 +6,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ThemeToggleButton from '../components/ThemeToggleButton.astro';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
+import tradesRoofer from '../assets/trades/roofer.jpg';
 
 const contactJsonLd = {
 	'@context': 'https://schema.org',
@@ -13,13 +14,13 @@ const contactJsonLd = {
 	name: 'Contact | Computer Tommy',
 	url: 'https://computertommy.com/contact/',
 	description:
-		'Book a free intro call or reach Computer Tommy by email or phone for Asheville web design and small business sites.',
+		'Send a message or reach Computer Tommy by email or phone for Asheville web design and small business sites.',
 };
 ---
 
 <Layout
 	title="Contact | Computer Tommy"
-	description="Book a free intro call on Calendly, or email and call for Asheville web design, fast sites, and small business builds."
+	description="Send a message through the form, or email and call for Asheville web design, fast sites, and small business builds."
 	canonical="https://computertommy.com/contact/"
 	image="/computertommylogo.png"
 	jsonLd={contactJsonLd}
@@ -44,11 +45,20 @@ const contactJsonLd = {
 
 				<div class="hero-content">
 					<span class="section-eyebrow">Get in touch</span>
-					<h1 class="hero-title">Book a call</h1>
+					<h1 class="hero-title">Contact</h1>
 					<p class="hero-desc">
-						Pick a time that works for you. We will talk through what you need and whether it is a fit. If you
-						prefer not to use the scheduler, email or call anytime.
+						Send a note about your project, timeline, or questions. I read every message and reply directly. You can also email or call if you prefer.
 					</p>
+					<div class="hero-direct-contact" aria-label="Email and phone">
+						<a class="hero-direct-link" href="mailto:letsbuild@computertommy.com">
+							<i class="fas fa-envelope" aria-hidden="true"></i>
+							<span>letsbuild@computertommy.com</span>
+						</a>
+						<a class="hero-direct-link" href="tel:+15083802013">
+							<i class="fas fa-phone" aria-hidden="true"></i>
+							<span>(508) 380-2013</span>
+						</a>
+					</div>
 				</div>
 
 				<div class="crumbs-wrap">
@@ -56,20 +66,56 @@ const contactJsonLd = {
 				</div>
 			</section>
 
-			<section class="section cal-section" aria-labelledby="cal-heading">
-				<h2 class="visually-hidden" id="cal-heading">Schedule an appointment</h2>
-				<div class="calendly-card">
-					<div
-						class="calendly-inline-widget"
-						data-url="https://calendly.com/tventura94"
-					/>
+			<section class="section contact-form-section" aria-labelledby="contact-form-heading">
+				<h2 class="visually-hidden" id="contact-form-heading">Send a message</h2>
+				<div class="contact-form-card">
+					<div class="contact-form-card__grid">
+						<div class="contact-form-card__form-wrap">
+							<form
+								class="contact-netlify-form"
+								name="contact"
+								method="POST"
+								data-netlify="true"
+								netlify-honeypot="bot-field"
+								action="/thank-you/"
+							>
+								<input type="hidden" name="form-name" value="contact" />
+								<p class="hp-field">
+									<label>
+										Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+									</label>
+								</p>
+
+								<div class="form-field">
+									<label for="contact-name">Name</label>
+									<input id="contact-name" name="name" type="text" autocomplete="name" required />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-email">Email</label>
+									<input id="contact-email" name="email" type="email" autocomplete="email" required />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-phone">Phone <span class="field-hint">(optional)</span></label>
+									<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+								</div>
+
+								<div class="form-field">
+									<label for="contact-message">How can I help?</label>
+									<textarea id="contact-message" name="message" rows="6" required></textarea>
+								</div>
+
+								<button type="submit" class="btn-solid">Send message</button>
+							</form>
+						</div>
+						<div
+							class="contact-form-card__visual"
+							style={`--contact-visual-bg: url(${tradesRoofer.src})`}
+							aria-hidden="true"
+						></div>
+					</div>
 				</div>
-				<p class="calendly-fallback">
-					<a href="https://calendly.com/tventura94" target="_blank" rel="noopener noreferrer">
-						Open the scheduler in a new tab
-					</a>
-					if the embed does not load.
-				</p>
 			</section>
 
 			<section class="section section-alt direct-section" aria-labelledby="direct-heading">
@@ -93,7 +139,6 @@ const contactJsonLd = {
 		</main>
 	</div>
 	<Footer />
-	<script is:inline async src="https://assets.calendly.com/assets/external/widget.js"></script>
 </Layout>
 
 <style>
@@ -197,6 +242,35 @@ const contactJsonLd = {
 		margin: 1rem 0 0;
 	}
 
+	.hero-direct-contact {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.65rem 1.35rem;
+		margin-top: 1.35rem;
+		max-width: 640px;
+	}
+
+	.hero-direct-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		line-height: 1.35;
+	}
+
+	.hero-direct-link:hover {
+		text-decoration: underline;
+	}
+
+	.hero-direct-link i {
+		font-size: 0.95em;
+		opacity: 0.95;
+	}
+
 	.btn-outline {
 		display: inline-flex;
 		align-items: center;
@@ -222,56 +296,188 @@ const contactJsonLd = {
 		transform: translateY(-1px);
 	}
 
+	.btn-solid {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 0.78rem 1.6rem;
+		border-radius: var(--radius);
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.9rem;
+		cursor: pointer;
+		font-family: inherit;
+		border: 1px solid var(--text);
+		background: var(--text);
+		color: var(--bg);
+		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
+		margin-top: 0.25rem;
+	}
+
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
+	}
+
 	.crumbs-wrap {
 		margin-top: 1.2rem;
 		padding-top: 1rem;
 		border-top: 1px solid var(--border);
 	}
 
-	.cal-section {
+	.section.contact-form-section {
+		max-width: 1100px;
+	}
+
+	.contact-form-section {
 		padding-top: 0.5rem;
 	}
 
-	.calendly-card {
+	.contact-form-card {
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		overflow: visible;
+		overflow: hidden;
 		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+		padding: 0;
 	}
 
-	html[data-theme='light'] .calendly-card {
+	html[data-theme='light'] .contact-form-card {
 		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
 	}
 
-	/* Calendly needs a tall box so the iframe is not trapped in an inner scroll (flow is often 900px+). */
-	.calendly-inline-widget {
-		width: 100%;
-		min-width: 320px;
-		min-height: 1180px;
-		height: 1180px;
+	.contact-form-card__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: auto minmax(200px, 32vw);
+		align-items: stretch;
 	}
 
-	.calendly-inline-widget :global(iframe) {
-		min-height: 1180px !important;
-		height: 1180px !important;
+	.contact-form-card__form-wrap {
+		padding: 1.75rem 1.5rem 2rem;
+		min-width: 0;
 	}
 
-	.calendly-fallback {
-		margin: 1rem 0 0;
-		font-size: 0.92rem;
+	.contact-form-card__visual {
+		position: relative;
+		margin: 0;
+		min-height: 0;
+		background-color: #1a1d24;
+		background-image: var(--contact-visual-bg);
+		background-size: cover;
+		background-position: center 28%;
+		background-repeat: no-repeat;
+		border-top: 1px solid var(--border);
+	}
+
+	.contact-form-card__visual::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: linear-gradient(
+			180deg,
+			rgba(0, 0, 0, 0.12) 0%,
+			transparent 35%,
+			rgba(0, 0, 0, 0.18) 100%
+		);
+	}
+
+	html[data-theme='light'] .contact-form-card__visual::after {
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.1) 0%,
+			transparent 40%,
+			rgba(0, 0, 0, 0.12) 100%
+		);
+	}
+
+	.contact-netlify-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.15rem;
+		max-width: 36rem;
+	}
+
+	@media (min-width: 900px) {
+		.contact-form-card__grid {
+			grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
+			grid-template-rows: minmax(420px, 1fr);
+		}
+
+		.contact-form-card__form-wrap {
+			padding: 1.85rem 1.75rem 2rem 2rem;
+		}
+
+		.contact-form-card__visual {
+			min-height: min(620px, 82vh);
+			border-top: none;
+			border-left: 1px solid var(--border);
+			background-position: center 22%;
+		}
+	}
+
+	.hp-field {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.form-field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.form-field label {
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
 		color: var(--text-muted);
-		text-align: center;
 	}
 
-	.calendly-fallback a {
-		color: var(--accent);
-		font-weight: 600;
-		text-decoration: none;
+	.field-hint {
+		font-weight: 500;
+		text-transform: none;
+		letter-spacing: 0;
+		font-size: 0.85em;
+		opacity: 0.85;
 	}
 
-	.calendly-fallback a:hover {
-		text-decoration: underline;
+	.form-field input,
+	.form-field textarea {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0.75rem 0.9rem;
+		border-radius: var(--radius-sm);
+		border: 1px solid var(--border);
+		background: var(--bg);
+		color: var(--text);
+		font-family: inherit;
+		font-size: 1rem;
+		line-height: 1.45;
+	}
+
+	.form-field textarea {
+		resize: vertical;
+		min-height: 8rem;
+	}
+
+	.form-field input:focus,
+	.form-field textarea:focus {
+		outline: none;
+		border-color: var(--accent);
+		box-shadow: 0 0 0 1px var(--accent);
 	}
 
 	.section-alt {
@@ -384,14 +590,12 @@ const contactJsonLd = {
 			margin-bottom: 1.35rem;
 		}
 
-		.calendly-inline-widget {
-			min-height: 1120px;
-			height: 1120px;
+		.contact-form-card__grid {
+			grid-template-rows: auto minmax(180px, 40vw);
 		}
 
-		.calendly-inline-widget :global(iframe) {
-			min-height: 1120px !important;
-			height: 1120px !important;
+		.contact-form-card__form-wrap {
+			padding: 1.35rem 1.15rem 1.6rem;
 		}
 	}
 </style>
