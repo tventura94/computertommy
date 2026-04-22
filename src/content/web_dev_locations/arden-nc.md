@@ -2,19 +2,20 @@
 h1: Web design in Arden, NC
 heroSubtitle: Clean, fast websites for Arden businesses — no retainers, no bloated templates.
 introBullets:
-  - Built for Arden service businesses and small teams
-  - Optimized for mobile and local search
-  - One-time project — full ownership
-  - Simple calls, quote forms, and clear service pages
+  - Service pages tailored to Arden and South Buncombe search behavior
+  - Conversion-first layouts for calls, quote requests, and short forms
+  - Speed-focused build that performs well on mobile and slower connections
+  - Lean code stack with no page-builder overhead
+  - One project fee and full ownership at handoff
 painPoints:
-  - You’re competing with Asheville listings but don’t have your own site dialed in
-  - Customers find your Google listing but not much else
-  - You need something polished without overcomplicating it
+  - You are buried under Asheville results even when you serve Arden daily
+  - People find your listing but hesitate because the site looks outdated
+  - Your current pages do not explain service areas or next steps clearly
 processSteps:
-  - Brief call to define services and coverage area
-  - You provide branding/photos (or I keep it minimal and sharp)
-  - Preview delivered within a few days
-  - Final revisions, then launch
+  - Align on top services, local positioning, and your best leads
+  - Draft focused page copy around Arden-area demand patterns
+  - Ship a review build with mobile-first CTA placement
+  - Refine, launch, and verify technical SEO basics
 faqs:
   - q: "What makes an Arden website different from an Asheville template site?"
     a: >
@@ -49,13 +50,15 @@ internalLinks:
 
 Arden sits right between Asheville and Hendersonville, and it pulls search traffic from a few directions at once—especially along **Airport Rd**, **Long Shoals Rd**, **Hendersonville Rd**, and the **I-26** corridor. That means competition is tight, and the fastest win is usually clarity: when someone lands on your site, they should immediately understand what you do, what areas you serve, and how to contact you.
 
-A strong Arden site doesn’t need gimmicks or a huge sitemap. It needs:
+For Arden businesses, local web design works best when the site removes friction. People should be able to land, confirm you serve their area, trust what they see, and reach out in seconds.
+
+A strong Arden site does not need gimmicks or a giant sitemap. It needs:
 
 - fast performance on mobile (most visits are on phones)
 - clear service pages that match what people actually search
 - obvious next steps (call, quote request, booking)
 - proof that you’re legit (photos, reviews, before/after, portfolio, FAQs)
 
-And to stay on the right side of Google, it also needs to be _real_. Instead of spinning up a bunch of near-duplicate “city pages,” we can make one solid home base that’s specific about **Arden** and the nearby areas you truly work—like **Royal Pines**, **Skyland**, **South Asheville**, **Fletcher**, or **Biltmore Park**—without pretending your business is headquartered everywhere at once.
+To stay on the right side of Google, it also needs to be _real_. Instead of spinning up near-duplicate city pages, we build a solid home base with true local details for **Arden** and nearby areas you actually serve, like **Royal Pines**, **Skyland**, **South Asheville**, **Fletcher**, or **Biltmore Park**.
 
-Whether you’re a contractor, a local service provider, or a small team that just needs a sharp presence, the objective stays simple: a clean website that positions you as reliable and makes it easy for someone in Arden to hire you.
+Whether you are a contractor, home service business, or local small team, the objective is the same: make your online presence feel trustworthy, specific, and easy to act on for someone searching in Arden right now.

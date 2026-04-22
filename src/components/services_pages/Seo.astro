@@ -27,9 +27,21 @@ const slugIcon: Record<string, string> = {
 	'speed-web-vitals': 'fa-tachometer-alt',
 };
 
+const cardTeaserBySlug: Record<string, string> = {
+	'technical-seo-audit':
+		'Crawl, indexation, redirects, canonicals, and structural blockers mapped into a prioritized fix queue.',
+	'onpage-cleanup':
+		'Sharper titles, headings, internal links, and page messaging so priority pages are easier to rank and convert.',
+	'local-seo':
+		'Location intent mapping, GBP alignment, and local trust signals tuned for calls, quotes, and booked jobs.',
+	'speed-web-vitals':
+		'Performance bottlenecks triaged by impact with focused improvements for LCP, CLS, INP, and mobile UX.',
+};
+
 const seoCards = seoServices.map((s) => ({
 	...s,
 	icon: slugIcon[s.slug] ?? 'fa-file-lines',
+	teaser: cardTeaserBySlug[s.slug] ?? 'Practical SEO work focused on measurable lead quality improvements.',
 }));
 
 const whoFit = [
@@ -366,7 +378,7 @@ const faqItems = [
 					<a class="seo-pillar-card" href={`/services/seo/${s.slug}/`}>
 						<i class:list={['fas', s.icon, 'pillar-icon']} aria-hidden="true"></i>
 						<h3>{s.data.h1 ?? s.slug}</h3>
-						{s.data.heroSubtitle ? <p>{s.data.heroSubtitle}</p> : null}
+						<p>{s.teaser}</p>
 						<span class="pillar-cta">View details</span>
 					</a>
 				))}
