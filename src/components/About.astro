@@ -2,94 +2,135 @@
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
+import Breadcrumbs from './Breadcrumbs.astro';
+import ThemeToggleButton from './ThemeToggleButton.astro';
+
+const eyebrowIcon =
+	'M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z';
 ---
 
-<div id="container">
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<main>
-		<section id="about-section">
-			<a href="/" class="logo">
-				<img src={astroLogo.src} width="115" height="48" alt="Astro Homepage" />
-			</a>
-			
-			<div class="heading-container">
-				<h1>About</h1>
-				<a href="/" class="back-link" aria-label="Back to home">
-					<i class="fas fa-arrow-left"></i>
+<div class="themed-subpage" id="about-page">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+	<img src="/paint-trip.png" alt="" class="about-trip-bg" aria-hidden="true" />
+	<main class="page">
+		<section class="section hero-section">
+			<div class="hero-nav">
+				<a href="/" class="logo-link">
+					<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Homepage" />
 				</a>
+				<div class="hero-nav-end">
+					<ThemeToggleButton />
+					<a href="/services/" class="btn-outline btn-small" aria-label="Back to services">
+						<i class="fas fa-arrow-left"></i>
+						<span>Services</span>
+					</a>
+				</div>
 			</div>
-			
-			<p class="subtitle">
-				Local dev who builds simple sites for small businesses and bands. No agency, no monthly fee traps.
-			</p>
-			
-			<div class="about-content">
-				<div class="about-card">
-					<div class="about-intro">
+
+			<div class="hero-content">
+				<span class="section-eyebrow section-eyebrow--inline">
+					<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor" aria-hidden="true">
+						<path d={eyebrowIcon}></path>
+					</svg>
+					About
+				</span>
+				<h1 class="hero-title">One person. Straight builds.</h1>
+				<p class="hero-desc">
+					Local dev who ships simple sites for small businesses and bands. No agency stack, no monthly fee traps.
+				</p>
+				<div class="hero-actions">
+					<a href="/contact/" class="btn-solid">Get in touch</a>
+					<a href="/services/" class="btn-outline">Services</a>
+				</div>
+			</div>
+
+			<div class="crumbs-wrap">
+				<Breadcrumbs variant="dark" items={[{ href: '/', label: 'Home' }]} current="About" />
+			</div>
+		</section>
+
+		<section class="section section-story" aria-labelledby="story-heading">
+			<span class="section-eyebrow section-eyebrow--muted">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor" aria-hidden="true">
+					<path d={eyebrowIcon}></path>
+				</svg>
+				Who you are hiring
+			</span>
+			<div class="about-card about-card--elevated">
+				<div class="about-intro">
+					<div class="about-photo-wrap">
 						<div class="about-photo">
-							<img src="/tombo_2.jpg" alt="Tom playing bass" width="160" height="160" loading="lazy" />
-						</div>
-						<div class="about-intro-text">
-							<h2>Hi, I'm Tom.</h2>
-							<p class="about-intro-text-p">
-								Bass player, Web developer, Asheville-based. I build websites for bands and small businesses that need something fast, clear, and built to last.
-							</p>
+							<img src="/tombo_2.jpg" alt="Tom playing bass" width="200" height="200" loading="lazy" />
 						</div>
 					</div>
+					<div class="about-intro-text">
+						<h2 class="card-title" id="story-heading">Hi, I'm Tom.</h2>
+						<p class="intro-lead">
+							Bass player, web developer, Asheville-based. I build websites for bands and small businesses that need something fast, clear, and built to last.
+						</p>
+					</div>
+				</div>
+				<hr class="about-divider" />
+				<div class="prose-block">
 					<p>
 						Most local businesses don't need a bloated platform or a stack of monthly subscriptions. They need a site that loads quickly, shows up in search, and gives customers what they're looking for without friction. When a site is built well and sized for the actual traffic it gets, it performs better and costs a lot less to keep online.
 					</p>
-					<p>
-						That's how I approach things.
-					</p>
+					<p>That's how I approach things.</p>
 					<p>
 						I build lightweight, modern sites that are fast, SEO-friendly, and easy to maintain. When we're done, you own the site. No lock-in, no ongoing fees unless you actually want ongoing work. Straightforward pricing and infrastructure that matches what you actually need.
 					</p>
-					<p>
-						In many cases, your only ongoing cost is the domain each year.
-					</p>
+					<p>In many cases, your only ongoing cost is the domain each year.</p>
 					<p>
 						If that sounds like the kind of setup you're after, <a href="/contact/">tell us what you're trying to build</a>.
 					</p>
 				</div>
-				
-				<div class="about-card">
-					<h2>How this works</h2>
-					<div class="process-steps">
-						<div class="step">
-							<div class="step-number">1</div>
-							<div class="step-content">
-								<h3>You message us</h3>
-								<p>Tell us what you need. We talk for ~10 minutes.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">2</div>
-							<div class="step-content">
-								<h3>We quote it</h3>
-								<p>Straight price. No subscriptions, no surprise invoices.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">3</div>
-							<div class="step-content">
-								<h3>We build it</h3>
-								<p>Clean, fast site.</p>
-							</div>
-						</div>
-						<div class="step">
-							<div class="step-number">4</div>
-							<div class="step-content">
-								<h3>You own it</h3>
-								<p>It's yours. No monthly lock-in.</p>
-							</div>
-						</div>
-					</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" aria-labelledby="process-heading">
+			<div class="section-header">
+				<span class="section-eyebrow section-eyebrow--muted">
+					<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor" aria-hidden="true">
+						<path d={eyebrowIcon}></path>
+					</svg>
+					Process
+				</span>
+				<h2 class="section-title" id="process-heading">How this works</h2>
+				<p class="section-lead">
+					Four steps from first message to a site you control. Same person the whole way.
+				</p>
+			</div>
+			<div class="process-grid">
+				<div class="process-step">
+					<span class="step-num">01</span>
+					<h3 class="step-title">You message us</h3>
+					<p>Tell us what you need. We talk for about 10 minutes.</p>
 				</div>
-				
-				<div class="cta-container">
-					<p class="cta-text">Want to skip the runaround?</p>
-					<a href="/contact/" class="button primary">Tell us what you need</a>
+				<div class="process-step">
+					<span class="step-num">02</span>
+					<h3 class="step-title">We quote it</h3>
+					<p>Straight price. No subscriptions, no surprise invoices.</p>
+				</div>
+				<div class="process-step">
+					<span class="step-num">03</span>
+					<h3 class="step-title">We build it</h3>
+					<p>Clean code, fast load, tuned for phones.</p>
+				</div>
+				<div class="process-step">
+					<span class="step-num">04</span>
+					<h3 class="step-title">You own it</h3>
+					<p>It's yours. No monthly lock-in.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section cta-section">
+			<div class="cta-inner">
+				<h2>Want to skip the runaround?</h2>
+				<p class="cta-lead">Share what you need. I will reply with next steps and a ballpark, not a funnel.</p>
+				<div class="cta-actions">
+					<a href="/contact/" class="btn-solid">Start a conversation</a>
+					<a href="/portfolio/" class="btn-outline">See work</a>
 				</div>
 			</div>
 		</section>
@@ -97,121 +138,290 @@ import background from '../assets/background.svg';
 </div>
 
 <style>
-	#background {
+	.bg-blur {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		z-index: -1;
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.16;
+		pointer-events: none;
+	}
+
+	html[data-theme='light'] #about-page .bg-blur {
+		opacity: 0.08;
 		filter: blur(100px);
 	}
 
-	#container {
-		font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
-		min-height: 100%;
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0 1rem;
+	.about-trip-bg {
+		position: fixed;
+		left: 40%;
+		top: 6%;
+		width: min(220vw, 2200px);
+		height: auto;
+		max-width: none;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.22;
+		mix-blend-mode: lighten;
+		transform: translateX(-48%) rotate(-2deg);
 	}
 
-	main {
-		min-height: 100%;
-		display: flex;
-		justify-content: center;
+	html[data-theme='light'] #about-page .about-trip-bg {
+		mix-blend-mode: soft-light;
+		opacity: 0.26;
 	}
 
-	#about-section {
-		display: flex;
-		align-items: start;
-		flex-direction: column;
-		justify-content: center;
-		padding: 3rem 0;
-		width: 100%;
+	.page {
 		position: relative;
+		z-index: 1;
 	}
 
-	.heading-container {
+	.section {
+		max-width: 900px;
+		margin: 0 auto;
+		padding: 3rem 1.5rem;
+	}
+
+	.section-story {
+		padding-top: 1rem;
+	}
+
+	.section-alt {
+		max-width: none;
+		background: var(--surface);
+	}
+
+	.section-alt > .section-header,
+	.section-alt > .process-grid {
+		max-width: 900px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+
+	.hero-section {
+		padding-top: 2rem;
+	}
+
+	.hero-nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 100%;
-		margin-top: 0.25em;
-	}
-	
-	h1 {
-		font-size: 2.5rem;
-		margin: 0;
-		line-height: 1.2;
-	}
-	
-	h2 {
-		font-size: 1.75rem;
-		margin: 0 0 1rem 0;
-		color: #111827;
-	}
-	
-	h3 {
-		font-size: 1.25rem;
-		margin: 0 0 0.5rem 0;
-		color: #111827;
-	}
-	
-	.back-link {
-		color: #4b5563;
-		font-size: 1.125rem;
-		transition: transform 0.2s ease, color 0.2s ease;
-	}
-	
-	.back-link:hover {
-		color: #111827;
-		transform: translateX(-3px);
+		margin-bottom: 2rem;
 	}
 
-	p {
-		color: #4b5563;
-		font-size: 1.125rem;
+	.hero-nav-end {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+	}
+
+	.logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		text-decoration: none;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-content {
+		max-width: 760px;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+	}
+
+	.section-header {
+		max-width: 720px;
+		margin-bottom: 1.5rem;
+	}
+
+	.section-story > .section-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.section-eyebrow--inline {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--accent);
+	}
+
+	.section-eyebrow--muted {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.eyebrow-icon {
+		width: 1rem;
+		height: 1rem;
+		flex-shrink: 0;
+		opacity: 0.85;
+	}
+
+	.section-lead {
+		margin: 0.75rem 0 0;
+		max-width: 620px;
+		color: var(--text-muted);
+		font-size: clamp(0.98rem, 1.6vw, 1.1rem);
 		line-height: 1.6;
-		letter-spacing: -0.006em;
-		margin: 0 0 1.5rem 0;
 	}
 
-	.logo {
-		transition: transform 0.2s ease;
+	.hero-title,
+	.section-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
-	.logo:hover {
-		transform: scale(1.05);
+	.hero-title {
+		font-size: clamp(2.4rem, 8vw, 4.25rem);
+		line-height: 0.95;
 	}
 
-	.subtitle {
-		font-size: 1.3rem;
-		max-width: 800px;
-		margin: 1.5rem 0 2.5rem 0;
-		color: #374151;
-		font-weight: 500;
+	.section-title {
+		font-size: clamp(1.85rem, 5vw, 3rem);
+		line-height: 1;
 	}
 
-	.about-content {
-		width: 100%;
+	.hero-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		line-height: 1.55;
+		max-width: 640px;
+		margin: 1rem 0 0;
+	}
+
+	html[data-theme='light'] #about-page .section-eyebrow--inline {
+		color: var(--accent);
+	}
+
+	.btn-solid,
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 0.78rem 1.6rem;
+		border-radius: var(--radius);
+		text-decoration: none;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: 0.9rem;
+		transition:
+			background 0.25s,
+			color 0.25s,
+			border-color 0.25s,
+			transform 0.15s;
+	}
+
+	.btn-solid {
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+	}
+
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+	}
+
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.btn-small {
+		padding: 0.6rem 1rem;
+		font-size: 0.86rem;
+	}
+
+	.crumbs-wrap {
+		margin-top: 1.2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--border);
 	}
 
 	.about-card {
-		background: rgba(255, 255, 255, 0.8);
-		border-radius: 16px;
-		padding: 2rem;
-		margin-bottom: 2rem;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.75rem 1.65rem;
 	}
 
-	.about-card a {
-		color: #3245ff;
-		text-decoration: none;
-		font-weight: 500;
+	.about-card--elevated {
+		box-shadow:
+			0 1px 0 rgba(255, 255, 255, 0.06) inset,
+			0 24px 48px rgba(0, 0, 0, 0.35);
+		background: linear-gradient(165deg, rgba(249, 115, 22, 0.06) 0%, var(--surface) 42%);
+		position: relative;
+		overflow: hidden;
 	}
 
-	.about-card a:hover {
-		text-decoration: underline;
+	.about-card--elevated::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgba(249, 115, 22, 0.55),
+			rgba(249, 115, 22, 0.85),
+			rgba(249, 115, 22, 0.55),
+			transparent
+		);
+		opacity: 0.9;
+		pointer-events: none;
+	}
+
+	html[data-theme='light'] #about-page .about-card--elevated {
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+		background: linear-gradient(165deg, rgba(249, 115, 22, 0.08) 0%, #fff 45%);
+	}
+
+	html[data-theme='light'] #about-page .about-card--elevated::before {
+		opacity: 0.85;
 	}
 
 	.about-intro {
@@ -221,13 +431,24 @@ import background from '../assets/background.svg';
 		margin-bottom: 1.5rem;
 	}
 
-	.about-photo {
+	.about-photo-wrap {
 		flex-shrink: 0;
-		width: 200px;
-		height: 200px;
-		border-radius: 10px;
+		padding: 3px;
+		border-radius: calc(var(--radius-sm) + 3px);
+		background: linear-gradient(145deg, rgba(249, 115, 22, 0.45), rgba(249, 115, 22, 0.12));
+	}
+
+	html[data-theme='light'] #about-page .about-photo-wrap {
+		background: linear-gradient(145deg, rgba(217, 93, 12, 0.35), rgba(217, 93, 12, 0.1));
+	}
+
+	.about-photo {
+		width: 160px;
+		height: 160px;
+		border-radius: var(--radius-sm);
 		overflow: hidden;
-		background: #e5e7eb;
+		background: var(--bg);
+		border: 1px solid var(--border);
 	}
 
 	.about-photo img {
@@ -242,156 +463,203 @@ import background from '../assets/background.svg';
 		min-width: 0;
 	}
 
-	.about-intro-text h2 {
-		margin-top: 0;
+	.card-title {
+		font-family: var(--font-display);
+		font-size: clamp(1.85rem, 4vw, 2.5rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0 0 0.65rem;
+		line-height: 1;
+		color: var(--text);
 	}
 
-	.about-intro-text p {
-		margin-bottom: 0;
-		width: 80%;
-		font-size: 1.4rem;
+	.intro-lead {
+		margin: 0;
+		font-size: clamp(1rem, 1.8vw, 1.12rem);
+		line-height: 1.55;
+		color: var(--text-muted);
+		max-width: 36rem;
 	}
 
-	.feature-list {
-		list-style: none;
-		padding: 0;
-		margin: 1.5rem 0 0 0;
+	.about-divider {
+		border: none;
+		height: 1px;
+		margin: 0 0 1.35rem;
+		background: linear-gradient(90deg, transparent, var(--border), transparent);
+		opacity: 0.95;
 	}
 
-	.feature-list li {
-		display: flex;
-		align-items: flex-start;
-		margin-bottom: 1rem;
-		font-size: 1.1rem;
+	.prose-block {
+		max-width: 42rem;
 	}
 
-	.icon {
-		color: #3245ff;
-		margin-right: 0.75rem;
-		font-weight: bold;
+	.prose-block p {
+		margin: 0 0 1rem;
+		color: var(--text-muted);
+		line-height: 1.65;
+		font-size: clamp(0.98rem, 1.55vw, 1.06rem);
 	}
 
-	.process-steps {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		margin-top: 1.5rem;
-	}
-
-	.step {
-		display: flex;
-		gap: 1rem;
-	}
-
-	.step-number {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		width: 36px;
-		height: 36px;
-		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-weight: bold;
-		flex-shrink: 0;
-	}
-
-	.step-content {
-		flex: 1;
-	}
-
-	.step-content p {
+	.prose-block p:last-child {
 		margin-bottom: 0;
 	}
 
-	.cta-container {
-		background: linear-gradient(to right, rgba(50, 69, 255, 0.1), rgba(188, 82, 238, 0.1));
-		border-radius: 16px;
-		padding: 2rem;
-		text-align: center;
-		margin-top: 3rem;
-	}
-
-	.cta-text {
-		font-size: 1.3rem;
-		font-weight: 500;
-		margin-bottom: 1.5rem;
-		color: #111827;
-	}
-
-	.button {
-		padding: 14px 28px;
-		border-radius: 8px;
+	.prose-block a {
+		color: var(--accent);
+		font-weight: 600;
 		text-decoration: none;
-		font-weight: 500;
-		font-size: 1.1rem;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		display: inline-block;
 	}
 
-	.button:hover {
+	.prose-block a:hover {
+		text-decoration: underline;
+	}
+
+	.process-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 0.75rem;
+		padding-bottom: 3rem;
+	}
+
+	.process-step {
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.35rem;
+		transition:
+			border-color 0.2s ease,
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.process-step:hover {
+		border-color: rgba(249, 115, 22, 0.35);
 		transform: translateY(-2px);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
 	}
 
-	.button.primary {
-		background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
-		color: white;
-		box-shadow: 0 4px 12px rgba(50, 69, 255, 0.2);
+	html[data-theme='light'] #about-page .process-step:hover {
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+		border-color: rgba(217, 93, 12, 0.35);
 	}
 
-	@media screen and (max-width: 768px) {
-		#about-section {
-			padding: 2rem 0;
+	html[data-theme='light'] #about-page .section-alt .process-step {
+		background: #fff;
+	}
+
+	.step-num {
+		display: block;
+		font-size: 1.75rem;
+		font-weight: 800;
+		color: var(--accent);
+		letter-spacing: -0.03em;
+		margin-bottom: 0.35rem;
+		line-height: 1;
+	}
+
+	.step-title {
+		margin: 0 0 0.45rem;
+		font-size: 0.95rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--text-muted);
+		font-family: inherit;
+	}
+
+	.process-step p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.95rem;
+		line-height: 1.5;
+	}
+
+	.cta-section {
+		text-align: center;
+		padding-bottom: 4rem;
+	}
+
+	.cta-inner {
+		max-width: 640px;
+		margin: 0 auto;
+		border: 1px solid var(--border);
+		background: var(--surface);
+		border-radius: var(--radius);
+		padding: 2rem 1.5rem;
+	}
+
+	.cta-inner h2 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: clamp(1.75rem, 5vw, 3rem);
+		line-height: 1.05;
+		margin: 0 0 0.65rem;
+	}
+
+	.cta-lead {
+		margin: 0 auto 1.25rem;
+		color: var(--text-muted);
+		font-size: 1rem;
+		line-height: 1.55;
+		max-width: 460px;
+	}
+
+	.cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	@media (max-width: 768px) {
+		.about-trip-bg {
+			width: 300vw;
+			top: 2%;
+			opacity: 0.14;
 		}
-		
-		h1 {
-			font-size: 1.8rem;
+
+		.section {
+			padding: 2.5rem 1rem;
 		}
-		
-		h2 {
-			font-size: 1.5rem;
+
+		.hero-section {
+			padding-top: 1.4rem;
 		}
-		
-		.subtitle {
-			font-size: 1.1rem;
+
+		.hero-nav {
+			margin-bottom: 1.3rem;
 		}
-		
-		.about-card {
-			padding: 1.5rem;
-		}
-		
+
 		.about-intro {
 			flex-direction: column;
 			align-items: flex-start;
 		}
 
-		.about-intro-text p {
-			width: 100%;
-		}
 		.about-photo {
-			width: 100px;
-			height: 100px;
+			width: 120px;
+			height: 120px;
 		}
-		
-		.process-steps {
-			gap: 1.25rem;
+
+		.process-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.hero-actions,
+		.cta-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.btn-solid,
+		.btn-outline {
+			min-height: 46px;
+		}
+
+		.btn-solid {
+			justify-content: center;
 		}
 	}
-
-	@keyframes fadeIn {
-		from { opacity: 0; transform: translateY(20px); }
-		to { opacity: 1; transform: translateY(0); }
-	}
-
-	#about-section > * {
-		animation: fadeIn 0.5s ease-out forwards;
-		opacity: 0;
-	}
-
-	#about-section > *:nth-child(1) { animation-delay: 0.1s; }
-	#about-section > *:nth-child(2) { animation-delay: 0.2s; }
-	#about-section > *:nth-child(3) { animation-delay: 0.3s; }
-	#about-section > *:nth-child(4) { animation-delay: 0.4s; }
 </style>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
