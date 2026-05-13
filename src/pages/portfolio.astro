@@ -7,6 +7,34 @@ import ThemeToggleButton from '../components/ThemeToggleButton.astro';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
 import { portfolioItems } from '../data/portfolio';
+
+type FilterGroup = 'business' | 'music' | 'other';
+
+function groupOf(category: string): FilterGroup {
+	if (category === 'Service site' || category === 'Business site') return 'business';
+	if (category === 'Band site') return 'music';
+	return 'other';
+}
+
+const accentByGroup: Record<FilterGroup, string> = {
+	business: 'var(--accent)',
+	music: 'var(--accent-pink)',
+	other: 'var(--accent-purple)',
+};
+
+const totalCount = 50;
+const businessCount = portfolioItems.filter((p) => groupOf(p.category) === 'business').length;
+const musicCount = portfolioItems.filter((p) => groupOf(p.category) === 'music').length;
+const otherCount = portfolioItems.filter((p) => groupOf(p.category) === 'other').length;
+
+const filters: { id: 'all' | FilterGroup; label: string; count: number }[] = [
+	{ id: 'all', label: 'All work', count: totalCount },
+	{ id: 'business', label: 'Service businesses', count: businessCount },
+	{ id: 'music', label: 'Bands and music', count: musicCount },
+	{ id: 'other', label: 'Other', count: otherCount },
+];
+
+const ctaInsertAfter = Math.min(5, Math.max(2, portfolioItems.length - 3));
 ---
 
 <Layout
@@ -18,27 +46,66 @@ import { portfolioItems } from '../data/portfolio';
 	<div class="themed-subpage">
 		<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
 		<img src="/portfolio/bg-img-ct.png" alt="" class="portfolio-brush-bg" aria-hidden="true" />
+
 		<main class="page">
-			<section class="hero section">
+			<!-- HERO -->
+			<section class="hero">
 				<div class="hero-nav">
 					<a href="/" class="logo-link">
 						<img src={astroLogo.src} width="115" height="48" alt="Computer Tommy Home" />
 					</a>
 					<div class="hero-nav-end">
 						<ThemeToggleButton />
-						<a href="/" class="btn-outline btn-small" aria-label="Back to home">
+						<a href="/" class="btn-ghost" aria-label="Back to home">
 							<i class="fas fa-arrow-left"></i>
 							<span>Home</span>
 						</a>
 					</div>
 				</div>
 
-				<div class="hero-content">
-					<span class="section-eyebrow">Selected work</span>
-					<h1 class="hero-title">Sites we have built</h1>
-					<p class="hero-desc">
-						What each client needed, what shipped, and how visitors get to a clear next step. One builder, fixed scopes when it makes sense, and no surprise monthly trap on the builds listed here.
-					</p>
+				<div class="hero-inner">
+					<div class="hero-aurora hero-aurora--a" aria-hidden="true"></div>
+					<div class="hero-aurora hero-aurora--b" aria-hidden="true"></div>
+
+					<div class="hero-content">
+						<span class="eyebrow">
+							<span class="eyebrow-dot"></span>
+							The portfolio · {totalCount} projects
+						</span>
+						<h1 class="hero-title">
+							Real sites for <span class="title-mark">service businesses</span>
+							that need to show up on Google.
+						</h1>
+						<p class="hero-desc">
+							Every project on this page was built by one person. <b>All sites</b> are ranked on Google within three months. None are stuck behind agency contracts. Take a look, then let's build yours.
+						</p>
+						<div class="hero-actions">
+							<a href="/contact/" class="btn-solid">
+								<span>Start a project</span>
+								<i class="fas fa-arrow-right" aria-hidden="true"></i>
+							</a>
+							<a href="/#simple-pricing" class="btn-outline">See plans</a>
+						</div>
+					</div>
+
+					<dl class="hero-stats" aria-label="Track record">
+						<div class="stat">
+							<dt class="stat-num">{totalCount}<span class="stat-suffix">+</span></dt>
+							<dd class="stat-label">Sites shipped</dd>
+						</div>
+						<div class="stat">
+							<dt class="stat-num">3<span class="stat-suffix">mo</span></dt>
+							<dd class="stat-label">Rank target</dd>
+						</div>
+						<div class="stat">
+							<dt class="stat-num">100<span class="stat-suffix">%</span></dt>
+							<dd class="stat-label">Client owned</dd>
+						</div>
+						<div class="stat">
+							<dt class="stat-num">0</dt>
+							<dd class="stat-label">Long contracts</dd>
+						</div>
+					</dl>
 				</div>
 
 				<div class="crumbs-wrap">
@@ -46,39 +113,133 @@ import { portfolioItems } from '../data/portfolio';
 				</div>
 			</section>
 
-			<section class="section grid-section" aria-labelledby="work-heading">
-				<h2 class="visually-hidden" id="work-heading">Portfolio projects</h2>
-				<div class="portfolio-grid">
-					{portfolioItems.map((item) => (
-						<article class="portfolio-card">
-							<div class="preview-wrap">
-								{item.previewImage ? (
-									<img
-										src={item.previewImage}
-										alt={`Preview of ${item.title}`}
-										class="preview-img preview-img--static"
-									/>
-								) : (
-									<iframe
-										title={`Live preview of ${item.title}`}
-										data-src={item.url}
-										class="preview-iframe"
-										aria-hidden="true"
-										tabindex="-1"
-									/>
+			<!-- FILTERS + GRID -->
+			<section class="work" aria-labelledby="work-heading">
+				<div class="work-head">
+					<h2 class="visually-hidden" id="work-heading">Portfolio projects</h2>
+					<div class="filter-bar" role="tablist" aria-label="Filter portfolio by category">
+						{filters.map((f, i) => (
+							<button
+								type="button"
+								class={`filter-pill${i === 0 ? ' is-active' : ''}`}
+								data-filter={f.id}
+								role="tab"
+								aria-selected={i === 0 ? 'true' : 'false'}
+							>
+								<span class="filter-pill-label">{f.label}</span>
+								<span class="filter-pill-count">{f.count}</span>
+							</button>
+						))}
+					</div>
+					<p class="filter-note">Click a card to open the live site in a new tab.</p>
+				</div>
+
+				<div class="portfolio-grid" data-grid>
+					{portfolioItems.map((item, idx) => {
+						const group = groupOf(item.category);
+						return (
+							<>
+								<article
+									class="portfolio-card"
+									data-group={group}
+									style={`--card-accent: ${accentByGroup[group]};`}
+								>
+									<a class="card-shell" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${item.title}`}>
+										<div class="preview-wrap">
+											{item.previewImage ? (
+												<img
+													src={item.previewImage}
+													alt={`Preview of ${item.title}`}
+													class="preview-img preview-img--static"
+													loading="lazy"
+												/>
+											) : (
+												<iframe
+													title={`Live preview of ${item.title}`}
+													data-src={item.url}
+													class="preview-iframe"
+													aria-hidden="true"
+													tabindex="-1"
+													loading="lazy"
+												/>
+											)}
+											<span class="card-num">{String(idx + 1).padStart(2, '0')}</span>
+											<span class="card-visit">
+												Visit site
+												<i class="fas fa-arrow-right" aria-hidden="true"></i>
+											</span>
+										</div>
+
+										<div class="card-body">
+											<div class="card-meta">
+												<span class="category-tag">{item.category}</span>
+												<span class="card-host">{item.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span>
+											</div>
+											<h3 class="card-title">{item.title}</h3>
+											<div class="card-story">
+												<p class="story-line story-line--need">
+													<span class="story-label">Needed</span>
+													<span class="story-text">{item.whatTheyNeeded}</span>
+												</p>
+												<p class="story-line story-line--shipped">
+													<span class="story-label">Shipped</span>
+													<span class="story-text">{item.result}</span>
+												</p>
+											</div>
+										</div>
+									</a>
+								</article>
+
+								{idx === ctaInsertAfter && (
+									<article class="portfolio-cta-card" data-group="all">
+										<div class="cta-card-grain" aria-hidden="true"></div>
+										<span class="cta-card-eyebrow">Spot a fit?</span>
+										<h3 class="cta-card-title">Your business could be next on this page.</h3>
+										<p class="cta-card-text">If any of these look like the kind of site you want, tell me about your business. I'll send back a plan and a quote within a day.</p>
+										<a href="/contact/" class="cta-card-btn">
+											<span>Get a quote</span>
+											<i class="fas fa-arrow-right" aria-hidden="true"></i>
+										</a>
+									</article>
 								)}
-							</div>
-							<div class="card-body">
-								<span class="category">{item.category}</span>
-								<h3 class="card-title">{item.title}</h3>
-								<p class="need">{item.whatTheyNeeded}</p>
-								<p class="result">{item.result}</p>
-								<a href={item.url} target="_blank" rel="noopener noreferrer" class="card-link">
-									Visit site <i class="fas fa-external-link-alt" aria-hidden="true"></i>
-								</a>
-							</div>
-						</article>
-					))}
+							</>
+						);
+					})}
+				</div>
+
+				<p class="empty-state" data-empty hidden>No projects in that category yet. Try "All work".</p>
+			</section>
+
+			<!-- CLOSING CTA -->
+			<section class="end-cta-section" aria-labelledby="end-cta-heading">
+				<div class="end-cta">
+					<div class="end-cta-bg" aria-hidden="true"></div>
+					<div class="end-cta-rule" aria-hidden="true"></div>
+
+					<div class="end-cta-content">
+						<span class="eyebrow eyebrow--centered">
+							<span class="eyebrow-dot"></span>
+							Ready to ship?
+						</span>
+						<h2 class="end-cta-title" id="end-cta-heading">
+							Let's get your business <span class="title-underline">on Google</span>.
+						</h2>
+						<p class="end-cta-desc">
+							Tell me a little about your business. I'll respond with a plan, a real quote, and a timeline. No agencies, no upsells, no monthly retainer trap.
+						</p>
+						<div class="end-cta-actions">
+							<a href="/contact/" class="btn-solid btn-lg">
+								<span>Start a project</span>
+								<i class="fas fa-arrow-right" aria-hidden="true"></i>
+							</a>
+							<a href="/#simple-pricing" class="btn-outline btn-lg">See pricing</a>
+						</div>
+						<ul class="trust-row" aria-label="What you get">
+							<li><i class="fas fa-check" aria-hidden="true"></i>One builder, no middlemen</li>
+							<li><i class="fas fa-check" aria-hidden="true"></i>Rank target in 3 months</li>
+							<li><i class="fas fa-check" aria-hidden="true"></i>You own the site</li>
+						</ul>
+					</div>
 				</div>
 			</section>
 		</main>
@@ -112,33 +273,31 @@ import { portfolioItems } from '../data/portfolio';
 		mix-blend-mode: lighten;
 	}
 
-	.hero-nav-end {
-		display: flex;
-		align-items: center;
-		gap: 0.65rem;
-	}
-
 	.page {
 		position: relative;
 		z-index: 1;
 	}
 
-	.section {
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 0 1.5rem 4rem;
-	}
-
+	/* ═══════════════════════════════════════
+	   Hero
+	   ═══════════════════════════════════════ */
 	.hero {
-		padding-top: 2rem;
-		padding-bottom: 1rem;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 2rem 1.5rem 1.25rem;
 	}
 
 	.hero-nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 2rem;
+		margin-bottom: 2.25rem;
+	}
+
+	.hero-nav-end {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
 	}
 
 	.logo-link {
@@ -151,55 +310,201 @@ import { portfolioItems } from '../data/portfolio';
 		opacity: 1;
 	}
 
-	.hero-content {
-		max-width: 900px;
+	.btn-ghost {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.55rem 0.95rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		border-radius: 999px;
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+		text-decoration: none;
+		transition: background 0.25s, border-color 0.25s, transform 0.15s;
 	}
 
-	.section-eyebrow {
-		display: inline-block;
+	.btn-ghost:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.hero-inner {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+		gap: 2.5rem;
+		align-items: end;
+		padding: 2.5rem;
+		border: 1px solid var(--border);
+		border-radius: calc(var(--radius) * 1.4);
+		background:
+			linear-gradient(165deg, color-mix(in srgb, var(--surface) 90%, transparent) 0%, var(--surface) 100%);
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.hero-aurora {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(110px);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.hero-aurora--a {
+		top: -120px;
+		left: -120px;
+		width: 460px;
+		height: 460px;
+		background: var(--accent);
+		opacity: 0.22;
+	}
+
+	.hero-aurora--b {
+		bottom: -160px;
+		right: -120px;
+		width: 460px;
+		height: 460px;
+		background: var(--accent-purple);
+		opacity: 0.16;
+	}
+
+	.hero-content,
+	.hero-stats {
+		position: relative;
+		z-index: 1;
+	}
+
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		font-family: var(--font-display);
-		font-size: 1.2rem;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
+		font-size: 0.95rem;
+		letter-spacing: 0.18em;
 		color: var(--text-muted);
-		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+		margin-bottom: 1rem;
+	}
+
+	.eyebrow--centered {
+		justify-content: center;
+	}
+
+	.eyebrow-dot {
+		display: inline-block;
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--accent);
+		box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 60%, transparent);
 	}
 
 	.hero-title {
 		font-family: var(--font-display);
 		font-weight: 400;
 		text-transform: uppercase;
-		letter-spacing: 0.02em;
+		letter-spacing: 0.005em;
 		margin: 0;
-		font-size: clamp(2.4rem, 8vw, 5rem);
-		line-height: 0.95;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
+		font-size: clamp(2.5rem, 6.2vw, 5.25rem);
+		line-height: 0.92;
+		color: var(--text);
+	}
+
+	.title-mark {
+		background: linear-gradient(120deg, var(--accent), var(--accent-pink));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	.title-underline {
+		position: relative;
+		display: inline-block;
+		white-space: nowrap;
+	}
+
+	.title-underline::after {
+		content: '';
+		position: absolute;
+		left: -2%;
+		right: -2%;
+		bottom: 0.05em;
+		height: 0.18em;
+		background: linear-gradient(90deg, transparent, var(--accent) 15%, var(--accent-pink) 85%, transparent);
+		border-radius: 999px;
+		opacity: 0.85;
 	}
 
 	.hero-desc {
 		color: var(--text-muted);
-		font-size: clamp(1rem, 2vw, 1.2rem);
-		line-height: 1.55;
-		max-width: 720px;
-		margin: 1rem 0 0;
+		font-size: clamp(1rem, 1.4vw, 1.18rem);
+		line-height: 1.6;
+		max-width: 56ch;
+		margin: 1.25rem 0 0;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.75rem;
+	}
+
+	.btn-solid {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		padding: 0.9rem 1.6rem;
+		font-size: 0.95rem;
+		font-weight: 500;
+		font-family: var(--font);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border-radius: 999px;
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+		text-decoration: none;
+		transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
+	}
+
+	.btn-solid:hover {
+		background: var(--accent);
+		color: #fff;
+		border-color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 14px 32px -10px color-mix(in srgb, var(--accent) 55%, transparent);
+	}
+
+	.btn-solid i {
+		transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.btn-solid:hover i {
+		transform: translateX(3px);
 	}
 
 	.btn-outline {
 		display: inline-flex;
 		align-items: center;
-		justify-content: center;
 		gap: 0.55rem;
-		padding: 0.6rem 1rem;
-		font-size: 0.86rem;
-		border-radius: var(--radius);
-		text-decoration: none;
-		font-weight: 600;
+		padding: 0.9rem 1.6rem;
+		font-size: 0.95rem;
+		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.03em;
+		letter-spacing: 0.05em;
+		border-radius: 999px;
 		background: transparent;
 		color: var(--text);
 		border: 1px solid var(--border);
+		text-decoration: none;
 		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
 	}
 
@@ -210,16 +515,135 @@ import { portfolioItems } from '../data/portfolio';
 		transform: translateY(-1px);
 	}
 
+	.btn-lg {
+		padding: 1.05rem 2rem;
+		font-size: 1rem;
+	}
+
+	.hero-stats {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.25rem 0.5rem;
+		align-self: end;
+		padding: 0;
+		margin: 0;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		padding-left: 1rem;
+		border-left: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+	}
+
+	.stat-num {
+		font-family: var(--font-display);
+		font-size: clamp(2.4rem, 4vw, 3.4rem);
+		line-height: 0.9;
+		color: var(--text);
+		letter-spacing: -0.01em;
+		margin: 0;
+	}
+
+	.stat-suffix {
+		font-size: 0.45em;
+		color: var(--accent);
+		margin-left: 0.15em;
+		letter-spacing: 0.04em;
+	}
+
+	.stat-label {
+		font-family: var(--font);
+		font-size: 0.78rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin: 0;
+	}
+
 	.crumbs-wrap {
-		margin-top: 1.2rem;
+		margin-top: 1.5rem;
 		padding-top: 1rem;
 		border-top: 1px solid var(--border);
 	}
 
-	.grid-section {
-		padding-top: 0.5rem;
+	/* ═══════════════════════════════════════
+	   Filter bar + work head
+	   ═══════════════════════════════════════ */
+	.work {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 1.5rem 1.5rem 3.5rem;
 	}
 
+	.work-head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.filter-bar {
+		display: inline-flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		padding: 0.35rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: 999px;
+	}
+
+	.filter-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.55rem 1rem;
+		font-family: var(--font);
+		font-size: 0.85rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		border-radius: 999px;
+		border: none;
+		background: transparent;
+		color: var(--text-muted);
+		cursor: pointer;
+		transition: background 0.2s, color 0.2s;
+	}
+
+	.filter-pill:hover {
+		color: var(--text);
+	}
+
+	.filter-pill.is-active {
+		background: var(--text);
+		color: var(--bg);
+	}
+
+	.filter-pill-count {
+		display: inline-block;
+		min-width: 1.4em;
+		padding: 0.05em 0.45em;
+		font-size: 0.7rem;
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		text-align: center;
+		border-radius: 999px;
+		background: color-mix(in srgb, currentColor 12%, transparent);
+		color: inherit;
+	}
+
+	.filter-note {
+		margin: 0;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	/* ═══════════════════════════════════════
+	   Grid + cards
+	   ═══════════════════════════════════════ */
 	.portfolio-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
@@ -228,19 +652,45 @@ import { portfolioItems } from '../data/portfolio';
 	}
 
 	.portfolio-card {
+		--card-accent: var(--accent);
+		position: relative;
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+		isolation: isolate;
+		transition:
+			transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+			border-color 0.3s,
+			box-shadow 0.35s;
+	}
+
+	.portfolio-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--card-accent), transparent 75%);
+		z-index: 2;
+		opacity: 0.85;
 	}
 
 	.portfolio-card:hover {
-		border-color: rgba(249, 115, 22, 0.35);
-		transform: translateY(-3px);
-		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+		border-color: color-mix(in srgb, var(--card-accent) 55%, var(--border));
+		transform: translateY(-4px);
+		box-shadow: 0 22px 56px -22px color-mix(in srgb, var(--card-accent) 55%, transparent);
+	}
+
+	.card-shell {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		color: inherit;
+		text-decoration: none;
 	}
 
 	.preview-wrap {
@@ -259,6 +709,7 @@ import { portfolioItems } from '../data/portfolio';
 		height: 100%;
 		object-fit: cover;
 		z-index: 1;
+		transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
 	.preview-img--static {
@@ -277,20 +728,93 @@ import { portfolioItems } from '../data/portfolio';
 		transform-origin: top left;
 	}
 
+	.portfolio-card:hover .preview-img {
+		transform: scale(1.04);
+	}
+
+	.card-num {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.85rem;
+		z-index: 2;
+		font-family: var(--font-display);
+		font-size: 1.65rem;
+		line-height: 0.9;
+		color: var(--card-accent);
+		letter-spacing: -0.02em;
+		text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+		pointer-events: none;
+	}
+
+	.card-visit {
+		position: absolute;
+		bottom: 0.85rem;
+		right: 0.85rem;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.5rem 0.9rem;
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #fff;
+		background: var(--card-accent);
+		border-radius: 999px;
+		opacity: 0;
+		transform: translateY(8px);
+		transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+		box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--card-accent) 70%, transparent);
+	}
+
+	.card-visit i {
+		font-size: 0.8em;
+	}
+
+	.portfolio-card:hover .card-visit {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
 	.card-body {
-		padding: 1.2rem 1.35rem 1.35rem;
+		padding: 1.25rem 1.4rem 1.5rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.35rem;
+		gap: 0.75rem;
 		flex: 1;
 	}
 
-	.category {
-		font-size: 0.72rem;
+	.card-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.category-tag {
+		font-family: var(--font);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--accent);
-		font-weight: 700;
+		padding: 0.25rem 0.6rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+		color: var(--card-accent);
+		border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+	}
+
+	.card-host {
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.72rem;
+		letter-spacing: 0.01em;
+		color: var(--text-muted);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		flex: 1;
+		text-align: right;
 	}
 
 	.card-title {
@@ -298,48 +822,272 @@ import { portfolioItems } from '../data/portfolio';
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
-		font-size: 1.35rem;
-		line-height: 1.15;
+		font-size: 1.55rem;
+		line-height: 1;
 		margin: 0;
 		color: var(--text);
 	}
 
-	.card-body .need,
-	.card-body .result {
-		font-size: 0.92rem;
+	.card-story {
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+		margin-top: 0.25rem;
+	}
+
+	.story-line {
+		display: grid;
+		grid-template-columns: 5.25rem 1fr;
+		gap: 0.65rem;
+		align-items: baseline;
+		margin: 0;
+		font-size: 0.88rem;
+		line-height: 1.5;
+	}
+
+	.story-label {
+		font-family: var(--font);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
 		color: var(--text-muted);
+		padding-top: 0.1em;
+	}
+
+	.story-line--shipped .story-label {
+		color: var(--card-accent);
+	}
+
+	.story-text {
+		color: var(--text-muted);
+	}
+
+	.story-line--shipped .story-text {
+		color: var(--text);
+		font-weight: 500;
+	}
+
+	/* ═══════════════════════════════════════
+	   Mid-grid CTA card
+	   ═══════════════════════════════════════ */
+	.portfolio-cta-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.85rem;
+		padding: 1.75rem;
+		border-radius: var(--radius);
+		overflow: hidden;
+		isolation: isolate;
+		border: 1px solid color-mix(in srgb, var(--accent) 50%, var(--border));
+		background:
+			radial-gradient(ellipse 80% 110% at 0% 0%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 65%),
+			radial-gradient(ellipse 80% 110% at 100% 100%, color-mix(in srgb, var(--accent-pink) 22%, transparent), transparent 60%),
+			var(--surface);
+		color: var(--text);
+	}
+
+	.cta-card-grain {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		opacity: 0.35;
+		background:
+			repeating-linear-gradient(
+				-45deg,
+				transparent,
+				transparent 8px,
+				rgba(255, 255, 255, 0.04) 8px,
+				rgba(255, 255, 255, 0.04) 9px
+			);
+		pointer-events: none;
+	}
+
+	.portfolio-cta-card > *:not(.cta-card-grain) {
+		position: relative;
+		z-index: 1;
+	}
+
+	.cta-card-eyebrow {
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		letter-spacing: 0.2em;
+		color: var(--accent);
+		text-transform: uppercase;
+	}
+
+	.cta-card-title {
+		font-family: var(--font-display);
+		font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1;
+		margin: 0;
+	}
+
+	.cta-card-text {
+		color: var(--text-muted);
+		font-size: 0.95rem;
 		line-height: 1.55;
-		margin: 0.15rem 0 0 0;
+		margin: 0;
 	}
 
-	.card-body .result {
-		font-weight: 600;
-		color: rgba(255, 255, 255, 0.78);
-	}
-
-	.card-link {
+	.cta-card-btn {
+		align-self: flex-start;
 		display: inline-flex;
 		align-items: center;
-		gap: 0.45rem;
-		color: var(--accent);
-		text-decoration: none;
-		font-weight: 600;
-		font-size: 0.88rem;
+		gap: 0.55rem;
+		padding: 0.8rem 1.35rem;
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+		border-radius: 999px;
+		font-family: var(--font);
+		font-size: 0.9rem;
+		font-weight: 500;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
-		margin-top: 0.65rem;
-		transition: gap 0.2s ease, color 0.2s ease;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		transition: background 0.25s, color 0.25s, transform 0.2s, box-shadow 0.25s;
+		margin-top: 0.25rem;
 	}
 
-	.card-link:hover {
-		gap: 0.65rem;
-		color: #fb923c;
+	.cta-card-btn i {
+		transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
-	.card-link i {
-		font-size: 0.75em;
+	.cta-card-btn:hover {
+		background: var(--accent);
+		color: #fff;
+		border-color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 14px 32px -10px color-mix(in srgb, var(--accent) 60%, transparent);
 	}
 
+	.cta-card-btn:hover i {
+		transform: translateX(3px);
+	}
+
+	/* ═══════════════════════════════════════
+	   Empty state
+	   ═══════════════════════════════════════ */
+	.empty-state {
+		text-align: center;
+		font-size: 1rem;
+		color: var(--text-muted);
+		padding: 2rem;
+	}
+
+	/* ═══════════════════════════════════════
+	   Closing CTA
+	   ═══════════════════════════════════════ */
+	.end-cta-section {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 1rem 1.5rem 4rem;
+	}
+
+	.end-cta {
+		position: relative;
+		padding: 3.5rem 2.25rem 3.75rem;
+		border: 1px solid var(--border);
+		border-radius: calc(var(--radius) * 1.5);
+		overflow: hidden;
+		isolation: isolate;
+		text-align: center;
+		background: var(--surface);
+	}
+
+	.end-cta-bg {
+		position: absolute;
+		inset: -1px;
+		z-index: 0;
+		background:
+			radial-gradient(ellipse 60% 80% at 20% 10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+			radial-gradient(ellipse 55% 80% at 80% 90%, color-mix(in srgb, var(--accent-pink) 18%, transparent), transparent 60%),
+			radial-gradient(ellipse 60% 80% at 50% 50%, color-mix(in srgb, var(--accent-purple) 12%, transparent), transparent 65%);
+		pointer-events: none;
+	}
+
+	.end-cta-rule {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60%;
+		max-width: 480px;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, var(--accent), transparent);
+		z-index: 1;
+	}
+
+	.end-cta-content {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.end-cta-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+		line-height: 0.95;
+		margin: 0;
+		color: var(--text);
+		max-width: 16ch;
+	}
+
+	.end-cta-desc {
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.4vw, 1.18rem);
+		line-height: 1.55;
+		max-width: 55ch;
+		margin: 0;
+	}
+
+	.end-cta-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem;
+		margin-top: 0.5rem;
+	}
+
+	.trust-row {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1.25rem 2rem;
+		list-style: none;
+		margin: 1.5rem 0 0;
+		padding: 0;
+	}
+
+	.trust-row li {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.88rem;
+		letter-spacing: 0.03em;
+		color: var(--text-muted);
+	}
+
+	.trust-row i {
+		color: var(--accent);
+		font-size: 0.85em;
+	}
+
+	/* ═══════════════════════════════════════
+	   Utilities
+	   ═══════════════════════════════════════ */
 	.visually-hidden {
 		position: absolute;
 		width: 1px;
@@ -352,22 +1100,138 @@ import { portfolioItems } from '../data/portfolio';
 		border: 0;
 	}
 
+	.portfolio-card[data-hidden='true'],
+	.portfolio-cta-card[data-hidden='true'] {
+		display: none;
+	}
+
+	/* ═══════════════════════════════════════
+	   Responsive
+	   ═══════════════════════════════════════ */
+	@media (max-width: 900px) {
+		.hero-inner {
+			grid-template-columns: 1fr;
+			padding: 2rem;
+			gap: 2rem;
+		}
+
+		.hero-stats {
+			align-self: stretch;
+		}
+	}
+
 	@media (max-width: 768px) {
 		.portfolio-brush-bg {
 			opacity: 0.32;
 		}
 
-		.section {
-			padding: 0 1rem 3rem;
-		}
-
 		.hero {
-			padding-top: 1.4rem;
+			padding: 1.4rem 1rem 1rem;
 		}
 
 		.hero-nav {
-			margin-bottom: 1.35rem;
+			margin-bottom: 1.5rem;
 		}
+
+		.hero-inner {
+			padding: 1.75rem 1.4rem;
+			border-radius: var(--radius);
+		}
+
+		.work {
+			padding: 1rem 1rem 3rem;
+		}
+
+		.work-head {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.filter-bar {
+			justify-content: flex-start;
+			width: 100%;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+		}
+
+		.filter-bar::-webkit-scrollbar {
+			display: none;
+		}
+
+		.filter-pill {
+			flex-shrink: 0;
+		}
+
+		.end-cta {
+			padding: 2.5rem 1.25rem 2.75rem;
+			border-radius: var(--radius);
+		}
+
+		.end-cta-section {
+			padding: 0.5rem 1rem 3rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-stats {
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem 0.5rem;
+		}
+
+		.story-line {
+			grid-template-columns: 1fr;
+			gap: 0.1rem;
+		}
+
+		.story-label {
+			padding-top: 0;
+		}
+	}
+
+	/* ═══════════════════════════════════════
+	   Light theme tweaks
+	   ═══════════════════════════════════════ */
+	:global(html[data-theme='light']) .themed-subpage .hero-inner {
+		background: linear-gradient(165deg, rgba(255, 255, 255, 0.95) 0%, var(--surface) 100%);
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .hero-aurora {
+		opacity: 0.14;
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .portfolio-card {
+		box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .portfolio-card:hover {
+		box-shadow: 0 24px 56px -20px color-mix(in srgb, var(--card-accent) 38%, transparent);
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .filter-bar {
+		background: #fff;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .preview-wrap {
+		background: #e8e6e3;
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .end-cta {
+		background: #fff;
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme='light']) .themed-subpage .cta-card-grain {
+		opacity: 0.5;
+		background: repeating-linear-gradient(
+			-45deg,
+			transparent,
+			transparent 8px,
+			rgba(0, 0, 0, 0.04) 8px,
+			rgba(0, 0, 0, 0.04) 9px
+		);
 	}
 </style>
 
@@ -406,6 +1270,41 @@ import { portfolioItems } from '../data/portfolio';
 	document.querySelectorAll<HTMLImageElement>('.preview-img').forEach((img) => {
 		img.addEventListener('error', () => {
 			img.style.display = 'none';
+		});
+	});
+
+	const pills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+	const cards = document.querySelectorAll<HTMLElement>('.portfolio-card');
+	const ctaCards = document.querySelectorAll<HTMLElement>('.portfolio-cta-card');
+	const emptyState = document.querySelector<HTMLElement>('[data-empty]');
+
+	function applyFilter(filter: string) {
+		let visibleCount = 0;
+		cards.forEach((card) => {
+			const group = card.dataset.group;
+			const show = filter === 'all' || group === filter;
+			card.dataset.hidden = show ? 'false' : 'true';
+			if (show) visibleCount++;
+		});
+		ctaCards.forEach((card) => {
+			card.dataset.hidden = filter === 'all' ? 'false' : 'true';
+		});
+		if (emptyState) {
+			if (visibleCount === 0) emptyState.removeAttribute('hidden');
+			else emptyState.setAttribute('hidden', '');
+		}
+	}
+
+	pills.forEach((pill) => {
+		pill.addEventListener('click', () => {
+			pills.forEach((p) => {
+				p.classList.remove('is-active');
+				p.setAttribute('aria-selected', 'false');
+			});
+			pill.classList.add('is-active');
+			pill.setAttribute('aria-selected', 'true');
+			const filter = pill.dataset.filter || 'all';
+			applyFilter(filter);
 		});
 	});
 </script>

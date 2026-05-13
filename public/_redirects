@@ -1,0 +1,14 @@
+# Removed location pages -> redirect to the web development hub
+/services/web-development/asheville-nc        /services/web-development/   301
+/services/web-development/asheville-nc/       /services/web-development/   301
+/services/web-development/weaverville-nc      /services/web-development/   301
+/services/web-development/weaverville-nc/     /services/web-development/   301
+/services/web-development/black-mountain-nc   /services/web-development/   301
+/services/web-development/black-mountain-nc/  /services/web-development/   301
+/services/web-development/hendersonville-nc   /services/web-development/   301
+/services/web-development/hendersonville-nc/  /services/web-development/   301
+/services/web-development/arden-nc            /services/web-development/   301
+/services/web-development/arden-nc/           /services/web-development/   301
+
+# Catch-all for any other deleted /services/web-development/<city>/ URL
+/services/web-development/*                   /services/web-development/   301

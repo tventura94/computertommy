@@ -5,155 +5,106 @@ import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import ThemeToggleButton from '../ThemeToggleButton.astro';
 
-type SeoServiceEntry = {
-	slug: string;
-	data: {
-		h1?: string;
-		heroSubtitle?: string;
-	};
+const pillars = [
+	{
+		icon: 'fa-bullseye',
+		color: 'orange',
+		title: 'Keyword placement',
+		body: 'I look at the searches that actually drive jobs in your town and target the ones with real intent. No vanity terms. No keywords that look good in a report and bring zero calls.',
+	},
+	{
+		icon: 'fa-link',
+		color: 'pink',
+		title: 'Backlink placement',
+		body: 'Where you have authority gaps, where your competitors are getting links, and where local connections actually move the needle. Real signals only.',
+	},
+	{
+		icon: 'fa-list-check',
+		color: 'yellow',
+		title: 'Local citations',
+		body: 'Get listed everywhere it counts and clean up the listings working against you. Consistent name, address, phone, and category across the platforms Google trusts.',
+	},
+	{
+		icon: 'fa-location-dot',
+		color: 'green',
+		title: 'GBP optimization',
+		body: 'Your Google Business Profile gets aligned with the website, posted to regularly, and tuned for the services and areas you care about most.',
+	},
+];
+
+const grid: (number | string)[][] = [
+	['20+', 16, 18, 17, 8, 7, 7],
+	[18, 16, 15, 11, 7, 7, 7],
+	[14, 11, 5, 4, 3, 5, 6],
+	[10, 7, 2, 1, 2, 2, 4],
+	[13, 4, 2, 2, 2, 3, 3],
+	[12, 2, 5, 3, 3, 4, 4],
+];
+
+const rankClass = (rank: number | string) => {
+	if (rank === '20+' || (typeof rank === 'number' && rank > 20)) return 'none';
+	const n = typeof rank === 'number' ? rank : parseInt(String(rank), 10);
+	if (n <= 3) return 'top';
+	if (n <= 10) return 'mid';
+	return 'low';
 };
 
-const { getCollection } = await import('astro:content');
-const seoServices = (
-	await (getCollection as unknown as (collection: string) => Promise<SeoServiceEntry[]>)('seo_services')
-)
-	.slice()
-	.sort((a, b) => (a.data.h1 ?? a.slug).localeCompare(b.data.h1 ?? b.slug));
+const cellW = 92;
+const cellH = 78;
+const startX = 50;
+const startY = 70;
+const dotR = 26;
 
-const slugIcon: Record<string, string> = {
-	'technical-seo-audit': 'fa-search',
-	'onpage-cleanup': 'fa-tags',
-	'local-seo': 'fa-map-marker-alt',
-	'speed-web-vitals': 'fa-tachometer-alt',
-};
-
-const cardTeaserBySlug: Record<string, string> = {
-	'technical-seo-audit':
-		'Crawl, indexation, redirects, canonicals, and structural blockers mapped into a prioritized fix queue.',
-	'onpage-cleanup':
-		'Sharper titles, headings, internal links, and page messaging so priority pages are easier to rank and convert.',
-	'local-seo':
-		'Location intent mapping, GBP alignment, and local trust signals tuned for calls, quotes, and booked jobs.',
-	'speed-web-vitals':
-		'Performance bottlenecks triaged by impact with focused improvements for LCP, CLS, INP, and mobile UX.',
-};
-
-const seoCards = seoServices.map((s) => ({
-	...s,
-	icon: slugIcon[s.slug] ?? 'fa-file-lines',
-	teaser: cardTeaserBySlug[s.slug] ?? 'Practical SEO work focused on measurable lead quality improvements.',
-}));
-
-const whoFit = [
-	'Local service businesses that need more calls and quote requests, not random traffic from people who will never hire you',
-	'Owners who want to know what competitors rank for, what pages they lean on, and what it actually takes to compete in their towns',
-	'Teams ready for research-first SEO: market audit, realistic keyword targets, and work tied back to leads you can measure',
-];
-
-const localSeoMeansBullets = [
-	'Which keywords have real local intent',
-	'Which services deserve their own pages',
-	'What your competitors are already targeting',
-	'Where keyword difficulty is realistic',
-	'How your Google Business Profile supports the website',
-	'Where your site is losing leads because the design or offer is weak',
-];
-
-const approachBlocks = [
+const plans = [
 	{
-		title: 'Local market and competitor audit',
-		body: 'I review the businesses already ranking in your area, the pages they are using, the services they emphasize, and how strong their websites and profiles are. That gives us a real picture of what you are up against.',
+		key: 'starter',
+		color: 'orange',
+		price: '$379',
+		name: 'Local SEO Starter',
+		tagline: 'Sets you on the path. Gets you on the listings, posting, and capturing reviews.',
+		bullets: [
+			'Local SEO audit',
+			'Keyword research',
+			'Website build',
+			'Hosting and security',
+			'Monthly GBP optimization',
+			'2 / monthGBP posts',
+			'20+ business listings online',
+			'Customer review funnel and response help',
+		],
 	},
 	{
-		title: 'Keyword research and opportunity mapping',
-		body: 'I look at search volume, keyword difficulty, service intent, and location intent to figure out what is worth targeting first. Some keywords look good on paper but will not bring leads. Some lower-volume terms are exactly the ones that drive calls. I build around the second type.',
+		key: 'growth',
+		color: 'green',
+		featured: true,
+		price: '$697',
+		name: 'Growth Local SEO',
+		tagline: 'Your own personal SEO guy. Posts, new pages, real strategy, and steady ranking work every month.',
+		bullets: [
+			'Everything in Starter',
+			'50+ business listings online',
+			'1 new SEO page or blog post / month',
+			'5+ Google Business posts / month',
+			'Customer review funnel and response help',
+			'Monthly rank tracking report',
+			'On-page SEO updates from performance data',
+			'Internal linking improvements',
+		],
 	},
 	{
-		title: 'On-page SEO recommendations',
-		body: 'Once the market is clear, I decide how the site should be structured. That includes service pages, title tags, headings, internal links, local relevance, and conversion-focused page layouts that make it easy for people to contact you.',
-	},
-	{
-		title: 'Technical SEO and crawl health',
-		body: 'I audit sites with Screaming Frog to catch crawl problems, broken links, indexation issues, metadata problems, thin pages, duplicate elements, redirect problems, and other technical issues that can hold rankings back.',
-	},
-
-];
-
-const includedItems = [
-	{
-		title: 'Local SEO strategy',
-		body: 'A research-driven plan based on your market, your services, and the keywords most likely to drive actual leads.',
-	},
-	{
-		title: 'Keyword targeting',
-		body: 'Keyword research using tools like Semrush, Ahrefs, Google Search Console, and Google Business Profile insights to identify realistic opportunities.',
-	},
-	{
-		title: 'Competitor analysis',
-		body: 'A review of what top competitors are targeting, how they structure their pages, where they are stronger, and where they are beatable.',
-	},
-	{
-		title: 'On-page SEO',
-		body: 'Titles, headings, service-page targeting, internal linking, local relevance, and page structure built around the market audit.',
-	},
-	{
-		title: 'Technical SEO',
-		body: 'Full crawl-based review with Screaming Frog to catch site issues that affect performance, indexing, or usability.',
-	},
-	{
-		title: 'Google Business Profile optimization',
-		body: 'Optimization recommendations so your Google Business Profile supports the website and helps reinforce local relevance.',
-	},
-	{
-		title: 'Backlink recommendations',
-		body: 'Clear recommendations from the audit on where authority gaps exist and what types of backlinks or citation opportunities make the most sense for your market.',
-	},
-	{
-		title: 'SEO handoff guides',
-		body: 'For one-time fee builds, guides so you can continue improving rankings after launch and understand how to maintain momentum.',
-	},
-];
-
-const gbpBullets = [
-	'Category alignment',
-	'Service alignment',
-	'Location and service area consistency',
-	'Relevance between the site and GBP',
-	'Opportunities to strengthen local trust signals',
-	'Content and update recommendations where appropriate',
-];
-
-const oneTimeGuideBullets = [
-	'How to keep pages optimized',
-	'How to expand service or location targeting',
-	'How to think about future content',
-	'How to keep your GBP aligned',
-	'What to monitor in Search Console',
-	'Where authority gaps may need attention later',
-];
-
-const toolsList = ['Semrush', 'Ahrefs', 'Google Search Console', 'Google Business Profile', 'Screaming Frog'];
-
-const faqItems = [
-	{
-		q: 'Do you guarantee rankings?',
-		a: 'No. Nobody honest should. What I can do is give you a realistic picture of your market, show where the opportunities are, and improve the site and local presence around the searches that matter.',
-	},
-	{
-		q: 'Do you only work with local service businesses?',
-		a: 'That is the core focus. Local service companies have a very specific type of SEO problem, and that is the niche I build around.',
-	},
-	{
-		q: 'Do you offer Google Business Profile optimization?',
-		a: 'Yes. I treat GBP as part of the local SEO system, not as a separate afterthought.',
-	},
-	{
-		q: 'Do backlinks matter for local SEO?',
-		a: 'Sometimes yes, sometimes less than people think. It depends on the market. That is why I make backlink recommendations based on the audit instead of pushing the same answer to every client.',
-	},
-	{
-		q: 'What if I only want a one-time website build?',
-		a: 'That is fine. I provide SEO guides with one-time builds so you have direction after launch.',
+		key: 'domination',
+		color: 'purple',
+		price: '$997',
+		name: 'Local Domination',
+		tagline: 'Full-court press. For competitive markets and businesses that can turn extra jobs into real money.',
+		bullets: [
+			'Everything in Growth',
+			'2 to 4 new website SEO pages / month',
+			'Service-area page expansion',
+			'Deeper competitor research',
+			'Backlink and outreach work',
+			'Priority edits and support',
+		],
 	},
 ];
 ---
@@ -177,17 +128,17 @@ const faqItems = [
 			</div>
 
 			<div class="hero-content">
-				<span class="section-eyebrow">Local SEO for service businesses</span>
-				<h1 class="hero-title">More calls, more quote requests, and a website built around the searches that actually bring in work.</h1>
+				<span class="section-eyebrow">Honest local SEO</span>
+				<h1 class="hero-title">Local SEO that gets you ranking on Google in 3 months.</h1>
 				<p class="hero-desc">
-					I help local service businesses figure out what people in their market are searching, what competitors are ranking for, and what it will take to compete. Every SEO decision I make is tied back to one thing: getting the phone to ring.
+					I look at your local competition and tell you straight up how hard it'll be to beat them. Then I go after them on every front that matters: keyword placement, backlinks, local citations, Google Business Profile, and the pages on your site.
 				</p>
 				<p class="hero-desc hero-desc--tight">
-					I start with a local market audit, map the best keyword opportunities by service and location, review competitor pages and listings, and build from there. No vague SEO package. No empty ranking promises. Just a practical plan based on your market.
+					This isn't rocket science. It's persistence and dedication, run by one person who actually gives a damn about your business.
 				</p>
 				<div class="hero-actions">
-					<a href="/contact/" class="btn-solid">Request an SEO audit</a>
-					<a href="/services/web-development/" class="btn-outline">Web development</a>
+					<a href="#plans" class="btn-solid">See plans</a>
+					<a href="/contact/" class="btn-outline">Free local audit</a>
 				</div>
 			</div>
 
@@ -200,222 +151,226 @@ const faqItems = [
 			</div>
 		</section>
 
-	
-
-		<section class="section section-alt" aria-labelledby="local-seo-means-heading">
+		<section class="section pillars-section" aria-labelledby="pillars-heading">
 			<div class="section-header">
-				<span class="section-eyebrow">What local SEO means here</span>
-				<h2 class="section-title" id="local-seo-means-heading">SEO built for local service businesses</h2>
+				<span class="section-eyebrow">How we beat your competition</span>
+				<h2 class="section-title" id="pillars-heading">Honest work, on every front.</h2>
 				<p class="section-lead">
-					Local SEO is not the same as broad national SEO. If you run a service business, you do not need random traffic from people who will never call you. You need visibility for the searches that show buying intent in the towns and service areas you actually want to work in.
+					I look at exactly what your competitors are doing and figure out what it'll actually take to outrank them. Every front gets attention. Nothing's left on autopilot.
 				</p>
 			</div>
-			<p class="seo-prose-intro">That means I look at:</p>
-			<ul class="seo-prose-list">
-				{localSeoMeansBullets.map((line) => (
-					<li>{line}</li>
+			<div class="pillar-grid">
+				{pillars.map((p) => (
+					<article class:list={['pillar-card', `pillar-card--${p.color}`]}>
+						<div class="pillar-icon" aria-hidden="true">
+							<i class:list={['fas', p.icon]}></i>
+						</div>
+						<h3 class="pillar-title">{p.title}</h3>
+						<p class="pillar-body">{p.body}</p>
+					</article>
 				))}
-			</ul>
-			<p class="seo-prose-outro">
-				The goal is not just rankings. The goal is rankings that turn into calls.
-			</p>
+			</div>
 		</section>
 
-		<section class="section" aria-labelledby="approach-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Strategy, then execution</span>
-				<h2 class="section-title" id="approach-heading">How I approach local SEO</h2>
-				<p class="section-lead">
-					I do not start with guesses or generic keyword lists. Every project starts with a local audit so I can see what is happening in your actual market.
-				</p>
-			</div>
-			<div class="grid-cards">
-				{approachBlocks.map((c) => (
-					<div class="info-card">
-						<h3>{c.title}</h3>
-						<p>{c.body}</p>
+		<section class="section section-alt islands-section" aria-labelledby="islands-heading">
+			<div class="islands-layout">
+				<div class="section-header islands-copy">
+					<span class="section-eyebrow">How Google actually works</span>
+					<h2 class="section-title" id="islands-heading">Each page is its own experiment.</h2>
+					<p class="islands-lead">
+						Most people think Google grades your whole site as one thing. It doesn't. Google grades pages, and each page stands on its own. That's exactly why building the site right from the start matters so much. A clean foundation gives every page a real shot at ranking for what it needs to rank for.
+					</p>
+					<p class="islands-lead islands-lead--tight">
+						So we treat every page like a little experiment. Target real local keywords, structure the page right, see what sticks. Once we know what's actually ranking, we double down. Those wins map out the next pages, the next keywords, and the next service areas. That's how we go from ranking for a few things to dominating locally.
+					</p>
+				</div>
+				<div class="islands-visual" aria-hidden="true">
+					<div class="island-card island-card--1">
+						<span class="island-tag">Page 1</span>
+						<span class="island-rank">Rank 2</span>
 					</div>
-				))}
-			</div>
-		</section>
-
-		<section class="section section-alt" aria-labelledby="included-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Deliverables</span>
-				<h2 class="section-title" id="included-heading">What is included</h2>
-				<p class="section-lead">
-					One system: research first, then recommendations and fixes tied to leads. Here is what that covers.
-				</p>
-			</div>
-			<div class="grid-cards included-grid">
-				{includedItems.map((item) => (
-					<div class="info-card">
-						<h3>{item.title}</h3>
-						<p>{item.body}</p>
+					<div class="island-card island-card--2">
+						<span class="island-tag">Page 2</span>
+						<span class="island-rank">Rank 1</span>
 					</div>
-				))}
-			</div>
-		</section>
-
-		<section class="section" aria-labelledby="gbp-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Listings</span>
-				<h2 class="section-title" id="gbp-heading">Google Business Profile optimization</h2>
-			</div>
-			<div class="seo-prose-block">
-				<p>
-					Your website and your Google Business Profile should support each other, not tell two different stories. I include Google Business Profile optimization as part of the local SEO process so your services, categories, descriptions, and service areas line up with what the website is targeting.
-				</p>
-				<p>That includes looking at:</p>
-				<ul class="seo-prose-list seo-prose-list--compact">
-					{gbpBullets.map((line) => (
-						<li>{line}</li>
-					))}
-				</ul>
-				<p class="seo-prose-outro seo-prose-outro--flush">
-					A lot of local businesses treat the website and GBP as separate things. They should work together.
-				</p>
-			</div>
-		</section>
-
-		<section class="section section-alt" aria-labelledby="backlinks-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Authority</span>
-				<h2 class="section-title" id="backlinks-heading">Backlink recommendations from the audit</h2>
-			</div>
-			<div class="seo-prose-block">
-				<p>
-					Not every market is won on on-page SEO alone. Some local spaces are light enough that better structure, better targeting, and a stronger GBP can move the needle. Others require stronger authority signals to compete. That is why I include backlink recommendations in my audits.
-				</p>
-				<p>
-					I look at the competitive gap and tell you where links or citations may actually matter. That way you are not blindly buying junk links or wasting money on things that do nothing.
-				</p>
-				<p class="seo-prose-outro seo-prose-outro--flush">
-					The point is not to pad a report with off-page SEO language. The point is to tell you what your market actually requires.
-				</p>
-			</div>
-		</section>
-
-		<section class="section" aria-labelledby="technical-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Performance</span>
-				<h2 class="section-title" id="technical-heading">Technical SEO and speed matter</h2>
-			</div>
-			<div class="seo-prose-block">
-				<p>
-					A slow, messy website can kill rankings and conversions at the same time. I run technical and on-page audits through Screaming Frog and build websites with speed in mind from the start. I use Astro for builds, which helps keep sites lean, fast, and easier to optimize for performance.
-				</p>
-				<p>
-					That means your site is built on a cleaner foundation, with less bloat and a better chance of loading quickly on mobile, which matters for both rankings and lead generation.
-				</p>
-				<p class="seo-prose-outro seo-prose-outro--flush">
-					Fast sites do not just look better in a report. They make it easier for people to stay on the page and call.
-				</p>
-			</div>
-		</section>
-
-		<section class="section section-alt" aria-labelledby="guides-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">One-time builds</span>
-				<h2 class="section-title" id="guides-heading">SEO guides for one-time builds</h2>
-			</div>
-			<div class="seo-prose-block">
-				<p>Not every client wants a monthly SEO engagement. For one-time fee website builds, I include SEO guides so you have a practical roadmap for what to do after launch. That can include:</p>
-				<ul class="seo-prose-list seo-prose-list--compact">
-					{oneTimeGuideBullets.map((line) => (
-						<li>{line}</li>
-					))}
-				</ul>
-				<p class="seo-prose-outro seo-prose-outro--flush">
-					That way you are not left with a finished website and no idea how to keep moving forward.
-				</p>
-			</div>
-		</section>
-
-		<section class="section" aria-labelledby="tools-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Data, not guesses</span>
-				<h2 class="section-title" id="tools-heading">Tools I use</h2>
-				<p class="section-lead">
-					I use industry-standard tools to audit performance, research keywords, and evaluate local competition. Tools are not the service by themselves, but they help me make decisions based on real data instead of assumptions.
-				</p>
-			</div>
-			<ul class="tools-list">
-				{toolsList.map((name) => (
-					<li>{name}</li>
-				))}
-			</ul>
-		</section>
-
-		<section class="section section-alt" aria-labelledby="why-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Why this is different</span>
-				<h2 class="section-title" id="why-heading">Why this approach is different</h2>
-			</div>
-			<div class="seo-prose-block">
-				<p>
-					A lot of SEO services sell dashboards, generic reports, and vague monthly activity. That is not how I work.
-				</p>
-				<p>
-					I focus on local service businesses, I start with your actual market, and I build around the pages and searches most likely to bring in work. I am not interested in sending you vanity metrics that make things look active while your phone stays quiet.
-				</p>
-				<p class="seo-prose-outro seo-prose-outro--flush">
-					My job is to help you make better local SEO decisions and turn that into more calls.
-				</p>
-			</div>
-		</section>
-
-		<section class="section" aria-labelledby="deep-dives-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">Go deeper</span>
-				<h2 class="section-title" id="deep-dives-heading">Service detail pages</h2>
-				<p class="section-lead">
-					Each focus area has its own page with specifics on deliverables and how it fits the larger plan.
-				</p>
-			</div>
-			<div class="seo-pillar-grid">
-				{seoCards.map((s) => (
-					<a class="seo-pillar-card" href={`/services/seo/${s.slug}/`}>
-						<i class:list={['fas', s.icon, 'pillar-icon']} aria-hidden="true"></i>
-						<h3>{s.data.h1 ?? s.slug}</h3>
-						<p>{s.teaser}</p>
-						<span class="pillar-cta">View details</span>
-					</a>
-				))}
-			</div>
-		</section>
-
-		<section class="section faq-section" aria-labelledby="faq-heading">
-			<div class="section-header">
-				<span class="section-eyebrow">FAQ</span>
-				<h2 class="section-title" id="faq-heading">Questions we hear a lot</h2>
-			</div>
-			<dl class="faq-list">
-				{faqItems.map((item) => (
-					<div class="faq-item">
-						<dt>{item.q}</dt>
-						<dd>{item.a}</dd>
+					<div class="island-card island-card--3">
+						<span class="island-tag">Page 3</span>
+						<span class="island-rank">Rank 4</span>
 					</div>
-				))}
-			</dl>
+					<div class="island-card island-card--4">
+						<span class="island-tag">Page 4</span>
+						<span class="island-rank">Rank 3</span>
+					</div>
+				</div>
+			</div>
 		</section>
 
-		<section class="section related-section" aria-labelledby="related-heading">
-			<h2 class="section-title section-title--sm" id="related-heading">Related services</h2>
-			<p class="related-lead">
-				Strong local SEO still needs a site Google can crawl and that customers trust. If you need a new build or faster pages, pair this with{' '}
-				<a href="/services/web-development/">web development</a>. For automation and internal tools, see{' '}
-				<a href="/services/tooling/">tooling</a>.
+		<section class="section connections-section" aria-labelledby="connections-heading">
+			<div class="section-header">
+				<span class="section-eyebrow">Backlinks that mean something</span>
+				<h2 class="section-title" id="connections-heading">Real connections, not random links.</h2>
+				<p class="section-lead">
+					I don't go chase a hundred junk links. I go after links that actually matter and form real connections in your local market. Real businesses. Real authority. Real signals Google can trust.
+				</p>
+			</div>
+			<div class="connections-grid">
+				<article class="connection-card">
+					<div class="connection-icon" aria-hidden="true">
+						<i class="fas fa-handshake"></i>
+					</div>
+					<h3>Local relationships, not link farms</h3>
+					<p>The backlinks I build come from real places: chambers, partner businesses, local press, trade orgs, suppliers. The kind of mentions Google trusts.</p>
+				</article>
+				<article class="connection-card">
+					<div class="connection-icon" aria-hidden="true">
+						<i class="fas fa-lightbulb"></i>
+					</div>
+					<h3>Local opportunities, surfaced for you</h3>
+					<p>You're not just paying for SEO. When I find local business opportunities, partnerships, or events that fit your shop, I pass them along. Online wins plus word-of-mouth wins.</p>
+				</article>
+				<article class="connection-card">
+					<div class="connection-icon" aria-hidden="true">
+						<i class="fas fa-clock"></i>
+					</div>
+					<h3>Time back to your busy life</h3>
+					<p>You hire someone you trust to handle this so you can stop fiddling with it at 9pm. I run the work. You get a clean update each month.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="section section-alt geogrid-section" aria-labelledby="geogrid-heading">
+			<div class="geogrid-layout">
+				<div class="geogrid-copy">
+					<span class="section-eyebrow">Where you actually rank</span>
+					<h2 class="section-title" id="geogrid-heading">Every square mile, accounted for.</h2>
+					<p class="section-lead">
+						I can pull a street-level view of your local search area and tell you exactly where you're ranking, square mile by square mile. No guessing. No "you're up a little." Real numbers, real positions, real coverage.
+					</p>
+					<p class="section-lead section-lead--tight">
+						You see what's working, where you're winning, and where there's room to grow. That's how we decide where to push next.
+					</p>
+				</div>
+				<figure class="geogrid-figure">
+					<div class="geogrid-frame">
+						<svg
+							class="geogrid"
+							viewBox="0 0 700 540"
+							role="img"
+							aria-label="Local search rank grid showing positions across a service area"
+						>
+							<defs>
+								<filter id="dotShadow" x="-50%" y="-50%" width="200%" height="200%">
+									<feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-opacity="0.28" />
+								</filter>
+							</defs>
+
+							{/* Map base */}
+							<rect width="700" height="540" class="map-base" />
+
+							{/* Park / forest patches */}
+							<path class="map-park" d="M -10 -10 L 250 -10 Q 240 70 180 100 Q 110 120 50 105 Q -5 90 -10 50 Z" />
+							<path class="map-park" d="M 540 -10 L 720 -10 L 720 60 Q 660 80 600 70 Q 555 50 540 -10 Z" />
+							<path class="map-park" d="M -10 280 Q 60 265 130 295 Q 110 370 60 385 Q -10 370 -10 320 Z" />
+							<path class="map-park" d="M 200 470 Q 360 440 500 480 Q 480 540 320 545 Q 200 530 200 470 Z" opacity="0.85" />
+							<path class="map-park" d="M 380 30 Q 460 50 480 110 Q 430 150 380 130 Q 340 100 380 30 Z" opacity="0.7" />
+
+							{/* Water (river/lake on right) */}
+							<path class="map-water" d="M 720 60 Q 640 130 660 220 Q 720 290 700 360 Q 720 460 720 540 L 720 60 Z" />
+							<ellipse class="map-water" cx="650" cy="290" rx="42" ry="56" />
+							<path class="map-water" d="M 0 380 Q 80 360 130 395 Q 100 430 50 425 Q 0 415 0 380 Z" opacity="0.85" />
+
+							{/* Roads - draw shoulder beneath the white surface */}
+							<g class="map-roads">
+								<path class="road-shoulder" d="M -10 235 Q 180 215 350 245 Q 520 280 720 235" />
+								<path class="road-surface" d="M -10 235 Q 180 215 350 245 Q 520 280 720 235" />
+								<path class="road-shoulder" d="M 90 -10 Q 200 130 320 250 Q 440 360 580 540" />
+								<path class="road-surface" d="M 90 -10 Q 200 130 320 250 Q 440 360 580 540" />
+								<path class="road-shoulder road-shoulder--small" d="M -10 470 Q 200 440 400 470 Q 560 490 720 460" />
+								<path class="road-surface road-surface--small" d="M -10 470 Q 200 440 400 470 Q 560 490 720 460" />
+							</g>
+
+							{/* Town labels */}
+							<g class="map-labels">
+								<text x="190" y="36">Weaverville</text>
+								<text x="350" y="200">Asheville</text>
+								<text x="600" y="180">Black Mountain</text>
+								<text x="120" y="455">Arden</text>
+								<text x="430" y="460">Fairview</text>
+							</g>
+
+							{/* Rank pins */}
+							<g class="rank-dots" filter="url(#dotShadow)">
+								{grid.flatMap((row, ri) =>
+									row.map((rank, ci) => {
+										const cx = startX + ci * cellW;
+										const cy = startY + ri * cellH;
+										const cls = rankClass(rank);
+										const delay = (ri + ci) * 0.035;
+										return (
+											<g
+												class:list={['rank-dot', `rank-dot--${cls}`]}
+												style={`--cell-delay: ${delay}s; --cell-cx: ${cx}px; --cell-cy: ${cy}px;`}
+											>
+												<circle class="rank-dot__circle" cx={cx} cy={cy} r={dotR} />
+												<text class="rank-dot__num" x={cx} y={cy + 1}>{rank}</text>
+											</g>
+										);
+									})
+								)}
+							</g>
+						</svg>
+					</div>
+					<figcaption class="geogrid-legend" aria-hidden="true">
+						<span class="legend-item legend-item--top"><span class="legend-dot"></span>Top 3</span>
+						<span class="legend-item legend-item--mid"><span class="legend-dot"></span>4 to 10</span>
+						<span class="legend-item legend-item--low"><span class="legend-dot"></span>11 to 20</span>
+						<span class="legend-item legend-item--none"><span class="legend-dot"></span>Not ranking</span>
+					</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<section class="section plans-section" id="plans" aria-labelledby="plans-heading">
+			<div class="section-header plans-header">
+				<span class="section-eyebrow">Monthly plans</span>
+				<h2 class="section-title" id="plans-heading">Pick a tier. Start ranking.</h2>
+				<p class="section-lead">
+					Three flat-monthly plans, each built around getting you visible in local search. Cancel any time. No long contracts.
+				</p>
+			</div>
+			<div class="plan-grid">
+				{plans.map((plan) => (
+					<article class:list={['plan-card', `plan-card--${plan.color}`, plan.featured && 'plan-card--featured']}>
+						{plan.featured && <span class="plan-badge">Most popular</span>}
+						<header class="plan-head">
+							<span class="plan-name">{plan.name}</span>
+							<div class="plan-price">
+								<span class="plan-price-amount">{plan.price}</span>
+								<span class="plan-price-cadence">/mo</span>
+							</div>
+							<p class="plan-tagline">{plan.tagline}</p>
+						</header>
+						<ul class="plan-features">
+							{plan.bullets.map((b) => (
+								<li>{b}</li>
+							))}
+						</ul>
+						<a href={`/contact/?plan=${plan.key}`} class="plan-cta">Start {plan.name.split(' ')[0]} &rarr;</a>
+					</article>
+				))}
+			</div>
+			<p class="plans-foot">
+				Not sure which fits? <a href="/contact/">Send a quick message</a> and I'll point you to the right one based on your market.
 			</p>
 		</section>
 
 		<section class="section cta-section">
 			<div class="cta-inner">
-				<h2>Want an honest look at your local SEO?</h2>
+				<h2>Ready to start ranking in 3 months?</h2>
 				<p class="cta-lead">
-					I will review your market, your competitors, your site structure, and where your biggest opportunities are. Then I will show you what is worth fixing first.
+					I'll review your market, your competitors, your site, and your Google Business Profile. Then I'll show you a real path to rankings that turn into calls.
 				</p>
-				<a href="/contact/" class="btn-solid">Request an SEO audit</a>
+				<a href="/contact/" class="btn-solid">Request a free local audit</a>
 			</div>
 		</section>
 	</main>
@@ -443,7 +398,7 @@ const faqItems = [
 		max-width: none;
 		z-index: 0;
 		pointer-events: none;
-		opacity: 0.2;
+		opacity: 0.18;
 		mix-blend-mode: lighten;
 		transform: translateX(-50%) rotate(-3deg);
 	}
@@ -460,7 +415,7 @@ const faqItems = [
 	}
 
 	.section {
-		max-width: 1100px;
+		max-width: 1200px;
 		margin: 0 auto;
 		padding: 4rem 1.5rem;
 	}
@@ -471,7 +426,7 @@ const faqItems = [
 	}
 
 	.section-alt > * {
-		max-width: 1100px;
+		max-width: 1200px;
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -532,17 +487,16 @@ const faqItems = [
 		line-height: 1;
 	}
 
-	.section-title--sm {
-		font-size: clamp(1.6rem, 4vw, 2.5rem);
-		margin-bottom: 0.65rem;
-	}
-
 	.section-lead {
 		color: var(--text-muted);
 		font-size: clamp(1rem, 1.8vw, 1.2rem);
 		line-height: 1.6;
 		max-width: 720px;
-		margin: 0.75rem 0 0;
+		margin: 0.85rem 0 0;
+	}
+
+	.section-lead--tight {
+		margin-top: 0.6rem;
 	}
 
 	.hero-desc {
@@ -559,7 +513,7 @@ const faqItems = [
 
 	.section-header {
 		max-width: 760px;
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 	}
 
 	.btn-solid,
@@ -620,290 +574,623 @@ const faqItems = [
 		border-top: 1px solid var(--border);
 	}
 
-	.checklist {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.65rem;
-		max-width: 52rem;
-	}
-
-	.checklist li {
-		display: flex;
-		gap: 0.75rem;
-		align-items: flex-start;
-		padding: 0.85rem 1rem;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-		font-size: 0.98rem;
-		line-height: 1.5;
-		color: var(--text-muted);
-	}
-
-	.checklist-icon {
-		color: var(--accent);
-		margin-top: 0.15rem;
-		flex-shrink: 0;
-	}
-
-	.who-list {
-		margin-top: 0.5rem;
-	}
-
-	.trade-chips-label {
-		font-size: 0.8rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--text-muted);
-		margin: 2rem 0 0.65rem;
-	}
-
-	.trade-chips {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		list-style: none;
-		padding: 0;
-		margin: 0 0 2rem;
-	}
-
-	.trade-chips li {
-		padding: 0.4rem 0.85rem;
-		border-radius: 999px;
-		border: 1px solid var(--border);
-		background: var(--surface);
-		font-size: 0.9rem;
-		color: var(--text);
-	}
-
-	.seo-prose-intro {
-		margin: 0 0 0.75rem;
-		font-weight: 600;
-		color: var(--text);
-		font-size: 1rem;
-	}
-
-	.seo-prose-list {
-		margin: 0 0 1.25rem;
-		padding-left: 1.25rem;
-		color: var(--text-muted);
-		line-height: 1.65;
-		max-width: 42rem;
-	}
-
-	.seo-prose-list li {
-		margin-bottom: 0.45rem;
-	}
-
-	.seo-prose-list li:last-child {
-		margin-bottom: 0;
-	}
-
-	.seo-prose-list--compact {
-		margin-bottom: 1rem;
-	}
-
-	.seo-prose-outro {
-		margin: 0;
-		font-size: clamp(1.02rem, 1.5vw, 1.12rem);
-		font-weight: 600;
-		color: var(--text);
-		line-height: 1.55;
-		max-width: 42rem;
-	}
-
-	.seo-prose-outro--flush {
-		margin-top: 0.25rem;
-	}
-
-	.seo-prose-block {
-		max-width: 42rem;
-	}
-
-	.seo-prose-block p {
-		margin: 0 0 1rem;
-		color: var(--text-muted);
-		line-height: 1.65;
-		font-size: clamp(1rem, 1.6vw, 1.08rem);
-	}
-
-	.seo-prose-block p:last-child {
-		margin-bottom: 0;
-	}
-
-	.tools-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		max-width: 42rem;
-	}
-
-	.tools-list li {
-		padding: 0.5rem 1rem;
-		border-radius: var(--radius-sm);
-		border: 1px solid var(--border);
-		background: var(--surface);
-		font-size: 0.95rem;
-		font-weight: 600;
-		color: var(--text);
-	}
-
-	.section-alt .tools-list li {
-		background: var(--bg);
-	}
-
-	.seo-pillar-grid {
+	/* ─────────────  Pillars (How we beat your competition)  ───────────── */
+	.pillar-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-		gap: 0.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1rem;
 	}
 
-	.seo-pillar-card {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		text-decoration: none;
-		color: inherit;
+	.pillar-card {
+		--pillar-color: var(--accent);
+		position: relative;
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		padding: 1.35rem 1.4rem;
-		transition: border-color 0.2s, transform 0.15s;
-		min-height: 100%;
+		padding: 1.5rem 1.4rem 1.6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		overflow: hidden;
+		transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
 	}
 
-	.seo-pillar-card:hover {
-		border-color: rgba(249, 115, 22, 0.45);
-		transform: translateY(-2px);
+	.pillar-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: var(--pillar-color);
 	}
+
+	.pillar-card:hover {
+		transform: translateY(-3px);
+		border-color: var(--pillar-color);
+		box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+	}
+
+	.pillar-card--orange { --pillar-color: var(--accent); }
+	.pillar-card--pink   { --pillar-color: var(--accent-pink); }
+	.pillar-card--yellow { --pillar-color: var(--accent-yellow); }
+	.pillar-card--green  { --pillar-color: var(--accent-green); }
 
 	.pillar-icon {
-		color: var(--accent);
-		font-size: 1.45rem;
-		margin-bottom: 0.75rem;
+		width: 48px;
+		height: 48px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		border: 1.5px solid var(--pillar-color);
+		color: var(--pillar-color);
+		font-size: 1.2rem;
 	}
 
-	.seo-pillar-card h3 {
+	.pillar-title {
 		font-family: var(--font-display);
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
-		font-size: 1.2rem;
-		line-height: 1.15;
-		margin: 0 0 0.5rem;
-	}
-
-	.seo-pillar-card p {
-		margin: 0 0 1rem;
-		color: var(--text-muted);
-		font-size: 0.96rem;
-		line-height: 1.55;
-		flex: 1;
-	}
-
-	.pillar-cta {
-		font-size: 0.82rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--accent);
-	}
-
-	.grid-cards {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-		gap: 0.7rem;
-	}
-
-	.included-grid {
-		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-	}
-
-	.info-card {
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 1.35rem;
-	}
-
-	.info-card h3 {
-		font-family: var(--font-display);
-		text-transform: uppercase;
-		font-weight: 400;
-		font-size: 1.35rem;
-		margin: 0 0 0.5rem;
-	}
-
-	.info-card p {
-		color: var(--text-muted);
+		font-size: 1.55rem;
 		margin: 0;
-		line-height: 1.55;
-		font-size: 0.96rem;
-	}
-
-	.section-alt .grid-cards .info-card {
-		background: var(--bg);
-	}
-
-	.faq-list {
-		margin: 0;
-		padding: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
-	.faq-item {
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		background: var(--surface);
-		padding: 1.15rem 1.35rem;
-	}
-
-	.faq-item dt {
-		font-weight: 700;
-		font-size: 1.02rem;
-		margin: 0 0 0.5rem;
+		line-height: 1;
 		color: var(--text);
 	}
 
-	.faq-item dd {
+	.pillar-body {
 		margin: 0;
 		color: var(--text-muted);
 		line-height: 1.55;
-		font-size: 0.97rem;
+		font-size: 0.98rem;
 	}
 
-	.related-section {
-		padding-top: 2rem;
-		padding-bottom: 2rem;
+	/* ─────────────  Page islands  ───────────── */
+	.islands-layout {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		align-items: center;
 	}
 
-	.related-lead {
-		margin: 0;
-		max-width: 720px;
+	@media (min-width: 920px) {
+		.islands-layout {
+			grid-template-columns: 1.05fr 1fr;
+		}
+	}
+
+	.islands-copy {
+		margin-bottom: 0;
+	}
+
+	.islands-lead {
 		color: var(--text-muted);
+		font-size: clamp(1rem, 1.6vw, 1.15rem);
 		line-height: 1.65;
-		font-size: 1rem;
+		margin: 1rem 0 0;
+		max-width: 600px;
 	}
 
-	.related-lead a {
-		color: var(--accent);
-		text-decoration: none;
+	.islands-lead--tight {
+		margin-top: 0.85rem;
+	}
+
+	.islands-visual {
+		position: relative;
+		min-height: 360px;
+		border-radius: var(--radius);
+	}
+
+	.island-card {
+		position: absolute;
+		background: var(--bg);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		padding: 0.9rem 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		min-width: 130px;
+		box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.35);
+		animation: island-bob 6s ease-in-out infinite;
+	}
+
+	.island-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+		background: var(--isle-color);
+	}
+
+	.island-card--1 { top: 4%;  left: 4%;  --isle-color: var(--accent); animation-delay: 0s; transform: rotate(-3deg); }
+	.island-card--2 { top: 8%;  right: 6%; --isle-color: var(--accent-green); animation-delay: -1.4s; transform: rotate(2.5deg); }
+	.island-card--3 { bottom: 6%; left: 10%; --isle-color: var(--accent-yellow); animation-delay: -2.8s; transform: rotate(-2deg); }
+	.island-card--4 { bottom: 4%; right: 4%; --isle-color: var(--accent-purple); animation-delay: -4.2s; transform: rotate(3deg); }
+
+	@keyframes island-bob {
+		0%, 100% { transform: translateY(0) rotate(var(--bob-rot, 0deg)); }
+		50%       { transform: translateY(-10px) rotate(var(--bob-rot, 0deg)); }
+	}
+
+	.island-card--1 { --bob-rot: -3deg; }
+	.island-card--2 { --bob-rot: 2.5deg; }
+	.island-card--3 { --bob-rot: -2deg; }
+	.island-card--4 { --bob-rot: 3deg; }
+
+	.island-tag {
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--isle-color);
+	}
+
+	.island-rank {
+		font-size: 0.85rem;
+		color: var(--text);
 		font-weight: 600;
 	}
 
-	.related-lead a:hover {
+	@media (prefers-reduced-motion: reduce) {
+		.island-card {
+			animation: none !important;
+		}
+	}
+
+	/* ─────────────  Connections  ───────────── */
+	.connections-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		gap: 1rem;
+	}
+
+	.connection-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.65rem 1.4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		transition: border-color 0.25s ease, transform 0.2s ease;
+	}
+
+	.connection-card:hover {
+		transform: translateY(-3px);
+		border-color: var(--accent);
+	}
+
+	.connection-icon {
+		width: 44px;
+		height: 44px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: var(--bg);
+		border: 1.5px solid var(--accent);
+		color: var(--accent);
+		font-size: 1.1rem;
+	}
+
+	.connection-card h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.4rem;
+		margin: 0;
+		line-height: 1.05;
+	}
+
+	.connection-card p {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 0.98rem;
+	}
+
+	/* ─────────────  Geogrid map  ───────────── */
+	.geogrid-layout {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		align-items: center;
+	}
+
+	@media (min-width: 920px) {
+		.geogrid-layout {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.geogrid-figure {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 1rem;
+		max-width: 580px;
+		width: 100%;
+	}
+
+	.geogrid-frame {
+		position: relative;
+		border-radius: var(--radius);
+		overflow: hidden;
+		border: 1px solid var(--border);
+		box-shadow:
+			0 24px 60px -28px rgba(0, 0, 0, 0.55),
+			0 2px 6px rgba(0, 0, 0, 0.18);
+		background: #e8f1da;
+		line-height: 0;
+	}
+
+	html[data-theme='light'] .geogrid-frame {
+		box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1);
+	}
+
+	.geogrid {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	/* Map background palette (kept fixed across light and dark themes
+	   so the "map" reads as a real screenshot)                          */
+	.map-base    { fill: #e8f1da; }
+	.map-park    { fill: #c9dfa1; }
+	.map-water   { fill: #aacbe0; }
+
+	.map-roads .road-shoulder {
+		stroke: rgba(0, 0, 0, 0.08);
+		stroke-width: 11;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+	}
+
+	.map-roads .road-surface {
+		stroke: #ffffff;
+		stroke-width: 7;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		fill: none;
+	}
+
+	.map-roads .road-shoulder--small {
+		stroke-width: 8;
+	}
+
+	.map-roads .road-surface--small {
+		stroke-width: 4.5;
+	}
+
+	.map-labels text {
+		font-family: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+		font-size: 14px;
+		font-weight: 600;
+		fill: #4a5765;
+		text-anchor: middle;
+		letter-spacing: 0.01em;
+		paint-order: stroke fill;
+		stroke: rgba(255, 255, 255, 0.85);
+		stroke-width: 3;
+		stroke-linejoin: round;
+	}
+
+	/* Rank pins ─────────────────────────────────────────────────────── */
+	.rank-dot {
+		opacity: 0;
+		transform-origin: var(--cell-cx, 50%) var(--cell-cy, 50%);
+		transform: scale(0.4);
+		animation: rank-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+		animation-delay: var(--cell-delay, 0s);
+	}
+
+	@keyframes rank-pop {
+		from { opacity: 0; transform: scale(0.4); }
+		to   { opacity: 1; transform: scale(1); }
+	}
+
+	.rank-dot__circle {
+		stroke: rgba(255, 255, 255, 0.9);
+		stroke-width: 1.5;
+	}
+
+	.rank-dot--top .rank-dot__circle { fill: #28c281; }
+	.rank-dot--mid .rank-dot__circle { fill: #f5b440; }
+	.rank-dot--low .rank-dot__circle { fill: #f06464; }
+	.rank-dot--none .rank-dot__circle {
+		fill: #ffffff;
+		stroke: #cbd5e1;
+		stroke-width: 1.5;
+	}
+
+	.rank-dot__num {
+		text-anchor: middle;
+		dominant-baseline: central;
+		font-family: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
+		font-size: 16px;
+		font-weight: 700;
+		fill: #ffffff;
+		letter-spacing: 0;
+	}
+
+	.rank-dot--none .rank-dot__num {
+		fill: #475569;
+		font-size: 13px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.rank-dot {
+			animation: none !important;
+			opacity: 1 !important;
+			transform: none !important;
+		}
+	}
+
+	/* Legend ─────────────────────────────────────────────────────────── */
+	.geogrid-legend {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.4rem 1.1rem;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	.legend-item {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.legend-dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		display: inline-block;
+		background: var(--surface);
+		border: 1px solid var(--border);
+	}
+
+	.legend-item--top  .legend-dot { background: #28c281; border-color: #28c281; }
+	.legend-item--mid  .legend-dot { background: #f5b440; border-color: #f5b440; }
+	.legend-item--low  .legend-dot { background: #f06464; border-color: #f06464; }
+	.legend-item--none .legend-dot { background: #ffffff; border-color: #cbd5e1; }
+
+	/* ─────────────  Plans  ───────────── */
+	.plans-section {
+		max-width: 1320px;
+	}
+
+	.plans-header {
+		max-width: 760px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
+	.plan-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+		align-items: stretch;
+	}
+
+	@media (min-width: 760px) {
+		.plan-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.plan-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.5rem;
+		}
+
+		.plan-card--featured {
+			transform: translateY(-12px);
+		}
+
+		.plan-card--featured:hover {
+			transform: translateY(-16px);
+		}
+	}
+
+	.plan-card {
+		--plan-color: var(--accent);
+		--plan-shadow: rgba(249, 115, 22, 0.35);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 2rem;
+		transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+	}
+
+	.plan-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: var(--plan-color);
+		border-radius: var(--radius) var(--radius) 0 0;
+		pointer-events: none;
+	}
+
+	.plan-card:hover {
+		border-color: var(--plan-color);
+		box-shadow: 0 24px 60px -16px var(--plan-shadow);
+	}
+
+	.plan-card--orange { --plan-color: var(--accent);        --plan-shadow: rgba(249, 115, 22, 0.45); }
+	.plan-card--green  { --plan-color: var(--accent-green);  --plan-shadow: rgba(74, 222, 128, 0.45); }
+	.plan-card--purple { --plan-color: var(--accent-purple); --plan-shadow: rgba(167, 139, 250, 0.45); }
+
+	.plan-card--featured {
+		border-color: var(--plan-color);
+		box-shadow: 0 24px 60px -16px var(--plan-shadow);
+	}
+
+	.plan-badge {
+		position: absolute;
+		top: -14px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		background: var(--plan-color);
+		color: #0b0b0f;
+		padding: 0.4rem 0.9rem;
+		border-radius: 999px;
+		box-shadow: 0 0 0 6px var(--bg);
+		white-space: nowrap;
+	}
+
+	.plan-head {
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.plan-name {
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--plan-color);
+		line-height: 1;
+	}
+
+	.plan-price {
+		display: flex;
+		align-items: baseline;
+		gap: 0.35rem;
+	}
+
+	.plan-price-amount {
+		font-family: var(--font-display);
+		font-size: clamp(2.75rem, 5vw, 3.75rem);
+		font-weight: 400;
+		color: var(--text);
+		letter-spacing: 0.01em;
+		line-height: 1;
+	}
+
+	.plan-price-cadence {
+		font-size: 1.1rem;
+		font-weight: 500;
+		color: var(--text-muted);
+		line-height: 1;
+	}
+
+	.plan-tagline {
+		font-size: 0.98rem;
+		color: var(--text-muted);
+		line-height: 1.55;
+		margin: 0;
+	}
+
+	.plan-features {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+		flex: 1;
+	}
+
+	.plan-features li {
+		position: relative;
+		padding-left: 1.6rem;
+		font-size: 0.96rem;
+		line-height: 1.45;
+		color: var(--text);
+	}
+
+	.plan-features li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.32em;
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: var(--plan-color);
+		opacity: 0.18;
+	}
+
+	.plan-features li::after {
+		content: '';
+		position: absolute;
+		left: 4px;
+		top: 0.55em;
+		width: 6px;
+		height: 3px;
+		border-left: 2px solid var(--plan-color);
+		border-bottom: 2px solid var(--plan-color);
+		transform: rotate(-45deg);
+	}
+
+	.plan-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.95rem 1.25rem;
+		border-radius: var(--radius);
+		background: var(--plan-color);
+		color: #0b0b0f;
+		font-weight: 600;
+		text-decoration: none;
+		font-size: 1rem;
+		letter-spacing: 0.01em;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+		margin-top: auto;
+	}
+
+	.plan-cta:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 28px -10px var(--plan-shadow);
+		opacity: 0.95;
+	}
+
+	.plans-foot {
+		text-align: center;
+		color: var(--text-muted);
+		margin: 2rem 0 0;
+		font-size: 0.95rem;
+	}
+
+	.plans-foot a {
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.plans-foot a:hover {
 		text-decoration: underline;
 	}
 
+	/* ─────────────  Closing CTA  ───────────── */
 	.cta-section {
 		text-align: center;
 	}
@@ -914,7 +1201,7 @@ const faqItems = [
 		border: 1px solid var(--border);
 		background: var(--surface);
 		border-radius: var(--radius);
-		padding: 2.2rem 1.5rem;
+		padding: 2.5rem 1.5rem;
 	}
 
 	.cta-inner h2 {
@@ -932,7 +1219,7 @@ const faqItems = [
 		color: var(--text-muted);
 		font-size: 1rem;
 		line-height: 1.55;
-		max-width: 520px;
+		max-width: 540px;
 	}
 
 	@media (max-width: 768px) {
@@ -965,5 +1252,27 @@ const faqItems = [
 		.btn-outline {
 			min-height: 46px;
 		}
+
+		.islands-visual {
+			min-height: 320px;
+		}
+	}
+
+	/* ─────────────  Light theme tweaks  ───────────── */
+	html[data-theme='light'] .geogrid-pin-dot {
+		fill: #ffffff;
+	}
+
+	html[data-theme='light'] .pillar-card,
+	html[data-theme='light'] .connection-card,
+	html[data-theme='light'] .plan-card,
+	html[data-theme='light'] .cta-inner {
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+	}
+
+	html[data-theme='light'] .plan-cta,
+	html[data-theme='light'] .plan-card--green .plan-badge,
+	html[data-theme='light'] .plan-card--green .plan-cta {
+		color: #ffffff;
 	}
 </style>

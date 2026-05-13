@@ -55,7 +55,6 @@ Example structure:
 
 - `/services/seo/` (SEO hub)
 - `/services/web-development/` (service hub)
-- `/services/web-development/asheville-nc/` (location page)
 
 The point is: **each page supports the next page** and keeps the site easy to navigate.
 

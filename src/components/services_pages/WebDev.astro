@@ -5,13 +5,7 @@ import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import ThemeToggleButton from '../ThemeToggleButton.astro';
 import { businessLogos } from '../../data/businessLogos';
-import { locations } from '../../data/locations';
 import { webdevTradePhotos } from '../../data/webdevTrades';
-
-const cityPageLinks = locations
-	.slice()
-	.sort((a, b) => a.city.localeCompare(b.city))
-	.map((l) => ({ href: `/services/web-development/${l.slug}/`, label: `${l.city}, ${l.regionLabel}` }));
 
 const deliverableFeature = {
 	title: 'A 1 to 10 page site built for how people hire you.',
@@ -540,20 +534,6 @@ const faqItems = [
 					</div>
 				))}
 			</dl>
-		</section>
-
-		<section class="section location-note-section" aria-labelledby="city-pages-heading">
-			<h2 class="visually-hidden" id="city-pages-heading">City-specific pages</h2>
-			<p class="location-note">
-				<strong>Cities and neighborhoods.
-			</p>
-			<ul class="city-link-list">
-				{cityPageLinks.map((link) => (
-					<li>
-						<a href={link.href}>{link.label}</a>
-					</li>
-				))}
-			</ul>
 		</section>
 
 		<section class="section cta-section">
@@ -1841,45 +1821,6 @@ const faqItems = [
 		line-height: var(--type-leading-body);
 		font-size: 0.98rem;
 		letter-spacing: 0.01em;
-	}
-
-	.location-note-section {
-		padding-top: 2rem;
-		padding-bottom: 2rem;
-	}
-
-	.location-note {
-		margin: 0;
-		font-size: 0.95rem;
-		line-height: var(--type-leading-body-relaxed);
-		color: var(--text-muted);
-		max-width: 900px;
-		letter-spacing: 0.01em;
-	}
-
-	.city-link-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem 1rem;
-		list-style: none;
-		padding: 0.75rem 0 0;
-		margin: 0;
-		max-width: 900px;
-	}
-
-	.city-link-list li {
-		margin: 0;
-	}
-
-	.city-link-list a {
-		color: var(--accent);
-		text-decoration: none;
-		font-size: 0.92rem;
-		font-weight: 500;
-	}
-
-	.city-link-list a:hover {
-		text-decoration: underline;
 	}
 
 	.visually-hidden {

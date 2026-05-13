@@ -1,12 +1,12 @@
 ---
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
-import { locations } from '../data/locations';
 import { portfolioItems } from '../data/portfolio';
 
-const featuredWork = portfolioItems.filter((p) =>
-	['notle-client', 'Kiefer Property Solutions', 'paintball-sample-site'].includes(p.slug)
-);
+const featuredSlugs = ['Kiefer Property Solutions', 'paintball-sample-site', 'my-buddy-lawn-care'];
+const featuredWork = featuredSlugs
+	.map((slug) => portfolioItems.find((p) => p.slug === slug))
+	.filter((p): p is NonNullable<typeof p> => Boolean(p));
 ---
 
 <div class="page-wrapper" id="page-wrapper">
@@ -30,20 +30,20 @@ const featuredWork = portfolioItems.filter((p) =>
 		<div class="hero-inner">
 			<div class="hero-headline-wrap">
 				<h1 class="hero-title">
-					Professional web developer for local businesses.
+					Local SEO and websites that get you ranking on Google in 3 months.
 				</h1>
-				<span class="badge badge-pink">NO FEES</span>
-				<span class="badge badge-yellow">FAST</span>
+				<span class="badge badge-pink">RANKINGS</span>
+				<span class="badge badge-yellow">MONTHLY</span>
 				<span class="badge badge-green">PERSONAL</span>
 			</div>
 
 			<div class="hero-foot">
 				<p class="hero-desc">
-					One-time build. No monthly fees. Real dude. Easy process. You own the site. Based in Asheville, NC.
+					Flat-fee monthly local SEO and websites for service businesses. Site, hosting, Google Business Profile, content, and rankings work, all rolled into one plan. Based in Asheville, NC.
 				</p>
 				<div class="hero-actions">
-					<a href="/contact/" class="btn-solid">Tell me what you need &rarr;</a>
-					<a href="/services/" class="btn-outline">Services</a>
+					<a href="/contact/" class="btn-solid">Start ranking &rarr;</a>
+					<a href="#simple-pricing" class="btn-outline">See plans</a>
 					<a href="/portfolio/" class="btn-outline">Portfolio</a>
 				</div>
 			</div>
@@ -58,7 +58,7 @@ const featuredWork = portfolioItems.filter((p) =>
 				Who you're working with.
 			</span>
 			<p class="about-text fade-in-child" style="--delay:1">
-				I'm Tom — a web developer in <a href="/services/web-development/asheville-nc/">Asheville, NC</a> who works directly with local service businesses. No middleman. No agency layers. You work with one person, me. You can ask questions. You get direct answers. I build websites for remodelers, plumbers, electricians, pressure washers, and other local service providers.
+				I'm <span class="bio-name">Tom</span>, a web developer and local SEO guy in <span class="bio-pin"><svg class="bio-pin-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C7.03 0 3 4.03 3 9c0 6.75 9 15 9 15s9-8.25 9-15c0-4.97-4.03-9-9-9zm0 12.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7z"/></svg>Asheville, NC</span>, working directly with local service businesses. <span class="bio-strike" style="--strike-delay:0.35s">No middleman.</span> <span class="bio-strike" style="--strike-delay:0.6s">No agency layers.</span> You work with <span class="bio-circle">one person, me</span>. I build the site, run your local SEO every month, and aim to have you ranking on <span class="bio-google" aria-label="Google"><span class="bio-google__l" style="--g-color:#4285F4">G</span><span class="bio-google__l" style="--g-color:#EA4335">o</span><span class="bio-google__l" style="--g-color:#FBBC05">o</span><span class="bio-google__l" style="--g-color:#4285F4">g</span><span class="bio-google__l" style="--g-color:#34A853">l</span><span class="bio-google__l" style="--g-color:#EA4335">e</span></span> <span class="bio-mark" style="--mark-delay:1s">within 3 months</span>. <span class="bio-trade" style="--trade-delay:1.2s; --trade-color: var(--accent)">Remodelers</span>, <span class="bio-trade" style="--trade-delay:1.3s; --trade-color: var(--accent-pink)">plumbers</span>, <span class="bio-trade" style="--trade-delay:1.4s; --trade-color: var(--accent-green)">electricians</span>, <span class="bio-trade" style="--trade-delay:1.5s; --trade-color: var(--accent-purple)">pressure washers</span>, and the rest of the trades.
 			</p>
 		</div>
 	</section>
@@ -71,22 +71,34 @@ const featuredWork = portfolioItems.filter((p) =>
 				Our services.
 			</span>
 			<h2 class="section-title">What I do.</h2>
-			<p class="section-desc">Website work built for local service businesses that need something fast, clear, and professional.</p>
+			<p class="section-desc">Monthly local SEO and websites built for service businesses that need to actually show up on Google.</p>
 		</div>
 
 		<ul class="stack-cards js-stack-cards">
 			<li class="stack-cards__item js-stack-cards__item">
-				<a href="/services/web-development/" class="svc-card">
+				<a href="/services/web-development/" class="svc-card svc-card--orange">
 					<div class="svc-card-content">
+						<div class="svc-card-head">
+							<span class="svc-mark">01 / 04</span>
+							<span class="svc-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+							</span>
+						</div>
 						<div class="svc-card-text">
 							<h3>Web Development</h3>
-							<p>Custom websites built for local businesses that need something fast, clear, and professional without dealing with an agency.</p>
+							<p>Custom websites built for local service businesses, included in every monthly plan. Fast, clear, and built to convert visitors into calls.</p>
 						</div>
-						<ul class="svc-tags">
-							<li>Custom Sites</li>
-							<li>Responsive</li>
-							<li>Performance</li>
-						</ul>
+						<div class="svc-card-foot">
+							<ul class="svc-tags">
+								<li>Included in plan</li>
+								<li>Hosting</li>
+								<li>Performance</li>
+							</ul>
+							<span class="svc-cta">
+								Explore
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+							</span>
+						</div>
 					</div>
 					<div class="svc-card-img">
 						<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1000" alt="Web Development" loading="lazy" />
@@ -95,17 +107,29 @@ const featuredWork = portfolioItems.filter((p) =>
 			</li>
 
 			<li class="stack-cards__item js-stack-cards__item">
-				<a href="/services/seo/" class="svc-card">
+				<a href="/services/seo/" class="svc-card svc-card--pink">
 					<div class="svc-card-content">
-						<div class="svc-card-text">
-							<h3>SEO Optimization</h3>
-							<p>On-page and technical SEO work to help your website show up better for the local searches that actually matter.</p>
+						<div class="svc-card-head">
+							<span class="svc-mark">02 / 04</span>
+							<span class="svc-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><polyline points="8.5 11 11 13.5 14 10"/></svg>
+							</span>
 						</div>
-						<ul class="svc-tags">
-							<li>Local SEO</li>
-							<li>Technical</li>
-							<li>Analytics</li>
-						</ul>
+						<div class="svc-card-text">
+							<h3>Local SEO</h3>
+							<p>Monthly SEO work aimed at getting you ranking on Google within 3 months. GBP optimization, content, on-page fixes, and review growth.</p>
+						</div>
+						<div class="svc-card-foot">
+							<ul class="svc-tags">
+								<li>Rank in 3 months</li>
+								<li>GBP</li>
+								<li>Content</li>
+							</ul>
+							<span class="svc-cta">
+								Explore
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+							</span>
+						</div>
 					</div>
 					<div class="svc-card-img">
 						<img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1000" alt="SEO Optimization" loading="lazy" />
@@ -114,17 +138,29 @@ const featuredWork = portfolioItems.filter((p) =>
 			</li>
 
 			<li class="stack-cards__item js-stack-cards__item">
-				<a href="/services/tooling/" class="svc-card">
+				<a href="/services/tooling/" class="svc-card svc-card--yellow">
 					<div class="svc-card-content">
+						<div class="svc-card-head">
+							<span class="svc-mark">03 / 04</span>
+							<span class="svc-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+							</span>
+						</div>
 						<div class="svc-card-text">
 							<h3>Tooling</h3>
-							<p>Useful business tools like forms, quote flows, dashboards, and automations that save time and cut down manual work.</p>
+							<p>Forms, quote flows, dashboards, and automations that save your team time and turn more visitors into actual jobs.</p>
 						</div>
-						<ul class="svc-tags">
-							<li>Forms</li>
-							<li>Dashboards</li>
-							<li>Automation</li>
-						</ul>
+						<div class="svc-card-foot">
+							<ul class="svc-tags">
+								<li>Forms</li>
+								<li>Dashboards</li>
+								<li>Automation</li>
+							</ul>
+							<span class="svc-cta">
+								Explore
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+							</span>
+						</div>
 					</div>
 					<div class="svc-card-img">
 						<img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" alt="Tooling" loading="lazy" />
@@ -133,17 +169,29 @@ const featuredWork = portfolioItems.filter((p) =>
 			</li>
 
 			<li class="stack-cards__item js-stack-cards__item">
-				<a href="/services/ai/" class="svc-card">
+				<a href="/services/ai/" class="svc-card svc-card--green">
 					<div class="svc-card-content">
+						<div class="svc-card-head">
+							<span class="svc-mark">04 / 04</span>
+							<span class="svc-icon" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M9 2v3"/><path d="M15 2v3"/><path d="M9 19v3"/><path d="M15 19v3"/><path d="M19 9h3"/><path d="M19 15h3"/><path d="M2 9h3"/><path d="M2 15h3"/></svg>
+							</span>
+						</div>
 						<div class="svc-card-text">
 							<h3>AI Workflows</h3>
-							<p>Practical AI features for small businesses that want real utility, not gimmicks or overcomplicated systems.</p>
+							<p>Practical AI built into your business. Lead capture, customer follow-ups, content help, and workflows that save real hours.</p>
 						</div>
-						<ul class="svc-tags">
-							<li>Chatbots</li>
-							<li>Content</li>
-							<li>Workflows</li>
-						</ul>
+						<div class="svc-card-foot">
+							<ul class="svc-tags">
+								<li>Chatbots</li>
+								<li>Follow-ups</li>
+								<li>Workflows</li>
+							</ul>
+							<span class="svc-cta">
+								Explore
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+							</span>
+						</div>
 					</div>
 					<div class="svc-card-img">
 						<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1000" alt="AI" loading="lazy" />
@@ -152,14 +200,6 @@ const featuredWork = portfolioItems.filter((p) =>
 			</li>
 		</ul>
 
-		<div class="serving-bar">
-			<span class="serving-label">Serving:</span>
-			<div class="serving-pills">
-				{locations.map((l) => (
-					<a href={`/services/web-development/${l.slug}/`} class="location-pill">{l.city}, {l.regionLabel}</a>
-				))}
-			</div>
-		</div>
 	</section>
 
 	<!-- HOW IT WORKS -->
@@ -171,40 +211,56 @@ const featuredWork = portfolioItems.filter((p) =>
 				How it works.
 			</span>
 			<h2 class="section-title">No agency runaround.</h2>
-			<p class="section-desc">Straightforward process from start to finish. You always know where things stand.</p>
+			<p class="section-desc">A clear path from first message to ranking on Google. Same person every step.</p>
 		</div>
 
-		<div class="process-grid">
-			<div class="process-step scale-in-child" style="--delay:0">
+		<ol class="process-flow">
+			<li class="process-step scale-in-child step--orange" style="--delay:0">
+				<div class="step-badge">
+					<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+				</div>
 				<span class="step-number">01</span>
 				<h4>You reach out</h4>
-				<p>Tell me what you need. A quick message is all it takes.</p>
-			</div>
-			<div class="process-step scale-in-child" style="--delay:1">
+				<p>Send a quick message. No phone tag. No forms with twenty fields.</p>
+			</li>
+			<li class="process-step scale-in-child step--pink" style="--delay:1">
+				<div class="step-badge">
+					<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+				</div>
 				<span class="step-number">02</span>
-				<h4>We scope it out</h4>
-				<p>A quick call to figure out what you need and how it should work.</p>
-			</div>
-			<div class="process-step scale-in-child" style="--delay:2">
+				<h4>We pick your plan</h4>
+				<p>Quick call to size up your market and pick the right monthly tier.</p>
+			</li>
+			<li class="process-step scale-in-child step--yellow" style="--delay:2">
+				<div class="step-badge">
+					<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+				</div>
 				<span class="step-number">03</span>
-				<h4>Clear upfront price</h4>
-				<p>You get a fixed price before anything starts. No surprises.</p>
-			</div>
-			<div class="process-step scale-in-child" style="--delay:3">
+				<h4>Site goes live</h4>
+				<p>Website, hosting, and Google Business Profile up and running fast.</p>
+			</li>
+			<li class="process-step scale-in-child step--green" style="--delay:3">
+				<div class="step-badge">
+					<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><polyline points="7 14 12 9 16 13 21 8"/></svg>
+				</div>
 				<span class="step-number">04</span>
-				<h4>I build it</h4>
-				<p>I handle the work — design, code, SEO, the whole thing.</p>
-			</div>
-			<div class="process-step scale-in-child" style="--delay:4">
+				<h4>Monthly SEO work</h4>
+				<p>Content, GBP posts, on-page fixes, reviews, and rank tracking every month.</p>
+			</li>
+			<li class="process-step scale-in-child step--purple" style="--delay:4">
+				<div class="step-badge">
+					<svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+				</div>
 				<span class="step-number">05</span>
-				<h4>You own it</h4>
-				<p>You get a finished site you control. No lock-in. No subscriptions.</p>
-			</div>
-		</div>
+				<h4>Ranking in 3 months</h4>
+				<p>Visible on Google for your local searches. Calls and leads start coming in.</p>
+			</li>
+		</ol>
 	</section>
 
 	<!-- TESTIMONIALS -->
 	<section class="section slide-in-section testimonials-section" id="testimonials">
+		<div class="testimonials-glow" aria-hidden="true"></div>
 		<img src="/paint-splat.png" alt="" class="testimonials-bg" />
 		<div class="section-header slide-in-left">
 			<span class="section-eyebrow">
@@ -218,181 +274,314 @@ const featuredWork = portfolioItems.filter((p) =>
 		<div class="reviews-grid">
 			<div class="review-card scale-in-child" style="--delay:0">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"I was in need of help with my website design. I reached out to Tommy he had me up and going in 2 days. The website is phenomenal!"</p>
-					<span class="review-name">Nicholas K.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"I was in need of help with my website design. I reached out to Tommy he had me up and going in 2 days. The website is phenomenal!"</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Nicholas K.</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="review-card scale-in-child" style="--delay:1">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"Tom produced A++ quality for my bands website, was easy to work with, can't recommend him enough!"</p>
-					<span class="review-name">Miles D.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"Tom produced A++ quality for my bands website, was easy to work with, can't recommend him enough!"</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Miles D.</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="review-card scale-in-child" style="--delay:2">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"I needed a simple but good looking website and didn't want to pay monthly fees or a crazy price. Tom is an excellent and quick web developer and made everything how I wanted. The price was super reasonable too!"</p>
-					<span class="review-name">Chris V.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"I needed a simple but good looking website and didn't want to pay monthly fees or a crazy price. Tom is an excellent and quick web developer and made everything how I wanted. The price was super reasonable too!"</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Chris V.</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="review-card scale-in-child" style="--delay:3">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"Tom was great! Explained everything to me and implemented it with zero hiccups. Didn't take a week. It literally took days."</p>
-					<span class="review-name">Michael B.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"Tom was great! Explained everything to me and implemented it with zero hiccups. Didn't take a week. It literally took days."</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Michael B.</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="review-card scale-in-child" style="--delay:4">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"Very positive experience with Tommy. Quick to make changes as requested and very reasonable with his rates. Highly recommend this man."</p>
-					<span class="review-name">Jon Q.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"Very positive experience with Tommy. Quick to make changes as requested and very reasonable with his rates. Highly recommend this man."</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Jon Q.</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="review-card scale-in-child" style="--delay:5">
 				<div class="review-inner">
-					<div class="review-head">
-						<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
-							<svg viewBox="0 0 24 24" fill="#FBBC05"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+					<div class="review-chrome">
+						<span class="review-google-chip">
+							<svg class="google-g" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+							<span class="review-google-brand">Google</span>
+						</span>
+						<div class="review-rating-row">
+							<div class="review-stars" aria-label="5 out of 5 stars">
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+								<svg viewBox="0 0 24 24" fill="#FBBC05" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg>
+							</div>
+							<span class="review-score">5.0</span>
 						</div>
 					</div>
-					<p class="review-text">"Tom was great to deal with! Very professional, solid product, and a quick turnaround. We have continued to use him for updates and he has been very prompt. 5/5, totally recommend."</p>
-					<span class="review-name">Matt F.</span>
+					<blockquote class="review-quote">
+					<p class="review-quote-text">"Tom was great to deal with! Very professional, solid product, and a quick turnaround. We have continued to use him for updates and he has been very prompt. 5/5, totally recommend."</p>
+					</blockquote>
+					<div class="review-foot">
+						<span class="review-name">Matt F.</span>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- PORTFOLIO -->
-	<section class="section section--alt" id="recent-work">
-		<div class="section-header">
-			<span class="section-eyebrow">
-				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
-				Recent work.
-			</span>
-			<h2 class="section-title">Latest projects</h2>
-			<p class="section-desc">From ultra-fast landing pages to full business sites — here's some of what I've built recently.</p>
+	<section class="section section--alt section--works" id="recent-work">
+		<div class="works-glow works-glow--a" aria-hidden="true"></div>
+		<div class="works-glow works-glow--b" aria-hidden="true"></div>
+
+		<div class="works-header">
+			<div class="works-header-text">
+				<span class="section-eyebrow">
+					<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+					Recent work.
+				</span>
+				<h2 class="section-title">Latest projects</h2>
+				<p class="section-desc">From ultra-fast landing pages to full business sites, here's some of what I've built recently.</p>
+			</div>
+			<div class="works-counter" aria-hidden="true">
+				<span class="works-counter-num">03</span>
+				<span class="works-counter-divider"></span>
+				<span class="works-counter-label">Featured<br/>projects</span>
+			</div>
 		</div>
 
-		<div class="works-grid">
-			{featuredWork.map((item) => (
-				<a class="work-card" href={item.url} target="_blank" rel="noopener noreferrer">
-					<div class="work-card-img">
-						{item.previewImage ? (
-							<img src={item.previewImage} alt={item.title} loading="lazy" />
-						) : (
-							<iframe src={item.url} title={item.title} loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
-						)}
-					</div>
-					<div class="work-card-info">
-						<h3>{item.title}</h3>
-						<div class="work-meta">
-							<div class="work-meta-item">
-								<span class="work-meta-label">Category</span>
-								<span class="work-meta-value">{item.category}</span>
+		<div class="works-showcase">
+			{featuredWork.map((item, idx) => {
+				const accents = ['var(--accent)', 'var(--accent-pink)', 'var(--accent-purple)'];
+				const variant = idx === 0 ? 'primary' : 'secondary';
+				const num = String(idx + 1).padStart(2, '0');
+				return (
+					<a class={`work-feature work-feature--${variant}`} style={`--card-accent: ${accents[idx % accents.length]};`} href={item.url} target="_blank" rel="noopener noreferrer">
+						<div class={`work-feature-media${item.previewFit === 'contain' ? ' work-feature-media--contain' : ''}`}>
+							{item.previewImage ? (
+								<img src={item.previewImage} alt={item.title} loading="lazy" />
+							) : (
+								<iframe src={item.url} title={item.title} loading="lazy" sandbox="allow-scripts allow-same-origin"></iframe>
+							)}
+							<span class="work-feature-num">{num}</span>
+							<div class="work-feature-overlay">
+								<span class="work-feature-cta">
+									<span>Visit site</span>
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="8 7 17 7 17 16"/></svg>
+								</span>
 							</div>
 						</div>
-						<p>{item.whatTheyNeeded}</p>
-						<span class="work-card-link">View Site</span>
-					</div>
-				</a>
-			))}
+						<div class="work-feature-body">
+							<div class="work-feature-meta">
+								<span class="work-feature-tag">{item.category}</span>
+								<span class="work-feature-host">{item.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span>
+							</div>
+							<h3 class="work-feature-title">{item.title}</h3>
+							<p class="work-feature-desc">{item.whatTheyNeeded}</p>
+						</div>
+					</a>
+				);
+			})}
 		</div>
 
 		<div class="works-cta-card">
-			<h4>See all my work</h4>
-			<a href="/portfolio/" class="btn-outline">All Projects &rarr;</a>
+			<div class="works-cta-text">
+				<span class="works-cta-eyebrow">More work</span>
+				<h4>See the full portfolio</h4>
+				<p>Band sites, business sites, and software products. Built fast, owned by the client.</p>
+			</div>
+			<a href="/portfolio/" class="works-cta-btn">
+				<span>All projects</span>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+			</a>
 		</div>
 	</section>
 
 	<!-- PRICING -->
 	<section class="pricing-section" id="simple-pricing">
-		<div class="pricing-layout">
-			<div class="pricing-sticky">
-				<span class="section-eyebrow">
-					<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
-					Pricing.
-				</span>
-				<h2 class="section-title">Upfront pricing. No monthly trap.</h2>
-				<a href="/contact/" class="btn-solid">Get a quote &rarr;</a>
-			</div>
-
-			<div class="pricing-scroll">
-				<div class="pricing-card">
-					<span class="pricing-card-label">The approach</span>
-					<p class="pricing-card-text">Every project is quoted based on what you actually need. No bloated packages. No agency-style retainer just to keep the lights on.</p>
-				</div>
-				<div class="pricing-card">
-					<span class="pricing-card-label">Typical range</span>
-					<p class="pricing-card-text">Smaller sites often land around <strong>$600</strong>. Most 1&ndash;5 page website builds range from <strong>$600 to $3,000</strong> depending on scope.</p>
-				</div>
-				<div class="pricing-card">
-					<span class="pricing-card-label">No surprises</span>
-					<p class="pricing-card-text">You'll know the price up front before anything starts. No hidden costs, no scope creep charges, no monthly trap.</p>
-				</div>
-				<div class="pricing-card">
-					<span class="pricing-card-label">You own it</span>
-					<p class="pricing-card-text">Once it's built, it's yours. No lock-in, no proprietary platforms. You get the code and full control.</p>
-				</div>
-			</div>
+		<div class="pricing-header">
+			<span class="section-eyebrow">
+				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
+				Monthly plans.
+			</span>
+			<h2 class="section-title">Pick your tier. Start ranking.</h2>
+			<p class="section-desc">Flat monthly pricing. Website, hosting, and local SEO included on every plan. No setup fees. No long contracts.</p>
 		</div>
+
+		<div class="plan-grid">
+			<article class="plan-card plan-card--orange">
+				<header class="plan-head">
+					<span class="plan-name">Local SEO Starter</span>
+					<div class="plan-price">
+						<span class="plan-price-amount">$379</span>
+						<span class="plan-price-cadence">/mo</span>
+					</div>
+					<p class="plan-tagline">Sets you on the path. Gets you on the listings, posting, and capturing reviews.</p>
+				</header>
+				<ul class="plan-features">
+					<li>Local SEO audit</li>
+					<li>Keyword research</li>
+					<li>Website build</li>
+					<li>Hosting and security</li>
+					<li>Monthly GBP optimization</li>
+					<li>2 GBP posts / month</li>
+					<li>20+ business listings online</li>
+					<li>Customer review funnel and response help</li>
+				</ul>
+				<a href="/contact/?plan=starter" class="plan-cta">Start with Starter &rarr;</a>
+			</article>
+
+			<article class="plan-card plan-card--green plan-card--featured">
+				<span class="plan-badge">Most popular</span>
+				<header class="plan-head">
+					<span class="plan-name">Growth Local SEO</span>
+					<div class="plan-price">
+						<span class="plan-price-amount">$697</span>
+						<span class="plan-price-cadence">/mo</span>
+					</div>
+					<p class="plan-tagline">Your own personal SEO guy. Posts, new pages, real strategy, and steady ranking work every month.</p>
+				</header>
+				<p class="plan-includes">Everything in Starter, plus:</p>
+				<ul class="plan-features">
+					<li>50+ business listings online</li>
+					<li>1 new SEO page or blog post / month</li>
+					<li>5+ Google Business posts / month</li>
+					<li>Monthly rank tracking report</li>
+					<li>On-page SEO updates from performance data</li>
+					<li>Internal linking improvements</li>
+				</ul>
+				<a href="/contact/?plan=growth" class="plan-cta">Start growing &rarr;</a>
+			</article>
+
+			<article class="plan-card plan-card--purple">
+				<header class="plan-head">
+					<span class="plan-name">Local Domination</span>
+					<div class="plan-price">
+						<span class="plan-price-amount">$997</span>
+						<span class="plan-price-cadence">/mo</span>
+					</div>
+					<p class="plan-tagline">Full-court press. For competitive markets and businesses that can turn extra jobs into real money.</p>
+				</header>
+				<p class="plan-includes">Everything in Growth, plus:</p>
+				<ul class="plan-features">
+					<li>2 to 4 new website SEO pages / month</li>
+					<li>Service-area page expansion</li>
+					<li>Deeper competitor research</li>
+					<li>Backlink and outreach work</li>
+					<li>Priority edits and support</li>
+				</ul>
+				<a href="/contact/?plan=domination" class="plan-cta">Dominate locally &rarr;</a>
+			</article>
+		</div>
+
+		<p class="plan-footnote">Not sure which tier fits? <a href="/contact/">Send a quick message</a> and I'll point you to the right one.</p>
 	</section>
 
 	<!-- WHY CHOOSE ME -->
@@ -403,7 +592,7 @@ const featuredWork = portfolioItems.filter((p) =>
 				Why hire me.
 			</span>
 			<h2 class="section-title">Choose solo. Choose better.</h2>
-			<p class="section-desc">Why hire a solo web designer instead of an agency?</p>
+			<p class="section-desc">Why hire one focused person instead of an agency?</p>
 		</div>
 
 		<div class="why-grid">
@@ -425,8 +614,8 @@ const featuredWork = portfolioItems.filter((p) =>
 				<div class="why-icon why-icon--orange">
 					<svg viewBox="0 0 166 166" fill="currentColor"><path d="M165.16 82.58c0-10.78-8.74-19.53-19.53-19.53h-15.91l11.25-11.25c7.63-7.63 7.63-19.99 0-27.61-7.63-7.63-19.99-7.63-27.61 0l-11.25 11.25V19.53C102.11 8.75 93.37 0 82.58 0 71.8 0 63.05 8.74 63.05 19.53v15.91L51.8 24.19c-7.63-7.63-19.99-7.63-27.61 0s-7.63 19.99 0 27.61l11.25 11.25H19.53C8.75 63.05 0 71.79 0 82.58c0 10.78 8.74 19.53 19.53 19.53h15.91l-11.25 11.25c-7.63 7.63-7.63 19.99 0 27.61 7.63 7.63 19.99 7.63 27.61 0l11.25-11.25v15.92c0 10.78 8.74 19.53 19.53 19.53 10.78 0 19.53-8.74 19.53-19.53v-15.91l11.25 11.25c7.63 7.63 19.99 7.63 27.61 0 7.63-7.63 7.63-19.99 0-27.61l-11.25-11.25h15.91c10.78 0 19.53-8.74 19.53-19.53z"/></svg>
 				</div>
-				<h4>No Bloated Monthly Fees</h4>
-				<p>There's an upfront build cost, then you pay for help when you actually need it instead of an expensive retainer.</p>
+				<h4>Ranked in 3 Months</h4>
+				<p>Plans are built around getting you visible on Google within 3 months, not just a pretty site that nobody finds.</p>
 			</div>
 		</div>
 	</section>
@@ -440,15 +629,15 @@ const featuredWork = portfolioItems.filter((p) =>
 			<div class="about-detail-text">
 				<h3>Hi, I'm Tom.</h3>
 				<p>
-					I'm a web developer and web designer centered in <a href="/services/web-development/asheville-nc/">Asheville, NC</a>, who works directly with local service businesses.
+					I'm a web developer and local SEO guy in Asheville, NC, working directly with local service businesses.
 				</p>
 				<p>
-					A lot of contractors and service business owners are used to people trying to sell them stuff they don't need. That's exactly why I keep this simple. You work with one person, me.
+					Most contractors and service business owners are used to people trying to sell them stuff they don't need. That's why I keep this simple. One flat monthly plan. Site, hosting, GBP, content, and SEO work all in one fee. You always work with me.
 				</p>
 				<p>
-					I build websites for remodelers, plumbers, electricians, pressure washers, and other local service providers that need a solid online presence without huge monthly fees.
+					I work with remodelers, plumbers, electricians, pressure washers, and other service providers who want to actually rank on Google and get more calls, not just stand up a website and hope.
 				</p>
-				<a href="/contact/" class="btn-solid">Tell me what you're trying to build &rarr;</a>
+				<a href="/contact/" class="btn-solid">Tell me about your business &rarr;</a>
 			</div>
 		</div>
 	</section>
@@ -458,8 +647,8 @@ const featuredWork = portfolioItems.filter((p) =>
 		<img src="/paint-trip.png" alt="" class="cta-bg" />
 		<div class="cta-inner">
 			<img class="cta-icon" src={astroLogo.src} alt="Computer Tommy" />
-			<h2>Ready to get your site built right?</h2>
-			<a href="/contact/" class="btn-solid btn-lg">Start a Project &rarr;</a>
+			<h2>Ready to start ranking in 3 months?</h2>
+			<a href="/contact/" class="btn-solid btn-lg">Start a Plan &rarr;</a>
 		</div>
 	</section>
 </div>
@@ -610,6 +799,12 @@ const featuredWork = portfolioItems.filter((p) =>
 		max-width: 1100px;
 		margin: 0 auto;
 		padding: 5rem 1.5rem;
+	}
+
+	#how-it-works.section {
+		max-width: 1320px;
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 
 	.section--tight {
@@ -925,6 +1120,182 @@ const featuredWork = portfolioItems.filter((p) =>
 		opacity: 0.85;
 	}
 
+	/* ───────────── Bio decorations ───────────── */
+
+	.bio-name {
+		display: inline-block;
+		color: var(--accent);
+		transform: rotate(-2.5deg);
+		transform-origin: 50% 100%;
+		transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+		padding: 0 0.05em;
+	}
+
+	.bio-name:hover {
+		transform: rotate(-5deg) scale(1.06);
+	}
+
+	.bio-pin {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.18em;
+		white-space: nowrap;
+		color: var(--accent);
+	}
+
+	.bio-pin-icon {
+		width: 0.7em;
+		height: 0.7em;
+		flex-shrink: 0;
+		align-self: center;
+		color: var(--accent);
+		transform-origin: 50% 100%;
+		animation: bio-pin-bounce 2.6s ease-in-out infinite;
+	}
+
+	@keyframes bio-pin-bounce {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-0.18em); }
+	}
+
+	.bio-strike {
+		position: relative;
+		display: inline-block;
+		color: var(--text-muted);
+		transition: color 0.5s ease var(--strike-delay, 0.3s);
+	}
+
+	.bio-strike::after {
+		content: "";
+		position: absolute;
+		left: -0.08em;
+		right: -0.08em;
+		top: 52%;
+		height: 0.1em;
+		background: var(--accent-pink);
+		border-radius: 999px;
+		transform: scaleX(0) rotate(-1.5deg);
+		transform-origin: left center;
+		transition: transform 0.65s cubic-bezier(0.65, 0, 0.35, 1) var(--strike-delay, 0.3s);
+		pointer-events: none;
+	}
+
+	.fade-in-section.is-visible .bio-strike::after {
+		transform: scaleX(1) rotate(-1.5deg);
+	}
+
+	.bio-circle {
+		position: relative;
+		display: inline-block;
+		z-index: 1;
+		padding: 0 0.18em;
+		color: var(--text);
+	}
+
+	.bio-circle::before {
+		content: "";
+		position: absolute;
+		inset: -0.05em -0.05em -0.1em -0.05em;
+		border: 2.5px solid var(--accent-yellow);
+		border-radius: 55% 45% 60% 40% / 50% 60% 45% 55%;
+		transform: scale(0.6) rotate(-2deg);
+		opacity: 0;
+		transition:
+			transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s,
+			opacity 0.5s ease 0.7s;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.fade-in-section.is-visible .bio-circle::before {
+		transform: scale(1) rotate(-2deg);
+		opacity: 1;
+	}
+
+	.bio-google {
+		display: inline-block;
+	}
+
+	.bio-google__l {
+		display: inline-block;
+		color: var(--g-color, var(--text));
+		opacity: 0;
+		transform: translateY(0.4em) scale(0.7);
+		transition:
+			opacity 0.45s ease,
+			transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.fade-in-section.is-visible .bio-google__l {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	.bio-google__l:nth-child(1) { transition-delay: 0.85s; }
+	.bio-google__l:nth-child(2) { transition-delay: 0.93s; }
+	.bio-google__l:nth-child(3) { transition-delay: 1.01s; }
+	.bio-google__l:nth-child(4) { transition-delay: 1.09s; }
+	.bio-google__l:nth-child(5) { transition-delay: 1.17s; }
+	.bio-google__l:nth-child(6) { transition-delay: 1.25s; }
+
+	.bio-mark {
+		position: relative;
+		display: inline-block;
+		z-index: 1;
+		white-space: nowrap;
+	}
+
+	.bio-mark::before {
+		content: "";
+		position: absolute;
+		left: -0.08em;
+		right: -0.08em;
+		bottom: 0.05em;
+		height: 0.28em;
+		background: var(--accent-yellow);
+		border-radius: 2px;
+		transform: scaleX(0) skewX(-3deg);
+		transform-origin: left center;
+		transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1) var(--mark-delay, 0.5s);
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	.fade-in-section.is-visible .bio-mark::before {
+		transform: scaleX(1) skewX(-3deg);
+	}
+
+	.bio-trade {
+		display: inline-block;
+		color: var(--trade-color, var(--text));
+		opacity: 0;
+		transform: translateY(0.45em);
+		transition:
+			opacity 0.45s ease,
+			transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+		transition-delay: var(--trade-delay, 1s);
+	}
+
+	.fade-in-section.is-visible .bio-trade {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.bio-name,
+		.bio-pin-icon,
+		.bio-strike::after,
+		.bio-circle::before,
+		.bio-google__l,
+		.bio-mark::before,
+		.bio-trade {
+			transition: none !important;
+			animation: none !important;
+			transform: none !important;
+			opacity: 1 !important;
+		}
+	}
+
 	/* ═══════════════════════════════════════
 	   Services — CodyHouse stacking cards
 	   ═══════════════════════════════════════ */
@@ -953,18 +1324,43 @@ const featuredWork = portfolioItems.filter((p) =>
 	}
 
 	.svc-card {
+		--svc-color: var(--accent);
+		--svc-shadow: rgba(249, 115, 22, 0.35);
+		position: relative;
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2px;
-		background: var(--text);
+		background: var(--surface);
+		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		padding: 2px;
 		overflow: hidden;
 		text-decoration: none;
 		color: inherit;
 		height: 100%;
 		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+		transition: border-color 0.3s ease, box-shadow 0.3s ease;
 	}
+
+	.svc-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 4px;
+		background: var(--svc-color);
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	.svc-card:hover {
+		border-color: var(--svc-color);
+		box-shadow: 0 24px 60px -16px var(--svc-shadow);
+	}
+
+	.svc-card--orange { --svc-color: var(--accent);        --svc-shadow: rgba(249, 115, 22, 0.45); }
+	.svc-card--pink   { --svc-color: var(--accent-pink);   --svc-shadow: rgba(244, 114, 182, 0.45); }
+	.svc-card--yellow { --svc-color: var(--accent-yellow); --svc-shadow: rgba(250, 204, 21, 0.45); }
+	.svc-card--green  { --svc-color: var(--accent-green);  --svc-shadow: rgba(74, 222, 128, 0.45); }
 
 	@media (min-width: 768px) {
 		.svc-card {
@@ -974,7 +1370,7 @@ const featuredWork = portfolioItems.filter((p) =>
 
 	@media (min-width: 1024px) {
 		.svc-card {
-			grid-template-columns: 2fr 1fr;
+			grid-template-columns: 1.4fr 1fr;
 		}
 	}
 
@@ -982,28 +1378,69 @@ const featuredWork = portfolioItems.filter((p) =>
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 2rem;
-		background: var(--bg);
-		padding: 1.5rem;
-		border-radius: var(--radius);
+		gap: 1rem;
+		background: var(--surface);
+		padding: 1.25rem 1.25rem 1.25rem 1.65rem;
 	}
 
 	@media (min-width: 768px) {
 		.svc-card-content {
-			padding: 3rem;
+			padding: 2rem 2rem 2rem 2.5rem;
+			gap: 1.25rem;
 		}
+	}
+
+	.svc-card-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.svc-mark {
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.18em;
+		color: var(--svc-color);
+		text-transform: uppercase;
+		line-height: 1;
+	}
+
+	.svc-icon {
+		width: 44px;
+		height: 44px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: var(--bg);
+		border: 1.5px solid var(--svc-color);
+		color: var(--svc-color);
+		flex-shrink: 0;
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, color 0.3s ease;
+	}
+
+	.svc-icon svg {
+		width: 22px;
+		height: 22px;
+	}
+
+	.svc-card:hover .svc-icon {
+		transform: rotate(-8deg) scale(1.06);
+		background: var(--svc-color);
+		color: #0b0b0f;
 	}
 
 	.svc-card-img {
 		overflow: hidden;
-		border-radius: var(--radius);
-		min-height: 200px;
+		min-height: 220px;
 		position: relative;
+		background: #1a1a22;
 	}
 
 	@media (min-width: 768px) {
 		.svc-card-img {
-			min-height: 300px;
+			min-height: 320px;
 		}
 	}
 
@@ -1011,28 +1448,39 @@ const featuredWork = portfolioItems.filter((p) =>
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.7s ease;
+		transition: transform 0.7s ease, filter 0.5s ease;
+		filter: saturate(0.9);
 	}
 
 	.svc-card:hover .svc-card-img img {
 		transform: scale(1.05);
+		filter: saturate(1.05);
 	}
 
 	.svc-card-text h3 {
 		font-family: var(--font-display);
 		font-size: clamp(2rem, 4vw, 3.5rem);
 		font-weight: 400;
-		margin: 0 0 1rem;
+		margin: 0 0 0.85rem;
 		letter-spacing: 0.02em;
 		text-transform: uppercase;
+		line-height: 1;
 	}
 
 	.svc-card-text p {
 		color: var(--text-muted);
-		font-size: clamp(1rem, 1.5vw, 1.35rem);
+		font-size: clamp(1rem, 1.4vw, 1.2rem);
 		line-height: 1.55;
 		margin: 0;
-		max-width: 600px;
+		max-width: 560px;
+	}
+
+	.svc-card-foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem 1.25rem;
 	}
 
 	.svc-tags {
@@ -1045,54 +1493,53 @@ const featuredWork = portfolioItems.filter((p) =>
 	}
 
 	.svc-tags li {
-		padding: 0.5rem 1rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		font-size: 1rem;
-		color: var(--text-muted);
-	}
-
-	.serving-bar {
-		display: flex;
-		flex-wrap: wrap;
+		display: inline-flex;
 		align-items: center;
-		gap: 0.75rem;
-		margin-top: 1.5rem;
-		padding: 1rem 1.25rem;
-		background: var(--surface);
+		gap: 0.45rem;
+		padding: 0.4rem 0.85rem;
 		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-	}
-
-	.serving-label {
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--text-muted);
-	}
-
-	.serving-pills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.location-pill {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: var(--accent);
-		text-decoration: none;
-		padding: 0.3rem 0.7rem;
 		border-radius: 999px;
-		background: rgba(249, 115, 22, 0.08);
-		border: 1px solid rgba(249, 115, 22, 0.2);
-		transition: background 0.2s, border-color 0.2s;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+		background: var(--bg);
+		transition: border-color 0.3s ease, color 0.3s ease;
 	}
 
-	.location-pill:hover {
-		background: rgba(249, 115, 22, 0.16);
-		border-color: rgba(249, 115, 22, 0.4);
+	.svc-tags li::before {
+		content: "";
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--svc-color);
+		flex-shrink: 0;
+	}
+
+	.svc-card:hover .svc-tags li {
+		border-color: var(--svc-color);
+		color: var(--text);
+	}
+
+	.svc-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: var(--font-display);
+		font-size: 1.05rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--svc-color);
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.svc-cta svg {
+		width: 18px;
+		height: 18px;
+		transition: transform 0.3s ease;
+	}
+
+	.svc-card:hover .svc-cta svg {
+		transform: translateX(5px);
 	}
 
 	.process-bg {
@@ -1117,54 +1564,337 @@ const featuredWork = portfolioItems.filter((p) =>
 	/* ═══════════════════════════════════════
 	   Process / How it works
 	   ═══════════════════════════════════════ */
-	.process-grid {
+	.process-flow {
+		--pf-pad-top: 4.25rem;
+		list-style: none;
+		padding: var(--pf-pad-top) 0 0;
+		margin: 0;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-		gap: 0.5rem;
+		grid-template-columns: repeat(5, 1fr);
+		gap: 1.35rem;
+		position: relative;
+	}
+
+	/* Dashed track that connects all the badges */
+	.process-flow::before {
+		content: "";
+		position: absolute;
+		top: calc(var(--pf-pad-top) - 1px);
+		left: calc((100% / 5) / 2);
+		right: calc((100% / 5) / 2);
+		height: 2px;
+		background-image: linear-gradient(
+			to right,
+			var(--border) 50%,
+			transparent 50%
+		);
+		background-size: 14px 2px;
+		background-repeat: repeat-x;
+		transform-origin: left center;
+		transform: scaleX(0);
+		transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.slide-in-section.is-visible .process-flow::before {
+		transform: scaleX(1);
 	}
 
 	.process-step {
+		--step-color: var(--accent);
+		--step-shadow: rgba(249, 115, 22, 0.35);
+		position: relative;
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		padding: 1.75rem 1.5rem;
+		padding: 3.25rem 1.65rem 1.85rem;
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.55rem;
+		text-align: left;
+		transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		overflow: visible;
+		isolation: isolate;
+	}
+
+	.process-step::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		background: radial-gradient(
+			120% 80% at 0% 0%,
+			var(--step-color) 0%,
+			transparent 60%
+		);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.process-step:hover {
+		transform: translateY(-6px);
+		border-color: var(--step-color);
+		box-shadow: 0 18px 40px -16px var(--step-shadow);
+	}
+
+	.process-step:hover::after {
+		opacity: 0.08;
+	}
+
+	/* Per-step accent colors */
+	.step--orange { --step-color: var(--accent);        --step-shadow: rgba(249, 115, 22, 0.45); }
+	.step--pink   { --step-color: var(--accent-pink);   --step-shadow: rgba(244, 114, 182, 0.45); }
+	.step--yellow { --step-color: var(--accent-yellow); --step-shadow: rgba(250, 204, 21, 0.45); }
+	.step--green  { --step-color: var(--accent-green);  --step-shadow: rgba(74, 222, 128, 0.45); }
+	.step--purple { --step-color: var(--accent-purple); --step-shadow: rgba(167, 139, 250, 0.45); }
+
+	/* Floating colored badge above each card */
+	.step-badge {
+		position: absolute;
+		top: -30px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		background: var(--step-color);
+		color: #0b0b0f;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow:
+			0 0 0 8px var(--bg),
+			0 12px 28px -8px var(--step-shadow);
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+		z-index: 2;
+	}
+
+	.process-step:hover .step-badge {
+		transform: translateX(-50%) rotate(-8deg) scale(1.06);
+	}
+
+	.step-icon {
+		width: 26px;
+		height: 26px;
 	}
 
 	.step-number {
-		font-size: 2rem;
-		font-weight: 800;
-		color: var(--accent);
-		letter-spacing: -0.03em;
+		font-family: var(--font-display);
+		font-size: 1rem;
+		font-weight: 400;
+		color: var(--step-color);
+		letter-spacing: 0.18em;
 		line-height: 1;
+		text-transform: uppercase;
+		margin-top: 0.25rem;
 	}
 
 	.process-step h4 {
-		font-size: 1.1rem;
+		font-size: 1.2rem;
 		font-weight: 700;
 		margin: 0;
 		color: var(--text);
+		letter-spacing: -0.01em;
 	}
 
 	.process-step p {
 		color: var(--text-muted);
-		font-size: 0.95rem;
-		line-height: 1.5;
+		font-size: 1rem;
+		line-height: 1.55;
 		margin: 0;
+	}
+
+	@media (min-width: 1280px) {
+		#how-it-works.section {
+			max-width: 1400px;
+		}
+		.process-flow {
+			gap: 1.65rem;
+		}
+		.process-step {
+			padding: 3.35rem 1.85rem 2rem;
+		}
+	}
+
+	/* Tablet: 3 + 2 columns. Hide the dashed connector since it can't span rows cleanly. */
+	@media (max-width: 900px) {
+		.process-flow {
+			grid-template-columns: repeat(3, 1fr);
+			--pf-pad-top: 3.75rem;
+			gap: 1rem;
+		}
+		.process-flow::before {
+			display: none;
+		}
+		.process-step {
+			padding: 3rem 1.35rem 1.65rem;
+		}
+		.process-step h4 {
+			font-size: 1.1rem;
+		}
+		.process-step p {
+			font-size: 0.95rem;
+		}
+	}
+
+	/* Mobile: vertical timeline with badge on the left and a vertical dashed line */
+	@media (max-width: 600px) {
+		.process-flow {
+			grid-template-columns: 1fr;
+			padding: 0 0 0 2rem;
+			gap: 1.25rem;
+			position: relative;
+		}
+		.process-flow::before {
+			display: block;
+			top: 0;
+			bottom: 0;
+			left: calc(2rem - 1px);
+			right: auto;
+			width: 2px;
+			height: auto;
+			background-image: linear-gradient(
+				to bottom,
+				var(--border) 50%,
+				transparent 50%
+			);
+			background-size: 2px 14px;
+			background-repeat: repeat-y;
+			transform-origin: top center;
+			transform: scaleY(0);
+			transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1) 0.2s;
+		}
+		.slide-in-section.is-visible .process-flow::before {
+			transform: scaleY(1);
+		}
+		.process-step {
+			padding: 1.25rem 1.25rem 1.25rem 2.25rem;
+		}
+		.step-badge {
+			top: 1.25rem;
+			left: -2rem;
+			transform: translateX(-50%);
+			width: 48px;
+			height: 48px;
+		}
+		.step-icon {
+			width: 20px;
+			height: 20px;
+		}
+		.process-step:hover {
+			transform: translateX(4px);
+		}
+		.process-step:hover .step-badge {
+			transform: translateX(-50%) rotate(-8deg) scale(1.06);
+		}
 	}
 
 	/* ═══════════════════════════════════════
 	   Works / Portfolio
 	   ═══════════════════════════════════════ */
-	.works-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: 0.5rem;
+	.section--works {
+		position: relative;
+		overflow: hidden;
 	}
 
-	.work-card {
+	.section--works > .works-header,
+	.section--works > .works-showcase,
+	.section--works > .works-cta-card {
+		position: relative;
+		z-index: 1;
+	}
+
+	.section--works > .works-glow {
+		position: absolute;
+		pointer-events: none;
+		z-index: 0;
+		border-radius: 50%;
+		filter: blur(110px);
+		opacity: 0.18;
+	}
+
+	.section--works > .works-glow--a {
+		top: -120px;
+		left: -120px;
+		width: 420px;
+		height: 420px;
+		background: var(--accent);
+	}
+
+	.section--works > .works-glow--b {
+		bottom: -160px;
+		right: -120px;
+		width: 460px;
+		height: 460px;
+		background: var(--accent-purple);
+		opacity: 0.14;
+	}
+
+	.works-header {
+		max-width: 1100px;
+		margin: 0 auto 3rem;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 2rem;
+	}
+
+	.works-header-text {
+		max-width: 760px;
+	}
+
+	.works-counter {
+		display: flex;
+		align-items: center;
+		gap: 0.85rem;
+		flex-shrink: 0;
+		margin-top: -0.25rem;
+	}
+
+	.works-counter-num {
+		font-family: var(--font-display);
+		font-size: clamp(3.5rem, 8vw, 5.5rem);
+		line-height: 0.85;
+		letter-spacing: -0.02em;
+		color: var(--accent);
+		text-shadow: 0 0 32px color-mix(in srgb, var(--accent) 35%, transparent);
+	}
+
+	.works-counter-divider {
+		width: 1px;
+		height: 48px;
+		background: var(--border);
+	}
+
+	.works-counter-label {
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.16em;
+		line-height: 1.15;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.works-showcase {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+		display: grid;
+		grid-template-columns: 1.55fr 1fr;
+		grid-auto-rows: 1fr;
+		gap: 1rem;
+		min-height: 720px;
+	}
+
+	.work-feature {
+		--card-accent: var(--accent);
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		background: var(--surface);
@@ -1173,122 +1903,282 @@ const featuredWork = portfolioItems.filter((p) =>
 		overflow: hidden;
 		text-decoration: none;
 		color: inherit;
-		transition: border-color 0.3s, transform 0.2s, box-shadow 0.3s;
+		isolation: isolate;
+		transition:
+			transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+			border-color 0.3s ease,
+			box-shadow 0.4s ease;
 	}
 
-	.work-card:hover {
-		border-color: rgba(255, 255, 255, 0.18);
-		transform: translateY(-3px);
-		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	.work-feature::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		padding: 1.5px;
+		background: linear-gradient(135deg, var(--card-accent), transparent 55%, var(--card-accent) 100%);
+		-webkit-mask:
+			linear-gradient(#fff 0 0) content-box,
+			linear-gradient(#fff 0 0);
+		-webkit-mask-composite: xor;
+		        mask-composite: exclude;
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+		z-index: 3;
 	}
 
-	.work-card-img {
-		aspect-ratio: 16 / 10;
+	.work-feature:hover {
+		transform: translateY(-4px);
+		border-color: transparent;
+		box-shadow: 0 28px 64px -24px color-mix(in srgb, var(--card-accent) 55%, transparent);
+	}
+
+	.work-feature:hover::after {
+		opacity: 1;
+	}
+
+	.work-feature--primary {
+		grid-row: 1 / span 2;
+	}
+
+	.work-feature--secondary {
+		flex-direction: row;
+	}
+
+	.work-feature-media {
+		position: relative;
 		overflow: hidden;
 		background: #1a1a22;
+		flex: 1 1 auto;
+		min-height: 320px;
 	}
 
-	.work-card-img img {
+	.work-feature--primary .work-feature-media {
+		min-height: 440px;
+	}
+
+	.work-feature--secondary .work-feature-media {
+		flex: 0 0 45%;
+		min-height: 0;
+		min-width: 0;
+	}
+
+	.work-feature-media img {
+		position: absolute;
+		inset: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.5s ease;
+		transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
-	.work-card-img iframe {
+	.work-feature-media--contain {
+		background:
+			radial-gradient(ellipse 80% 100% at 50% 50%, color-mix(in srgb, var(--card-accent) 12%, transparent), transparent 65%),
+			#0f0f14;
+	}
+
+	.work-feature-media--contain img {
+		object-fit: contain;
+		padding: 1.25rem;
+	}
+
+	.work-feature--secondary .work-feature-media--contain img {
+		padding: 0.75rem;
+	}
+
+	.work-feature-media iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 1280px;
 		height: 800px;
 		border: none;
 		pointer-events: none;
 		transform-origin: top left;
-		transform: scale(0.3);
+		transform: scale(0.35);
 	}
 
-	.work-card:hover .work-card-img img {
+	.work-feature--primary .work-feature-media iframe {
+		transform: scale(0.5);
+	}
+
+	.work-feature:hover .work-feature-media img {
 		transform: scale(1.06);
 	}
 
-	.work-card-info {
-		padding: 1.5rem;
+	.work-feature-num {
+		position: absolute;
+		top: 1rem;
+		left: 1.1rem;
+		z-index: 2;
+		font-family: var(--font-display);
+		font-size: 2.75rem;
+		line-height: 0.85;
+		color: var(--card-accent);
+		letter-spacing: -0.02em;
+		text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+		pointer-events: none;
+	}
+
+	.work-feature--primary .work-feature-num {
+		top: 1.25rem;
+		left: 1.5rem;
+		font-size: 4.5rem;
+	}
+
+	.work-feature-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+		padding: 1.25rem;
+		background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.6) 100%);
+		opacity: 0;
+		transition: opacity 0.35s ease;
+	}
+
+	.work-feature:hover .work-feature-overlay {
+		opacity: 1;
+	}
+
+	.work-feature-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.55rem 1rem;
+		background: var(--card-accent);
+		color: #fff;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		border-radius: 999px;
+		transform: translateY(10px);
+		transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+		box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--card-accent) 60%, transparent);
+	}
+
+	.work-feature:hover .work-feature-cta {
+		transform: translateY(0);
+	}
+
+	.work-feature-cta svg {
+		width: 0.95em;
+		height: 0.95em;
+	}
+
+	.work-feature-body {
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
-		flex: 1;
+		padding: 1.5rem;
+		border-top: 1px solid var(--border);
+		background:
+			linear-gradient(180deg, transparent, color-mix(in srgb, var(--card-accent) 5%, transparent));
 	}
 
-	.work-card-info h3 {
+	.work-feature--secondary .work-feature-body {
+		flex: 1 1 0;
+		border-top: 0;
+		border-left: 1px solid var(--border);
+		padding: 1.25rem 1.35rem;
+		gap: 0.55rem;
+		justify-content: center;
+	}
+
+	.work-feature-meta {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		flex-wrap: wrap;
+	}
+
+	.work-feature-tag {
+		font-family: var(--font);
+		font-size: 0.7rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		padding: 0.3rem 0.65rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+		color: var(--card-accent);
+		font-weight: 600;
+		border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+	}
+
+	.work-feature-host {
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.72rem;
+		letter-spacing: 0.02em;
+		color: var(--text-muted);
+		opacity: 0.85;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		max-width: 100%;
+	}
+
+	.work-feature-title {
 		font-family: var(--font-display);
-		font-size: 1.75rem;
+		font-size: 1.85rem;
 		font-weight: 400;
 		text-transform: uppercase;
-		margin: 0;
 		letter-spacing: 0.02em;
+		line-height: 1;
+		margin: 0;
+		display: inline-block;
+		width: fit-content;
+		background-image: linear-gradient(90deg, var(--card-accent), var(--card-accent));
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		background-size: 0% 2px;
+		padding-bottom: 4px;
+		transition: background-size 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 	}
 
-	.work-meta {
-		display: flex;
-		gap: 1.5rem;
+	.work-feature--primary .work-feature-title {
+		font-size: clamp(2.25rem, 3.8vw, 3rem);
 	}
 
-	.work-meta-item {
-		display: flex;
-		flex-direction: column;
+	.work-feature:hover .work-feature-title {
+		background-size: 100% 2px;
 	}
 
-	.work-meta-label {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		color: var(--text-muted);
-		letter-spacing: 0.06em;
-	}
-
-	.work-meta-value {
-		color: var(--text);
-		font-weight: 500;
-	}
-
-	.work-card-info p {
+	.work-feature-desc {
 		color: var(--text-muted);
 		font-size: 0.95rem;
 		line-height: 1.5;
 		margin: 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
-	.work-card-link {
-		display: inline-flex;
-		align-items: center;
-		margin-top: auto;
-		font-size: 0.95rem;
-		font-weight: 600;
-		color: var(--text);
-		text-transform: uppercase;
-		padding: 0.6rem 1.5rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		transition: background 0.2s, border-color 0.2s;
-		width: fit-content;
-	}
-
-	.work-card:hover .work-card-link {
-		background: var(--text);
-		color: var(--bg);
-		border-color: var(--text);
+	.work-feature--secondary .work-feature-desc {
+		-webkit-line-clamp: 2;
+		font-size: 0.9rem;
 	}
 
 	.works-cta-card {
-		margin-top: 1.5rem;
-		display: flex;
-		flex-direction: column;
+		max-width: 1100px;
+		margin: 2.5rem auto 0;
+		display: grid;
+		grid-template-columns: 1fr auto;
 		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-		padding: 3rem 2rem;
-		border: 2px solid var(--border);
+		gap: 2rem;
+		padding: 2.5rem 2.75rem;
+		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		text-align: center;
 		position: relative;
 		overflow: hidden;
 		background:
+			radial-gradient(ellipse 90% 120% at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 55%),
+			radial-gradient(ellipse 90% 120% at 100% 100%, color-mix(in srgb, var(--accent-purple) 9%, transparent), transparent 55%),
 			repeating-linear-gradient(
 				-45deg,
 				transparent,
@@ -1298,13 +2188,73 @@ const featuredWork = portfolioItems.filter((p) =>
 			);
 	}
 
+	.works-cta-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.works-cta-eyebrow {
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		letter-spacing: 0.2em;
+		color: var(--accent);
+		text-transform: uppercase;
+	}
+
 	.works-cta-card h4 {
 		font-family: var(--font-display);
-		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-size: clamp(2rem, 5vw, 3.25rem);
 		font-weight: 400;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
 		margin: 0;
+		line-height: 0.95;
+	}
+
+	.works-cta-card p {
+		color: var(--text-muted);
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.5;
+		max-width: 50ch;
+	}
+
+	.works-cta-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.95rem 1.6rem;
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+		border-radius: 999px;
+		font-family: var(--font);
+		font-size: 0.95rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.3s ease;
+		white-space: nowrap;
+	}
+
+	.works-cta-btn svg {
+		width: 1em;
+		height: 1em;
+		transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.works-cta-btn:hover {
+		background: var(--accent);
+		color: #fff;
+		border-color: var(--accent);
+		transform: translateY(-1px);
+		box-shadow: 0 12px 28px -10px color-mix(in srgb, var(--accent) 55%, transparent);
+	}
+
+	.works-cta-btn:hover svg {
+		transform: translateX(3px);
 	}
 
 	/* ═══════════════════════════════════════
@@ -1313,66 +2263,241 @@ const featuredWork = portfolioItems.filter((p) =>
 	.pricing-section {
 		position: relative;
 		z-index: 1;
-		max-width: 1100px;
+		max-width: 1320px;
 		margin: 0 auto;
-		padding: 5rem 1.5rem;
+		padding: 5rem 2rem;
 	}
 
-	.pricing-layout {
+	.pricing-header {
+		max-width: 760px;
+		margin: 0 auto 3rem;
+		text-align: center;
+	}
+
+	.pricing-header .section-eyebrow {
+		justify-content: center;
+	}
+
+	.plan-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 3rem;
-		align-items: start;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+		align-items: stretch;
 	}
 
-	.pricing-sticky {
-		position: sticky;
-		top: 3rem;
+	.plan-card {
+		--plan-color: var(--accent);
+		--plan-shadow: rgba(249, 115, 22, 0.35);
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.pricing-sticky .btn-solid {
-		width: fit-content;
-		margin-top: 0.5rem;
-	}
-
-	.pricing-scroll {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	.pricing-card {
+		gap: 1.25rem;
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		padding: 2rem;
+		transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+	}
+
+	.plan-card::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 4px;
+		background: var(--plan-color);
+		border-radius: var(--radius) var(--radius) 0 0;
+		pointer-events: none;
+	}
+
+	.plan-card:hover {
+		border-color: var(--plan-color);
+		box-shadow: 0 24px 60px -16px var(--plan-shadow);
+	}
+
+	.plan-card--orange { --plan-color: var(--accent);        --plan-shadow: rgba(249, 115, 22, 0.45); }
+	.plan-card--green  { --plan-color: var(--accent-green);  --plan-shadow: rgba(74, 222, 128, 0.45); }
+	.plan-card--purple { --plan-color: var(--accent-purple); --plan-shadow: rgba(167, 139, 250, 0.45); }
+
+	.plan-card--featured {
+		border-color: var(--plan-color);
+		box-shadow: 0 24px 60px -16px var(--plan-shadow);
+	}
+
+	.plan-badge {
+		position: absolute;
+		top: -14px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		background: var(--plan-color);
+		color: #0b0b0f;
+		padding: 0.4rem 0.9rem;
+		border-radius: 999px;
+		box-shadow: 0 0 0 6px var(--bg);
+		white-space: nowrap;
+	}
+
+	.plan-head {
 		display: flex;
 		flex-direction: column;
-		gap: 0.75rem;
+		gap: 0.65rem;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid var(--border);
 	}
 
-	.pricing-card-label {
+	.plan-name {
 		font-family: var(--font-display);
-		font-size: 1.25rem;
-		font-weight: 400;
+		font-size: 1.15rem;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
-		color: var(--accent);
+		color: var(--plan-color);
+		line-height: 1;
 	}
 
-	.pricing-card-text {
+	.plan-price {
+		display: flex;
+		align-items: baseline;
+		gap: 0.35rem;
+	}
+
+	.plan-price-amount {
+		font-family: var(--font-display);
+		font-size: clamp(2.75rem, 5vw, 3.75rem);
+		font-weight: 400;
+		color: var(--text);
+		letter-spacing: 0.01em;
+		line-height: 1;
+	}
+
+	.plan-price-cadence {
 		font-size: 1.1rem;
+		font-weight: 500;
 		color: var(--text-muted);
-		line-height: 1.6;
+		line-height: 1;
+	}
+
+	.plan-tagline {
+		font-size: 0.98rem;
+		color: var(--text-muted);
+		line-height: 1.55;
 		margin: 0;
 	}
 
-	.pricing-card-text strong {
+	.plan-includes {
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 		color: var(--text);
+		margin: 0;
+	}
+
+	.plan-features {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+		flex: 1;
+	}
+
+	.plan-features li {
+		position: relative;
+		padding-left: 1.6rem;
+		font-size: 0.96rem;
+		line-height: 1.45;
+		color: var(--text);
+	}
+
+	.plan-features li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.32em;
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: var(--plan-color);
+		opacity: 0.18;
+	}
+
+	.plan-features li::after {
+		content: "";
+		position: absolute;
+		left: 4px;
+		top: 0.55em;
+		width: 6px;
+		height: 3px;
+		border-left: 2px solid var(--plan-color);
+		border-bottom: 2px solid var(--plan-color);
+		transform: rotate(-45deg);
+	}
+
+	.plan-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.95rem 1.25rem;
+		border-radius: var(--radius);
+		background: var(--plan-color);
+		color: #0b0b0f;
 		font-weight: 600;
+		text-decoration: none;
+		font-size: 1rem;
+		letter-spacing: 0.01em;
+		transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+		margin-top: auto;
+	}
+
+	.plan-cta:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 12px 28px -10px var(--plan-shadow);
+		opacity: 0.95;
+	}
+
+	.plan-footnote {
+		text-align: center;
+		color: var(--text-muted);
+		margin: 2rem 0 0;
+		font-size: 0.95rem;
+	}
+
+	.plan-footnote a {
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.plan-footnote a:hover {
+		text-decoration: underline;
+	}
+
+	@media (min-width: 760px) {
+		.plan-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.plan-grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 1.5rem;
+		}
+
+		.plan-card--featured {
+			transform: translateY(-12px);
+		}
+
+		.plan-card--featured:hover {
+			transform: translateY(-16px);
+		}
 	}
 
 	/* ═══════════════════════════════════════
@@ -1441,8 +2566,38 @@ const featuredWork = portfolioItems.filter((p) =>
 	/* ═══════════════════════════════════════
 	   Testimonials / Reviews
 	   ═══════════════════════════════════════ */
+	#testimonials.section {
+		max-width: 1320px;
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
 	.testimonials-section {
 		position: relative;
+	}
+
+	.testimonials-glow {
+		position: absolute;
+		top: -8%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: min(100%, 920px);
+		height: clamp(260px, 38vw, 420px);
+		background:
+			radial-gradient(ellipse 55% 45% at 30% 40%, rgba(66, 133, 244, 0.16), transparent 55%),
+			radial-gradient(ellipse 45% 40% at 75% 35%, rgba(234, 67, 53, 0.1), transparent 50%),
+			radial-gradient(ellipse 50% 42% at 55% 70%, rgba(251, 188, 5, 0.12), transparent 55%),
+			radial-gradient(ellipse 38% 35% at 15% 75%, rgba(52, 168, 83, 0.1), transparent 50%);
+		filter: blur(28px);
+		opacity: 0.55;
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	.testimonials-section > .section-header,
+	.testimonials-section > .reviews-grid {
+		position: relative;
+		z-index: 2;
 	}
 
 	.testimonials-bg {
@@ -1453,77 +2608,168 @@ const featuredWork = portfolioItems.filter((p) =>
 		height: auto;
 		opacity: 0;
 		pointer-events: none;
-		z-index: 0;
+		z-index: 1;
 		transform: scale(0.8) rotate(-5deg);
 		transition: opacity 1.2s ease, transform 1.2s ease;
 	}
 
 	.slide-in-section.is-visible .testimonials-bg {
-		opacity: 0.15;
+		opacity: 0.14;
 		transform: scale(1) rotate(0deg);
 	}
 
 	.reviews-grid {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 2px;
-		background: var(--text);
-		border-radius: var(--radius);
-		padding: 2px;
-		overflow: hidden;
-		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+		gap: 1.25rem;
+		background: transparent;
+		padding: 0;
+		border-radius: 0;
+		overflow: visible;
+		box-shadow: none;
 	}
 
 	.review-card {
-		background: var(--bg);
-		border-radius: calc(var(--radius) - 2px);
+		position: relative;
+		height: 100%;
+		min-height: 100%;
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, var(--surface) 52%, var(--surface) 100%);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		box-shadow: 0 20px 50px rgba(0, 0, 0, 0.38);
+		transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+	}
+
+	.review-card::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 1rem;
+		bottom: 1rem;
+		width: 3px;
+		border-radius: 99px;
+		background: linear-gradient(
+			180deg,
+			#4285f4 0%,
+			#ea4335 32%,
+			#fbbc05 64%,
+			#34a853 100%
+		);
+		opacity: 0.85;
+		pointer-events: none;
+	}
+
+	.review-card:hover {
+		transform: translateY(-6px) scale(1);
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
 	}
 
 	.review-inner {
-		padding: 2rem;
+		padding: 1.85rem 1.75rem 1.85rem calc(1.75rem + 10px);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		gap: 1rem;
+		gap: 1.05rem;
 		height: 100%;
 	}
 
-	.review-head {
+	.review-chrome {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.75rem;
+		justify-content: space-between;
+		gap: 0.75rem 1rem;
+		padding-bottom: 1.1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.review-google-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.35rem 0.65rem 0.35rem 0.45rem;
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.09);
 	}
 
 	.google-g {
-		width: 1.25rem;
-		height: 1.25rem;
+		width: 1.125rem;
+		height: 1.125rem;
 		flex-shrink: 0;
+	}
+
+	.review-google-brand {
+		font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		font-size: 0.92rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
+		color: var(--text);
+		line-height: 1;
+	}
+
+	.review-rating-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.review-stars {
 		display: flex;
+		align-items: center;
 		gap: 2px;
 	}
 
 	.review-stars svg {
 		width: 1rem;
 		height: 1rem;
+		filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
 	}
 
-	.review-text {
-		color: var(--text-muted);
-		font-size: clamp(1rem, 1.5vw, 1.15rem);
-		line-height: 1.6;
+	.review-score {
+		flex-shrink: 0;
+		font-weight: 800;
+		font-size: 0.8rem;
+		line-height: 1;
+		color: #0f0f12;
+		background: #fbbc05;
+		padding: 0.3rem 0.45rem;
+		border-radius: 6px;
+	}
+
+	blockquote.review-quote {
 		margin: 0;
+		padding: 0;
+		border: none;
 		flex: 1;
+	}
+
+	blockquote.review-quote p.review-quote-text {
+		color: var(--text-muted);
+		font-size: clamp(1.02rem, 1.4vw, 1.125rem);
+		line-height: 1.62;
+		margin: 0;
+		font-style: italic;
+	}
+
+	.review-foot {
+		padding-top: 0.2rem;
 	}
 
 	.review-name {
 		font-family: var(--font-display);
-		font-size: 1.25rem;
+		font-size: 1.15rem;
 		text-transform: uppercase;
-		letter-spacing: 0.03em;
+		letter-spacing: 0.04em;
 		color: var(--text);
+	}
+
+	@media (min-width: 1100px) {
+		.reviews-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
 	/* ═══════════════════════════════════════
@@ -1708,23 +2954,56 @@ const featuredWork = portfolioItems.filter((p) =>
 			height: auto;
 		}
 
-		.works-grid {
+		.works-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+		}
+
+		.works-counter {
+			padding-bottom: 0;
+		}
+
+		.works-showcase {
 			grid-template-columns: 1fr;
+			grid-auto-rows: auto;
+			min-height: 0;
+		}
+
+		.work-feature--primary {
+			grid-row: auto;
+		}
+
+		.work-feature--secondary {
+			flex-direction: column;
+		}
+
+		.work-feature--secondary .work-feature-media {
+			flex: 1 1 auto;
+			min-height: 260px;
+		}
+
+		.work-feature--secondary .work-feature-body {
+			border-left: 0;
+			border-top: 1px solid var(--border);
+			padding: 1.5rem;
+		}
+
+		.works-cta-card {
+			grid-template-columns: 1fr;
+			padding: 2rem 1.5rem;
 		}
 
 		.reviews-grid {
 			grid-template-columns: 1fr;
-			border-radius: var(--radius-sm);
 		}
 
-		.pricing-layout {
+		.pricing-section {
+			padding: 3rem 1rem;
+		}
+
+		.plan-grid {
 			grid-template-columns: 1fr;
-			gap: 2rem;
-		}
-
-		.pricing-sticky {
-			position: relative;
-			top: auto;
 		}
 	}
 
@@ -1749,10 +3028,6 @@ const featuredWork = portfolioItems.filter((p) =>
 			font-size: 1.75rem;
 		}
 
-		.process-grid {
-			grid-template-columns: 1fr 1fr;
-		}
-
 		.about-photo-wrap {
 			width: 120px;
 			height: 120px;
@@ -1770,10 +3045,6 @@ const featuredWork = portfolioItems.filter((p) =>
 	@media (max-width: 360px) {
 		.hero-title {
 			font-size: 1.85rem;
-		}
-
-		.process-grid {
-			grid-template-columns: 1fr;
 		}
 
 		.about-photo-wrap {
@@ -1851,25 +3122,15 @@ const featuredWork = portfolioItems.filter((p) =>
 			linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(248, 246, 242, 0.95) 100%);
 	}
 
-	:global(html[data-theme="light"]) .page-wrapper .serving-bar {
-		background: rgba(255, 255, 255, 0.85);
-		border-color: rgba(0, 0, 0, 0.08);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .location-pill {
-		background: rgba(217, 93, 12, 0.08);
-		border-color: rgba(217, 93, 12, 0.22);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .location-pill:hover {
-		background: rgba(217, 93, 12, 0.14);
-		border-color: rgba(217, 93, 12, 0.35);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .work-card-img,
+	:global(html[data-theme="light"]) .page-wrapper .work-feature-media,
 	:global(html[data-theme="light"]) .page-wrapper .about-photo-wrap {
 		background: #e8e6e3;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-feature-media--contain {
+		background:
+			radial-gradient(ellipse 80% 100% at 50% 50%, color-mix(in srgb, var(--card-accent) 10%, transparent), transparent 65%),
+			#f4f2ee;
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .badge-yellow {
@@ -1882,20 +3143,74 @@ const featuredWork = portfolioItems.filter((p) =>
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .svc-card {
-		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .svc-card:hover {
+		box-shadow: 0 22px 50px -16px var(--svc-shadow);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .svc-card-img {
+		background: #e8e6e3;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .svc-tags li {
+		background: rgba(0, 0, 0, 0.025);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .svc-icon {
+		background: #ffffff;
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .reviews-grid {
-		box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+		box-shadow: none;
 	}
 
-	:global(html[data-theme="light"]) .page-wrapper .work-card {
+	:global(html[data-theme="light"]) .page-wrapper .review-card {
+		background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, var(--surface) 48%, var(--surface) 100%);
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .review-card:hover {
+		border-color: rgba(0, 0, 0, 0.12);
+		box-shadow: 0 20px 44px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .review-google-chip {
+		background: rgba(0, 0, 0, 0.04);
+		border-color: rgba(0, 0, 0, 0.07);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .testimonials-glow {
+		opacity: 0.42;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-feature {
 		box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
 	}
 
-	:global(html[data-theme="light"]) .page-wrapper .work-card:hover {
-		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
-		border-color: rgba(0, 0, 0, 0.12);
+	:global(html[data-theme="light"]) .page-wrapper .work-feature:hover {
+		box-shadow: 0 28px 64px -22px color-mix(in srgb, var(--card-accent) 40%, transparent), 0 4px 14px rgba(0, 0, 0, 0.06);
+		border-color: transparent;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .works-glow {
+		opacity: 0.1;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .works-counter-divider {
+		background: rgba(0, 0, 0, 0.12);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .work-feature-body {
+		background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--card-accent) 7%, transparent));
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .works-cta-btn:hover {
+		color: #fff;
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .why-card:hover {
@@ -1907,12 +3222,32 @@ const featuredWork = portfolioItems.filter((p) =>
 		border-color: rgba(0, 0, 0, 0.08);
 	}
 
-	:global(html[data-theme="light"]) .page-wrapper .pricing-card {
-		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+	:global(html[data-theme="light"]) .page-wrapper .plan-card {
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+		border-color: rgba(0, 0, 0, 0.08);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .plan-card--featured {
+		box-shadow: 0 18px 48px -12px var(--plan-shadow);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .plan-card:hover {
+		box-shadow: 0 20px 50px -16px var(--plan-shadow);
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .plan-cta {
+		color: #ffffff;
+	}
+
+	:global(html[data-theme="light"]) .page-wrapper .plan-card--green .plan-cta,
+	:global(html[data-theme="light"]) .page-wrapper .plan-card--green .plan-badge {
+		color: #ffffff;
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .works-cta-card {
 		background:
+			radial-gradient(ellipse 90% 120% at 0% 0%, color-mix(in srgb, var(--accent) 11%, transparent), transparent 55%),
+			radial-gradient(ellipse 90% 120% at 100% 100%, color-mix(in srgb, var(--accent-purple) 10%, transparent), transparent 55%),
 			repeating-linear-gradient(
 				-45deg,
 				rgba(255, 255, 255, 0.4),
@@ -1921,6 +3256,7 @@ const featuredWork = portfolioItems.filter((p) =>
 				rgba(0, 0, 0, 0.028) 9px
 			);
 		border-color: rgba(0, 0, 0, 0.1);
+		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .process-step {

@@ -8,6 +8,10 @@
 	--text: #f0f0f5;
 	--text-muted: rgba(255, 255, 255, 0.65);
 	--accent: #f97316;
+	--accent-green: #4ade80;
+	--accent-pink: #f472b6;
+	--accent-yellow: #facc15;
+	--accent-purple: #a78bfa;
 	--radius: 16px;
 	--radius-sm: 10px;
 	--font: 'Outfit Variable', 'Outfit', Inter, system-ui, sans-serif;
@@ -62,6 +66,10 @@ html[data-theme='light'] #loc-page.themed-subpage {
 	--text: #14141a;
 	--text-muted: rgba(0, 0, 0, 0.52);
 	--accent: #d95d0c;
+	--accent-green: #15803d;
+	--accent-pink: #c2185b;
+	--accent-yellow: #ca8a04;
+	--accent-purple: #6d28d9;
 	background:
 		radial-gradient(ellipse 100% 60% at 50% -15%, rgba(249, 115, 22, 0.09), transparent 55%),
 		radial-gradient(ellipse 80% 50% at 100% 40%, rgba(167, 139, 250, 0.06), transparent 50%),

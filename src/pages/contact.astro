@@ -6,7 +6,6 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ThemeToggleButton from '../components/ThemeToggleButton.astro';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
-import tradesRoofer from '../assets/trades/roofer.jpg';
 
 const contactJsonLd = {
 	'@context': 'https://schema.org',
@@ -16,6 +15,57 @@ const contactJsonLd = {
 	description:
 		'Send a message or reach Computer Tommy by email or phone for Asheville web design and small business sites.',
 };
+
+const expectations = [
+	{
+		icon: 'fa-bolt',
+		title: 'Reply within 1 business day',
+		body: "If you message during the week, you'll hear back same day or next morning.",
+	},
+	{
+		icon: 'fa-magnifying-glass-chart',
+		title: 'Free local audit on every reply',
+		body: 'I take a quick look at your market and competitors before we even talk.',
+	},
+	{
+		icon: 'fa-comments',
+		title: 'No pressure call',
+		body: "If we hop on a quick call, it's a real conversation, not a pitch deck.",
+	},
+];
+
+const planOptions = [
+	{
+		key: 'starter',
+		name: 'Starter',
+		price: '$379/mo',
+		value: 'Local SEO Starter ($379/mo)',
+	},
+	{
+		key: 'growth',
+		name: 'Growth',
+		price: '$697/mo',
+		value: 'Growth Local SEO ($697/mo)',
+	},
+	{
+		key: 'domination',
+		name: 'Domination',
+		price: '$997/mo',
+		value: 'Local Domination ($997/mo)',
+	},
+	{
+		key: 'onetime',
+		name: 'One-time build',
+		price: 'Custom quote',
+		value: 'One-time build (custom quote)',
+	},
+	{
+		key: 'not-sure',
+		name: 'Not sure yet',
+		price: 'Help me pick',
+		value: 'Not sure yet',
+	},
+];
 ---
 
 <Layout
@@ -44,16 +94,17 @@ const contactJsonLd = {
 				</div>
 
 				<div class="hero-content">
-					<span class="section-eyebrow">Get in touch</span>
-					<h1 class="hero-title">Contact</h1>
+					<span class="section-eyebrow">Let's talk</span>
+					<h1 class="hero-title">Tell me about your project.</h1>
 					<p class="hero-desc">
-						Send a note about your project, timeline, or questions. I read every message and reply directly. You can also email or call if you prefer.
+						Send a quick message about what you're working on and I'll get back to you within one business day. Email or call if you'd rather skip the form.
 					</p>
 					<div class="hero-direct-contact" aria-label="Email and phone">
 						<a class="hero-direct-link" href="mailto:letsbuild@computertommy.com">
 							<i class="fas fa-envelope" aria-hidden="true"></i>
 							<span>letsbuild@computertommy.com</span>
 						</a>
+						<span class="hero-direct-sep" aria-hidden="true"></span>
 						<a class="hero-direct-link" href="tel:+15083802013">
 							<i class="fas fa-phone" aria-hidden="true"></i>
 							<span>(508) 380-2013</span>
@@ -66,74 +117,132 @@ const contactJsonLd = {
 				</div>
 			</section>
 
-			<section class="section contact-form-section" aria-labelledby="contact-form-heading">
+			<section class="section contact-section" aria-labelledby="contact-form-heading">
 				<h2 class="visually-hidden" id="contact-form-heading">Send a message</h2>
-				<div class="contact-form-card">
-					<div class="contact-form-card__grid">
-						<div class="contact-form-card__form-wrap">
-							<form
-								class="contact-netlify-form"
-								name="contact"
-								method="POST"
-								data-netlify="true"
-								netlify-honeypot="bot-field"
-								action="/thank-you/"
-							>
-								<input type="hidden" name="form-name" value="contact" />
-								<p class="hp-field">
-									<label>
-										Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
-									</label>
-								</p>
+				<div class="contact-layout">
+					<div class="contact-form-card">
+						<form
+							class="contact-form"
+							name="contact"
+							method="POST"
+							data-netlify="true"
+							netlify-honeypot="bot-field"
+							action="/thank-you/"
+						>
+							<input type="hidden" name="form-name" value="contact" />
+							<p class="hp-field">
+								<label>
+									Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+								</label>
+							</p>
 
+							<div class="form-row form-row--two">
 								<div class="form-field">
-									<label for="contact-name">Name</label>
+									<label for="contact-name">Your name</label>
 									<input id="contact-name" name="name" type="text" autocomplete="name" required />
 								</div>
-
 								<div class="form-field">
 									<label for="contact-email">Email</label>
 									<input id="contact-email" name="email" type="email" autocomplete="email" required />
 								</div>
+							</div>
 
-								<div class="form-field">
-									<label for="contact-phone">Phone <span class="field-hint">(optional)</span></label>
-									<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+							<div class="form-field">
+								<label for="contact-phone">
+									Phone <span class="field-hint">(optional, for quicker callbacks)</span>
+								</label>
+								<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
+							</div>
+
+							<fieldset class="form-field form-field--plan">
+								<legend>
+									Which plan are you interested in? <span class="field-hint">(optional)</span>
+								</legend>
+								<div class="plan-choices">
+									{planOptions.map((plan) => (
+										<label class="plan-choice" data-plan={plan.key}>
+											<input type="radio" name="plan" value={plan.value} data-key={plan.key} />
+											<span class="plan-choice-name">{plan.name}</span>
+											<span class="plan-choice-price">{plan.price}</span>
+										</label>
+									))}
 								</div>
+							</fieldset>
 
-								<div class="form-field">
-									<label for="contact-message">How can I help?</label>
-									<textarea id="contact-message" name="message" rows="6" required></textarea>
-								</div>
+							<div class="form-field">
+								<label for="contact-message">What can I help with?</label>
+								<textarea
+									id="contact-message"
+									name="message"
+									rows="6"
+									placeholder="A few sentences about your business, what you need, and any timing or budget you have in mind."
+									required
+								></textarea>
+							</div>
 
-								<button type="submit" class="btn-solid">Send message</button>
-							</form>
-						</div>
-						<div
-							class="contact-form-card__visual"
-							style={`--contact-visual-bg: url(${tradesRoofer.src})`}
-							aria-hidden="true"
-						></div>
+							<button type="submit" class="btn-submit">
+								<span>Send message</span>
+								<i class="fas fa-arrow-right" aria-hidden="true"></i>
+							</button>
+
+							<p class="form-foot">
+								Prefer email? Reach me directly at
+								<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>.
+							</p>
+						</form>
+						<script is:inline>
+							(function () {
+								try {
+									var params = new URLSearchParams(window.location.search);
+									var plan = params.get('plan');
+									if (!plan) return;
+									var radio = document.querySelector(
+										'input[name="plan"][data-key="' + plan.toLowerCase() + '"]'
+									);
+									if (radio) radio.checked = true;
+								} catch (e) {
+									/* silently ignore */
+								}
+							})();
+						</script>
 					</div>
-				</div>
-			</section>
 
-			<section class="section section-alt direct-section" aria-labelledby="direct-heading">
-				<div class="contact-direct-card">
-					<h2 class="direct-title" id="direct-heading">Email or phone</h2>
-					<p class="direct-lede">
-						Same inbox and number for project questions, timelines, and follow ups.
-					</p>
-					<ul class="direct-list">
-						<li>
-							<span class="direct-label">Email</span>
-							<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>
-						</li>
-						<li>
-							<span class="direct-label">Phone</span>
-							<a href="tel:+15083802013">(508) 380-2013</a>
-						</li>
-					</ul>
+					<aside class="contact-aside" aria-label="What to expect">
+						<div class="aside-card">
+							<span class="aside-eyebrow">What to expect</span>
+							<ul class="aside-list">
+								{expectations.map((item) => (
+									<li class="aside-item">
+										<span class="aside-icon" aria-hidden="true">
+											<i class:list={['fas', item.icon]}></i>
+										</span>
+										<div>
+											<strong>{item.title}</strong>
+											<p>{item.body}</p>
+										</div>
+									</li>
+								))}
+							</ul>
+						</div>
+
+						<div class="aside-card aside-card--quiet">
+							<span class="aside-eyebrow">Other ways to reach me</span>
+							<ul class="aside-direct">
+								<li>
+									<span class="aside-direct-label">Email</span>
+									<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>
+								</li>
+								<li>
+									<span class="aside-direct-label">Phone</span>
+									<a href="tel:+15083802013">(508) 380-2013</a>
+								</li>
+								<li>
+									<span class="aside-direct-label">Hours</span>
+									<span class="aside-direct-text">Mon to Fri, 9am to 6pm ET</span>
+								</li>
+							</ul>
+						</div>
+					</aside>
 				</div>
 			</section>
 		</main>
@@ -150,11 +259,11 @@ const contactJsonLd = {
 		height: 100%;
 		z-index: 0;
 		filter: blur(120px);
-		opacity: 0.16;
+		opacity: 0.14;
 		pointer-events: none;
 	}
 
-	/* Full-bleed paint trip: landscape brush stroke on black, reads as atmosphere */
+	/* Toned way down so it reads as atmosphere, not noise */
 	.contact-trip-bg {
 		position: fixed;
 		inset: 0;
@@ -164,9 +273,13 @@ const contactJsonLd = {
 		object-position: center 38%;
 		z-index: 0;
 		pointer-events: none;
-		opacity: 0.5;
+		opacity: 0.18;
 		mix-blend-mode: lighten;
-		transform: translateY(6vh);
+		transform: translateY(8vh);
+	}
+
+	html[data-theme='light'] .contact-trip-bg {
+		opacity: 0.16;
 	}
 
 	.hero-nav-end {
@@ -181,7 +294,7 @@ const contactJsonLd = {
 	}
 
 	.section {
-		max-width: 960px;
+		max-width: 1100px;
 		margin: 0 auto;
 		padding: 0 1.5rem 4rem;
 	}
@@ -209,7 +322,7 @@ const contactJsonLd = {
 	}
 
 	.hero-content {
-		max-width: 720px;
+		max-width: 760px;
 	}
 
 	.section-eyebrow {
@@ -228,33 +341,33 @@ const contactJsonLd = {
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
 		margin: 0;
-		font-size: clamp(2.4rem, 8vw, 4.25rem);
-		line-height: 0.95;
+		font-size: clamp(2.4rem, 7vw, 4.5rem);
+		line-height: 0.98;
 		word-wrap: break-word;
 		overflow-wrap: break-word;
 	}
 
 	.hero-desc {
 		color: var(--text-muted);
-		font-size: clamp(1rem, 2vw, 1.15rem);
+		font-size: clamp(1.05rem, 2vw, 1.2rem);
 		line-height: 1.55;
 		max-width: 640px;
-		margin: 1rem 0 0;
+		margin: 1.1rem 0 0;
 	}
 
 	.hero-direct-contact {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.65rem 1.35rem;
-		margin-top: 1.35rem;
+		gap: 0.5rem 1rem;
+		margin-top: 1.5rem;
 		max-width: 640px;
 	}
 
 	.hero-direct-link {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.45rem;
+		gap: 0.5rem;
 		font-size: clamp(0.95rem, 1.8vw, 1.05rem);
 		font-weight: 600;
 		color: var(--accent);
@@ -271,6 +384,20 @@ const contactJsonLd = {
 		opacity: 0.95;
 	}
 
+	.hero-direct-sep {
+		width: 1px;
+		height: 18px;
+		background: var(--border);
+		display: inline-block;
+	}
+
+	@media (max-width: 540px) {
+		.hero-direct-sep {
+			display: none;
+		}
+	}
+
+	/* ───────────  Buttons  ─────────── */
 	.btn-outline {
 		display: inline-flex;
 		align-items: center;
@@ -296,127 +423,111 @@ const contactJsonLd = {
 		transform: translateY(-1px);
 	}
 
-	.btn-solid {
+	.btn-submit {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.55rem;
-		padding: 0.78rem 1.6rem;
+		gap: 0.65rem;
+		padding: 1rem 1.5rem;
 		border-radius: var(--radius);
-		font-weight: 600;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.03em;
-		font-size: 0.9rem;
+		letter-spacing: 0.04em;
+		font-size: 1rem;
 		cursor: pointer;
 		font-family: inherit;
-		border: 1px solid var(--text);
-		background: var(--text);
-		color: var(--bg);
-		transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.15s;
-		margin-top: 0.25rem;
+		border: 1px solid var(--accent);
+		background: var(--accent);
+		color: #0b0b0f;
+		transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+		box-shadow: 0 14px 30px -14px rgba(249, 115, 22, 0.55);
+		align-self: flex-start;
+		min-width: 220px;
 	}
 
-	.btn-solid:hover {
-		background: transparent;
-		color: var(--text);
-		transform: translateY(-1px);
+	html[data-theme='light'] .btn-submit {
+		color: #ffffff;
+	}
+
+	.btn-submit:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 18px 36px -14px rgba(249, 115, 22, 0.65);
+	}
+
+	.btn-submit i {
+		font-size: 0.9em;
+		transition: transform 0.2s ease;
+	}
+
+	.btn-submit:hover i {
+		transform: translateX(3px);
 	}
 
 	.crumbs-wrap {
-		margin-top: 1.2rem;
+		margin-top: 1.5rem;
 		padding-top: 1rem;
 		border-top: 1px solid var(--border);
 	}
 
-	.section.contact-form-section {
-		max-width: 1100px;
-	}
-
-	.contact-form-section {
+	/* ───────────  Layout: form + aside  ─────────── */
+	.contact-section {
 		padding-top: 0.5rem;
 	}
 
+	.contact-layout {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		align-items: start;
+	}
+
+	@media (min-width: 960px) {
+		.contact-layout {
+			grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+			gap: 2rem;
+		}
+
+		.contact-aside {
+			position: sticky;
+			top: 2rem;
+		}
+	}
+
+	/* ───────────  Form card  ─────────── */
 	.contact-form-card {
 		background: var(--surface);
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		overflow: hidden;
-		box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
-		padding: 0;
+		padding: 1.85rem 1.65rem 2rem;
+		box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.4);
+	}
+
+	@media (min-width: 720px) {
+		.contact-form-card {
+			padding: 2.5rem 2.4rem;
+		}
 	}
 
 	html[data-theme='light'] .contact-form-card {
-		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+		box-shadow: 0 14px 40px rgba(0, 0, 0, 0.07);
 	}
 
-	.contact-form-card__grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: auto minmax(200px, 32vw);
-		align-items: stretch;
-	}
-
-	.contact-form-card__form-wrap {
-		padding: 1.75rem 1.5rem 2rem;
-		min-width: 0;
-	}
-
-	.contact-form-card__visual {
-		position: relative;
-		margin: 0;
-		min-height: 0;
-		background-color: #1a1d24;
-		background-image: var(--contact-visual-bg);
-		background-size: cover;
-		background-position: center 28%;
-		background-repeat: no-repeat;
-		border-top: 1px solid var(--border);
-	}
-
-	.contact-form-card__visual::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		background: linear-gradient(
-			180deg,
-			rgba(0, 0, 0, 0.12) 0%,
-			transparent 35%,
-			rgba(0, 0, 0, 0.18) 100%
-		);
-	}
-
-	html[data-theme='light'] .contact-form-card__visual::after {
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 0.1) 0%,
-			transparent 40%,
-			rgba(0, 0, 0, 0.12) 100%
-		);
-	}
-
-	.contact-netlify-form {
+	.contact-form {
 		display: flex;
 		flex-direction: column;
-		gap: 1.15rem;
-		max-width: 36rem;
+		gap: 1.5rem;
 	}
 
-	@media (min-width: 900px) {
-		.contact-form-card__grid {
-			grid-template-columns: minmax(0, 1fr) minmax(280px, 44%);
-			grid-template-rows: minmax(420px, 1fr);
-		}
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
 
-		.contact-form-card__form-wrap {
-			padding: 1.85rem 1.75rem 2rem 2rem;
-		}
-
-		.contact-form-card__visual {
-			min-height: min(620px, 82vh);
-			border-top: none;
-			border-left: 1px solid var(--border);
-			background-position: center 22%;
+	@media (min-width: 640px) {
+		.form-row--two {
+			grid-template-columns: 1fr 1fr;
+			gap: 1.25rem;
 		}
 	}
 
@@ -435,128 +546,302 @@ const contactJsonLd = {
 	.form-field {
 		display: flex;
 		flex-direction: column;
-		gap: 0.4rem;
+		gap: 0.55rem;
 	}
 
-	.form-field label {
-		font-size: 0.8rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--text-muted);
+	.form-field label,
+	.form-field--plan legend {
+		font-size: 0.95rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		color: var(--text);
+		padding: 0;
+		text-transform: none;
 	}
 
 	.field-hint {
-		font-weight: 500;
-		text-transform: none;
-		letter-spacing: 0;
-		font-size: 0.85em;
-		opacity: 0.85;
+		font-weight: 400;
+		font-size: 0.88em;
+		color: var(--text-muted);
+		margin-left: 0.25rem;
 	}
 
 	.form-field input,
 	.form-field textarea {
 		box-sizing: border-box;
 		width: 100%;
-		padding: 0.75rem 0.9rem;
+		padding: 0.95rem 1rem;
 		border-radius: var(--radius-sm);
 		border: 1px solid var(--border);
 		background: var(--bg);
 		color: var(--text);
 		font-family: inherit;
 		font-size: 1rem;
-		line-height: 1.45;
+		line-height: 1.5;
+		transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+	}
+
+	.form-field input::placeholder,
+	.form-field textarea::placeholder {
+		color: var(--text-muted);
+		opacity: 0.7;
 	}
 
 	.form-field textarea {
 		resize: vertical;
-		min-height: 8rem;
+		min-height: 9rem;
+		line-height: 1.6;
+	}
+
+	.form-field input:hover,
+	.form-field textarea:hover {
+		border-color: color-mix(in srgb, var(--text-muted) 60%, var(--border));
 	}
 
 	.form-field input:focus,
 	.form-field textarea:focus {
 		outline: none;
 		border-color: var(--accent);
-		box-shadow: 0 0 0 1px var(--accent);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
 	}
 
-	.section-alt {
-		max-width: none;
-		background: var(--surface);
-		padding-top: 3rem;
-		padding-bottom: 4rem;
-		border-top: 1px solid var(--border);
+	html[data-theme='light'] .form-field input,
+	html[data-theme='light'] .form-field textarea {
+		background: #ffffff;
 	}
 
-	.direct-section > * {
-		max-width: 960px;
-		margin-left: auto;
-		margin-right: auto;
-		padding-left: 1.5rem;
-		padding-right: 1.5rem;
+	/* ───────────  Plan picker  ─────────── */
+	.form-field--plan {
+		border: 0;
+		padding: 0;
+		margin: 0;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
 	}
 
-	.contact-direct-card {
-		background: var(--bg);
+	.plan-choices {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.6rem;
+	}
+
+	@media (min-width: 600px) {
+		.plan-choices {
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		}
+	}
+
+	.plan-choice {
+		--plan-color: var(--text-muted);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 0.3rem;
+		padding: 0.95rem 1rem;
 		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 1.75rem 1.5rem 1.85rem;
+		border-radius: var(--radius-sm);
+		background: var(--bg);
+		cursor: pointer;
+		transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+		min-height: 76px;
 	}
 
-	html[data-theme='light'] .contact-direct-card {
-		background: rgba(255, 255, 255, 0.85);
+	html[data-theme='light'] .plan-choice {
+		background: #ffffff;
 	}
 
-	.direct-title {
+	.plan-choice[data-plan='starter']    { --plan-color: var(--accent); }
+	.plan-choice[data-plan='growth']     { --plan-color: var(--accent-green); }
+	.plan-choice[data-plan='domination'] { --plan-color: var(--accent-purple); }
+	.plan-choice[data-plan='onetime']    { --plan-color: var(--accent-pink); }
+
+	.plan-choice input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+		width: 1px;
+		height: 1px;
+	}
+
+	.plan-choice:hover {
+		border-color: var(--plan-color);
+		transform: translateY(-1px);
+	}
+
+	.plan-choice:focus-within {
+		border-color: var(--plan-color);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--plan-color) 25%, transparent);
+	}
+
+	.plan-choice:has(input:checked) {
+		border-color: var(--plan-color);
+		background: color-mix(in srgb, var(--plan-color) 12%, var(--bg));
+		box-shadow: 0 0 0 1px var(--plan-color), 0 8px 24px -12px color-mix(in srgb, var(--plan-color) 40%, transparent);
+	}
+
+	html[data-theme='light'] .plan-choice:has(input:checked) {
+		background: color-mix(in srgb, var(--plan-color) 10%, #ffffff);
+	}
+
+	.plan-choice-name {
 		font-family: var(--font-display);
+		font-size: 1.2rem;
 		font-weight: 400;
-		text-transform: uppercase;
 		letter-spacing: 0.04em;
-		font-size: 1.5rem;
-		margin: 0 0 0.5rem;
+		text-transform: uppercase;
 		color: var(--text);
+		line-height: 1;
 	}
 
-	.direct-lede {
-		margin: 0 0 1.25rem;
+	.plan-choice-price {
+		font-size: 0.82rem;
 		color: var(--text-muted);
-		font-size: 1rem;
+		line-height: 1;
+		letter-spacing: 0.02em;
+	}
+
+	.plan-choice:has(input:checked) .plan-choice-price {
+		color: var(--plan-color);
+		font-weight: 600;
+	}
+
+	.form-foot {
+		margin: 0;
+		font-size: 0.92rem;
+		color: var(--text-muted);
 		line-height: 1.5;
 	}
 
-	.direct-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
+	.form-foot a {
+		color: var(--accent);
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.form-foot a:hover {
+		text-decoration: underline;
+	}
+
+	/* ───────────  Aside  ─────────── */
+	.contact-aside {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
 	}
 
-	.direct-list li {
+	.aside-card {
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		padding: 1.5rem 1.4rem;
+	}
+
+	html[data-theme='light'] .aside-card {
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+	}
+
+	.aside-card--quiet {
+		background: transparent;
+	}
+
+	.aside-eyebrow {
+		display: block;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 1rem;
+	}
+
+	.aside-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+	}
+
+	.aside-item {
+		display: flex;
+		gap: 0.85rem;
+		align-items: flex-start;
+	}
+
+	.aside-icon {
+		flex-shrink: 0;
+		width: 38px;
+		height: 38px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		border: 1.5px solid var(--accent);
+		background: color-mix(in srgb, var(--accent) 10%, transparent);
+		color: var(--accent);
+		font-size: 0.95rem;
+	}
+
+	.aside-item strong {
+		display: block;
+		color: var(--text);
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.3;
+		margin-bottom: 0.2rem;
+	}
+
+	.aside-item p {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.5;
+		font-size: 0.93rem;
+	}
+
+	.aside-direct {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.aside-direct li {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: baseline;
-		gap: 0.5rem 1rem;
+		gap: 0.4rem 0.9rem;
 	}
 
-	.direct-label {
-		font-size: 0.75rem;
+	.aside-direct-label {
+		font-size: 0.78rem;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.1em;
 		color: var(--text-muted);
-		min-width: 4.5rem;
+		min-width: 4rem;
+		font-weight: 600;
 	}
 
-	.direct-list a {
+	.aside-direct a {
 		color: var(--accent);
 		font-weight: 600;
 		text-decoration: none;
-		font-size: 1.05rem;
+		font-size: 1rem;
 	}
 
-	.direct-list a:hover {
+	.aside-direct a:hover {
 		text-decoration: underline;
+	}
+
+	.aside-direct-text {
+		color: var(--text);
+		font-size: 0.98rem;
 	}
 
 	.visually-hidden {
@@ -574,8 +859,8 @@ const contactJsonLd = {
 	@media (max-width: 768px) {
 		.contact-trip-bg {
 			object-position: center 35%;
-			opacity: 0.42;
-			transform: translateY(5vh);
+			opacity: 0.14;
+			transform: translateY(6vh);
 		}
 
 		.section {
@@ -590,12 +875,9 @@ const contactJsonLd = {
 			margin-bottom: 1.35rem;
 		}
 
-		.contact-form-card__grid {
-			grid-template-rows: auto minmax(180px, 40vw);
-		}
-
-		.contact-form-card__form-wrap {
-			padding: 1.35rem 1.15rem 1.6rem;
+		.btn-submit {
+			align-self: stretch;
+			min-width: 0;
 		}
 	}
 </style>

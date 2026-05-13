@@ -3,7 +3,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
 import ThemeToggleButton from './ThemeToggleButton.astro';
-import { locations } from '../data/locations';
 
 const eyebrowIcon = 'M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z';
 
@@ -107,14 +106,6 @@ const services = [
 			</div>
 		</div>
 
-		<div class="serving-bar">
-			<span class="serving-label">Serving:</span>
-			<div class="serving-pills">
-				{locations.map((l) => (
-					<a href={`/services/web-development/${l.slug}/`} class="location-pill">{l.city}, {l.regionLabel}</a>
-				))}
-			</div>
-		</div>
 	</section>
 
 	<section class="pricing-section slide-in-section" id="simple-pricing">
@@ -579,49 +570,6 @@ const services = [
 		color: var(--text);
 	}
 
-	.serving-bar {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: 0.75rem;
-		margin-top: 2rem;
-		padding: 1rem 1.25rem;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: var(--radius-sm);
-	}
-
-	.serving-label {
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
-		color: var(--text-muted);
-	}
-
-	.serving-pills {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.location-pill {
-		font-size: 0.875rem;
-		font-weight: 500;
-		color: var(--accent);
-		text-decoration: none;
-		padding: 0.3rem 0.7rem;
-		border-radius: 999px;
-		background: rgba(249, 115, 22, 0.08);
-		border: 1px solid rgba(249, 115, 22, 0.2);
-		transition: background 0.2s, border-color 0.2s;
-	}
-
-	.location-pill:hover {
-		background: rgba(249, 115, 22, 0.16);
-		border-color: rgba(249, 115, 22, 0.4);
-	}
-
 	.pricing-section {
 		position: relative;
 		z-index: 1;
@@ -814,22 +762,6 @@ const services = [
 		mix-blend-mode: normal;
 		opacity: 0.42;
 		filter: saturate(1.25) contrast(1.05);
-	}
-
-	:global(html[data-theme='light']) .page-wrapper .serving-bar {
-		background: rgba(255, 255, 255, 0.85);
-		border-color: rgba(0, 0, 0, 0.08);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-	}
-
-	:global(html[data-theme='light']) .page-wrapper .location-pill {
-		background: rgba(217, 93, 12, 0.08);
-		border-color: rgba(217, 93, 12, 0.22);
-	}
-
-	:global(html[data-theme='light']) .page-wrapper .location-pill:hover {
-		background: rgba(217, 93, 12, 0.14);
-		border-color: rgba(217, 93, 12, 0.35);
 	}
 
 	:global(html[data-theme='light']) .page-wrapper .service-page-card:hover {
