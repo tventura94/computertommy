@@ -19,8 +19,6 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Strudel Construction",
     category: "Service site",
     url: "https://strudel-construction.netlify.app/",
-    previewImage: "/portfolio/strudel-construction-screenshot.png",
-    previewFit: "contain",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
