@@ -68,7 +68,7 @@ const plans = [
 			'Website build',
 			'Hosting and security',
 			'Monthly GBP optimization',
-			'2 / monthGBP posts',
+			'2 / month GBP posts',
 			'20+ business listings online',
 			'Customer review funnel and response help',
 		],
@@ -235,6 +235,114 @@ const plans = [
 					<h3>Time back to your busy life</h3>
 					<p>You hire someone you trust to handle this so you can stop fiddling with it at 9pm. I run the work. You get a clean update each month.</p>
 				</article>
+			</div>
+		</section>
+
+		<section class="section local-presence-section" aria-labelledby="local-presence-heading">
+			<div class="presence-shell">
+				<div class="presence-backdrop" aria-hidden="true"></div>
+				<div class="presence-noise" aria-hidden="true"></div>
+				<div class="presence-inner">
+					<header class="presence-header">
+						<div class="presence-header-row">
+							<span class="presence-eyebrow">Reputation & listings</span>
+							<ul class="presence-pills">
+								<li class="presence-pill">50+ directories</li>
+								<li class="presence-pill">5+ GBP posts / mo</li>
+								<li class="presence-pill">Monthly review outreach</li>
+							</ul>
+						</div>
+						<h2 class="presence-title" id="local-presence-heading">
+							<span class="presence-title-line">Beyond your website.</span>
+	
+							<span class="presence-title-line presence-title-line--accent">
+								On every signal Google actually reads.
+							</span>
+						</h2>
+						<p class="presence-lead">
+							Pages and backlinks matter. So does the rest of the picture: your Google Business Profile, fresh reviews, clean citations, and how you show up when someone searches your trade in your town. This block is the monthly machine behind that side of the work.
+						</p>
+					</header>
+
+					<div class="presence-bento">
+						<article class="presence-tile presence-tile--funnel">
+							<span class="presence-idx" aria-hidden="true">01</span>
+							<div class="presence-tile-head">
+								<div class="presence-icon-wrap">
+									<i class="fas fa-paper-plane" aria-hidden="true"></i>
+								</div>
+								<h3>Monthly review funnel</h3>
+							</div>
+							<p class="presence-tile-body">
+								You hand us customer emails and phone numbers. Every month we run respectful outreach so more happy jobs turn into Google reviews, while you stay focused on the work, not the follow-ups.
+							</p>
+						</article>
+
+						<article class="presence-tile presence-tile--posts">
+							<span class="presence-idx" aria-hidden="true">02</span>
+							<div class="presence-tile-head">
+								<div class="presence-icon-wrap">
+									<i class="fas fa-store" aria-hidden="true"></i>
+								</div>
+								<h3>Google Business posts</h3>
+							</div>
+							<p class="presence-tile-body">
+								Five or more posts a month on your Profile: recent work, finished jobs, and photos that prove what you deliver before they even hit your site.
+							</p>
+						</article>
+
+						<article class="presence-tile presence-tile--replies">
+							<span class="presence-idx" aria-hidden="true">03</span>
+							<div class="presence-tile-head">
+								<div class="presence-icon-wrap">
+									<i class="fas fa-comments" aria-hidden="true"></i>
+								</div>
+								<h3>Review responses</h3>
+							</div>
+							<p class="presence-tile-body">
+								We answer new reviews for you, good or rough, in a steady voice that matches your shop so your Profile never looks abandoned.
+							</p>
+						</article>
+
+						<article class="presence-tile presence-tile--dirs">
+							<span class="presence-idx" aria-hidden="true">04</span>
+							<div class="presence-tile-head presence-tile-head--inline">
+								<div class="presence-icon-wrap">
+									<i class="fas fa-map-location-dot" aria-hidden="true"></i>
+								</div>
+								<div>
+									<h3>50+ directories &amp; local citations</h3>
+									<p class="presence-tile-tag">Same NAP. Same categories. Everywhere that counts.</p>
+								</div>
+							</div>
+							<p class="presence-tile-body">
+								Listings on fifty or more trusted directories, cleaned and aligned so Google sees one consistent story: who you are, what you do, and where you show up.
+							</p>
+						</article>
+
+						<article class="presence-tile presence-tile--scout">
+							<span class="presence-idx" aria-hidden="true">05</span>
+							<div class="presence-scout-grid">
+								<div>
+									<div class="presence-tile-head">
+										<div class="presence-icon-wrap">
+											<i class="fas fa-magnifying-glass-location" aria-hidden="true"></i>
+										</div>
+										<h3>Local opportunity scouting</h3>
+									</div>
+									<p class="presence-tile-body presence-tile-body--flush">
+										We keep scanning your market for new angles: neighborhoods to own, services to push, seasonal spikes, and partnerships that fit your trade, then we bring the ideas straight to you.
+									</p>
+								</div>
+								<div class="presence-scout-visual" aria-hidden="true">
+									<span class="presence-ring"></span>
+									<span class="presence-ring presence-ring--delay"></span>
+									<span class="presence-dot"></span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -795,6 +903,481 @@ const plans = [
 		font-size: 0.98rem;
 	}
 
+	/* ─────────────  Local presence (GBP / reputation bento)  ───────────── */
+	.local-presence-section {
+		position: relative;
+		padding-top: 4.5rem;
+		padding-bottom: 4.5rem;
+	}
+
+	.presence-shell {
+		position: relative;
+		overflow: hidden;
+		border-radius: calc(var(--radius) + 14px);
+		padding: clamp(1.35rem, 3.2vw, 2.85rem);
+		background:
+			linear-gradient(165deg, rgba(255, 255, 255, 0.03), transparent 55%),
+			linear-gradient(var(--surface), var(--surface)) padding-box,
+			linear-gradient(
+				118deg,
+				color-mix(in srgb, var(--accent) 82%, transparent),
+				color-mix(in srgb, var(--accent-pink) 75%, transparent),
+				color-mix(in srgb, var(--accent-purple) 70%, transparent),
+				color-mix(in srgb, var(--accent-green) 78%, transparent),
+				color-mix(in srgb, var(--accent-yellow) 72%, transparent)
+			)
+			border-box;
+		border: 1.5px solid transparent;
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+			0 44px 120px -52px rgba(0, 0, 0, 0.72);
+	}
+
+	.presence-backdrop {
+		position: absolute;
+		inset: -42% -28%;
+		z-index: 0;
+		pointer-events: none;
+		opacity: 0.62;
+	}
+
+	.presence-backdrop::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: conic-gradient(
+			from 210deg at 50% 48%,
+			transparent 0deg,
+			color-mix(in srgb, var(--accent) 22%, transparent) 55deg,
+			transparent 115deg,
+			color-mix(in srgb, var(--accent-purple) 20%, transparent) 185deg,
+			transparent 245deg,
+			color-mix(in srgb, var(--accent-green) 18%, transparent) 305deg,
+			transparent 360deg
+		);
+		animation: presence-orbit 28s linear infinite;
+	}
+
+	.presence-noise {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+		opacity: 0.09;
+		mix-blend-mode: overlay;
+		background-image: radial-gradient(rgba(255, 255, 255, 0.11) 0.6px, transparent 0.7px);
+		background-size: 3px 3px;
+	}
+
+	.presence-inner {
+		position: relative;
+		z-index: 2;
+	}
+
+	.presence-header {
+		margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+	}
+
+	.presence-header-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem 1.5rem;
+	}
+
+	.presence-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.presence-pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: flex-end;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	@media (max-width: 560px) {
+		.presence-pills {
+			justify-content: flex-start;
+		}
+	}
+
+	.presence-pill {
+		font-family: var(--font-display);
+		font-size: 0.92rem;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+		padding: 0.42rem 0.88rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		background: rgba(0, 0, 0, 0.22);
+		color: rgba(255, 255, 255, 0.82);
+	}
+
+	.presence-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 1.1rem 0 0;
+		line-height: 0.96;
+		font-size: clamp(2.15rem, 6.5vw, 4.75rem);
+		display: flex;
+		flex-direction: column;
+		gap: 0.02em;
+		max-width: 1000px;
+	}
+
+	.presence-title-line--accent {
+		background: linear-gradient(
+			92deg,
+			var(--accent) 0%,
+			var(--accent-pink) 34%,
+			var(--accent-green) 68%,
+			var(--accent-yellow) 100%
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	.presence-lead {
+		margin: 1.1rem 0 0;
+		max-width: 46rem;
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.75vw, 1.18rem);
+		line-height: 1.65;
+	}
+
+	.presence-bento {
+		display: grid;
+		gap: 1rem;
+		grid-template-columns: 1fr;
+	}
+
+	.presence-tile {
+		--tile-accent: var(--accent);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 0.95rem;
+		overflow: hidden;
+		border-radius: calc(var(--radius) + 2px);
+		padding: 1.45rem 1.3rem 1.5rem;
+		background:
+			linear-gradient(155deg, color-mix(in srgb, var(--tile-accent) 12%, transparent), transparent 48%),
+			color-mix(in srgb, var(--surface) 94%, var(--bg));
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		transition:
+			transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+			border-color 0.32s ease,
+			box-shadow 0.32s ease;
+		animation: presence-rise 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.presence-tile::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--tile-accent), color-mix(in srgb, var(--tile-accent) 15%, transparent));
+		opacity: 0.95;
+	}
+
+	.presence-tile:hover {
+		transform: translateY(-5px);
+		border-color: color-mix(in srgb, var(--tile-accent) 48%, rgba(255, 255, 255, 0.12));
+		box-shadow:
+			0 26px 60px -28px rgba(0, 0, 0, 0.75),
+			0 0 0 1px color-mix(in srgb, var(--tile-accent) 26%, transparent),
+			0 0 48px -16px color-mix(in srgb, var(--tile-accent) 35%, transparent);
+	}
+
+	.presence-tile--funnel {
+		--tile-accent: var(--accent-pink);
+		animation-delay: 0.04s;
+	}
+
+	.presence-tile--posts {
+		--tile-accent: var(--accent);
+		animation-delay: 0.1s;
+	}
+
+	.presence-tile--replies {
+		--tile-accent: var(--accent-purple);
+		animation-delay: 0.16s;
+	}
+
+	.presence-tile--dirs {
+		--tile-accent: var(--accent-green);
+		animation-delay: 0.22s;
+	}
+
+	.presence-tile--scout {
+		--tile-accent: var(--accent-yellow);
+		animation-delay: 0.28s;
+	}
+
+	.presence-idx {
+		position: absolute;
+		top: 0.2rem;
+		right: 0.65rem;
+		font-family: var(--font-display);
+		font-size: clamp(3.2rem, 9vw, 5rem);
+		line-height: 0.88;
+		letter-spacing: 0.03em;
+		color: transparent;
+		-webkit-text-stroke: 1px rgba(255, 255, 255, 0.16);
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	.presence-tile-head {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.85rem;
+		padding-right: clamp(3rem, 12vw, 5rem);
+	}
+
+	.presence-tile-head--inline {
+		flex-direction: row;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.presence-tile-head--inline > div:last-child {
+		min-width: 0;
+	}
+
+	.presence-icon-wrap {
+		width: 52px;
+		height: 52px;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 14px;
+		background: color-mix(in srgb, var(--tile-accent) 16%, var(--bg));
+		border: 1px solid color-mix(in srgb, var(--tile-accent) 45%, transparent);
+		color: var(--tile-accent);
+		font-size: 1.22rem;
+		box-shadow:
+			0 0 32px color-mix(in srgb, var(--tile-accent) 32%, transparent),
+			inset 0 1px 0 rgba(255, 255, 255, 0.07);
+	}
+
+	.presence-tile h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+		line-height: 1;
+		margin: 0;
+		color: var(--text);
+	}
+
+	.presence-tile-tag {
+		margin: 0.35rem 0 0;
+		font-size: 0.82rem;
+		line-height: 1.45;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		font-weight: 600;
+		color: color-mix(in srgb, var(--tile-accent) 70%, var(--text-muted));
+	}
+
+	.presence-tile-body {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.98rem;
+		line-height: 1.58;
+	}
+
+	.presence-tile-body--flush {
+		margin-top: 0.15rem;
+	}
+
+	.presence-scout-grid {
+		display: grid;
+		gap: 1.5rem;
+		align-items: center;
+	}
+
+	.presence-scout-visual {
+		position: relative;
+		width: min(200px, 100%);
+		aspect-ratio: 1;
+		margin: 0 auto;
+	}
+
+	.presence-ring {
+		position: absolute;
+		inset: 6%;
+		border-radius: 50%;
+		border: 1px dashed color-mix(in srgb, var(--tile-accent) 55%, transparent);
+		animation: presence-pulse 5.2s ease-in-out infinite;
+	}
+
+	.presence-ring--delay {
+		inset: 24%;
+		animation-delay: -2.6s;
+	}
+
+	.presence-dot {
+		position: absolute;
+		inset: 0;
+		width: 18px;
+		height: 18px;
+		margin: auto;
+		border-radius: 50%;
+		background: var(--tile-accent);
+		box-shadow:
+			0 0 0 6px color-mix(in srgb, var(--tile-accent) 22%, transparent),
+			0 0 36px color-mix(in srgb, var(--tile-accent) 55%, transparent);
+		animation: presence-glow 3.4s ease-in-out infinite;
+	}
+
+	@keyframes presence-orbit {
+		to {
+			transform: rotate(1turn);
+		}
+	}
+
+	@keyframes presence-rise {
+		from {
+			opacity: 0;
+			transform: translateY(26px) scale(0.97);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	@keyframes presence-pulse {
+		0%,
+		100% {
+			transform: scale(1) rotate(0deg);
+			opacity: 0.45;
+		}
+		50% {
+			transform: scale(1.07) rotate(6deg);
+			opacity: 0.95;
+		}
+	}
+
+	@keyframes presence-glow {
+		0%,
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+		50% {
+			transform: scale(1.14);
+			opacity: 0.78;
+		}
+	}
+
+	@media (min-width: 700px) and (max-width: 899px) {
+		.presence-bento {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-areas:
+				'funnel funnel'
+				'posts resp'
+				'dirs dirs'
+				'scout scout';
+		}
+
+		.presence-tile--funnel {
+			grid-area: funnel;
+		}
+
+		.presence-tile--posts {
+			grid-area: posts;
+		}
+
+		.presence-tile--replies {
+			grid-area: resp;
+		}
+
+		.presence-tile--dirs {
+			grid-area: dirs;
+		}
+
+		.presence-tile--scout {
+			grid-area: scout;
+		}
+	}
+
+	@media (min-width: 900px) {
+		.presence-bento {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+			grid-template-rows: auto auto auto;
+			grid-template-areas:
+				'funnel funnel posts resp'
+				'funnel funnel dirs dirs'
+				'scout scout scout scout';
+		}
+
+		.presence-tile--funnel {
+			grid-area: funnel;
+			min-height: 100%;
+		}
+
+		.presence-tile--posts {
+			grid-area: posts;
+		}
+
+		.presence-tile--replies {
+			grid-area: resp;
+		}
+
+		.presence-tile--dirs {
+			grid-area: dirs;
+		}
+
+		.presence-tile--scout {
+			grid-area: scout;
+		}
+
+		.presence-scout-grid {
+			grid-template-columns: 1fr minmax(140px, 18%);
+			gap: 2rem;
+		}
+
+		.presence-scout-visual {
+			margin: 0;
+			width: 100%;
+			max-width: none;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.presence-backdrop::before,
+		.presence-ring,
+		.presence-dot {
+			animation: none !important;
+		}
+
+		.presence-tile {
+			animation: none !important;
+			opacity: 1;
+		}
+	}
+
 	/* ─────────────  Geogrid map  ───────────── */
 	.geogrid-layout {
 		display: grid;
@@ -1265,9 +1848,37 @@ const plans = [
 
 	html[data-theme='light'] .pillar-card,
 	html[data-theme='light'] .connection-card,
+	html[data-theme='light'] .presence-tile,
 	html[data-theme='light'] .plan-card,
 	html[data-theme='light'] .cta-inner {
 		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+	}
+
+	html[data-theme='light'] .presence-shell {
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, 0.05) inset,
+			0 32px 80px -40px rgba(0, 0, 0, 0.14);
+	}
+
+	html[data-theme='light'] .presence-pill {
+		background: rgba(255, 255, 255, 0.82);
+		border-color: rgba(0, 0, 0, 0.1);
+		color: var(--text);
+	}
+
+	html[data-theme='light'] .presence-tile:hover {
+		box-shadow:
+			0 22px 48px -22px rgba(0, 0, 0, 0.16),
+			0 0 0 1px color-mix(in srgb, var(--tile-accent) 22%, transparent);
+	}
+
+	html[data-theme='light'] .presence-idx {
+		-webkit-text-stroke-color: rgba(0, 0, 0, 0.11);
+	}
+
+	html[data-theme='light'] .presence-noise {
+		opacity: 0.045;
+		mix-blend-mode: multiply;
 	}
 
 	html[data-theme='light'] .plan-cta,
