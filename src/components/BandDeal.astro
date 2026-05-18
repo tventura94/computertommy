@@ -3,17 +3,66 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
 import ThemeToggleButton from './ThemeToggleButton.astro';
+import { portfolioItems } from '../data/portfolio';
 
-const features = [
-	'A clean, responsive site that actually looks good',
-	'Contact form so venues and fans can reach you',
-	'Seated.com integration for shows and tickets',
-	'Optional newsletter signup',
-	'YouTube, Bandcamp, Spotify, wherever you live',
-	'Social and music links in one place',
+const bandSites = portfolioItems.filter((p) => p.category === 'Band site');
+const midBand = Math.ceil(bandSites.length / 2);
+const bandRowA = bandSites.slice(0, midBand);
+const bandRowB = bandSites.slice(midBand);
+const bandRowSecond = bandRowB.length > 0 ? bandRowB : bandRowA;
+
+function portfolioStyleHost(url: string) {
+	return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+}
+
+function bandMarbleCardNum(site: (typeof bandSites)[number]) {
+	const n = bandSites.findIndex((s) => s.slug === site.slug) + 1;
+	return String(Math.max(1, n)).padStart(2, '0');
+}
+
+const bandMarbleRows: { sites: typeof bandSites; drift: 'left' | 'right' }[] = [
+	{ sites: bandRowA, drift: 'left' },
+	{ sites: bandRowSecond, drift: 'right' },
 ];
 
-const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] as const;
+const features = [
+	{
+		color: 'orange',
+		icon: 'fa-wand-magic-sparkles',
+		title: 'Professional design',
+		body: 'A clean, responsive site that actually looks good on every screen.',
+	},
+	{
+		color: 'pink',
+		icon: 'fa-envelope',
+		title: 'Contact form',
+		body: 'Venues and fans can reach you without hunting for a DM or a buried link.',
+	},
+	{
+		color: 'yellow',
+		icon: 'fa-ticket',
+		title: 'Shows and tickets',
+		body: 'Seated.com integration so people see where you are playing and grab tickets.',
+	},
+	{
+		color: 'green',
+		icon: 'fa-newspaper',
+		title: 'Newsletter signup',
+		body: 'Optional list building for drops, tour dates, and whatever you send next.',
+	},
+	{
+		color: 'purple',
+		icon: 'fa-music',
+		title: 'Your music, linked',
+		body: 'YouTube, Bandcamp, Spotify, and the rest, wherever your catalog lives.',
+	},
+	{
+		color: 'orange',
+		icon: 'fa-link',
+		title: 'One link hub',
+		body: 'Socials and music in one place so new listeners do not bounce around.',
+	},
+] as const;
 ---
 
 <div class="page-wrapper band-page">
@@ -46,13 +95,23 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 					Most low- to mid-tier bands never hit enough traffic to outgrow free hosting. So we charge a single small fee. You get a proper site, and you're set.
 				</p>
 
-				<article class="band-price-card plan-card plan-card--orange">
-					<span class="plan-name">Band site package</span>
-					<div class="plan-price">
-						<span class="plan-price-amount">$300</span>
-						<span class="plan-price-cadence">one-time</span>
+				<article class="band-price-card" aria-label="Band site package, three hundred dollars one-time">
+					<div class="band-price-aura" aria-hidden="true"></div>
+					<div class="band-price-aura band-price-aura--b" aria-hidden="true"></div>
+					<div class="band-price-frame">
+						<span class="band-price-badge">One price · no monthly trap</span>
+						<p class="band-price-label">Band site package</p>
+						<div class="band-price-display">
+							<span class="band-price-currency" aria-hidden="true">$</span>
+							<span class="band-price-value">300</span>
+						</div>
+						<p class="band-price-cadence">one-time</p>
+						<ul class="band-price-perks">
+							<li>You own it</li>
+							<li>Full build included</li>
+							<li>Free-tier hosting ready</li>
+						</ul>
 					</div>
-					<p class="band-price-note">You own it. No monthly anything.</p>
 				</article>
 
 				<div class="hero-actions">
@@ -63,8 +122,117 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		</div>
 	</section>
 
-	<section class="section section--alt" id="band-includes">
-		<div class="section-header">
+	{bandSites.length > 0 && (
+		<section class="band-showcase-marble" aria-labelledby="band-showcase-heading">
+		<div class="band-showcase-inner">
+			<p class="band-showcase-eyebrow" id="band-showcase-heading">Live band sites</p>
+			<p class="band-showcase-tagline">
+				A few artists already live. Click a tile to open the site.
+			</p>
+		</div>
+
+		<div class="band-marble-grid" data-marquee-pause>
+			{
+				bandMarbleRows.map(({ sites, drift }) => (
+					<div class="band-marble-row-wrap">
+						<div class:list={['band-marble-row', drift === 'left' ? 'band-marble-row--left' : 'band-marble-row--right']}>
+							<div class="band-marble-strip">
+								{sites.map((site) => (
+									<article class="band-tile-card" style="--card-accent: var(--accent-pink);">
+										<a
+											class="card-shell"
+											href={site.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`Visit ${site.title}`}
+										>
+											<div class="preview-wrap" data-live-preview={site.url}>
+												{site.previewImage ? (
+													<img
+														src={site.previewImage}
+														alt={`Preview of ${site.title}`}
+														class="preview-img preview-img--static"
+														loading="lazy"
+													/>
+												) : (
+													<iframe
+														title={`Live preview of ${site.title}`}
+														data-src={site.url}
+														class="preview-iframe"
+														aria-hidden="true"
+														tabindex="-1"
+														loading="lazy"
+													/>
+												)}
+												<span class="card-num" aria-hidden="true">{bandMarbleCardNum(site)}</span>
+												<span class="card-visit">
+													Visit site
+													<i class="fas fa-arrow-right" aria-hidden="true"></i>
+												</span>
+											</div>
+											<div class="card-body">
+												<div class="card-meta">
+													<span class="category-tag">Band site</span>
+													<span class="card-host">{portfolioStyleHost(site.url)}</span>
+												</div>
+												<h3 class="card-title">{site.title}</h3>
+											</div>
+										</a>
+									</article>
+								))}
+								{sites.map((site) => (
+									<article
+										class="band-tile-card"
+										style="--card-accent: var(--accent-pink);"
+										data-band-marble-clone
+										aria-hidden="true"
+									>
+										<a class="card-shell" href={site.url} target="_blank" rel="noopener noreferrer" tabindex="-1">
+											<div class="preview-wrap" data-live-preview={site.url}>
+												{site.previewImage ? (
+													<img
+														src={site.previewImage}
+														alt=""
+														class="preview-img preview-img--static"
+														loading="lazy"
+													/>
+												) : (
+													<iframe
+														title={`Live preview of ${site.title}`}
+														data-src={site.url}
+														class="preview-iframe"
+														aria-hidden="true"
+														tabindex="-1"
+														loading="lazy"
+													/>
+												)}
+												<span class="card-num" aria-hidden="true">{bandMarbleCardNum(site)}</span>
+												<span class="card-visit">
+													Visit site
+													<i class="fas fa-arrow-right" aria-hidden="true"></i>
+												</span>
+											</div>
+											<div class="card-body">
+												<div class="card-meta">
+													<span class="category-tag">Band site</span>
+													<span class="card-host">{portfolioStyleHost(site.url)}</span>
+												</div>
+												<h3 class="card-title">{site.title}</h3>
+											</div>
+										</a>
+									</article>
+								))}
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+	)}
+
+	<section class="section section--alt band-includes-section" id="band-includes">
+		<div class="section-header band-includes-header">
 			<span class="section-eyebrow">What you get</span>
 			<h2 class="section-title">Everything a band site needs.</h2>
 			<p class="section-desc">
@@ -73,14 +241,47 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 			</p>
 		</div>
 
-		<ul class="band-feature-grid">
-			{features.map((text, i) => (
-				<li class:list={['band-feature', `band-feature--${featureColors[i]}`]}>
-					<span class="band-feature-mark" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-					<p>{text}</p>
-				</li>
-			))}
-		</ul>
+		<div class="band-features" data-band-features>
+			<div class="band-features-stage" aria-live="polite">
+				<ul class="band-features-slides">
+					{features.map((feature, i) => (
+						<li
+							class:list={['band-feature', `band-feature--${feature.color}`, i === 0 && 'is-active']}
+							data-feature-slide
+							aria-hidden={i !== 0 ? 'true' : 'false'}
+						>
+							<span class="band-feature-mark" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+							<div class="band-feature-icon" aria-hidden="true">
+								<i class:list={['fas', feature.icon]}></i>
+							</div>
+							<h3 class="band-feature-title">{feature.title}</h3>
+							<p class="band-feature-body">{feature.body}</p>
+						</li>
+					))}
+				</ul>
+			</div>
+
+			<div class="band-features-controls">
+				<button type="button" class="band-features-btn" data-feature-prev aria-label="Previous benefit">
+					<i class="fas fa-arrow-left" aria-hidden="true"></i>
+				</button>
+				<div class="band-features-dots" role="tablist" aria-label="Choose a benefit">
+					{features.map((feature, i) => (
+						<button
+							type="button"
+							class:list={['band-features-dot', i === 0 && 'is-active']}
+							data-feature-dot={i}
+							role="tab"
+							aria-selected={i === 0 ? 'true' : 'false'}
+							aria-label={`${feature.title}, benefit ${i + 1} of ${features.length}`}
+						/>
+					))}
+				</div>
+				<button type="button" class="band-features-btn" data-feature-next aria-label="Next benefit">
+					<i class="fas fa-arrow-right" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
 	</section>
 
 	<section class="section">
@@ -165,6 +366,126 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		</div>
 	</section>
 </div>
+
+<script is:inline>
+	(function () {
+		var root = document.querySelector('[data-band-features]');
+		if (!root) return;
+
+		var slides = Array.prototype.slice.call(root.querySelectorAll('[data-feature-slide]'));
+		var dots = Array.prototype.slice.call(root.querySelectorAll('[data-feature-dot]'));
+		var prevBtn = root.querySelector('[data-feature-prev]');
+		var nextBtn = root.querySelector('[data-feature-next]');
+		var index = 0;
+		var timer = null;
+		var intervalMs = 5500;
+		var autoplayEnabled =
+			slides.length > 1 &&
+			!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		function show(nextIndex) {
+			index = (nextIndex + slides.length) % slides.length;
+
+			slides.forEach(function (slide, i) {
+				var active = i === index;
+				slide.classList.toggle('is-active', active);
+				slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+			});
+
+			dots.forEach(function (dot, i) {
+				var active = i === index;
+				dot.classList.toggle('is-active', active);
+				dot.setAttribute('aria-selected', active ? 'true' : 'false');
+			});
+		}
+
+		function stopAutoplay() {
+			if (timer) {
+				clearInterval(timer);
+				timer = null;
+			}
+		}
+
+		function startAutoplay() {
+			stopAutoplay();
+			if (!autoplayEnabled || document.hidden) return;
+			timer = setInterval(function () {
+				show(index + 1);
+			}, intervalMs);
+		}
+
+		function restartAutoplay() {
+			stopAutoplay();
+			startAutoplay();
+		}
+
+		if (prevBtn) {
+			prevBtn.addEventListener('click', function () {
+				show(index - 1);
+				restartAutoplay();
+			});
+		}
+
+		if (nextBtn) {
+			nextBtn.addEventListener('click', function () {
+				show(index + 1);
+				restartAutoplay();
+			});
+		}
+
+		dots.forEach(function (dot, i) {
+			dot.addEventListener('click', function () {
+				show(i);
+				restartAutoplay();
+			});
+		});
+
+		root.addEventListener('mouseenter', stopAutoplay);
+		root.addEventListener('mouseleave', startAutoplay);
+		root.addEventListener('focusin', stopAutoplay);
+		root.addEventListener('focusout', function (e) {
+			if (!root.contains(e.relatedTarget)) startAutoplay();
+		});
+
+		document.addEventListener('visibilitychange', function () {
+			if (document.hidden) stopAutoplay();
+			else startAutoplay();
+		});
+
+		startAutoplay();
+	})();
+</script>
+
+<script is:inline>
+	(function () {
+		var root = document.querySelector('.band-showcase-marble');
+		if (!root) return;
+
+		function loadBandMarbleIframes() {
+			root.querySelectorAll('.preview-iframe').forEach(function (iframe) {
+				var src = iframe.getAttribute('data-src');
+				if (src && !iframe.getAttribute('src')) iframe.setAttribute('src', src);
+			});
+		}
+
+		function boot() {
+			setTimeout(function () {
+				loadBandMarbleIframes();
+				root.querySelectorAll('.preview-img').forEach(function (img) {
+					img.addEventListener('error', function () {
+						img.style.display = 'none';
+					});
+				});
+			}, 150);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+	})();
+</script>
 
 <style>
 	/* Design tokens (match Welcome homepage) */
@@ -262,11 +583,18 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 	.hero-inner {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		gap: 2.5rem;
+		width: 100%;
+		text-align: center;
 	}
 
 	.hero-headline-wrap {
 		position: relative;
+		width: 100%;
+		max-width: 900px;
+		margin: 0 auto;
+		padding-top: 2.5rem;
 	}
 
 	.hero-title {
@@ -276,8 +604,9 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		line-height: 0.95;
 		letter-spacing: 0.02em;
 		color: var(--text);
-		margin: 0;
+		margin: 0 auto;
 		text-transform: uppercase;
+		text-align: center;
 	}
 
 	.badge {
@@ -295,55 +624,247 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 
 	.badge-pink {
 		background: var(--accent-pink);
-		top: -2.5rem;
-		left: 0;
+		top: -0.5rem;
+		left: 8%;
 		transform: rotate(-12deg);
 	}
 
 	.badge-yellow {
 		background: var(--accent-yellow);
-		top: -1rem;
-		right: 2rem;
+		top: -0.25rem;
+		right: 8%;
 		transform: rotate(10deg);
 	}
 
 	.badge-green {
 		background: var(--accent-green);
-		bottom: 0;
-		right: 12%;
-		transform: rotate(-6deg);
+		bottom: -0.25rem;
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%) rotate(-6deg);
 	}
 
 	.hero-foot {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-		max-width: 640px;
+		align-items: center;
+		gap: 1.75rem;
+		width: 100%;
+		max-width: 720px;
+		margin: 0 auto;
+		text-align: center;
 	}
 
 	.hero-desc {
 		font-size: clamp(1rem, 2vw, 1.35rem);
 		color: var(--text-muted);
 		line-height: 1.55;
-		margin: 0;
+		margin: 0 auto;
+		max-width: 540px;
 	}
 
 	.band-price-card {
-		max-width: 420px;
-		margin: 0;
+		--price-glow: rgba(249, 115, 22, 0.55);
+		position: relative;
+		width: 100%;
+		max-width: min(580px, 100%);
+		margin: 0.5rem auto 0;
+		padding: 3px;
+		border-radius: calc(var(--radius) + 10px);
+		background: linear-gradient(
+			135deg,
+			var(--accent) 0%,
+			var(--accent-pink) 35%,
+			var(--accent-yellow) 70%,
+			var(--accent) 100%
+		);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+			0 40px 100px -35px var(--price-glow),
+			0 8px 32px -12px rgba(0, 0, 0, 0.65);
+		transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 	}
 
-	.band-price-note {
+	.band-price-card:hover {
+		transform: translateY(-6px) scale(1.01);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+			0 52px 120px -40px var(--price-glow),
+			0 16px 48px -16px rgba(0, 0, 0, 0.7);
+	}
+
+	.band-price-aura {
+		position: absolute;
+		width: 55%;
+		height: 55%;
+		top: -18%;
+		right: -12%;
+		border-radius: 50%;
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent) 45%, transparent), transparent 68%);
+		filter: blur(28px);
+		opacity: 0.85;
+		pointer-events: none;
+		animation: band-price-pulse 6s ease-in-out infinite;
+	}
+
+	.band-price-aura--b {
+		top: auto;
+		bottom: -22%;
+		right: auto;
+		left: -14%;
+		width: 50%;
+		height: 50%;
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent-pink) 40%, transparent), transparent 70%);
+		animation-delay: -3s;
+	}
+
+	@keyframes band-price-pulse {
+		0%,
+		100% {
+			opacity: 0.65;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.08);
+		}
+	}
+
+	.band-price-frame {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.65rem;
+		padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2.25rem) clamp(2rem, 4vw, 2.5rem);
+		border-radius: calc(var(--radius) + 7px);
+		background:
+			linear-gradient(165deg, rgba(255, 255, 255, 0.04), transparent 42%),
+			linear-gradient(var(--surface), var(--surface));
+		overflow: hidden;
+	}
+
+	.band-price-frame::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			105deg,
+			transparent 40%,
+			rgba(255, 255, 255, 0.06) 50%,
+			transparent 60%
+		);
+		pointer-events: none;
+	}
+
+	.band-price-badge {
+		font-family: var(--font-display);
+		font-size: clamp(0.95rem, 2vw, 1.15rem);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: #0b0b0f;
+		background: linear-gradient(90deg, var(--accent-yellow), var(--accent));
+		padding: 0.45rem 1rem;
+		border-radius: 999px;
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent);
+	}
+
+	.band-price-label {
+		margin: 0.35rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent);
+		line-height: 1;
+	}
+
+	.band-price-display {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 0.08em;
+		margin: 0.15rem 0 0;
+		line-height: 0.85;
+	}
+
+	.band-price-currency {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 4rem);
+		font-weight: 400;
+		color: var(--accent);
+		margin-top: 0.35em;
+		opacity: 0.95;
+	}
+
+	.band-price-value {
+		font-family: var(--font-display);
+		font-size: clamp(5.5rem, 22vw, 9.5rem);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		background: linear-gradient(
+			180deg,
+			var(--text) 0%,
+			color-mix(in srgb, var(--text) 75%, var(--accent)) 100%
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		text-shadow: none;
+		filter: drop-shadow(0 8px 28px rgba(249, 115, 22, 0.35));
+	}
+
+	.band-price-cadence {
 		margin: 0;
-		font-size: 1rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 3vw, 2rem);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
 		color: var(--text-muted);
-		line-height: 1.5;
+	}
+
+	.band-price-perks {
+		list-style: none;
+		margin: 1rem 0 0;
+		padding: 1rem 0 0;
+		border-top: 1px solid var(--border);
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.band-price-perks li {
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		padding: 0.45rem 0.85rem;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+		background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+		color: var(--text);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.band-price-aura {
+			animation: none;
+		}
+
+		.band-price-card:hover {
+			transform: none;
+		}
 	}
 
 	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: 0.75rem;
+		width: 100%;
 	}
 
 	.btn-solid {
@@ -398,6 +919,302 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 	.btn-lg {
 		padding: 1rem 2.5rem;
 		font-size: 1.125rem;
+	}
+
+	/* ─── Band portfolio marble rails ─── */
+	.band-showcase-marble {
+		position: relative;
+		z-index: 1;
+		padding: 2.75rem 0 3.25rem;
+		overflow: hidden;
+		background:
+			radial-gradient(ellipse 90% 55% at 50% 0%, rgba(249, 115, 22, 0.07), transparent 55%),
+			radial-gradient(ellipse 60% 40% at 10% 60%, rgba(244, 114, 182, 0.06), transparent 50%),
+			radial-gradient(ellipse 50% 35% at 92% 40%, rgba(167, 139, 250, 0.06), transparent 45%),
+			linear-gradient(175deg, #1a1a22 0%, var(--surface) 45%, #12121a 100%);
+		border-block: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	.band-showcase-marble::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.11'/%3E%3C/svg%3E");
+		opacity: 0.35;
+		mix-blend-mode: overlay;
+		pointer-events: none;
+	}
+
+	.band-showcase-inner {
+		position: relative;
+		text-align: center;
+		padding: 0 1.5rem 1.75rem;
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
+	.band-showcase-eyebrow {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.45);
+		margin: 0;
+	}
+
+	.band-showcase-tagline {
+		margin: 0.5rem 0 0;
+		font-size: 1.05rem;
+		color: var(--text-muted);
+		line-height: 1.5;
+	}
+
+	.band-marble-grid {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+		mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+	}
+
+	.band-marble-row-wrap {
+		overflow: hidden;
+		padding-block: 0.15rem;
+	}
+
+	.band-marble-row {
+		position: relative;
+		width: 100%;
+	}
+
+	.band-marble-strip {
+		display: flex;
+		gap: 1.25rem;
+		width: max-content;
+		padding-inline: 1rem;
+		will-change: transform;
+	}
+
+	/* Portfolio-matching project cards (same structure as src/pages/portfolio.astro) */
+	.band-showcase-marble .band-tile-card {
+		--card-accent: var(--accent-pink);
+		position: relative;
+		flex: 0 0 auto;
+		width: min(340px, 88vw);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		isolation: isolate;
+		transition:
+			transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+			border-color 0.3s,
+			box-shadow 0.35s;
+	}
+
+	.band-showcase-marble .band-tile-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: linear-gradient(90deg, var(--card-accent), transparent 75%);
+		z-index: 2;
+		opacity: 0.85;
+	}
+
+	.band-showcase-marble .band-tile-card:hover {
+		border-color: color-mix(in srgb, var(--card-accent) 55%, var(--border));
+		transform: translateY(-4px);
+		box-shadow: 0 22px 56px -22px color-mix(in srgb, var(--card-accent) 55%, transparent);
+	}
+
+	.band-showcase-marble .band-tile-card .card-shell {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.band-showcase-marble .band-tile-card .preview-wrap {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		background: #0a0a0d;
+		overflow: hidden;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.band-showcase-marble .band-tile-card .preview-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 1;
+		transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.band-showcase-marble .band-tile-card .preview-img--static {
+		object-position: top center;
+	}
+
+	.band-showcase-marble .band-tile-card .preview-iframe {
+		position: absolute;
+		inset: 0;
+		width: 200%;
+		height: 200%;
+		border: none;
+		z-index: 0;
+		pointer-events: none;
+		transform: scale(0.5);
+		transform-origin: top left;
+	}
+
+	.band-showcase-marble .band-tile-card:hover .preview-img {
+		transform: scale(1.04);
+	}
+
+	.band-showcase-marble .band-tile-card .card-num {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.85rem;
+		z-index: 2;
+		font-family: var(--font-display);
+		font-size: 1.65rem;
+		line-height: 0.9;
+		color: var(--card-accent);
+		letter-spacing: -0.02em;
+		text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+		pointer-events: none;
+	}
+
+	.band-showcase-marble .band-tile-card .card-visit {
+		position: absolute;
+		bottom: 0.85rem;
+		right: 0.85rem;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.5rem 0.9rem;
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #fff;
+		background: var(--card-accent);
+		border-radius: 999px;
+		opacity: 0;
+		transform: translateY(8px);
+		transition:
+			opacity 0.3s ease,
+			transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+		box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--card-accent) 70%, transparent);
+		pointer-events: none;
+	}
+
+	.band-showcase-marble .band-tile-card .card-visit i {
+		font-size: 0.8em;
+	}
+
+	.band-showcase-marble .band-tile-card:hover .card-visit {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.band-showcase-marble .band-tile-card .card-body {
+		padding: 1.25rem 1.4rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		flex: 1;
+	}
+
+	.band-showcase-marble .band-tile-card .card-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.band-showcase-marble .band-tile-card .category-tag {
+		font-family: var(--font);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		padding: 0.25rem 0.6rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+		color: var(--card-accent);
+		border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+	}
+
+	.band-showcase-marble .band-tile-card .card-host {
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.72rem;
+		letter-spacing: 0.01em;
+		color: var(--text-muted);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		flex: 1;
+		text-align: right;
+		min-width: 0;
+	}
+
+	.band-showcase-marble .band-tile-card .card-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.55rem;
+		line-height: 1;
+		margin: 0;
+		color: var(--text);
+	}
+
+	.band-marble-row--left .band-marble-strip {
+		animation: band-marble-drift-l 75s linear infinite;
+	}
+
+	.band-marble-row--right .band-marble-strip {
+		animation: band-marble-drift-r 85s linear infinite;
+	}
+
+	.band-marble-grid:hover .band-marble-strip,
+	.band-marble-grid:focus-within .band-marble-strip {
+		animation-play-state: paused;
+	}
+
+	@keyframes band-marble-drift-l {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@keyframes band-marble-drift-r {
+		from {
+			transform: translateX(-50%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.band-marble-row--left .band-marble-strip,
+		.band-marble-row--right .band-marble-strip {
+			animation: none;
+		}
 	}
 
 	.section {
@@ -565,28 +1382,76 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		letter-spacing: 0.04em;
 	}
 
-	/* Feature grid */
-	.band-feature-grid {
+	/* What you get — one card at a time */
+	.band-includes-section .section-header {
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.band-includes-header .section-desc {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.band-features {
+		max-width: 720px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.band-features-stage {
+		position: relative;
+		min-height: clamp(320px, 48vh, 400px);
+	}
+
+	.band-features-slides {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 1rem;
+		position: relative;
+		height: 100%;
+		min-height: inherit;
 	}
 
 	.band-feature {
 		--feat-color: var(--accent);
-		position: relative;
-		background: var(--bg);
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 1.35rem 1.25rem 1.35rem 1.1rem;
+		position: absolute;
+		inset: 0;
+		z-index: 0;
 		display: flex;
-		align-items: flex-start;
-		gap: 1rem;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1.15rem;
+		padding: 2.25rem 1.75rem 2rem;
+		border-radius: calc(var(--radius) + 6px);
+		border: 1px solid color-mix(in srgb, var(--feat-color) 32%, var(--border));
+		background:
+			linear-gradient(155deg, color-mix(in srgb, var(--feat-color) 16%, transparent), transparent 50%),
+			var(--bg);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+			0 28px 70px -28px rgba(0, 0, 0, 0.6),
+			0 0 40px -16px color-mix(in srgb, var(--feat-color) 38%, transparent);
 		overflow: hidden;
-		transition: border-color 0.25s ease, transform 0.2s ease;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(12px) scale(0.98);
+		transition:
+			opacity 0.4s ease,
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0.4s ease;
+		pointer-events: none;
+	}
+
+	.band-feature.is-active {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0) scale(1);
+		pointer-events: auto;
+		z-index: 1;
 	}
 
 	.band-feature::before {
@@ -595,13 +1460,8 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 3px;
-		background: var(--feat-color);
-	}
-
-	.band-feature:hover {
-		border-color: var(--feat-color);
-		transform: translateY(-2px);
+		height: 4px;
+		background: linear-gradient(90deg, var(--feat-color), color-mix(in srgb, var(--feat-color) 15%, transparent));
 	}
 
 	.band-feature--orange { --feat-color: var(--accent); }
@@ -611,19 +1471,125 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 	.band-feature--purple { --feat-color: var(--accent-purple); }
 
 	.band-feature-mark {
+		position: absolute;
+		top: 0.35rem;
+		right: 0.85rem;
 		font-family: var(--font-display);
-		font-size: 1.5rem;
-		line-height: 1;
-		color: var(--feat-color);
-		flex-shrink: 0;
-		letter-spacing: 0.06em;
+		font-size: clamp(3.5rem, 14vw, 6.5rem);
+		line-height: 0.85;
+		letter-spacing: 0.04em;
+		color: transparent;
+		-webkit-text-stroke: 1px color-mix(in srgb, var(--feat-color) 38%, transparent);
+		opacity: 0.5;
+		pointer-events: none;
 	}
 
-	.band-feature p {
+	.band-feature-icon {
+		width: 62px;
+		height: 62px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 14px;
+		font-size: 1.4rem;
+		color: var(--feat-color);
+		background: color-mix(in srgb, var(--feat-color) 18%, var(--surface));
+		border: 1px solid color-mix(in srgb, var(--feat-color) 48%, transparent);
+		box-shadow: 0 0 32px color-mix(in srgb, var(--feat-color) 32%, transparent);
+	}
+
+	.band-feature-title {
 		margin: 0;
-		font-size: 1.05rem;
-		line-height: 1.55;
+		padding-right: 3rem;
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 7vw, 3.75rem);
+		font-weight: 400;
+		line-height: 0.95;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
 		color: var(--text);
+	}
+
+	.band-feature-body {
+		margin: 0;
+		font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+		line-height: 1.65;
+		color: var(--text-muted);
+		max-width: 36rem;
+	}
+
+	.band-features-controls {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	.band-features-btn {
+		width: 48px;
+		height: 48px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		border: 1px solid var(--border);
+		background: var(--bg);
+		color: var(--text);
+		cursor: pointer;
+		font-size: 1rem;
+		transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+	}
+
+	.band-features-btn:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+		transform: translateY(-1px);
+	}
+
+	.band-features-btn:disabled {
+		opacity: 0.35;
+		cursor: not-allowed;
+		transform: none;
+	}
+
+	.band-features-dots {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.band-features-dot {
+		width: 10px;
+		height: 10px;
+		padding: 0;
+		border: none;
+		border-radius: 50%;
+		background: var(--border);
+		cursor: pointer;
+		transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.band-features-dot.is-active {
+		background: var(--accent);
+		transform: scale(1.25);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+	}
+
+	.band-features-dot:hover:not(.is-active) {
+		background: var(--text-muted);
+	}
+
+	@media (min-width: 720px) {
+		.band-feature {
+			padding: 2.75rem 2.5rem 2.5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.band-feature {
+			transition: none;
+		}
 	}
 
 	/* Contact form */
@@ -837,7 +1803,13 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 
 		.hero-actions {
 			flex-direction: column;
-			align-items: stretch;
+			align-items: center;
+		}
+
+		.hero-actions .btn-solid,
+		.hero-actions .btn-outline {
+			width: 100%;
+			max-width: 320px;
 		}
 
 		.btn-solid,
@@ -878,6 +1850,29 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 		background: var(--surface);
 	}
 
+	:global(html[data-theme='light']) .page-wrapper .band-showcase-marble {
+		background:
+			radial-gradient(ellipse 90% 55% at 50% 0%, rgba(249, 115, 22, 0.12), transparent 55%),
+			linear-gradient(175deg, #efeeec 0%, #ffffff 48%, #e8e6e3 100%);
+		border-block-color: rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-showcase-eyebrow {
+		color: rgba(0, 0, 0, 0.42);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-showcase-marble .band-tile-card {
+		box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-showcase-marble .band-tile-card:hover {
+		box-shadow: 0 24px 56px -20px color-mix(in srgb, var(--card-accent) 38%, transparent);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-showcase-marble .band-tile-card .preview-wrap {
+		background: #e8e6e3;
+	}
+
 	:global(html[data-theme='light']) .page-wrapper .badge-yellow {
 		color: #14141a;
 	}
@@ -889,7 +1884,26 @@ const featureColors = ['orange', 'pink', 'yellow', 'green', 'purple', 'orange'] 
 
 	:global(html[data-theme='light']) .page-wrapper .plan-card,
 	:global(html[data-theme='light']) .page-wrapper .band-feature {
-		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, 0.04) inset,
+			0 20px 48px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-price-card {
+		--price-glow: rgba(217, 93, 12, 0.35);
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, 0.05) inset,
+			0 32px 80px -36px var(--price-glow),
+			0 12px 36px rgba(0, 0, 0, 0.1);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-price-frame {
+		background:
+			linear-gradient(165deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.98));
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .band-price-badge {
+		color: #14141a;
 	}
 
 	:global(html[data-theme='light']) .page-wrapper .cta-bg {
