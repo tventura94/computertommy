@@ -24,6 +24,26 @@ export const portfolioItems: PortfolioItem[] = [
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
   },
   {
+    slug: "noble-cleaning-solutions",
+    title: "Noble Cleaning Solutions",
+    category: "Service site",
+    url: "https://noblecleaningsolutionsllc.com/",
+    whatTheyNeeded:
+      "A commercial cleaning site built around post-construction bids and recurring service leads.",
+    result:
+      "A polished Greensboro service site with clear service pages, trust signals, and fast quote paths.",
+  },
+  {
+    slug: "frontline-medical-travel",
+    title: "Frontline Medical Travel & Planning",
+    category: "Service site",
+    url: "https://frontlinemedicaltravel.com/",
+    whatTheyNeeded:
+      "A professional site explaining RN and CNA travel companion services for families planning trips.",
+    result:
+      "A warm, trust-focused service site with clear process steps, service details, and inquiry paths.",
+  },
+  {
     slug: "north-peak-hvac",
     title: "North Peak HVAC",
     category: "Service site",
@@ -128,6 +148,16 @@ export const portfolioItems: PortfolioItem[] = [
     url: "https://swongband.com/",
     whatTheyNeeded: "A site to showcase music, bio, and upcoming shows.",
     result: "Clean band site with music, bio, shows, and contact.",
+  },
+  {
+    slug: "nathan-hughes-project",
+    title: "Nathan Hughes Project",
+    category: "Band site",
+    url: "https://nathanhughesproject.com/",
+    whatTheyNeeded:
+      "A musician site to book solo, duo, and trio gigs around Charlotte and the Carolinas.",
+    result:
+      "A polished music site with video, booking details, contact paths, and a strong live-performance feel.",
   },
   {
     slug: "so-close-band",
