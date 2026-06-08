@@ -1,0 +1,210 @@
+---
+const inclusions = [
+	{
+		icon: 'fa-location-dot',
+		title: '70+ business listings online',
+		body: 'Clean, consistent citations across the directories Google expects to see for a real local business.',
+	},
+	{
+		icon: 'fa-file-lines',
+		title: '1 new SEO page or blog post / month',
+		body: 'Fresh, targeted content aimed at the services, towns, and searches that can turn into calls.',
+	},
+	{
+		icon: 'fa-store',
+		title: '5+ Google Business posts / month',
+		body: 'Your Google Business Profile stays active with service-focused posts instead of sitting untouched.',
+	},
+	{
+		icon: 'fa-paper-plane',
+		title: 'Customer review funnel',
+		body: 'A simple outreach flow that turns completed jobs into more Google reviews without adding work to your day.',
+	},
+	{
+		icon: 'fa-comment-dots',
+		title: 'Review management and responses',
+		body: 'I respond to new reviews in a steady voice so your profile looks active, professional, and cared for.',
+	},
+	{
+		icon: 'fa-chart-line',
+		title: 'Monthly rank tracking report',
+		body: 'See where you are moving, which pages are working, and what gets attacked next.',
+	},
+	{
+		icon: 'fa-screwdriver-wrench',
+		title: 'On-page SEO updates from performance data',
+		body: 'Titles, headings, internal structure, schema, and page copy get tuned based on what the data shows.',
+	},
+	{
+		icon: 'fa-link',
+		title: 'Backlinking and local outreach',
+		body: 'Local mentions and backlinks from real places: partners, directories, suppliers, chambers, and trade sources.',
+	},
+];
+---
+
+<section class="growth-section growth-includes" id="growth-includes">
+	<div class="section-header">
+		<span class="section-eyebrow">Everything in Maintenance, plus</span>
+		<h2 class="section-title">The monthly machine behind local rankings.</h2>
+		<p class="section-desc">
+			This is the middle tier for businesses that need real ongoing SEO, not just site upkeep.
+		</p>
+	</div>
+
+	<div class="includes-grid">
+		{inclusions.map((item, i) => (
+			<article class="include-card" style={`--delay: ${i * 70}ms`}>
+				<div class="include-icon" aria-hidden="true">
+					<i class:list={['fas', item.icon]}></i>
+				</div>
+				<h3>{item.title}</h3>
+				<p>{item.body}</p>
+			</article>
+		))}
+	</div>
+</section>
+
+<style>
+	.growth-section {
+		position: relative;
+		z-index: 1;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 5rem 1.5rem;
+	}
+
+	.section-header {
+		max-width: 800px;
+		margin: 0 auto 2.75rem;
+		text-align: center;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		font-weight: 400;
+		color: var(--accent-teal);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 0.75rem;
+	}
+
+	.section-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		color: var(--text);
+		margin: 0 0 1rem;
+		text-transform: uppercase;
+		text-wrap: balance;
+	}
+
+	.section-desc {
+		font-size: clamp(1rem, 2vw, 1.25rem);
+		color: var(--text-muted);
+		line-height: 1.55;
+		margin: 0 auto;
+		max-width: 620px;
+	}
+
+	.includes-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 1rem;
+	}
+
+	.include-card {
+		position: relative;
+		min-height: 245px;
+		padding: 1.25rem;
+		border-radius: calc(var(--radius) + 6px);
+		background:
+			linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent 45%),
+			color-mix(in srgb, var(--surface) 92%, #1f2937);
+		border: 1px solid var(--border);
+		box-shadow: 0 24px 60px -34px rgba(0, 0, 0, 0.75);
+		overflow: hidden;
+		animation: card-rise 0.65s ease both;
+		animation-delay: var(--delay);
+	}
+
+	.include-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent-teal) 12%, transparent), transparent 38%),
+			radial-gradient(circle at 95% 90%, color-mix(in srgb, var(--accent-slate) 10%, transparent), transparent 38%);
+		pointer-events: none;
+	}
+
+	.include-card > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.include-icon {
+		width: 3rem;
+		height: 3rem;
+		display: grid;
+		place-items: center;
+		border-radius: 1rem;
+		background: color-mix(in srgb, var(--accent-teal) 12%, transparent);
+		border: 1px solid color-mix(in srgb, var(--accent-teal) 24%, transparent);
+		color: var(--accent-teal);
+		margin-bottom: 1.25rem;
+	}
+
+	.include-card h3 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
+		line-height: 1;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		margin: 0 0 0.75rem;
+		color: var(--text);
+	}
+
+	.include-card p {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 0.98rem;
+	}
+
+	@keyframes card-rise {
+		from {
+			opacity: 0;
+			transform: translateY(18px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 980px) {
+		.includes-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 620px) {
+		.growth-section {
+			padding: 4rem 1rem;
+		}
+
+		.includes-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.include-card {
+			min-height: auto;
+		}
+	}
+</style>

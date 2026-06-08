@@ -1,0 +1,126 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import background from '../assets/background.svg';
+import GrowSeoHero from './grow_local_seo/GrowSeoHero.astro';
+import GrowSeoShowcase from './grow_local_seo/GrowSeoShowcase.astro';
+import GrowSeoIncludes from './grow_local_seo/GrowSeoIncludes.astro';
+import GrowSeoProcess from './grow_local_seo/GrowSeoProcess.astro';
+import GrowSeoContact from './grow_local_seo/GrowSeoContact.astro';
+---
+
+<div class="page-wrapper growth-seo-page">
+	<img class="bg-blur" src={background.src} alt="" fetchpriority="high" />
+
+	<div class="hero-bg" aria-hidden="true">
+		<img src="/portfolio/bg-img-ct.png" alt="" class="hero-bg-img" />
+	</div>
+
+	<GrowSeoHero />
+	<GrowSeoShowcase />
+	<GrowSeoIncludes />
+	<GrowSeoProcess />
+	<GrowSeoContact />
+</div>
+
+<style>
+	:global(html:has(.growth-seo-page)) {
+		scroll-behavior: smooth;
+	}
+
+	.page-wrapper {
+		--bg: #0c0d10;
+		--surface: #15171c;
+		--border: rgba(255, 255, 255, 0.08);
+		--text: #eef0f4;
+		--text-muted: rgba(238, 240, 244, 0.58);
+		--accent: #c4834a;
+		--accent-teal: #5f929f;
+		--accent-gold: #b89a6a;
+		--accent-slate: #8896a8;
+		--accent-green: var(--accent-teal);
+		--accent-yellow: var(--accent-gold);
+		--accent-pink: #c49a8a;
+		--accent-purple: var(--accent-slate);
+		--accent-glow: rgba(95, 146, 159, 0.28);
+		--accent-glow-soft: rgba(95, 146, 159, 0.07);
+		--accent-glow-slate: rgba(136, 150, 168, 0.08);
+		--radius: 16px;
+		--radius-sm: 10px;
+		--font: 'Outfit Variable', 'Outfit', sans-serif;
+		--font-display: 'Bebas Neue', Impact, sans-serif;
+
+		font-family: var(--font);
+		background:
+			radial-gradient(ellipse 70% 45% at 50% -10%, var(--accent-glow-soft), transparent 58%),
+			radial-gradient(ellipse 45% 35% at 88% 10%, var(--accent-glow-slate), transparent 55%),
+			var(--bg);
+		color: var(--text);
+		min-height: 100vh;
+		position: relative;
+		overflow-x: clip;
+		box-sizing: border-box;
+	}
+
+	.page-wrapper *,
+	.page-wrapper *::before,
+	.page-wrapper *::after {
+		box-sizing: inherit;
+	}
+
+	.bg-blur {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 0;
+		filter: blur(120px);
+		opacity: 0.12;
+		pointer-events: none;
+	}
+
+	.hero-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.hero-bg-img {
+		width: 100%;
+		height: auto;
+		opacity: 0.2;
+		filter: saturate(0.75) brightness(0.92);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper {
+		--bg: #f4f2ee;
+		--surface: #ffffff;
+		--border: rgba(0, 0, 0, 0.08);
+		--text: #171a1f;
+		--text-muted: rgba(23, 26, 31, 0.62);
+		--accent-teal: #4a7d8a;
+		--accent-gold: #9a7d4f;
+		--accent-slate: #6b788a;
+		--accent-glow: rgba(74, 125, 138, 0.2);
+		--accent-glow-soft: rgba(74, 125, 138, 0.1);
+		--accent-glow-slate: rgba(107, 120, 138, 0.08);
+
+		background:
+			radial-gradient(ellipse 70% 45% at 50% -10%, var(--accent-glow-soft), transparent 58%),
+			radial-gradient(ellipse 45% 35% at 88% 10%, var(--accent-glow-slate), transparent 55%),
+			var(--bg);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .bg-blur {
+		opacity: 0.08;
+		filter: blur(100px);
+	}
+
+	:global(html[data-theme='light']) .page-wrapper .hero-bg-img {
+		opacity: 0.16;
+		filter: saturate(0.8) brightness(1.02);
+	}
+</style>

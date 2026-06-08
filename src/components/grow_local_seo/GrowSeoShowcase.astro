@@ -1,0 +1,425 @@
+---
+import { portfolioItems } from '../../data/portfolio';
+
+const serviceSites = portfolioItems.filter(
+	(p) => p.category === 'Service site' || p.category === 'Business site',
+);
+const mid = Math.ceil(serviceSites.length / 2);
+const rowA = serviceSites.slice(0, mid);
+const rowB = serviceSites.slice(mid);
+const rowSecond = rowB.length > 0 ? rowB : rowA;
+
+function styleHost(url: string) {
+	return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+}
+
+const marbleRows: { sites: typeof serviceSites; drift: 'left' | 'right' }[] = [
+	{ sites: rowA, drift: 'left' },
+	{ sites: rowSecond, drift: 'right' },
+];
+---
+
+{serviceSites.length > 0 && (
+	<section class="seo-showcase-marble" aria-labelledby="seo-showcase-heading">
+		<div class="seo-showcase-inner">
+			<p class="seo-showcase-eyebrow" id="seo-showcase-heading">Live local service sites</p>
+			<p class="seo-showcase-tagline">
+				Real businesses we have built and rank. Click a tile to open the site.
+			</p>
+		</div>
+
+		<div class="seo-marble-grid">
+			{
+				marbleRows.map(({ sites, drift }) => (
+					<div class="seo-marble-row-wrap">
+						<div class:list={['seo-marble-row', drift === 'left' ? 'seo-marble-row--left' : 'seo-marble-row--right']}>
+							<div class="seo-marble-strip">
+								{sites.map((site) => (
+									<article class="seo-tile-card">
+										<a
+											class="card-shell"
+											href={site.url}
+											target="_blank"
+											rel="noopener noreferrer"
+											aria-label={`Visit ${site.title}`}
+										>
+											<div class="preview-wrap" data-live-preview={site.url}>
+												{site.previewImage ? (
+													<img
+														src={site.previewImage}
+														alt={`Preview of ${site.title}`}
+														class="preview-img preview-img--static"
+														loading="lazy"
+													/>
+												) : (
+													<iframe
+														title={`Live preview of ${site.title}`}
+														data-src={site.url}
+														class="preview-iframe"
+														aria-hidden="true"
+														tabindex="-1"
+														loading="lazy"
+													/>
+												)}
+												<span class="card-visit">
+													Visit site
+													<i class="fas fa-arrow-right" aria-hidden="true"></i>
+												</span>
+											</div>
+											<div class="card-body">
+												<div class="card-meta">
+													<span class="category-tag">{site.category}</span>
+													<span class="card-host">{styleHost(site.url)}</span>
+												</div>
+												<h3 class="card-title">{site.title}</h3>
+											</div>
+										</a>
+									</article>
+								))}
+								{sites.map((site) => (
+									<article class="seo-tile-card" data-marble-clone aria-hidden="true">
+										<a class="card-shell" href={site.url} target="_blank" rel="noopener noreferrer" tabindex="-1">
+											<div class="preview-wrap" data-live-preview={site.url}>
+												{site.previewImage ? (
+													<img
+														src={site.previewImage}
+														alt=""
+														class="preview-img preview-img--static"
+														loading="lazy"
+													/>
+												) : (
+													<iframe
+														title={`Live preview of ${site.title}`}
+														data-src={site.url}
+														class="preview-iframe"
+														aria-hidden="true"
+														tabindex="-1"
+														loading="lazy"
+													/>
+												)}
+												<span class="card-visit">
+													Visit site
+													<i class="fas fa-arrow-right" aria-hidden="true"></i>
+												</span>
+											</div>
+											<div class="card-body">
+												<div class="card-meta">
+													<span class="category-tag">{site.category}</span>
+													<span class="card-host">{styleHost(site.url)}</span>
+												</div>
+												<h3 class="card-title">{site.title}</h3>
+											</div>
+										</a>
+									</article>
+								))}
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+)}
+
+<script is:inline>
+	(function () {
+		var root = document.querySelector('.seo-showcase-marble');
+		if (!root) return;
+
+		function loadIframes() {
+			root.querySelectorAll('.preview-iframe').forEach(function (iframe) {
+				var src = iframe.getAttribute('data-src');
+				if (src && !iframe.getAttribute('src')) iframe.setAttribute('src', src);
+			});
+		}
+
+		function boot() {
+			setTimeout(function () {
+				loadIframes();
+				root.querySelectorAll('.preview-img').forEach(function (img) {
+					img.addEventListener('error', function () {
+						img.style.display = 'none';
+					});
+				});
+			}, 150);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+	})();
+</script>
+
+<style>
+	.seo-showcase-marble {
+		position: relative;
+		z-index: 1;
+		padding: 2.75rem 0 3.25rem;
+		overflow: hidden;
+		background:
+			radial-gradient(ellipse 90% 55% at 50% 0%, var(--accent-glow-soft), transparent 55%),
+			radial-gradient(ellipse 60% 40% at 10% 60%, var(--accent-glow-slate), transparent 50%),
+			radial-gradient(ellipse 50% 35% at 92% 40%, var(--accent-glow-soft), transparent 45%),
+			linear-gradient(175deg, #16171c 0%, var(--surface) 45%, #111318 100%);
+		border-block: 1px solid rgba(255, 255, 255, 0.06);
+	}
+
+	.seo-showcase-marble::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.11'/%3E%3C/svg%3E");
+		opacity: 0.35;
+		mix-blend-mode: overlay;
+		pointer-events: none;
+	}
+
+	.seo-showcase-inner {
+		position: relative;
+		text-align: center;
+		padding: 0 1.5rem 1.75rem;
+		max-width: 640px;
+		margin: 0 auto;
+	}
+
+	.seo-showcase-eyebrow {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent-teal);
+		margin: 0;
+	}
+
+	.seo-showcase-tagline {
+		margin: 0.5rem 0 0;
+		font-size: 1.05rem;
+		color: var(--text-muted);
+		line-height: 1.5;
+	}
+
+	.seo-marble-grid {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+		mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+	}
+
+	.seo-marble-row-wrap {
+		overflow: hidden;
+		padding-block: 0.15rem;
+	}
+
+	.seo-marble-row {
+		position: relative;
+		width: 100%;
+	}
+
+	.seo-marble-strip {
+		display: flex;
+		gap: 1.25rem;
+		width: max-content;
+		padding-inline: 1rem;
+		will-change: transform;
+	}
+
+	/* Portfolio-matching project cards */
+	.seo-showcase-marble .seo-tile-card {
+		--card-accent: var(--accent-teal);
+		position: relative;
+		flex: 0 0 auto;
+		width: min(340px, 88vw);
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		isolation: isolate;
+		transition:
+			transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+			border-color 0.3s,
+			box-shadow 0.35s;
+	}
+
+	.seo-showcase-marble .seo-tile-card:hover {
+		border-color: color-mix(in srgb, var(--card-accent) 55%, var(--border));
+		transform: translateY(-4px);
+		box-shadow: 0 22px 56px -22px color-mix(in srgb, var(--card-accent) 55%, transparent);
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-shell {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.seo-showcase-marble .seo-tile-card .preview-wrap {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		background: #0a0a0d;
+		overflow: hidden;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.seo-showcase-marble .seo-tile-card .preview-img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 1;
+		transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.seo-showcase-marble .seo-tile-card .preview-img--static {
+		object-position: top center;
+	}
+
+	.seo-showcase-marble .seo-tile-card .preview-iframe {
+		position: absolute;
+		inset: 0;
+		width: 200%;
+		height: 200%;
+		border: none;
+		z-index: 0;
+		pointer-events: none;
+		transform: scale(0.5);
+		transform-origin: top left;
+	}
+
+	.seo-showcase-marble .seo-tile-card:hover .preview-img {
+		transform: scale(1.04);
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-visit {
+		position: absolute;
+		bottom: 0.85rem;
+		right: 0.85rem;
+		z-index: 2;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.5rem 0.9rem;
+		font-family: var(--font-display);
+		font-size: 0.85rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #f4f8f9;
+		background: var(--card-accent);
+		border-radius: 999px;
+		opacity: 0;
+		transform: translateY(8px);
+		transition:
+			opacity 0.3s ease,
+			transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+		box-shadow: 0 8px 22px -8px color-mix(in srgb, var(--card-accent) 70%, transparent);
+		pointer-events: none;
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-visit i {
+		font-size: 0.8em;
+	}
+
+	.seo-showcase-marble .seo-tile-card:hover .card-visit {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-body {
+		padding: 1.25rem 1.4rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		flex: 1;
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+	}
+
+	.seo-showcase-marble .seo-tile-card .category-tag {
+		font-family: var(--font);
+		font-size: 0.68rem;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		padding: 0.25rem 0.6rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--card-accent) 14%, transparent);
+		color: var(--card-accent);
+		border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+		white-space: nowrap;
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-host {
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.72rem;
+		letter-spacing: 0.01em;
+		color: var(--text-muted);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		flex: 1;
+		text-align: right;
+		min-width: 0;
+	}
+
+	.seo-showcase-marble .seo-tile-card .card-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		font-size: 1.55rem;
+		line-height: 1;
+		margin: 0;
+		color: var(--text);
+	}
+
+	.seo-marble-row--left .seo-marble-strip {
+		animation: seo-marble-drift-l 80s linear infinite;
+	}
+
+	.seo-marble-row--right .seo-marble-strip {
+		animation: seo-marble-drift-r 90s linear infinite;
+	}
+
+	.seo-marble-grid:hover .seo-marble-strip,
+	.seo-marble-grid:focus-within .seo-marble-strip {
+		animation-play-state: paused;
+	}
+
+	@keyframes seo-marble-drift-l {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@keyframes seo-marble-drift-r {
+		from {
+			transform: translateX(-50%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.seo-marble-row--left .seo-marble-strip,
+		.seo-marble-row--right .seo-marble-strip {
+			animation: none;
+		}
+	}
+</style>

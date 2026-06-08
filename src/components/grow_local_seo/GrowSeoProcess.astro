@@ -1,0 +1,200 @@
+---
+const steps = [
+	{
+		label: 'Audit',
+		title: 'Find the ranking gaps',
+		body: 'I check the site, competitors, Google Business Profile, listings, content, and backlinks so the month starts with a clear target.',
+	},
+	{
+		label: 'Build',
+		title: 'Ship the monthly work',
+		body: 'A new page or post goes live, GBP posts get published, on-page changes happen, and citation or backlink work moves forward.',
+	},
+	{
+		label: 'Reputation',
+		title: 'Push reviews forward',
+		body: 'The review funnel runs, new reviews get answered, and your profile keeps looking alive to prospects and Google.',
+	},
+	{
+		label: 'Report',
+		title: 'Show what moved',
+		body: 'You get rank tracking and a plain-English recap of what changed, what improved, and what I am going after next.',
+	},
+];
+---
+
+<section class="process-section" aria-labelledby="growth-process-heading">
+	<div class="process-shell">
+		<div class="process-copy">
+			<span class="section-eyebrow">How it runs</span>
+			<h2 class="section-title" id="growth-process-heading">Same person. Every month. No agency shuffle.</h2>
+			<p>
+				Growth SEO is for owners who want someone actively moving the needle without making them manage a marketing team. I do the work, keep the strategy tight, and show you what is happening.
+			</p>
+		</div>
+
+		<ol class="process-list">
+			{steps.map((step) => (
+				<li class="process-step">
+					<span class="step-label">{step.label}</span>
+					<h3>{step.title}</h3>
+					<p>{step.body}</p>
+				</li>
+			))}
+		</ol>
+	</div>
+</section>
+
+<style>
+	.process-section {
+		position: relative;
+		z-index: 1;
+		padding: 5rem 1.5rem;
+		background:
+			radial-gradient(ellipse 80% 55% at 18% 0%, var(--accent-glow-soft), transparent 58%),
+			radial-gradient(ellipse 70% 55% at 85% 80%, var(--accent-glow-slate), transparent 56%),
+			linear-gradient(175deg, #171820, var(--surface) 55%, #111318);
+		border-block: 1px solid rgba(255, 255, 255, 0.07);
+		overflow: hidden;
+	}
+
+	.process-section::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+		opacity: 0.28;
+		mix-blend-mode: overlay;
+		pointer-events: none;
+	}
+
+	.process-shell {
+		position: relative;
+		z-index: 1;
+		max-width: 1120px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr);
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.process-copy {
+		position: sticky;
+		top: 2rem;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		color: var(--accent-teal);
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 0.75rem;
+	}
+
+	.section-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 5rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		color: var(--text);
+		text-transform: uppercase;
+		margin: 0 0 1rem;
+		text-wrap: balance;
+	}
+
+	.process-copy p {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.65;
+		font-size: 1.05rem;
+		max-width: 54ch;
+	}
+
+	.process-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.process-step {
+		position: relative;
+		padding: 1.35rem 1.35rem 1.45rem;
+		border-radius: calc(var(--radius) + 6px);
+		background: rgba(255, 255, 255, 0.045);
+		border: 1px solid var(--border);
+		overflow: hidden;
+	}
+
+	.process-step::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, color-mix(in srgb, var(--accent-teal) 10%, transparent), transparent 45%);
+		opacity: 0.8;
+		pointer-events: none;
+	}
+
+	.process-step > * {
+		position: relative;
+		z-index: 1;
+	}
+
+	.step-label {
+		display: inline-block;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--accent-teal);
+		margin-bottom: 0.35rem;
+	}
+
+	.process-step h3 {
+		margin: 0 0 0.45rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.55rem, 3vw, 2.25rem);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.03em;
+		text-transform: uppercase;
+		color: var(--text);
+	}
+
+	.process-step p {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+	}
+
+	@media (max-width: 860px) {
+		.process-shell {
+			grid-template-columns: 1fr;
+		}
+
+		.process-copy {
+			position: static;
+			text-align: center;
+			margin: 0 auto;
+		}
+
+		.process-copy p {
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.process-section {
+			padding: 4rem 1rem;
+		}
+
+		.process-step {
+			padding: 1.25rem;
+		}
+	}
+</style>

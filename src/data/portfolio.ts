@@ -24,10 +24,29 @@ export const portfolioItems: PortfolioItem[] = [
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
   },
   {
+    slug: "cams-junk-removal",
+    title: "Cam's Junk Removal",
+    category: "Service site",
+    url: "https://cams-junk-removal.netlify.app/",
+    whatTheyNeeded: "A professional web presence to showcase their services.",
+    result:
+      "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
+  },
+  {
+    slug: "qh-refrigeration",
+    title: "QH Refrigeration",
+    category: "Service site",
+    url: "https://qh-refrigeration.netlify.app/",
+    whatTheyNeeded: "A professional web presence to showcase their services.",
+    result:
+      "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
+  },
+  {
     slug: "noble-cleaning-solutions",
     title: "Noble Cleaning Solutions",
     category: "Service site",
     url: "https://noblecleaningsolutionsllc.com/",
+    previewImage: "/portfolio/noble-img.png",
     whatTheyNeeded:
       "A commercial cleaning site built around post-construction bids and recurring service leads.",
     result:
@@ -38,6 +57,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Frontline Medical Travel & Planning",
     category: "Service site",
     url: "https://frontlinemedicaltravel.com/",
+    previewImage: "/portfolio/frontline-img.png",
     whatTheyNeeded:
       "A professional site explaining RN and CNA travel companion services for families planning trips.",
     result:

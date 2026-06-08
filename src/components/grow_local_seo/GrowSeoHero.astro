@@ -1,0 +1,421 @@
+---
+import astroLogo from '../../assets/computertommylogo.svg';
+import ThemeToggleButton from '../ThemeToggleButton.astro';
+
+const perks = ['70+ listings', '1 new SEO page / month', 'Review funnel', 'Backlink outreach'];
+---
+
+<section class="seo-hero">
+	<div class="hero-nav">
+		<a href="/" class="logo-link">
+			<img src={astroLogo.src} width="130" height="52" alt="Computer Tommy home" />
+		</a>
+		<ThemeToggleButton />
+	</div>
+
+	<div class="hero-inner">
+		<div class="hero-headline-wrap">
+			<h1 class="hero-title">
+				Growth Local SEO.<br />Your own SEO guy.
+			</h1>
+			<span class="badge badge-green">Rank locally</span>
+			<span class="badge badge-yellow">$679/mo</span>
+			<span class="badge badge-purple">Done monthly</span>
+		</div>
+
+		<div class="hero-foot">
+			<p class="hero-desc">
+				Posts, new pages, review growth, backlinks, and real strategy every month. Built for service businesses that are ready to turn Google searches into calls.
+			</p>
+
+			<article class="seo-price-card" aria-label="Growth Local SEO, nine hundred ninety seven dollars per month">
+				<div class="seo-price-aura" aria-hidden="true"></div>
+				<div class="seo-price-aura seo-price-aura--b" aria-hidden="true"></div>
+				<div class="seo-price-frame">
+					<span class="seo-price-badge">Growth Local SEO</span>
+					<p class="seo-price-label">Monthly ranking work</p>
+					<div class="seo-price-display">
+						<span class="seo-price-currency" aria-hidden="true">$</span>
+						<span class="seo-price-value">679</span>
+					</div>
+					<p class="seo-price-cadence">per month</p>
+					<ul class="seo-price-perks">
+						{perks.map((perk) => <li>{perk}</li>)}
+					</ul>
+				</div>
+			</article>
+
+			<div class="hero-actions">
+				<a href="#growth-contact" class="btn-solid">Start Growth SEO &rarr;</a>
+				<a href="/services/seo/" class="btn-outline">See full SEO service</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.seo-hero {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 2rem 1.5rem 4rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+	}
+
+	.hero-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.logo-link {
+		display: inline-flex;
+		align-items: center;
+		text-decoration: none;
+		opacity: 0.92;
+		transition: opacity 0.2s;
+	}
+
+	.logo-link:hover {
+		opacity: 1;
+	}
+
+	.hero-inner,
+	.hero-foot {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		width: 100%;
+	}
+
+	.hero-inner {
+		gap: 2.5rem;
+	}
+
+	.hero-headline-wrap {
+		position: relative;
+		width: 100%;
+		max-width: 980px;
+		margin: 0 auto;
+		padding-top: 2.5rem;
+	}
+
+	.hero-title {
+		font-family: var(--font-display);
+		font-size: clamp(3.1rem, 9vw, 7.7rem);
+		font-weight: 400;
+		line-height: 0.92;
+		letter-spacing: 0.02em;
+		color: var(--text);
+		margin: 0 auto;
+		text-transform: uppercase;
+		text-align: center;
+		text-wrap: balance;
+	}
+
+	.badge {
+		position: absolute;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(1rem, 2.5vw, 1.75rem);
+		padding: 0.2em 0.6em;
+		border-radius: 6px;
+		color: #050509;
+		z-index: 2;
+		pointer-events: none;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.badge-green {
+		background: var(--accent-teal);
+		color: #f4f8f9;
+		top: -0.55rem;
+		left: 4%;
+		transform: rotate(-10deg);
+	}
+
+	.badge-yellow {
+		background: var(--accent-gold);
+		color: #1a1510;
+		top: -0.35rem;
+		right: 8%;
+		transform: rotate(8deg);
+	}
+
+	.badge-purple {
+		background: var(--accent-slate);
+		top: -0.45rem;
+		left: 50%;
+		transform: translateX(-50%) rotate(-5deg);
+		color: #f4f6f8;
+	}
+
+	.hero-foot {
+		gap: 1.75rem;
+		max-width: 760px;
+		margin: 0 auto;
+	}
+
+	.hero-desc {
+		font-size: clamp(1rem, 2vw, 1.35rem);
+		color: var(--text-muted);
+		line-height: 1.55;
+		margin: 0 auto;
+		max-width: 620px;
+		text-wrap: balance;
+	}
+
+	.seo-price-card {
+		--price-glow: var(--accent-glow);
+		position: relative;
+		width: 100%;
+		max-width: min(600px, 100%);
+		margin: 0.5rem auto 0;
+		padding: 2px;
+		border-radius: calc(var(--radius) + 10px);
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--accent-teal) 55%, transparent),
+			color-mix(in srgb, var(--accent-slate) 45%, transparent)
+		);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+			0 40px 100px -35px var(--price-glow),
+			0 8px 32px -12px rgba(0, 0, 0, 0.65);
+		transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+	}
+
+	.seo-price-card:hover {
+		transform: translateY(-6px) scale(1.01);
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+			0 52px 120px -40px var(--price-glow),
+			0 16px 48px -16px rgba(0, 0, 0, 0.7);
+	}
+
+	.seo-price-aura {
+		position: absolute;
+		width: 55%;
+		height: 55%;
+		top: -18%;
+		right: -12%;
+		border-radius: 50%;
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent-teal) 32%, transparent), transparent 68%);
+		filter: blur(28px);
+		opacity: 0.65;
+		pointer-events: none;
+		animation: price-pulse 6s ease-in-out infinite;
+	}
+
+	.seo-price-aura--b {
+		top: auto;
+		bottom: -22%;
+		right: auto;
+		left: -14%;
+		background: radial-gradient(circle, color-mix(in srgb, var(--accent-slate) 28%, transparent), transparent 70%);
+		animation-delay: -3s;
+	}
+
+	@keyframes price-pulse {
+		0%,
+		100% {
+			opacity: 0.65;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.08);
+		}
+	}
+
+	.seo-price-frame {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 0.65rem;
+		padding: clamp(1.75rem, 4vw, 2.75rem) clamp(1.25rem, 3vw, 2.25rem) clamp(2rem, 4vw, 2.5rem);
+		border-radius: calc(var(--radius) + 7px);
+		background:
+			linear-gradient(165deg, rgba(255, 255, 255, 0.04), transparent 42%),
+			linear-gradient(var(--surface), var(--surface));
+		overflow: hidden;
+	}
+
+	.seo-price-frame::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.06) 50%, transparent 60%);
+		pointer-events: none;
+	}
+
+	.seo-price-badge {
+		font-family: var(--font-display);
+		font-size: clamp(0.95rem, 2vw, 1.15rem);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: #f4f8f9;
+		background: var(--accent-teal);
+		padding: 0.45rem 1rem;
+		border-radius: 999px;
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-teal) 18%, transparent);
+	}
+
+	.seo-price-label {
+		margin: 0.35rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--accent-teal);
+		line-height: 1;
+	}
+
+	.seo-price-display {
+		display: flex;
+		align-items: flex-start;
+		justify-content: center;
+		gap: 0.08em;
+		margin: 0.15rem 0 0;
+		line-height: 0.85;
+	}
+
+	.seo-price-currency {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 4rem);
+		font-weight: 400;
+		color: var(--accent-gold);
+		margin-top: 0.35em;
+		opacity: 0.95;
+	}
+
+	.seo-price-value {
+		font-family: var(--font-display);
+		font-size: clamp(5.5rem, 22vw, 9.5rem);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		background: linear-gradient(180deg, var(--text), color-mix(in srgb, var(--text) 72%, var(--accent-teal)));
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		filter: drop-shadow(0 8px 28px var(--accent-glow));
+	}
+
+	.seo-price-cadence {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 3vw, 2rem);
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.seo-price-perks {
+		list-style: none;
+		margin: 1rem 0 0;
+		padding: 1rem 0 0;
+		border-top: 1px solid var(--border);
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.seo-price-perks li {
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		padding: 0.45rem 0.85rem;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--accent-teal) 28%, var(--border));
+		background: color-mix(in srgb, var(--accent-teal) 8%, var(--bg));
+		color: var(--text);
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.75rem;
+		width: 100%;
+	}
+
+	.btn-solid,
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.8rem 2rem;
+		font-size: 1rem;
+		font-weight: 500;
+		font-family: var(--font);
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		border-radius: var(--radius);
+		transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.15s;
+	}
+
+	.btn-solid {
+		background: var(--text);
+		color: var(--bg);
+		border: 1px solid var(--text);
+	}
+
+	.btn-solid:hover {
+		background: transparent;
+		color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--text);
+		border: 1px solid var(--border);
+	}
+
+	.btn-outline:hover {
+		background: var(--text);
+		color: var(--bg);
+		border-color: var(--text);
+		transform: translateY(-1px);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.seo-price-aura {
+			animation: none;
+		}
+
+		.seo-price-card:hover {
+			transform: none;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.badge {
+			font-size: 0.95rem;
+		}
+
+		.badge-green {
+			left: 0;
+		}
+
+		.badge-yellow {
+			right: 0;
+		}
+
+		.badge-purple {
+			bottom: -0.8rem;
+		}
+	}
+</style>
