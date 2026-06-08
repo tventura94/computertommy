@@ -119,6 +119,8 @@ const perks = ['Custom website', '70+ listings', '1 new page / month', 'Review f
 
 	.badge {
 		position: absolute;
+		display: inline-block;
+		width: max-content;
 		font-family: var(--font-display);
 		font-weight: 400;
 		font-size: clamp(1rem, 2.5vw, 1.75rem);
@@ -129,6 +131,7 @@ const perks = ['Custom website', '70+ listings', '1 new page / month', 'Review f
 		pointer-events: none;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
+		white-space: nowrap;
 	}
 
 	.badge-green {
@@ -415,7 +418,8 @@ const perks = ['Custom website', '70+ listings', '1 new page / month', 'Review f
 		}
 
 		.badge-purple {
-			bottom: -0.8rem;
+			top: -0.8rem;
+			bottom: auto;
 		}
 	}
 </style>
