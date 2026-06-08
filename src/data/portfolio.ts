@@ -2,6 +2,8 @@ export interface PortfolioItem {
   slug: string;
   title: string;
   category: string;
+  /** Specific trade or industry label shown on cards (e.g. "HVAC", "Junk Removal"). */
+  serviceType?: string;
   url: string;
   /** Optional preview image path (e.g. when site blocks iframe). */
   previewImage?: string;
@@ -18,7 +20,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "strudel-construction",
     title: "Strudel Construction",
     category: "Service site",
+    serviceType: "Construction",
     url: "https://strudel-construction.netlify.app/",
+    previewImage: "/portfolio_figmas/strudel-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
@@ -27,7 +31,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "cams-junk-removal",
     title: "Cam's Junk Removal",
     category: "Service site",
+    serviceType: "Junk Removal",
     url: "https://cams-junk-removal.netlify.app/",
+    previewImage: "/portfolio_figmas/cams-junk-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
@@ -36,17 +42,41 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "qh-refrigeration",
     title: "QH Refrigeration",
     category: "Service site",
+    serviceType: "HVAC",
     url: "https://qh-refrigeration.netlify.app/",
+    previewImage: "/portfolio_figmas/qh-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
+  },
+
+  {
+    slug: "cali-cuts",
+    title: "Cali Cuts",
+    category: "Service site",
+    serviceType: "Lawn Care",
+    url: "https://cali-cuts.netlify.app/",
+    previewImage: "/portfolio_figmas/cali-cuts-portfolio.jpeg",
+    whatTheyNeeded: "A site to showcase their services and book appointments.",
+    result: "Simple site to showcase services and take inquiries.",
+  },
+  {
+    slug: "race-car-network-promotions",
+    title: "Race Car Network Promotions",
+    category: "Service site",
+    serviceType: "Media Marketing",
+    url: "https://racecarnetworkpromotions.com/",
+    previewImage: "/portfolio_figmas/rcnp-portfolio.jpeg",
+    whatTheyNeeded: "A site to showcase their services and book appointments.",
+    result: "Simple site to showcase services and take inquiries.",
   },
   {
     slug: "noble-cleaning-solutions",
     title: "Noble Cleaning Solutions",
     category: "Service site",
+    serviceType: "Commercial Cleaning",
     url: "https://noblecleaningsolutionsllc.com/",
-    previewImage: "/portfolio/noble-img.png",
+    previewImage: "/portfolio_figmas/noble-cleaning-portfolio.jpeg",
     whatTheyNeeded:
       "A commercial cleaning site built around post-construction bids and recurring service leads.",
     result:
@@ -56,8 +86,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "frontline-medical-travel",
     title: "Frontline Medical Travel & Planning",
     category: "Service site",
+    serviceType: "Medical Travel",
     url: "https://frontlinemedicaltravel.com/",
-    previewImage: "/portfolio/frontline-img.png",
+    previewImage: "/portfolio_figmas/frontline-medical-portfolio.jpeg",
     whatTheyNeeded:
       "A professional site explaining RN and CNA travel companion services for families planning trips.",
     result:
@@ -67,9 +98,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "north-peak-hvac",
     title: "North Peak HVAC",
     category: "Service site",
+    serviceType: "HVAC",
     url: "https://north-peak-hvac.netlify.app/",
-    previewImage: "/portfolio/north-peak-hvac-screenshot.png",
-    previewFit: "contain",
+    previewImage: "/portfolio_figmas/north-peak-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
@@ -78,9 +109,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "Kiefer Property Solutions",
     title: "Kiefer Property Solutions",
     category: "Service site",
+    serviceType: "Property Maintenance",
     url: "https://kieferpropertysolutions.com/",
-    previewImage: "/portfolio/kiefer-prop.png",
-    previewFit: "contain",
+    previewImage: "/portfolio_figmas/kiefer-property-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
@@ -89,7 +120,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "my-buddy-lawn-care",
     title: "My Buddy Lawn Care",
     category: "Service site",
+    serviceType: "Lawn Care",
     url: "https://mybuddylawncarellc.com/",
+    previewImage: "/portfolio_figmas/my-buddy-portfolio.jpeg",
     whatTheyNeeded:
       "A clean, professional site to bring in lawn care leads and showcase services.",
     result:
@@ -99,8 +132,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "fresh-grill-bbq",
     title: "Clean Grills BBQ (Charlotte, NC)",
     category: "Service site",
+    serviceType: "Grill Cleaning",
     url: "https://cleangrillscharlotte.com/",
-    previewImage: "/portfolio/clean-grills-screenshot.png",
+    previewImage: "/portfolio_figmas/clean-grills-charlotte-portfolio.jpeg",
     whatTheyNeeded: "A site to showoff their services.",
     result: "Simple site w/ a beautiful design to showcase their services.",
   },
@@ -108,8 +142,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "parallel-carpentry",
     title: "Parallel Carpentry",
     category: "Business site",
+    serviceType: "Home Remodeling",
     url: "https://parallelcarpentry.com/",
-    previewImage: "/portfolio/parallel-carp.png",
+    previewImage: "/portfolio_figmas/parallel-carpentry-portfolio.jpeg",
     whatTheyNeeded:
       "A professional web presence to showcase kitchen remodels and attract local clients in Charlotte, NC.",
     result:
@@ -119,7 +154,9 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "paintball-sample-site",
     title: "Ironridge Paintball",
     category: "Business site",
+    serviceType: "Paintball",
     url: "https://ironridgepaintball.netlify.app/",
+    previewImage: "/portfolio_figmas/ironridge-portfolio.jpeg",
     whatTheyNeeded:
       "A site for a paintball business to showcase their services.",
     result:
@@ -129,19 +166,22 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "nathankingtattoos",
     title: "Nathan King Tattoos",
     category: "Service site",
+    serviceType: "Tattoo Artist",
     url: "https://nathankingtattoos.com/",
+    previewImage: "/portfolio_figmas/nathanking-portfolio.jpeg",
     whatTheyNeeded: "A portfolio site to book sessions and show work.",
     result:
       "Simple site to showcase work and take inquiries. Built in a weekend.",
   },
   {
     slug: "dizzys-glizzies",
-    title: "Dizzys Glizzies (Discontinued)",
-    category: "Business site",
-    url: "https://dizzys-glizzies.netlify.app",
-    whatTheyNeeded:
-      "A landing page for a discontinued late-night grub spot located at Imperial AVL.",
-    result: "A beautiful hot dog themed landing page!",
+    title: "Dizzys Glizzies",
+    category: "Service site",
+    serviceType: "Restaurant",
+    url: "https://dizzys-glizzies.netlify.app/",
+    previewImage: "/portfolio_figmas/dizzys-portfolio.jpeg",
+    whatTheyNeeded: "A site to showcase their services and book appointments.",
+    result: "Simple site to showcase services and take inquiries.",
   },
   {
     slug: "notle-client",

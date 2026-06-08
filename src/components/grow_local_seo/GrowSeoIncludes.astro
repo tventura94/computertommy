@@ -1,210 +1,1160 @@
 ---
-const inclusions = [
+type Inclusion = {
+	kicker: string;
+	kind: 'metric' | 'quality';
+	title: string;
+	body: string;
+	accent: 'teal' | 'gold' | 'slate';
+	visual:
+		| 'website'
+		| 'listings'
+		| 'content'
+		| 'gbp'
+		| 'funnel'
+		| 'responses'
+		| 'rank'
+		| 'onpage'
+		| 'backlinks';
+};
+
+const inclusions: Inclusion[] = [
 	{
-		icon: 'fa-location-dot',
-		title: '70+ business listings online',
+		kicker: 'New',
+		kind: 'quality',
+		title: 'Custom website, built and hosted',
+		body: 'A fast, modern site we design, build, and host for you. The foundation everything else ranks on.',
+		accent: 'teal',
+		visual: 'website',
+	},
+	{
+		kicker: '70+',
+		kind: 'metric',
+		title: 'Local business listings online',
 		body: 'Clean, consistent citations across the directories Google expects to see for a real local business.',
+		accent: 'gold',
+		visual: 'listings',
 	},
 	{
-		icon: 'fa-file-lines',
-		title: '1 new SEO page or blog post / month',
+		kicker: '1 new',
+		kind: 'metric',
+		title: 'SEO page or blog post every month',
 		body: 'Fresh, targeted content aimed at the services, towns, and searches that can turn into calls.',
+		accent: 'slate',
+		visual: 'content',
 	},
 	{
-		icon: 'fa-store',
-		title: '5+ Google Business posts / month',
-		body: 'Your Google Business Profile stays active with service-focused posts instead of sitting untouched.',
+		kicker: '5+',
+		kind: 'metric',
+		title: 'Google Business posts every month',
+		body: 'Your profile stays active with service-focused posts instead of sitting untouched.',
+		accent: 'teal',
+		visual: 'gbp',
 	},
 	{
-		icon: 'fa-paper-plane',
-		title: 'Customer review funnel',
+		kicker: 'More',
+		kind: 'quality',
+		title: 'Reviews through a customer review funnel',
 		body: 'A simple outreach flow that turns completed jobs into more Google reviews without adding work to your day.',
+		accent: 'gold',
+		visual: 'funnel',
 	},
 	{
-		icon: 'fa-comment-dots',
-		title: 'Review management and responses',
-		body: 'I respond to new reviews in a steady voice so your profile looks active, professional, and cared for.',
+		kicker: 'Managed',
+		kind: 'quality',
+		title: 'Review responses in your voice',
+		body: 'I respond to new reviews so your profile looks active, professional, and cared for.',
+		accent: 'slate',
+		visual: 'responses',
 	},
 	{
-		icon: 'fa-chart-line',
+		kicker: 'Tracked',
+		kind: 'quality',
 		title: 'Monthly rank tracking report',
-		body: 'See where you are moving, which pages are working, and what gets attacked next.',
+		body: 'See where you are moving, which pages are working, and what to push on next.',
+		accent: 'teal',
+		visual: 'rank',
 	},
 	{
-		icon: 'fa-screwdriver-wrench',
-		title: 'On-page SEO updates from performance data',
-		body: 'Titles, headings, internal structure, schema, and page copy get tuned based on what the data shows.',
+		kicker: 'Tuned',
+		kind: 'quality',
+		title: 'On-page SEO from real performance data',
+		body: 'Titles, headings, internal structure, schema, and copy get tuned based on what the data shows.',
+		accent: 'gold',
+		visual: 'onpage',
 	},
 	{
-		icon: 'fa-link',
-		title: 'Backlinking and local outreach',
-		body: 'Local mentions and backlinks from real places: partners, directories, suppliers, chambers, and trade sources.',
+		kicker: 'Earned',
+		kind: 'quality',
+		title: 'Backlinks and local outreach',
+		body: 'Real mentions and links from partners, directories, suppliers, chambers, and trade sources.',
+		accent: 'slate',
+		visual: 'backlinks',
 	},
 ];
 ---
 
-<section class="growth-section growth-includes" id="growth-includes">
-	<div class="section-header">
-		<span class="section-eyebrow">Everything in Maintenance, plus</span>
-		<h2 class="section-title">The monthly machine behind local rankings.</h2>
-		<p class="section-desc">
-			This is the middle tier for businesses that need real ongoing SEO, not just site upkeep.
-		</p>
-	</div>
+<section class="scroll-funnel" id="growth-includes" style={`--steps: ${inclusions.length}`}>
+	<div class="funnel-sticky">
+		<div class="funnel-head">
+			<span class="funnel-eyebrow">A website, plus monthly SEO</span>
+		</div>
 
-	<div class="includes-grid">
-		{inclusions.map((item, i) => (
-			<article class="include-card" style={`--delay: ${i * 70}ms`}>
-				<div class="include-icon" aria-hidden="true">
-					<i class:list={['fas', item.icon]}></i>
-				</div>
-				<h3>{item.title}</h3>
-				<p>{item.body}</p>
-			</article>
-		))}
+		<div class="funnel-stage">
+			{inclusions.map((item, i) => (
+				<article
+					class="funnel-step"
+					data-step={i}
+					style={`--step-accent: var(--accent-${item.accent})`}
+				>
+					<div class="step-text">
+						<span class="step-rule" aria-hidden="true"></span>
+						<span class:list={['step-kicker', `step-kicker--${item.kind}`]}>{item.kicker}</span>
+						<h3 class="step-title">{item.title}</h3>
+						<p class="step-body">{item.body}</p>
+					</div>
+
+					<div class="step-visual" aria-hidden="true">
+						<span class="step-index">{String(i + 1).padStart(2, '0')}</span>
+
+						{item.visual === 'website' && (
+							<div class="mock mock-site">
+								<div class="site-bar pop">
+									<span class="site-logo"></span>
+									<span class="site-nav"><span></span><span></span><span></span></span>
+									<span class="site-btn">Call</span>
+								</div>
+								<div class="site-hero pop">
+									<div class="site-h1"></div>
+									<div class="site-h1 site-h1--short"></div>
+									<div class="site-sub"></div>
+									<span class="site-cta">Get a quote</span>
+								</div>
+								<div class="site-cards pop">
+									<span></span><span></span><span></span>
+								</div>
+							</div>
+						)}
+
+						{item.visual === 'listings' && (
+							<div class="mock mock-listings">
+								<div class="mock-cap pop">
+									<i class="fas fa-circle-check"></i> 70+ verified listings
+								</div>
+								<div class="brand-grid">
+									<div class="brand-tile pop"><i class="fa-brands fa-google b-google"></i><span>Google</span></div>
+									<div class="brand-tile pop"><i class="fa-brands fa-apple b-apple"></i><span>Maps</span></div>
+									<div class="brand-tile pop"><i class="fa-brands fa-yelp b-yelp"></i><span>Yelp</span></div>
+									<div class="brand-tile pop"><i class="fa-brands fa-microsoft b-bing"></i><span>Bing</span></div>
+									<div class="brand-tile pop"><i class="fa-brands fa-facebook b-facebook"></i><span>Facebook</span></div>
+									<div class="brand-tile brand-tile--more pop"><strong>+65</strong><span>more</span></div>
+								</div>
+							</div>
+						)}
+
+						{item.visual === 'content' && (
+							<div class="mock mock-browser">
+								<div class="browser-bar pop">
+									<span class="dot"></span><span class="dot"></span><span class="dot"></span>
+									<span class="url"><i class="fas fa-lock"></i> yoursite.com/roof-repair</span>
+								</div>
+								<div class="browser-body">
+									<span class="tag-badge pop">NEW PAGE</span>
+									<div class="doc-h1 pop"></div>
+									<div class="doc-line pop"></div>
+									<div class="doc-line doc-line--short pop"></div>
+									<div class="doc-block pop"></div>
+								</div>
+							</div>
+						)}
+
+						{item.visual === 'gbp' && (
+							<div class="mock mock-post">
+								<div class="post-head pop">
+									<span class="post-avatar"><i class="fa-brands fa-google b-google"></i></span>
+									<span class="post-meta"><strong>Your Business</strong><small>Posted just now</small></span>
+								</div>
+								<div class="post-img pop"><i class="fas fa-image"></i></div>
+								<div class="post-text pop">
+									<div class="doc-line"></div>
+									<div class="doc-line doc-line--short"></div>
+								</div>
+								<div class="post-cta pop">Book online</div>
+							</div>
+						)}
+
+						{item.visual === 'funnel' && (
+							<div class="mock mock-funnel">
+								<div class="funnel-score pop">
+									<strong>5.0</strong>
+									<span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+								</div>
+								<div class="funnel-row funnel-row--1 pop"><i class="fas fa-check"></i> Job completed</div>
+								<div class="funnel-row funnel-row--2 pop"><i class="fas fa-paper-plane"></i> Review request sent</div>
+								<div class="funnel-row funnel-row--3 pop"><i class="fas fa-star"></i> New 5-star review</div>
+							</div>
+						)}
+
+						{item.visual === 'responses' && (
+							<div class="mock mock-reply">
+								<div class="review-card pop">
+									<span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+									<p>"Showed up on time and did great work."</p>
+									<small>— Sarah M.</small>
+								</div>
+								<div class="owner-reply pop">
+									<span class="post-avatar post-avatar--owner"><i class="fas fa-screwdriver-wrench"></i></span>
+									<div class="reply-bubble">
+										<strong>Owner response</strong>
+										<p>"Thanks, Sarah! It was a pleasure. We appreciate you."</p>
+									</div>
+								</div>
+							</div>
+						)}
+
+						{item.visual === 'rank' && (
+							<div class="mock mock-rank">
+								<div class="rank-chart pop">
+									<span style="--h: 34%"></span>
+									<span style="--h: 48%"></span>
+									<span style="--h: 42%"></span>
+									<span style="--h: 66%"></span>
+									<span style="--h: 78%"></span>
+									<span style="--h: 96%"></span>
+								</div>
+								<div class="rank-row pop">
+									<span class="kw">roofing near me</span>
+									<span class="pos"><s>#7</s> <i class="fas fa-arrow-up"></i> #3</span>
+								</div>
+								<div class="rank-row pop">
+									<span class="kw">metal roof install</span>
+									<span class="pos"><s>#12</s> <i class="fas fa-arrow-up"></i> #5</span>
+								</div>
+							</div>
+						)}
+
+						{item.visual === 'onpage' && (
+							<div class="mock mock-code">
+								<div class="code-line pop"><span class="tk-punc">&lt;</span><span class="tk-tag">title</span><span class="tk-punc">&gt;</span><span class="tk-str">Roof Repair in Charlotte</span></div>
+								<div class="code-line pop"><span class="tk-punc">&lt;</span><span class="tk-tag">meta</span> <span class="tk-attr">description</span><span class="tk-punc">=</span><span class="tk-str">"Fast local roofers..."</span></div>
+								<div class="code-line pop"><span class="tk-punc">&lt;</span><span class="tk-tag">h1</span><span class="tk-punc">&gt;</span><span class="tk-str">Trusted Roofers</span></div>
+								<div class="code-check pop"><i class="fas fa-circle-check"></i> Schema added</div>
+								<div class="code-check pop"><i class="fas fa-circle-check"></i> Headings fixed</div>
+							</div>
+						)}
+
+						{item.visual === 'backlinks' && (
+							<div class="mock mock-links">
+								<div class="link-center pop"><i class="fas fa-globe"></i> Your site</div>
+								<div class="link-web">
+									<span class="link-chip pop"><i class="fas fa-handshake"></i> Partner</span>
+									<span class="link-chip pop"><i class="fas fa-list"></i> Directory</span>
+									<span class="link-chip pop"><i class="fas fa-building-columns"></i> Chamber</span>
+									<span class="link-chip pop"><i class="fas fa-truck"></i> Supplier</span>
+								</div>
+							</div>
+						)}
+					</div>
+				</article>
+			))}
+		</div>
+
+		<div class="funnel-rail" aria-hidden="true">
+			{inclusions.map((item, i) => (
+				<span
+					class="rail-tick"
+					data-tick={i}
+					style={`--step-accent: var(--accent-${item.accent})`}
+				></span>
+			))}
+		</div>
 	</div>
 </section>
 
+<script is:inline>
+	(function () {
+		var section = document.querySelector('.scroll-funnel');
+		if (!section) return;
+
+		var steps = Array.prototype.slice.call(section.querySelectorAll('.funnel-step'));
+		var ticks = Array.prototype.slice.call(section.querySelectorAll('.rail-tick'));
+		if (!steps.length) return;
+
+		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduce) return;
+
+		section.classList.add('is-js');
+		var ticking = false;
+
+		function update() {
+			var rect = section.getBoundingClientRect();
+			var vh = window.innerHeight || document.documentElement.clientHeight;
+			var total = rect.height - vh;
+			var progress = total > 0 ? (0 - rect.top) / total : 0;
+			progress = Math.max(0, Math.min(0.9999, progress));
+			var idx = Math.floor(progress * steps.length);
+			if (idx >= steps.length) idx = steps.length - 1;
+			if (idx < 0) idx = 0;
+
+			for (var i = 0; i < steps.length; i++) {
+				steps[i].classList.toggle('is-active', i === idx);
+				steps[i].classList.toggle('is-past', i < idx);
+			}
+			for (var j = 0; j < ticks.length; j++) {
+				ticks[j].classList.toggle('is-on', j <= idx);
+			}
+			ticking = false;
+		}
+
+		function onScroll() {
+			if (!ticking) {
+				window.requestAnimationFrame(update);
+				ticking = true;
+			}
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onScroll);
+		update();
+	})();
+</script>
+
 <style>
-	.growth-section {
+	.scroll-funnel {
 		position: relative;
 		z-index: 1;
+		height: calc(var(--steps) * 62vh + 38vh);
+	}
+
+	.funnel-sticky {
+		position: sticky;
+		top: 0;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		max-width: 1180px;
 		margin: 0 auto;
-		padding: 5rem 1.5rem;
+		padding: 4rem 1.5rem;
+		overflow: hidden;
 	}
 
-	.section-header {
-		max-width: 800px;
-		margin: 0 auto 2.75rem;
-		text-align: center;
+	.funnel-head {
+		margin-bottom: 2.5rem;
 	}
 
-	.section-eyebrow {
+	.funnel-eyebrow {
 		display: inline-block;
 		font-family: var(--font-display);
-		font-size: 1.25rem;
-		font-weight: 400;
-		color: var(--accent-teal);
+		font-size: clamp(1rem, 2.2vw, 1.35rem);
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		margin-bottom: 0.75rem;
+		color: var(--accent-teal);
+		padding-bottom: 0.6rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--accent-teal) 35%, transparent);
 	}
 
-	.section-title {
+	.funnel-stage {
+		position: relative;
+		width: 100%;
+		max-width: 1120px;
+	}
+
+	.funnel-step {
+		display: grid;
+		grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+		align-items: center;
+		gap: clamp(1.5rem, 5vw, 4rem);
+	}
+
+	.step-text {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.85rem;
+	}
+
+	.step-rule {
+		position: relative;
+		z-index: 1;
+		width: 64px;
+		height: 4px;
+		border-radius: 999px;
+		background: var(--step-accent);
+		box-shadow: 0 0 24px -2px color-mix(in srgb, var(--step-accent) 60%, transparent);
+	}
+
+	.step-kicker {
+		position: relative;
+		z-index: 1;
 		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 6vw, 5rem);
-		font-weight: 400;
-		line-height: 1;
-		letter-spacing: 0.02em;
-		color: var(--text);
-		margin: 0 0 1rem;
+		line-height: 0.85;
+		letter-spacing: 0.005em;
 		text-transform: uppercase;
+	}
+
+	.step-kicker--metric {
+		font-size: clamp(3rem, 7vw, 5.5rem);
+		color: var(--step-accent);
+		text-shadow: 0 10px 40px color-mix(in srgb, var(--step-accent) 45%, transparent);
+	}
+
+	.step-kicker--quality {
+		font-size: clamp(2.4rem, 6vw, 4.5rem);
+		color: color-mix(in srgb, var(--step-accent) 18%, transparent);
+		-webkit-text-stroke: 1.5px var(--step-accent);
+	}
+
+	.step-title {
+		position: relative;
+		z-index: 1;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(2.1rem, 4.6vw, 3.8rem);
+		line-height: 0.98;
+		letter-spacing: 0.01em;
+		text-transform: uppercase;
+		color: var(--text);
+		margin: 0.2rem 0 0;
 		text-wrap: balance;
 	}
 
-	.section-desc {
-		font-size: clamp(1rem, 2vw, 1.25rem);
-		color: var(--text-muted);
-		line-height: 1.55;
-		margin: 0 auto;
-		max-width: 620px;
-	}
-
-	.includes-grid {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 1rem;
-	}
-
-	.include-card {
+	.step-body {
 		position: relative;
-		min-height: 245px;
-		padding: 1.25rem;
-		border-radius: calc(var(--radius) + 6px);
-		background:
-			linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent 45%),
-			color-mix(in srgb, var(--surface) 92%, #1f2937);
-		border: 1px solid var(--border);
-		box-shadow: 0 24px 60px -34px rgba(0, 0, 0, 0.75);
-		overflow: hidden;
-		animation: card-rise 0.65s ease both;
-		animation-delay: var(--delay);
+		z-index: 1;
+		margin: 0.4rem 0 0;
+		max-width: 46ch;
+		font-size: clamp(1.05rem, 2vw, 1.4rem);
+		line-height: 1.5;
+		color: var(--text-muted);
+		padding-left: 1.1rem;
+		border-left: 2px solid color-mix(in srgb, var(--step-accent) 45%, transparent);
 	}
 
-	.include-card::before {
+	/* ── Visual panel shell ── */
+	.step-visual {
+		position: relative;
+		aspect-ratio: 5 / 4;
+		border-radius: calc(var(--radius) + 8px);
+		overflow: hidden;
+		background:
+			radial-gradient(ellipse 80% 70% at 75% 12%, color-mix(in srgb, var(--step-accent) 26%, transparent), transparent 60%),
+			linear-gradient(160deg, color-mix(in srgb, var(--step-accent) 13%, var(--surface)), var(--surface) 72%);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 28%, var(--border));
+		box-shadow:
+			0 40px 90px -45px color-mix(in srgb, var(--step-accent) 55%, transparent),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+
+	.step-visual::before {
 		content: '';
 		position: absolute;
 		inset: 0;
-		background:
-			radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent-teal) 12%, transparent), transparent 38%),
-			radial-gradient(circle at 95% 90%, color-mix(in srgb, var(--accent-slate) 10%, transparent), transparent 38%);
+		background-image:
+			linear-gradient(color-mix(in srgb, var(--step-accent) 12%, transparent) 1px, transparent 1px),
+			linear-gradient(90deg, color-mix(in srgb, var(--step-accent) 12%, transparent) 1px, transparent 1px);
+		background-size: 38px 38px;
+		mask-image: radial-gradient(ellipse 90% 90% at 30% 80%, #000, transparent 75%);
+		opacity: 0.45;
 		pointer-events: none;
 	}
 
-	.include-card > * {
-		position: relative;
-		z-index: 1;
+	.step-index {
+		position: absolute;
+		top: -0.2em;
+		right: 0.06em;
+		z-index: 0;
+		font-family: var(--font-display);
+		font-size: clamp(7rem, 18vw, 12rem);
+		line-height: 0.8;
+		letter-spacing: -0.02em;
+		color: transparent;
+		-webkit-text-stroke: 1.5px color-mix(in srgb, var(--step-accent) 38%, transparent);
+		opacity: 0.4;
+		pointer-events: none;
+		user-select: none;
 	}
 
-	.include-icon {
-		width: 3rem;
-		height: 3rem;
+	.mock {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+		padding: clamp(1rem, 2.5vw, 1.6rem);
+		justify-content: center;
+	}
+
+	/* shared bits */
+	.doc-line {
+		height: 9px;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--text) 22%, transparent);
+	}
+
+	.doc-line--short {
+		width: 60%;
+	}
+
+	.stars {
+		color: #f5b301;
+		font-size: 0.8rem;
+		letter-spacing: 1px;
+	}
+
+	.post-avatar {
 		display: grid;
 		place-items: center;
-		border-radius: 1rem;
-		background: color-mix(in srgb, var(--accent-teal) 12%, transparent);
-		border: 1px solid color-mix(in srgb, var(--accent-teal) 24%, transparent);
-		color: var(--accent-teal);
-		margin-bottom: 1.25rem;
+		width: 2.1rem;
+		height: 2.1rem;
+		border-radius: 50%;
+		background: #fff;
+		flex: 0 0 auto;
+		font-size: 0.95rem;
 	}
 
-	.include-card h3 {
-		font-family: var(--font-display);
-		font-weight: 400;
-		font-size: clamp(1.5rem, 2.4vw, 2rem);
-		line-height: 1;
-		text-transform: uppercase;
-		letter-spacing: 0.03em;
-		margin: 0 0 0.75rem;
+	.post-avatar--owner {
+		background: var(--step-accent);
+		color: #fff;
+	}
+
+	/* ── Listings (brand logos) ── */
+	.mock-cap {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		align-self: flex-start;
+		font-size: 0.82rem;
+		font-weight: 700;
+		color: var(--text);
+		background: color-mix(in srgb, var(--surface) 70%, #000);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 35%, var(--border));
+		padding: 0.4rem 0.7rem;
+		border-radius: 999px;
+	}
+
+	.mock-cap i {
+		color: var(--step-accent);
+	}
+
+	.brand-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.55rem;
+	}
+
+	.brand-tile {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.3rem;
+		padding: 0.7rem 0.4rem;
+		border-radius: 12px;
+		background: #ffffff;
+		box-shadow: 0 10px 24px -16px rgba(0, 0, 0, 0.8);
+	}
+
+	.brand-tile i {
+		font-size: 1.5rem;
+	}
+
+	.brand-tile span {
+		font-size: 0.68rem;
+		font-weight: 600;
+		color: #3a3a3a;
+	}
+
+	.brand-tile--more {
+		background: color-mix(in srgb, var(--step-accent) 22%, var(--surface));
 		color: var(--text);
 	}
 
-	.include-card p {
-		margin: 0;
+	.brand-tile--more strong {
+		font-family: var(--font-display);
+		font-size: 1.35rem;
+		color: var(--text);
+	}
+
+	.brand-tile--more span {
 		color: var(--text-muted);
-		line-height: 1.55;
-		font-size: 0.98rem;
 	}
 
-	@keyframes card-rise {
-		from {
-			opacity: 0;
-			transform: translateY(18px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	/* ── Website mock ── */
+	.mock-site {
+		gap: 0;
+		padding: clamp(0.9rem, 2.2vw, 1.4rem);
 	}
 
-	@media (max-width: 980px) {
-		.includes-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+	.mock-site > * {
+		background: color-mix(in srgb, var(--surface) 88%, #000);
+	}
+
+	.site-bar {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		padding: 0.6rem 0.8rem;
+		border-radius: 10px 10px 0 0;
+		border: 1px solid var(--border);
+		border-bottom: 0;
+	}
+
+	.site-logo {
+		width: 1.5rem;
+		height: 1.5rem;
+		border-radius: 6px;
+		background: var(--step-accent);
+		flex: 0 0 auto;
+	}
+
+	.site-nav {
+		display: flex;
+		gap: 0.4rem;
+		margin-left: auto;
+	}
+
+	.site-nav span {
+		width: 22px;
+		height: 6px;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--text) 22%, transparent);
+	}
+
+	.site-btn {
+		font-size: 0.62rem;
+		font-weight: 800;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: #06110a;
+		background: var(--step-accent);
+		padding: 0.3rem 0.55rem;
+		border-radius: 6px;
+	}
+
+	.site-hero {
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+		padding: 1.1rem 0.9rem 1.2rem;
+		border: 1px solid var(--border);
+		border-bottom: 0;
+	}
+
+	.site-h1 {
+		height: 16px;
+		width: 85%;
+		border-radius: 5px;
+		background: color-mix(in srgb, var(--text) 78%, transparent);
+	}
+
+	.site-h1--short {
+		width: 55%;
+		background: var(--step-accent);
+	}
+
+	.site-sub {
+		height: 8px;
+		width: 70%;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--text) 20%, transparent);
+		margin-top: 0.15rem;
+	}
+
+	.site-cta {
+		align-self: flex-start;
+		margin-top: 0.35rem;
+		font-size: 0.7rem;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: #06110a;
+		background: var(--step-accent);
+		padding: 0.45rem 0.85rem;
+		border-radius: 999px;
+	}
+
+	.site-cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5rem;
+		padding: 0.8rem;
+		border-radius: 0 0 10px 10px;
+		border: 1px solid var(--border);
+	}
+
+	.site-cards span {
+		height: 34px;
+		border-radius: 8px;
+		background: color-mix(in srgb, var(--step-accent) 16%, transparent);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 28%, var(--border));
+	}
+
+	.b-google { color: #4285f4; }
+	.b-apple { color: #111; }
+	.b-yelp { color: #ff1a1a; }
+	.b-bing { color: #00a4ef; }
+	.b-facebook { color: #1877f2; }
+
+	/* ── Content browser ── */
+	.mock-browser {
+		gap: 0;
+		padding: 0;
+	}
+
+	.mock-browser {
+		margin: clamp(1rem, 2.5vw, 1.6rem);
+		inset: auto;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border-radius: 14px;
+		overflow: hidden;
+		border: 1px solid color-mix(in srgb, var(--step-accent) 30%, var(--border));
+		background: color-mix(in srgb, var(--surface) 86%, #000);
+	}
+
+	.browser-bar {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.6rem 0.8rem;
+		background: color-mix(in srgb, var(--surface) 60%, #000);
+		border-bottom: 1px solid var(--border);
+	}
+
+	.browser-bar .dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: color-mix(in srgb, var(--text) 30%, transparent);
+	}
+
+	.browser-bar .url {
+		margin-left: 0.5rem;
+		font-size: 0.72rem;
+		color: var(--text-muted);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+	}
+
+	.browser-bar .url i {
+		color: var(--step-accent);
+		font-size: 0.65rem;
+	}
+
+	.browser-body {
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.tag-badge {
+		align-self: flex-start;
+		font-size: 0.65rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		padding: 0.25rem 0.55rem;
+		border-radius: 999px;
+		color: #06110a;
+		background: var(--step-accent);
+	}
+
+	.doc-h1 {
+		height: 18px;
+		width: 75%;
+		border-radius: 6px;
+		background: var(--step-accent);
+	}
+
+	.doc-block {
+		height: 54px;
+		border-radius: 8px;
+		background: color-mix(in srgb, var(--step-accent) 14%, transparent);
+		border: 1px dashed color-mix(in srgb, var(--step-accent) 40%, transparent);
+	}
+
+	/* ── GBP post ── */
+	.post-head {
+		display: flex;
+		align-items: center;
+		gap: 0.55rem;
+	}
+
+	.post-meta {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.1;
+	}
+
+	.post-meta strong { font-size: 0.85rem; color: var(--text); }
+	.post-meta small { font-size: 0.68rem; color: var(--text-muted); }
+
+	.post-img {
+		display: grid;
+		place-items: center;
+		height: 38%;
+		border-radius: 10px;
+		background: color-mix(in srgb, var(--step-accent) 16%, transparent);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 28%, var(--border));
+		color: color-mix(in srgb, var(--step-accent) 75%, #fff);
+		font-size: 1.4rem;
+	}
+
+	.post-text { display: flex; flex-direction: column; gap: 0.4rem; }
+
+	.post-cta {
+		align-self: flex-start;
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--step-accent);
+		padding: 0.4rem 0.8rem;
+		border-radius: 999px;
+		border: 1px solid color-mix(in srgb, var(--step-accent) 45%, transparent);
+	}
+
+	/* ── Review funnel ── */
+	.mock-funnel { align-items: center; }
+
+	.funnel-score {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.2rem;
+		margin-bottom: 0.3rem;
+	}
+
+	.funnel-score strong {
+		font-family: var(--font-display);
+		font-size: 2.6rem;
+		line-height: 0.9;
+		color: var(--text);
+	}
+
+	.funnel-score .stars { font-size: 0.95rem; }
+
+	.funnel-row {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--text);
+		padding: 0.55rem 0.9rem;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--surface) 72%, #000);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 30%, var(--border));
+	}
+
+	.funnel-row i { color: var(--step-accent); }
+	.funnel-row--1 { width: 92%; }
+	.funnel-row--2 { width: 74%; }
+	.funnel-row--3 {
+		width: 56%;
+		background: var(--step-accent);
+		color: #06110a;
+		border-color: transparent;
+	}
+	.funnel-row--3 i { color: #06110a; }
+
+	/* ── Review responses ── */
+	.review-card {
+		background: color-mix(in srgb, var(--surface) 80%, #000);
+		border: 1px solid var(--border);
+		border-radius: 12px;
+		padding: 0.7rem 0.85rem;
+	}
+
+	.review-card p { margin: 0.35rem 0 0.2rem; font-size: 0.82rem; color: var(--text); }
+	.review-card small { color: var(--text-muted); font-size: 0.7rem; }
+
+	.owner-reply {
+		display: flex;
+		gap: 0.55rem;
+		margin-left: 1.2rem;
+		margin-top: 0.5rem;
+	}
+
+	.reply-bubble {
+		background: color-mix(in srgb, var(--step-accent) 16%, var(--surface));
+		border: 1px solid color-mix(in srgb, var(--step-accent) 35%, var(--border));
+		border-radius: 12px;
+		padding: 0.6rem 0.8rem;
+	}
+
+	.reply-bubble strong { font-size: 0.7rem; color: var(--step-accent); text-transform: uppercase; letter-spacing: 0.05em; }
+	.reply-bubble p { margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--text); }
+
+	/* ── Rank tracking ── */
+	.rank-chart {
+		display: flex;
+		align-items: flex-end;
+		gap: 0.45rem;
+		height: 42%;
+		padding: 0.6rem 0.2rem 0;
+	}
+
+	.rank-chart span {
+		flex: 1;
+		height: var(--h);
+		border-radius: 6px 6px 0 0;
+		background: linear-gradient(180deg, var(--step-accent), color-mix(in srgb, var(--step-accent) 25%, transparent));
+		transform-origin: bottom;
+	}
+
+	.rank-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+		padding: 0.5rem 0.7rem;
+		border-radius: 10px;
+		background: color-mix(in srgb, var(--surface) 75%, #000);
+		border: 1px solid var(--border);
+	}
+
+	.rank-row .kw { color: var(--text); font-weight: 600; }
+	.rank-row .pos { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--text-muted); font-weight: 700; }
+	.rank-row .pos s { opacity: 0.6; }
+	.rank-row .pos i { color: #2ecc71; }
+	.rank-row .pos { color: var(--text); }
+
+	/* ── On-page code ── */
+	.mock-code {
+		font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+		gap: 0.5rem;
+	}
+
+	.code-line {
+		font-size: 0.74rem;
+		padding: 0.4rem 0.6rem;
+		border-radius: 8px;
+		background: color-mix(in srgb, #05070a 70%, var(--surface));
+		border-left: 3px solid var(--step-accent);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.tk-punc { color: var(--text-muted); }
+	.tk-tag { color: var(--step-accent); }
+	.tk-attr { color: #c08be0; }
+	.tk-str { color: #8fd6b4; }
+
+	.code-check {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		font-size: 0.76rem;
+		color: var(--text);
+		font-family: var(--font);
+	}
+
+	.code-check i { color: #2ecc71; }
+
+	/* ── Backlinks ── */
+	.mock-links { align-items: center; justify-content: center; gap: 1rem; }
+
+	.link-center {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 800;
+		font-size: 0.9rem;
+		color: #06110a;
+		background: var(--step-accent);
+		padding: 0.6rem 1.1rem;
+		border-radius: 999px;
+		box-shadow: 0 12px 30px -12px color-mix(in srgb, var(--step-accent) 70%, transparent);
+	}
+
+	.link-web {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.5rem;
+		max-width: 88%;
+		position: relative;
+	}
+
+	.link-web::before {
+		content: '';
+		position: absolute;
+		top: -0.9rem;
+		left: 50%;
+		width: 1px;
+		height: 0.9rem;
+		background: color-mix(in srgb, var(--step-accent) 50%, transparent);
+	}
+
+	.link-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.78rem;
+		font-weight: 600;
+		color: var(--text);
+		background: color-mix(in srgb, var(--surface) 74%, #000);
+		border: 1px solid color-mix(in srgb, var(--step-accent) 35%, var(--border));
+		padding: 0.45rem 0.8rem;
+		border-radius: 999px;
+	}
+
+	.link-chip i { color: var(--step-accent); }
+
+	/* Progress rail */
+	.funnel-rail {
+		display: flex;
+		gap: 0.5rem;
+		margin-top: 2.75rem;
+	}
+
+	.rail-tick {
+		height: 3px;
+		flex: 1;
+		max-width: 56px;
+		border-radius: 999px;
+		background: var(--border);
+		transition: background 0.4s ease, transform 0.4s ease;
+		transform-origin: left center;
+	}
+
+	.rail-tick.is-on {
+		background: var(--step-accent);
+	}
+
+	/* ── JS-driven pinned reveal ── */
+	.scroll-funnel.is-js .funnel-stage {
+		min-height: 48vh;
+	}
+
+	.scroll-funnel.is-js .funnel-step {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transform: translateY(42px) scale(0.985);
+		transition:
+			opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+			transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+		pointer-events: none;
+		will-change: opacity, transform;
+	}
+
+	.scroll-funnel.is-js .funnel-step.is-active {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+		pointer-events: auto;
+	}
+
+	.scroll-funnel.is-js .funnel-step.is-past {
+		opacity: 0;
+		transform: translateY(-42px) scale(0.985);
+	}
+
+	/* Visual panel reveal */
+	.scroll-funnel.is-js .step-visual {
+		opacity: 0;
+		transform: translateY(26px) scale(0.96);
+		transition:
+			opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+			transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.scroll-funnel.is-js .funnel-step.is-active .step-visual {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+
+	/* Staggered pop-in of inner mock pieces */
+	.scroll-funnel.is-js .pop {
+		opacity: 0;
+		transform: translateY(14px);
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.scroll-funnel.is-js .funnel-step.is-active .pop {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(1) { transition-delay: 0.12s; }
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(2) { transition-delay: 0.2s; }
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(3) { transition-delay: 0.28s; }
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(4) { transition-delay: 0.36s; }
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(5) { transition-delay: 0.44s; }
+	.scroll-funnel.is-js .funnel-step.is-active .pop:nth-child(6) { transition-delay: 0.52s; }
+
+	/* Brand tiles cascade inside their own grid */
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(1) { transition-delay: 0.18s; }
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(2) { transition-delay: 0.24s; }
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(3) { transition-delay: 0.3s; }
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(4) { transition-delay: 0.36s; }
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(5) { transition-delay: 0.42s; }
+	.scroll-funnel.is-js .funnel-step.is-active .brand-tile:nth-child(6) { transition-delay: 0.48s; }
+
+	/* ── No-JS / reduced-motion fallback ── */
+	.scroll-funnel:not(.is-js) {
+		height: auto;
+	}
+
+	.scroll-funnel:not(.is-js) .funnel-sticky {
+		position: static;
+		min-height: 0;
+		padding: 5rem 1.5rem;
+	}
+
+	.scroll-funnel:not(.is-js) .funnel-stage {
+		display: flex;
+		flex-direction: column;
+		gap: 4rem;
+	}
+
+	.scroll-funnel:not(.is-js) .funnel-step {
+		position: relative;
+	}
+
+	.scroll-funnel:not(.is-js) .step-kicker--metric {
+		font-size: clamp(2.4rem, 5vw, 3.6rem);
+	}
+
+	.scroll-funnel:not(.is-js) .step-kicker--quality {
+		font-size: clamp(2rem, 4.5vw, 3rem);
+	}
+
+	@media (max-width: 760px) {
+		.funnel-step {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.step-visual {
+			order: -1;
+			aspect-ratio: 16 / 11;
+		}
+
+		.scroll-funnel.is-js .funnel-stage {
+			min-height: 82vh;
 		}
 	}
 
 	@media (max-width: 620px) {
-		.growth-section {
-			padding: 4rem 1rem;
+		.funnel-sticky {
+			padding: 3rem 1.15rem;
 		}
 
-		.includes-grid {
-			grid-template-columns: 1fr;
+		.funnel-head {
+			margin-bottom: 1.75rem;
 		}
 
-		.include-card {
-			min-height: auto;
+		.rail-tick {
+			max-width: none;
 		}
 	}
 </style>

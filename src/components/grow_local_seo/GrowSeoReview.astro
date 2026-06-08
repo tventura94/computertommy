@@ -1,0 +1,177 @@
+---
+const quote =
+	"Tom was great! Explained everything to me and implemented it with zero hiccups. It literally took less than 48 hours for our website to be up and running. Extremely reasonable. GoDaddy charged me well over $2k. Looking forward to having more clients and less money spent to do so. Highly recommend!";
+---
+
+<section class="seo-review" aria-labelledby="seo-review-heading">
+	<div class="review-shell">
+		<span class="review-eyebrow" id="seo-review-heading">Proof it works</span>
+
+		<i class="fas fa-quote-left review-mark" aria-hidden="true"></i>
+
+		<blockquote class="review-quote">{quote}</blockquote>
+
+		<div class="review-foot">
+			<div class="review-person">
+				<span class="review-avatar" aria-hidden="true">MB</span>
+				<span class="review-id">
+					<strong>Michael Birchfield</strong>
+					<span class="review-role">
+						<i class="fa-brands fa-google" aria-hidden="true"></i> Clean Grills Charlotte
+					</span>
+				</span>
+			</div>
+
+			<span class="review-stars" aria-label="Five star review">
+				<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+			</span>
+		</div>
+
+		<div class="review-result">
+			<i class="fas fa-trophy" aria-hidden="true"></i>
+			Now ranking <strong>#1-2 on Google</strong> for grill cleaners in Charlotte
+		</div>
+	</div>
+</section>
+
+<style>
+	.seo-review {
+		position: relative;
+		z-index: 1;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1rem 1.5rem 5rem;
+	}
+
+	.review-shell {
+		position: relative;
+		max-width: 880px;
+		margin: 0 auto;
+		padding: clamp(2rem, 5vw, 3.5rem);
+		text-align: center;
+		border-radius: calc(var(--radius) + 10px);
+		background:
+			radial-gradient(ellipse 70% 60% at 50% 0%, color-mix(in srgb, var(--accent-teal) 14%, transparent), transparent 60%),
+			linear-gradient(165deg, color-mix(in srgb, var(--accent-teal) 8%, var(--surface)), var(--surface) 75%);
+		border: 1px solid color-mix(in srgb, var(--accent-teal) 26%, var(--border));
+		box-shadow: 0 40px 100px -50px color-mix(in srgb, var(--accent-teal) 50%, transparent);
+		overflow: hidden;
+	}
+
+	.review-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: clamp(1rem, 2.2vw, 1.3rem);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent-teal);
+		margin-bottom: 1.25rem;
+	}
+
+	.review-mark {
+		display: block;
+		font-size: clamp(2rem, 5vw, 3rem);
+		color: color-mix(in srgb, var(--accent-teal) 55%, transparent);
+		margin-bottom: 0.75rem;
+	}
+
+	.review-quote {
+		margin: 0 auto;
+		max-width: 46ch;
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+		line-height: 1.12;
+		letter-spacing: 0.01em;
+		color: var(--text);
+		text-wrap: balance;
+	}
+
+	.review-foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 1.25rem;
+		margin-top: 2rem;
+	}
+
+	.review-person {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.8rem;
+		text-align: left;
+	}
+
+	.review-avatar {
+		display: grid;
+		place-items: center;
+		width: 3rem;
+		height: 3rem;
+		flex: 0 0 auto;
+		border-radius: 50%;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		letter-spacing: 0.04em;
+		color: #06110a;
+		background: linear-gradient(135deg, var(--accent-teal), var(--accent-gold));
+		box-shadow: 0 10px 26px -12px color-mix(in srgb, var(--accent-teal) 70%, transparent);
+	}
+
+	.review-id {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.2;
+	}
+
+	.review-id strong {
+		font-size: 1.05rem;
+		color: var(--text);
+	}
+
+	.review-role {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+		color: var(--text-muted);
+	}
+
+	.review-role .fa-google {
+		color: #4285f4;
+	}
+
+	.review-stars {
+		color: #f5b301;
+		font-size: 1.05rem;
+		letter-spacing: 2px;
+	}
+
+	.review-result {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		margin-top: 1.75rem;
+		padding: 0.6rem 1.15rem;
+		font-size: clamp(0.85rem, 1.8vw, 1rem);
+		color: var(--text);
+		background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
+		border: 1px solid color-mix(in srgb, var(--accent-gold) 38%, var(--border));
+		border-radius: 999px;
+	}
+
+	.review-result strong {
+		color: var(--text);
+	}
+
+	.review-result .fa-trophy {
+		color: var(--accent-gold);
+	}
+
+	@media (max-width: 540px) {
+		.review-foot {
+			flex-direction: column;
+			gap: 0.85rem;
+		}
+	}
+</style>

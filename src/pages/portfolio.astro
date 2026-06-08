@@ -172,7 +172,7 @@ const ctaInsertAfter = Math.min(5, Math.max(2, portfolioItems.length - 3));
 
 										<div class="card-body">
 											<div class="card-meta">
-												<span class="category-tag">{item.category}</span>
+												<span class="category-tag">{item.serviceType ?? item.category}</span>
 												<span class="card-host">{item.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</span>
 											</div>
 											<h3 class="card-title">{item.title}</h3>
