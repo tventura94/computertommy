@@ -280,7 +280,8 @@ const inclusions: Inclusion[] = [
 		if (!steps.length) return;
 
 		var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		if (reduce) return;
+		var mobile = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+		if (reduce || mobile) return;
 
 		section.classList.add('is-js');
 		var ticking = false;
@@ -1129,9 +1130,51 @@ const inclusions: Inclusion[] = [
 	}
 
 	@media (max-width: 760px) {
+		.scroll-funnel,
+		.scroll-funnel.is-js {
+			height: auto;
+		}
+
+		.scroll-funnel .funnel-sticky,
+		.scroll-funnel.is-js .funnel-sticky {
+			position: static;
+			min-height: 0;
+			justify-content: flex-start;
+			overflow: visible;
+		}
+
+		.scroll-funnel .funnel-stage,
+		.scroll-funnel.is-js .funnel-stage {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+			min-height: 0;
+		}
+
 		.funnel-step {
 			grid-template-columns: 1fr;
 			gap: 1.5rem;
+			padding: 1rem;
+			border: 1px solid color-mix(in srgb, var(--step-accent) 24%, var(--border));
+			border-radius: calc(var(--radius) + 8px);
+			background:
+				radial-gradient(ellipse 90% 55% at 50% 0%, color-mix(in srgb, var(--step-accent) 8%, transparent), transparent 62%),
+				color-mix(in srgb, var(--surface) 94%, #000);
+		}
+
+		.scroll-funnel.is-js .funnel-step {
+			position: relative;
+			inset: auto;
+			opacity: 1;
+			transform: none;
+			pointer-events: auto;
+			transition: none;
+		}
+
+		.scroll-funnel.is-js .funnel-step.is-active,
+		.scroll-funnel.is-js .funnel-step.is-past {
+			opacity: 1;
+			transform: none;
 		}
 
 		.step-visual {
@@ -1139,8 +1182,15 @@ const inclusions: Inclusion[] = [
 			aspect-ratio: 16 / 11;
 		}
 
-		.scroll-funnel.is-js .funnel-stage {
-			min-height: 82vh;
+		.scroll-funnel.is-js .step-visual,
+		.scroll-funnel.is-js .pop {
+			opacity: 1;
+			transform: none;
+			transition: none;
+		}
+
+		.funnel-rail {
+			display: none;
 		}
 	}
 
