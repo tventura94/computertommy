@@ -10,7 +10,7 @@ import astroLogo from '../../assets/computertommylogo.svg';
 			<span class="section-eyebrow">Get started</span>
 			<h2 class="section-title" id="growth-contact-heading">Start Growth Local SEO.</h2>
 			<p class="contact-lead">
-				Send a few details about your business, service area, and current site. I will reply with a plan for your new website and monthly local SEO.
+				Send a few details about your business and service area. I will reply with a plan for your website and monthly local SEO.
 			</p>
 		</header>
 
@@ -42,15 +42,47 @@ import astroLogo from '../../assets/computertommylogo.svg';
 					</div>
 				</div>
 
-				<div class="form-row form-row--two">
-					<div class="form-field">
-						<label for="growth-contact-phone">Phone <span class="field-hint">(optional)</span></label>
-						<input id="growth-contact-phone" name="phone" type="tel" autocomplete="tel" />
+				<div class="form-field">
+					<label for="growth-contact-phone">Phone <span class="field-hint">(optional)</span></label>
+					<input id="growth-contact-phone" name="phone" type="tel" autocomplete="tel" />
+				</div>
+
+				<fieldset class="form-field form-field--website-status">
+					<legend style="margin-bottom: .5rem;">Do you already have a website?</legend>
+					<div class="website-status-choices">
+						<label class="website-status-choice">
+							<input
+								type="radio"
+								name="website_status"
+								value="needs-website"
+								required
+								data-website-toggle
+							/>
+							<span class="website-status-label">I need a website included</span>
+						</label>
+						<label class="website-status-choice">
+							<input
+								type="radio"
+								name="website_status"
+								value="has-website"
+								data-website-toggle
+							/>
+							<span class="website-status-label">I already have one</span>
+						</label>
 					</div>
-					<div class="form-field">
-						<label for="growth-contact-website">Website</label>
-						<input id="growth-contact-website" name="website" type="url" placeholder="https://yourbusiness.com" />
-					</div>
+				</fieldset>
+
+				<div class="form-field website-url-field" id="growth-website-url-field" hidden>
+					<label for="growth-contact-website">
+						Your website <span class="field-hint">(optional)</span>
+					</label>
+					<input
+						id="growth-contact-website"
+						name="website"
+						type="url"
+						placeholder="https://yourbusiness.com"
+						autocomplete="url"
+					/>
 				</div>
 
 				<div class="form-field">
@@ -74,6 +106,30 @@ import astroLogo from '../../assets/computertommylogo.svg';
 					<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>.
 				</p>
 			</form>
+			<script is:inline>
+				(function () {
+					var form = document.querySelector('#growth-contact .growth-form');
+					if (!form) return;
+
+					var urlField = document.getElementById('growth-website-url-field');
+					var websiteInput = document.getElementById('growth-contact-website');
+					var radios = form.querySelectorAll('input[data-website-toggle]');
+
+					function syncWebsiteField() {
+						var selected = form.querySelector('input[name="website_status"]:checked');
+						var showUrl = selected && selected.value === 'has-website';
+
+						if (urlField) urlField.hidden = !showUrl;
+						if (websiteInput && !showUrl) websiteInput.value = '';
+					}
+
+					radios.forEach(function (radio) {
+						radio.addEventListener('change', syncWebsiteField);
+					});
+
+					syncWebsiteField();
+				})();
+			</script>
 		</div>
 	</div>
 </section>
@@ -195,12 +251,75 @@ import astroLogo from '../../assets/computertommylogo.svg';
 		margin-bottom: 0;
 	}
 
-	label {
+	label,
+	legend {
 		font-size: 0.78rem;
 		font-weight: 800;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
 		color: var(--text);
+	}
+
+	.form-field--website-status {
+		border: 0;
+		padding: 0;
+		margin: 0 0 1rem;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.65rem;
+	}
+
+	.website-status-choices {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.6rem;
+	}
+
+	.website-status-choice {
+		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: 3.25rem;
+		padding: 0.85rem 1rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		background: color-mix(in srgb, var(--bg) 78%, #fff);
+		cursor: pointer;
+		transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.15s;
+	}
+
+	.website-status-choice input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+		width: 1px;
+		height: 1px;
+	}
+
+	.website-status-label {
+		font-size: 0.92rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		text-transform: none;
+		color: var(--text);
+		line-height: 1.35;
+	}
+
+	.website-status-choice:hover {
+		border-color: color-mix(in srgb, var(--accent-teal) 55%, var(--border));
+		transform: translateY(-1px);
+	}
+
+	.website-status-choice:focus-within,
+	.website-status-choice:has(input:checked) {
+		border-color: color-mix(in srgb, var(--accent-teal) 65%, var(--border));
+		background: color-mix(in srgb, var(--accent-teal) 10%, var(--bg));
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-teal) 14%, transparent);
+	}
+
+	.website-url-field[hidden] {
+		display: none;
 	}
 
 	.field-hint {
@@ -296,7 +415,8 @@ import astroLogo from '../../assets/computertommylogo.svg';
 			padding: 4rem 1rem 5rem;
 		}
 
-		.form-row--two {
+		.form-row--two,
+		.website-status-choices {
 			grid-template-columns: 1fr;
 		}
 	}
