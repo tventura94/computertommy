@@ -87,6 +87,7 @@ export const portfolioItems: PortfolioItem[] = [
     title: "Time To Shine Mobile Detailing",
     category: "Service site",
     serviceType: "Car Detailing",
+    previewImage: "/portfolio_figmas/timetoshine-portfolio.jpeg",
     url: "https://ttsmd941.com/",
     whatTheyNeeded:
       "A mobile-first site to showcase detailing packages, gallery work, and drive quote requests across Sarasota and Bradenton.",
