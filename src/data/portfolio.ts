@@ -83,6 +83,17 @@ export const portfolioItems: PortfolioItem[] = [
       "A polished Greensboro service site with clear service pages, trust signals, and fast quote paths.",
   },
   {
+    slug: "time-to-shine-mobile-detailing",
+    title: "Time To Shine Mobile Detailing",
+    category: "Service site",
+    serviceType: "Car Detailing",
+    url: "https://ttsmd941.com/",
+    whatTheyNeeded:
+      "A mobile-first site to showcase detailing packages, gallery work, and drive quote requests across Sarasota and Bradenton.",
+    result:
+      "A polished local detailing site with service menu, vehicle-specific pricing, gallery, reviews, and a fast quote path.",
+  },
+  {
     slug: "frontline-medical-travel",
     title: "Frontline Medical Travel & Planning",
     category: "Service site",
