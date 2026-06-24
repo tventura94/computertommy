@@ -1,0 +1,228 @@
+---
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import astroLogo from '../../assets/computertommylogo.svg';
+import background from '../../assets/background.svg';
+import ThemeToggleButton from '../ThemeToggleButton.astro';
+import { portfolioItems } from '../../data/portfolio';
+import WebsiteDealHero from './WebsiteDealHero.astro';
+import WebsiteDealCarousel from './WebsiteDealCarousel.astro';
+import WebsiteDealMidCta from './WebsiteDealMidCta.astro';
+import WebsiteDealContact from './WebsiteDealContact.astro';
+
+const showcaseSites = portfolioItems.filter((item) => item.previewImage);
+---
+
+<div class="website-deal-page">
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+		rel="stylesheet"
+	/>
+
+	<img class="deal-bg-blur" src={background.src} alt="" fetchpriority="high" aria-hidden="true" />
+
+	<section class="deal-viewport" aria-labelledby="website-deal-heading">
+		<div class="deal-nav">
+			<a href="/" class="deal-logo-link">
+				<img src={astroLogo.src} width="120" height="48" alt="Computer Tommy home" />
+			</a>
+			<ThemeToggleButton />
+		</div>
+
+		<div class="deal-pitch-wrap">
+			<WebsiteDealHero />
+		</div>
+	</section>
+
+	{showcaseSites.length > 0 && (
+		<div class="deal-carousel-band">
+			<WebsiteDealCarousel sites={showcaseSites} />
+		</div>
+	)}
+
+	<WebsiteDealMidCta />
+
+	<WebsiteDealContact />
+</div>
+
+<script is:inline>
+	(function () {
+		function trackContact(source) {
+			if (typeof window.trackMetaContact === 'function') {
+				window.trackMetaContact(source ? { content_name: source } : {});
+				return;
+			}
+
+			if (typeof window.fbq === 'function') {
+				window.fbq('track', 'Contact', source ? { content_name: source } : {});
+			}
+		}
+
+		document.querySelectorAll('a[href="#website-deal-contact"]').forEach(function (link) {
+			link.addEventListener('click', function (event) {
+				var target = document.getElementById('website-deal-contact');
+				if (!target) return;
+
+				event.preventDefault();
+				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				history.replaceState(null, '', '#website-deal-contact');
+			});
+		});
+
+		var root = document.querySelector('.website-deal-page');
+		if (!root) return;
+
+		root.addEventListener('submit', function (event) {
+			var form = event.target;
+			if (!form || form.tagName !== 'FORM') return;
+
+			var source = form.getAttribute('data-fbq-contact');
+			if (!source) return;
+
+			trackContact(source);
+		});
+
+		root.addEventListener('click', function (event) {
+			var link = event.target.closest('[data-fbq-contact]');
+			if (!link || link.tagName !== 'A') return;
+			if (!link.getAttribute('href') || link.getAttribute('href').indexOf('tel:') !== 0) return;
+
+			trackContact(link.getAttribute('data-fbq-contact'));
+		});
+	})();
+</script>
+
+<style>
+	:global(html:has(.website-deal-page)) {
+		scroll-behavior: smooth;
+	}
+
+	.website-deal-page {
+		--deal-bg: #0a0f14;
+		--deal-surface: #121922;
+		--deal-border: rgba(255, 255, 255, 0.1);
+		--deal-text: #eef3f8;
+		--deal-muted: rgba(238, 243, 248, 0.58);
+		--deal-gold: #f0b429;
+		--deal-mint: #3ecf8e;
+		--deal-radius: 14px;
+		--deal-radius-sm: 9px;
+		--deal-font: 'Bricolage Grotesque', system-ui, sans-serif;
+		--deal-font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+
+		font-family: var(--deal-font);
+		background: var(--deal-bg);
+		color: var(--deal-text);
+		min-height: 100vh;
+		position: relative;
+		overflow-x: hidden;
+		box-sizing: border-box;
+	}
+
+	.website-deal-page *,
+	.website-deal-page *::before,
+	.website-deal-page *::after {
+		box-sizing: inherit;
+	}
+
+	html[data-theme='light'] .website-deal-page {
+		--deal-bg: #f4f1ea;
+		--deal-surface: #ffffff;
+		--deal-border: rgba(0, 0, 0, 0.1);
+		--deal-text: #101820;
+		--deal-muted: rgba(16, 24, 32, 0.58);
+		--deal-gold: #c8870a;
+		--deal-mint: #15803d;
+		background:
+			radial-gradient(ellipse 90% 60% at 10% -10%, rgba(240, 180, 41, 0.12), transparent 55%),
+			radial-gradient(ellipse 70% 50% at 100% 20%, rgba(62, 207, 142, 0.08), transparent 50%),
+			var(--deal-bg);
+	}
+
+	.deal-bg-blur {
+		position: fixed;
+		top: -10%;
+		right: -20%;
+		width: min(900px, 120vw);
+		opacity: 0.18;
+		filter: blur(80px);
+		pointer-events: none;
+		z-index: 0;
+	}
+
+	html[data-theme='light'] .deal-bg-blur {
+		opacity: 0.1;
+	}
+
+	.deal-viewport {
+		position: relative;
+		z-index: 1;
+		min-height: auto;
+		display: flex;
+		flex-direction: column;
+		padding: 1.1rem clamp(1rem, 3vw, 2rem) 1.35rem;
+		gap: 1rem;
+	}
+
+	.deal-nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-shrink: 0;
+	}
+
+	.deal-logo-link {
+		display: inline-flex;
+		opacity: 0.92;
+		transition: opacity 0.2s;
+	}
+
+	.deal-logo-link:hover {
+		opacity: 1;
+	}
+
+	.deal-pitch-wrap {
+		max-width: 52rem;
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	.deal-carousel-band {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		margin: 0.5rem 0 0;
+	}
+
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.website-deal-page :global(.theme-toggle) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 50%;
+		border: 1px solid var(--deal-border);
+		background: var(--deal-surface);
+		color: var(--deal-text);
+		cursor: pointer;
+		transition: background 0.3s, border-color 0.3s, transform 0.15s;
+	}
+
+	.website-deal-page :global(.theme-toggle:hover) {
+		border-color: color-mix(in srgb, var(--deal-gold) 45%, var(--deal-border));
+		transform: scale(1.06);
+	}
+</style>

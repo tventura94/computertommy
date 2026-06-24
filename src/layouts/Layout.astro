@@ -134,6 +134,11 @@ const jsonLdArray = jsonLd
 	'https://connect.facebook.net/en_US/fbevents.js');
 	fbq('init', '2087040128902511');
 	fbq('track', 'PageView');
+	window.trackMetaContact = function (params) {
+		if (typeof window.fbq === 'function') {
+			window.fbq('track', 'Contact', params || {});
+		}
+	};
 	</script>
 	<noscript><img height="1" width="1" style="display:none"
 	src="https://www.facebook.com/tr?id=2087040128902511&ev=PageView&noscript=1"

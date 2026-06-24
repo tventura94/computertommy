@@ -1,0 +1,200 @@
+---
+const perks = [
+	{ icon: 'fa-magnifying-glass-chart', label: 'Google friendly' },
+	{ icon: 'fa-award', label: 'Award winning design' },
+	{ icon: 'fa-pen-ruler', label: 'Unlimited edits' },
+];
+---
+
+<div class="deal-pitch">
+	<h1 class="deal-headline" id="website-deal-heading">Websites for local businesses.</h1>
+
+	<p class="deal-eyebrow">5–10 page website · hosted for you</p>
+
+	<div class="deal-price-block" aria-label="One hundred dollars per month">
+		<span class="deal-price-currency" aria-hidden="true">$</span>
+		<span class="deal-price-value">100</span>
+		<span class="deal-price-cadence">/mo</span>
+	</div>
+
+	<ul class="deal-perks">
+		{perks.map((perk) => (
+			<li>
+				<i class:list={['fas', perk.icon]} aria-hidden="true"></i>
+				<span>{perk.label}</span>
+			</li>
+		))}
+	</ul>
+
+	<div class="deal-actions">
+		<a href="#website-deal-contact" class="deal-cta">
+			<span>Claim your $100 site</span>
+			<i class="fas fa-arrow-right" aria-hidden="true"></i>
+		</a>
+		<a href="tel:5083802013" class="deal-cta-secondary" data-fbq-contact="website-deal-call">
+			<i class="fas fa-phone" aria-hidden="true"></i>
+			508 380 2013
+		</a>
+	</div>
+</div>
+
+<style>
+	.deal-pitch {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1.1rem;
+		min-width: 0;
+		text-align: center;
+		align-items: center;
+	}
+
+	.deal-headline {
+		margin: 0;
+		font-family: var(--deal-font-display);
+		font-size: clamp(2.35rem, 7vw, 4.25rem);
+		font-weight: 800;
+		line-height: 0.98;
+		letter-spacing: -0.03em;
+		color: var(--deal-text);
+		max-width: 14ch;
+		text-wrap: balance;
+	}
+
+	.deal-eyebrow {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--deal-muted);
+	}
+
+	.deal-price-block {
+		display: flex;
+		align-items: flex-start;
+		line-height: 0.85;
+		color: var(--deal-gold);
+		text-shadow: 0 0 60px color-mix(in srgb, var(--deal-gold) 35%, transparent);
+	}
+
+	.deal-price-currency {
+		font-family: var(--deal-font-display);
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		font-weight: 800;
+		margin-top: 0.35rem;
+		margin-right: 0.1rem;
+	}
+
+	.deal-price-value {
+		font-family: var(--deal-font-display);
+		font-size: clamp(5.5rem, 12vw, 8.5rem);
+		font-weight: 800;
+		letter-spacing: -0.04em;
+	}
+
+	.deal-price-cadence {
+		align-self: flex-end;
+		margin-left: 0.2rem;
+		margin-bottom: 0.65rem;
+		font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+		font-weight: 700;
+		color: var(--deal-text);
+		opacity: 0.75;
+	}
+
+	.deal-perks {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+		align-items: flex-start;
+		text-align: left;
+		width: min(100%, 20rem);
+	}
+
+	.deal-perks li {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+		font-weight: 600;
+		color: var(--deal-text);
+	}
+
+	.deal-perks i {
+		width: 1.75rem;
+		height: 1.75rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--deal-gold) 14%, transparent);
+		color: var(--deal-gold);
+		font-size: 0.72rem;
+		flex-shrink: 0;
+	}
+
+	.deal-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin-top: 0.35rem;
+		justify-content: center;
+		width: 100%;
+	}
+
+	.deal-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 0.9rem 1.35rem;
+		border-radius: 999px;
+		background: var(--deal-gold);
+		color: #0c1018;
+		font-weight: 800;
+		font-size: 0.92rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-decoration: none;
+		text-align: center;
+		box-shadow: 0 14px 40px -12px color-mix(in srgb, var(--deal-gold) 55%, transparent);
+		transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+	}
+
+	.deal-cta:hover {
+		transform: translateY(-2px);
+		background: #ffd56a;
+		box-shadow: 0 18px 48px -10px color-mix(in srgb, var(--deal-gold) 65%, transparent);
+	}
+
+	.deal-cta-secondary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.45rem;
+		padding: 0.9rem 1.1rem;
+		border-radius: 999px;
+		border: 1px solid var(--deal-border);
+		color: var(--deal-text);
+		font-weight: 700;
+		font-size: 0.88rem;
+		text-decoration: none;
+		text-align: center;
+		transition: border-color 0.2s ease, background 0.2s ease;
+	}
+
+	.deal-cta-secondary:hover {
+		border-color: color-mix(in srgb, var(--deal-gold) 45%, var(--deal-border));
+		background: color-mix(in srgb, var(--deal-gold) 8%, transparent);
+	}
+
+	.deal-cta,
+	.deal-cta-secondary {
+		flex: 1 1 auto;
+		min-width: min(100%, 16rem);
+	}
+</style>

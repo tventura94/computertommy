@@ -1,0 +1,269 @@
+---
+import astroLogo from '../../assets/computertommylogo.svg';
+---
+
+<section class="deal-contact" id="website-deal-contact" aria-labelledby="website-deal-contact-heading">
+	<div class="deal-contact-inner">
+		<header class="deal-contact-header">
+			<img class="deal-contact-logo" src={astroLogo.src} alt="" />
+			<p class="deal-contact-eyebrow">Get started</p>
+			<h2 class="deal-contact-title" id="website-deal-contact-heading">Lock in your $100/mo website.</h2>
+			<p class="deal-contact-lead">
+				Tell me about your business and what pages you need. I will reply within one business day with next steps.
+			</p>
+		</header>
+
+		<div class="deal-form-shell">
+			<form
+				class="deal-form"
+				name="website-deal"
+				method="POST"
+				data-netlify="true"
+				netlify-honeypot="bot-field"
+				action="/thank-you/"
+				data-fbq-contact="website-deal-form"
+			>
+				<input type="hidden" name="form-name" value="website-deal" />
+				<input type="hidden" name="plan" value="Website deal — $100/mo (5-10 pages)" />
+				<p class="hp-field">
+					<label>
+						Do not fill this in: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" />
+					</label>
+				</p>
+
+				<div class="form-row">
+					<div class="form-field">
+						<label for="website-deal-name">Your name</label>
+						<input id="website-deal-name" name="name" type="text" autocomplete="name" required />
+					</div>
+					<div class="form-field">
+						<label for="website-deal-email">Email</label>
+						<input id="website-deal-email" name="email" type="email" autocomplete="email" required />
+					</div>
+				</div>
+
+				<div class="form-field">
+					<label for="website-deal-phone">Phone <span class="field-hint">(optional)</span></label>
+					<input id="website-deal-phone" name="phone" type="tel" autocomplete="tel" />
+				</div>
+
+				<div class="form-field">
+					<label for="website-deal-message">What do you need on the site?</label>
+					<textarea
+						id="website-deal-message"
+						name="message"
+						rows="4"
+						placeholder="Business type, pages you want, examples you like, and when you want to launch."
+						required
+					></textarea>
+				</div>
+
+				<button type="submit" class="deal-form-submit">
+					<span>Send $100/mo website inquiry</span>
+					<i class="fas fa-arrow-right" aria-hidden="true"></i>
+				</button>
+
+				<p class="deal-form-foot">
+					Prefer to talk? Call <a href="tel:5083802013" data-fbq-contact="website-deal-call">508 380 2013</a> or email
+					<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>.
+				</p>
+			</form>
+		</div>
+	</div>
+</section>
+
+<style>
+	.deal-contact {
+		position: relative;
+		z-index: 1;
+		padding: 4rem 1.5rem 5rem;
+		border-top: 1px solid var(--deal-border);
+		scroll-margin-top: 1.5rem;
+		background:
+			radial-gradient(ellipse 80% 50% at 50% 0%, color-mix(in srgb, var(--deal-gold) 8%, transparent), transparent 60%),
+			var(--deal-bg);
+	}
+
+	.deal-contact-inner {
+		max-width: 920px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 2rem;
+		align-items: start;
+	}
+
+	.deal-contact-logo {
+		width: 52px;
+		height: auto;
+		margin-bottom: 0.85rem;
+	}
+
+	.deal-contact-eyebrow {
+		margin: 0 0 0.5rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--deal-gold);
+	}
+
+	.deal-contact-title {
+		margin: 0 0 0.75rem;
+		font-family: var(--deal-font-display);
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 800;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+	}
+
+	.deal-contact-lead {
+		margin: 0;
+		color: var(--deal-muted);
+		line-height: 1.6;
+		max-width: 38ch;
+	}
+
+	.deal-form-shell {
+		border-radius: calc(var(--deal-radius) + 6px);
+		padding: 1px;
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--deal-gold) 40%, transparent),
+			color-mix(in srgb, var(--deal-mint) 25%, transparent)
+		);
+	}
+
+	.deal-form {
+		border-radius: calc(var(--deal-radius) + 5px);
+		background: var(--deal-surface);
+		border: 1px solid var(--deal-border);
+		padding: clamp(1.1rem, 2.5vw, 1.6rem);
+	}
+
+	.hp-field {
+		position: absolute;
+		left: -9999px;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.85rem;
+		margin-bottom: 0.85rem;
+	}
+
+	.form-field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+		margin-bottom: 0.85rem;
+	}
+
+	.form-row .form-field {
+		margin-bottom: 0;
+	}
+
+	label {
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.field-hint {
+		color: var(--deal-muted);
+		font-weight: 600;
+		text-transform: none;
+		letter-spacing: 0;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		border: 1px solid var(--deal-border);
+		border-radius: var(--deal-radius-sm);
+		background: color-mix(in srgb, var(--deal-bg) 80%, #fff);
+		color: var(--deal-text);
+		font: inherit;
+		padding: 0.85rem 0.95rem;
+		outline: none;
+		transition: border-color 0.2s, box-shadow 0.2s;
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 110px;
+	}
+
+	input:focus,
+	textarea:focus {
+		border-color: color-mix(in srgb, var(--deal-gold) 55%, var(--deal-border));
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--deal-gold) 12%, transparent);
+	}
+
+	.deal-form-submit {
+		width: 100%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		border: 0;
+		border-radius: 999px;
+		background: var(--deal-gold);
+		color: #0c1018;
+		font: inherit;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-align: center;
+		padding: 0.95rem 1.2rem;
+		cursor: pointer;
+		transition: transform 0.15s, background 0.2s;
+	}
+
+	.deal-form-submit:hover {
+		transform: translateY(-1px);
+		background: #ffd56a;
+	}
+
+	.deal-form-foot {
+		margin: 0.85rem 0 0;
+		font-size: 0.88rem;
+		color: var(--deal-muted);
+		text-align: center;
+		line-height: 1.55;
+	}
+
+	.deal-form-foot a {
+		color: var(--deal-text);
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.deal-form-foot a:hover {
+		color: var(--deal-gold);
+	}
+
+	@media (max-width: 820px) {
+		.deal-contact-inner {
+			grid-template-columns: 1fr;
+		}
+
+		.deal-contact-header {
+			text-align: center;
+		}
+
+		.deal-contact-lead {
+			margin: 0 auto;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

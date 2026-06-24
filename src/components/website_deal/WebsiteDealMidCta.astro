@@ -1,0 +1,77 @@
+---
+---
+
+<section class="deal-mid-cta" aria-labelledby="deal-mid-cta-heading">
+	<div class="deal-mid-cta-inner">
+		<h2 class="deal-mid-cta-title" id="deal-mid-cta-heading">
+			Get a website that puts your brand ahead of the competition.
+		</h2>
+		<a href="#website-deal-contact" class="deal-mid-cta-btn">
+			<span>Start for $100/mo</span>
+			<i class="fas fa-arrow-right" aria-hidden="true"></i>
+		</a>
+	</div>
+</section>
+
+<style>
+	.deal-mid-cta {
+		position: relative;
+		z-index: 1;
+		padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 3vw, 2rem);
+		border-bottom: 1px solid var(--deal-border);
+		background:
+			radial-gradient(ellipse 70% 80% at 50% 100%, color-mix(in srgb, var(--deal-gold) 10%, transparent), transparent 65%),
+			var(--deal-bg);
+	}
+
+	.deal-mid-cta-inner {
+		max-width: 52rem;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: 1.35rem;
+	}
+
+	.deal-mid-cta-title {
+		margin: 0;
+		font-family: var(--deal-font-display);
+		font-size: clamp(1.85rem, 4.5vw, 3.1rem);
+		font-weight: 800;
+		line-height: 1.05;
+		letter-spacing: -0.025em;
+		color: var(--deal-text);
+		text-wrap: balance;
+		max-width: 22ch;
+	}
+
+	.deal-mid-cta-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.55rem;
+		padding: 0.95rem 1.5rem;
+		border-radius: 999px;
+		background: var(--deal-gold);
+		color: #0c1018;
+		font-weight: 800;
+		font-size: 0.92rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		text-decoration: none;
+		text-align: center;
+		box-shadow: 0 14px 40px -12px color-mix(in srgb, var(--deal-gold) 55%, transparent);
+		transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+	}
+
+	.deal-mid-cta-btn span {
+		text-align: center;
+	}
+
+	.deal-mid-cta-btn:hover {
+		transform: translateY(-2px);
+		background: #ffd56a;
+		box-shadow: 0 18px 48px -10px color-mix(in srgb, var(--deal-gold) 65%, transparent);
+	}
+</style>
