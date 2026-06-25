@@ -8,6 +8,7 @@ const perks = [
 
 <div class="deal-pitch">
 	<h1 class="deal-headline" id="website-deal-heading">Websites for local businesses.</h1>
+	<p class="deal-tagline">Work directly with one guy.</p>
 
 	<p class="deal-eyebrow">5–10 page website · hosted for you</p>
 
@@ -59,6 +60,14 @@ const perks = [
 		color: var(--deal-text);
 		max-width: 14ch;
 		text-wrap: balance;
+	}
+
+	.deal-tagline {
+		margin: -0.35rem 0 0;
+		font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+		font-weight: 600;
+		color: var(--deal-muted);
+		letter-spacing: 0.01em;
 	}
 
 	.deal-eyebrow {

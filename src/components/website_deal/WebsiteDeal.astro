@@ -6,6 +6,8 @@ import ThemeToggleButton from '../ThemeToggleButton.astro';
 import { portfolioItems } from '../../data/portfolio';
 import WebsiteDealHero from './WebsiteDealHero.astro';
 import WebsiteDealCarousel from './WebsiteDealCarousel.astro';
+import WebsiteDealPersonal from './WebsiteDealPersonal.astro';
+import WebsiteDealReviews from './WebsiteDealReviews.astro';
 import WebsiteDealMidCta from './WebsiteDealMidCta.astro';
 import WebsiteDealContact from './WebsiteDealContact.astro';
 
@@ -40,6 +42,10 @@ const showcaseSites = portfolioItems.filter((item) => item.previewImage);
 			<WebsiteDealCarousel sites={showcaseSites} />
 		</div>
 	)}
+
+	<WebsiteDealPersonal />
+
+	<WebsiteDealReviews />
 
 	<WebsiteDealMidCta />
 

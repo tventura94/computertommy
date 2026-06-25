@@ -1,0 +1,148 @@
+---
+const points = [
+	'You work with me, not an account manager',
+	'I build the site, host it, and handle edits',
+	'One number to call when you need something',
+];
+---
+
+<section class="deal-personal" aria-labelledby="deal-personal-heading">
+	<div class="deal-personal-inner">
+		<figure class="deal-personal-photo">
+			<img src="/tom.png" alt="Tom Ventura" width="320" height="400" loading="lazy" decoding="async" />
+		</figure>
+
+		<div class="deal-personal-copy">
+			<p class="deal-personal-eyebrow">Hi, I'm Tom</p>
+			<h2 class="deal-personal-title" id="deal-personal-heading">
+				I work with local businesses to grow their brand presence online.
+			</h2>
+			<p class="deal-personal-body">
+				No agency layers. No handoffs. You get a real person who builds your site, answers your texts,
+				and keeps it looking sharp month after month.
+			</p>
+			<ul class="deal-personal-points">
+				{points.map((point) => (
+					<li>
+						<i class="fas fa-check" aria-hidden="true"></i>
+						<span>{point}</span>
+					</li>
+				))}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<style>
+	.deal-personal {
+		position: relative;
+		z-index: 1;
+		padding: clamp(2.25rem, 5vw, 3.5rem) clamp(1rem, 3vw, 2rem);
+		border-bottom: 1px solid var(--deal-border);
+		background:
+			radial-gradient(ellipse 60% 70% at 0% 50%, color-mix(in srgb, var(--deal-mint) 8%, transparent), transparent 55%),
+			var(--deal-bg);
+	}
+
+	.deal-personal-inner {
+		max-width: 56rem;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+		gap: clamp(1.25rem, 4vw, 2.5rem);
+		align-items: center;
+	}
+
+	.deal-personal-photo {
+		margin: 0;
+	}
+
+	.deal-personal-photo img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: calc(var(--deal-radius) + 6px);
+		border: 1px solid var(--deal-border);
+		box-shadow:
+			0 20px 50px -24px rgba(0, 0, 0, 0.55),
+			0 0 0 1px color-mix(in srgb, var(--deal-gold) 18%, transparent);
+		object-fit: cover;
+		aspect-ratio: 4 / 5;
+	}
+
+	.deal-personal-eyebrow {
+		margin: 0 0 0.5rem;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--deal-gold);
+	}
+
+	.deal-personal-title {
+		margin: 0 0 0.85rem;
+		font-family: var(--deal-font-display);
+		font-size: clamp(1.65rem, 3.8vw, 2.35rem);
+		font-weight: 800;
+		line-height: 1.08;
+		letter-spacing: -0.02em;
+		text-wrap: balance;
+	}
+
+	.deal-personal-body {
+		margin: 0 0 1.1rem;
+		color: var(--deal-muted);
+		font-size: clamp(1rem, 1.8vw, 1.08rem);
+		line-height: 1.65;
+		max-width: 48ch;
+	}
+
+	.deal-personal-points {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.55rem;
+	}
+
+	.deal-personal-points li {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.6rem;
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.45;
+	}
+
+	.deal-personal-points i {
+		margin-top: 0.2rem;
+		color: var(--deal-mint);
+		font-size: 0.72rem;
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 640px) {
+		.deal-personal-inner {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+
+		.deal-personal-photo {
+			width: min(11rem, 62vw);
+			margin: 0 auto;
+		}
+
+		.deal-personal-body {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.deal-personal-points {
+			align-items: flex-start;
+			text-align: left;
+			width: min(100%, 22rem);
+			margin: 0 auto;
+		}
+	}
+</style>
