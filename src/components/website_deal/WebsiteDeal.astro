@@ -141,7 +141,7 @@ const showcaseSites = portfolioItems.filter((item) => item.previewImage);
 			if (!link || link.tagName !== 'A') return;
 			if (!link.getAttribute('href') || link.getAttribute('href').indexOf('tel:') !== 0) return;
 
-			trackContact(link.getAttribute('data-fbq-contact'), null, null);
+			trackContact(link.getAttribute('data-fbq-contact'), {}, null);
 		});
 	})();
 </script>
