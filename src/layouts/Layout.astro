@@ -132,14 +132,89 @@ const jsonLdArray = jsonLd
 	t.src=v;s=b.getElementsByTagName(e)[0];
 	s.parentNode.insertBefore(t,s)}(window, document,'script',
 	'https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '2087040128902511');
+
+	window.META_PIXEL_ID = '2087040128902511';
+	fbq('init', window.META_PIXEL_ID);
 	fbq('track', 'PageView');
-	window.trackMetaContact = function (params) {
-		if (typeof window.fbq === 'function') {
-			window.fbq('track', 'Contact', params || {});
-		}
+
+	window.metaSha256 = async function (value) {
+		if (!value || !window.crypto || !window.crypto.subtle) return null;
+		var encoded = new TextEncoder().encode(value);
+		var buffer = await window.crypto.subtle.digest('SHA-256', encoded);
+		return Array.from(new Uint8Array(buffer))
+			.map(function (byte) {
+				return byte.toString(16).padStart(2, '0');
+			})
+			.join('');
 	};
-	</script>
+
+	window.metaNormalizeEmail = function (email) {
+		return (email || '').trim().toLowerCase();
+	};
+
+	window.metaNormalizePhone = function (phone) {
+		var digits = (phone || '').replace(/\D/g, '');
+		if (!digits) return '';
+		if (digits.length === 10) return '1' + digits;
+		if (digits.length === 11 && digits.charAt(0) === '1') return digits;
+		return digits;
+	};
+
+	window.metaNormalizeNamePart = function (part) {
+		return (part || '').trim().toLowerCase().replace(/[^a-z]/g, '');
+	};
+
+	window.metaBuildAdvancedMatching = async function (raw) {
+		var match = {};
+		if (!raw) return match;
+
+		var email = window.metaNormalizeEmail(raw.email);
+		if (email) {
+			var hashedEmail = await window.metaSha256(email);
+			if (hashedEmail) {
+				match.em = hashedEmail;
+				match.external_id = hashedEmail;
+			}
+		}
+
+		var phone = window.metaNormalizePhone(raw.phone);
+		if (phone) {
+			var hashedPhone = await window.metaSha256(phone);
+			if (hashedPhone) match.ph = hashedPhone;
+		}
+
+		var name = (raw.name || '').trim();
+		if (name) {
+			var parts = name.toLowerCase().split(/\s+/).filter(Boolean);
+			var firstName = window.metaNormalizeNamePart(parts[0]);
+			var lastName = window.metaNormalizeNamePart(parts.slice(1).join(' '));
+			if (firstName) match.fn = await window.metaSha256(firstName);
+			if (lastName) match.ln = await window.metaSha256(lastName);
+		}
+
+		var hashedCountry = await window.metaSha256('us');
+		if (hashedCountry) match.country = hashedCountry;
+
+		return match;
+	};
+
+	window.trackMetaContact = async function (eventParams, rawUser) {
+		if (typeof window.fbq !== 'function') return;
+
+		var params = eventParams || {};
+		var eventId =
+			'contact_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+
+		try {
+			var match = await window.metaBuildAdvancedMatching(rawUser);
+			if (match && Object.keys(match).length > 0) {
+				fbq('init', window.META_PIXEL_ID, match);
+			}
+		} catch (e) {}
+
+		fbq('track', 'Contact', params, { eventID: eventId });
+	};
+</script>
 	<noscript><img height="1" width="1" style="display:none"
 	src="https://www.facebook.com/tr?id=2087040128902511&ev=PageView&noscript=1"
 	/></noscript>

@@ -54,15 +54,46 @@ const showcaseSites = portfolioItems.filter((item) => item.previewImage);
 
 <script is:inline>
 	(function () {
-		function trackContact(source) {
+		var DEAL_VALUE = 100;
+		var DEAL_CURRENCY = 'USD';
+
+		function dealEventParams(source, form) {
+			var params = {
+				content_name: source,
+				value: DEAL_VALUE,
+				currency: DEAL_CURRENCY,
+			};
+
+			if (form) {
+				var planInput = form.querySelector('input[name="plan"]');
+				if (planInput && planInput.value) {
+					params.content_category = planInput.value;
+				}
+			}
+
+			return params;
+		}
+
+		function formUserData(form) {
+			return {
+				name: ((form.querySelector('[name="name"]') || {}).value || '').trim(),
+				email: ((form.querySelector('[name="email"]') || {}).value || '').trim(),
+				phone: ((form.querySelector('[name="phone"]') || {}).value || '').trim(),
+			};
+		}
+
+		function trackContact(source, rawUser, form) {
+			var params = dealEventParams(source, form);
+
 			if (typeof window.trackMetaContact === 'function') {
-				window.trackMetaContact(source ? { content_name: source } : {});
-				return;
+				return window.trackMetaContact(params, rawUser);
 			}
 
 			if (typeof window.fbq === 'function') {
-				window.fbq('track', 'Contact', source ? { content_name: source } : {});
+				window.fbq('track', 'Contact', params);
 			}
+
+			return Promise.resolve();
 		}
 
 		document.querySelectorAll('a[href="#website-deal-contact"]').forEach(function (link) {
@@ -86,7 +117,23 @@ const showcaseSites = portfolioItems.filter((item) => item.previewImage);
 			var source = form.getAttribute('data-fbq-contact');
 			if (!source) return;
 
-			trackContact(source);
+			event.preventDefault();
+
+			var submitted = false;
+			function submitOnce() {
+				if (submitted) return;
+				submitted = true;
+				form.submit();
+			}
+
+			var rawUser = formUserData(form);
+
+			Promise.race([
+				trackContact(source, rawUser, form).catch(function () {}),
+				new Promise(function (resolve) {
+					setTimeout(resolve, 800);
+				}),
+			]).then(submitOnce);
 		});
 
 		root.addEventListener('click', function (event) {
@@ -94,7 +141,7 @@ const showcaseSites = portfolioItems.filter((item) => item.previewImage);
 			if (!link || link.tagName !== 'A') return;
 			if (!link.getAttribute('href') || link.getAttribute('href').indexOf('tel:') !== 0) return;
 
-			trackContact(link.getAttribute('data-fbq-contact'));
+			trackContact(link.getAttribute('data-fbq-contact'), null, null);
 		});
 	})();
 </script>
