@@ -9,6 +9,8 @@ export interface PortfolioItem {
   previewImage?: string;
   /** How the preview image fits its frame. Defaults to "cover". Use "contain" to show the full image with letterboxing. */
   previewFit?: "cover" | "contain";
+  /** Where cover-cropped previews anchor. Use "top" for tall page screenshots. Defaults to "center". */
+  previewPosition?: "top" | "center";
   /** What they needed (one sentence). */
   whatTheyNeeded: string;
   /** Result (one sentence). */
@@ -77,6 +79,7 @@ export const portfolioItems: PortfolioItem[] = [
     serviceType: "Commercial Cleaning",
     url: "https://noblecleaningsolutionsllc.com/",
     previewImage: "/portfolio_figmas/noble-cleaning-portfolio.jpeg",
+    previewPosition: "top",
     whatTheyNeeded:
       "A commercial cleaning site built around post-construction bids and recurring service leads.",
     result:
@@ -101,6 +104,7 @@ export const portfolioItems: PortfolioItem[] = [
     serviceType: "Medical Travel",
     url: "https://frontlinemedicaltravel.com/",
     previewImage: "/portfolio_figmas/frontline-medical-portfolio.jpeg",
+    previewPosition: "top",
     whatTheyNeeded:
       "A professional site explaining RN and CNA travel companion services for families planning trips.",
     result:

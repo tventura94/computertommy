@@ -464,7 +464,7 @@ const featuredWork = featuredSlugs
 				const num = String(idx + 1).padStart(2, '0');
 				return (
 					<a class={`work-feature work-feature--${variant}`} style={`--card-accent: ${accents[idx % accents.length]};`} href={item.url} target="_blank" rel="noopener noreferrer">
-						<div class={`work-feature-media${item.previewFit === 'contain' ? ' work-feature-media--contain' : ''}`}>
+						<div class={`work-feature-media${item.previewFit === 'contain' ? ' work-feature-media--contain' : ''}${item.previewPosition === 'top' ? ' work-feature-media--top' : ''}`}>
 							{item.previewImage ? (
 								<img src={item.previewImage} alt={item.title} loading="lazy" />
 							) : (
@@ -1970,7 +1970,12 @@ const featuredWork = featuredSlugs
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		object-position: center;
 		transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+	}
+
+	.work-feature-media--top img {
+		object-position: top center;
 	}
 
 	.work-feature-media--contain {
