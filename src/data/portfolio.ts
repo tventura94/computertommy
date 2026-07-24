@@ -9,7 +9,7 @@ export interface PortfolioItem {
   previewImage?: string;
   /** How the preview image fits its frame. Defaults to "cover". Use "contain" to show the full image with letterboxing. */
   previewFit?: "cover" | "contain";
-  /** Where cover-cropped previews anchor. Use "top" for tall page screenshots. Defaults to "center". */
+  /** Where cover-cropped previews anchor. Defaults to "top" for tall page screenshots. */
   previewPosition?: "top" | "center";
   /** What they needed (one sentence). */
   whatTheyNeeded: string;
