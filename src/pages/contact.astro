@@ -36,22 +36,22 @@ const expectations = [
 
 const planOptions = [
 	{
-		key: 'starter',
-		name: 'Maintenance',
+		key: 'care',
+		name: 'Website Care',
 		price: '$379/mo',
-		value: 'Maintenance + On-Page SEO ($379/mo)',
+		value: 'Website Care ($379/mo)',
 	},
 	{
 		key: 'growth',
-		name: 'Growth',
-		price: '$679/mo',
-		value: 'Growth Local SEO ($679/mo)',
+		name: 'Local Growth',
+		price: '$997/mo',
+		value: 'Local Growth ($997/mo)',
 	},
 	{
-		key: 'domination',
-		name: 'Domination',
-		price: '$2,000+/mo',
-		value: 'Local Domination ($2,000+/mo)',
+		key: 'custom',
+		name: 'Custom Growth',
+		price: "Let's Chat",
+		value: "Custom Growth (Let's Chat)",
 	},
 	{
 		key: 'onetime',
@@ -196,8 +196,10 @@ const planOptions = [
 									var params = new URLSearchParams(window.location.search);
 									var plan = params.get('plan');
 									if (!plan) return;
+									var aliases = { starter: 'care', domination: 'custom' };
+									plan = (aliases[plan.toLowerCase()] || plan).toLowerCase();
 									var radio = document.querySelector(
-										'input[name="plan"][data-key="' + plan.toLowerCase() + '"]'
+										'input[name="plan"][data-key="' + plan + '"]'
 									);
 									if (radio) radio.checked = true;
 								} catch (e) {
@@ -654,10 +656,10 @@ const planOptions = [
 		background: #ffffff;
 	}
 
-	.plan-choice[data-plan='starter']    { --plan-color: var(--accent); }
-	.plan-choice[data-plan='growth']     { --plan-color: var(--accent-green); }
-	.plan-choice[data-plan='domination'] { --plan-color: var(--accent-purple); }
-	.plan-choice[data-plan='onetime']    { --plan-color: var(--accent-pink); }
+	.plan-choice[data-plan='care']    { --plan-color: var(--accent); }
+	.plan-choice[data-plan='growth']  { --plan-color: var(--accent-green); }
+	.plan-choice[data-plan='custom']  { --plan-color: var(--accent-purple); }
+	.plan-choice[data-plan='onetime'] { --plan-color: var(--accent-pink); }
 
 	.plan-choice input {
 		position: absolute;

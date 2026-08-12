@@ -57,52 +57,65 @@ const dotR = 26;
 
 const plans = [
 	{
-		key: 'starter',
+		key: 'care',
 		color: 'orange',
 		price: '$379',
-		name: 'Maintenance + On-Page SEO',
-		tagline: 'Keeps your site healthy, maintained, and technically clean without the full monthly growth campaign.',
+		cadence: '/mo',
+		name: 'Website Care',
+		tagline: 'Keep the site healthy, fast, secure, and maintained. Not a growth SEO campaign.',
+		cta: 'Start Website Care',
 		bullets: [
+			'Hosting',
 			'Website maintenance',
-			'Hosting and security checks',
-			'Technical SEO cleanup',
-			'On-page SEO edits',
-			'Speed and Core Web Vitals monitoring',
-			'Basic monthly health report',
+			'Security',
+			'Technical SEO',
+			'Speed / Core Web Vitals',
+			'Basic on-page fixes',
+			'Monthly site health report',
 		],
 	},
 	{
 		key: 'growth',
 		color: 'green',
 		featured: true,
-		price: '$679',
-		name: 'Growth Local SEO',
-		tagline: 'Your own personal SEO guy. Posts, new pages, real strategy, and steady ranking work every month.',
+		price: '$997',
+		cadence: '/mo',
+		name: 'Local Growth',
+		tagline: 'Full local SEO campaign for most service businesses. Website plus real monthly ranking work.',
+		cta: 'Start Local Growth',
 		bullets: [
-			'Everything in Maintenance',
-			'70+ business listings online',
-			'1 new SEO page or blog post / month',
-			'5+ Google Business posts / month',
-			'Customer review funnel',
-			'Review management and responses',
-			'Monthly rank tracking report',
-			'On-page SEO updates from performance data',
+			'Custom website built + hosted',
+			'Everything in Website Care',
+			'Google Business Profile optimization',
+			'70+ business listings / citations',
+			'1 new SEO service / location page per month',
+			'4–5 GBP posts / month',
+			'Review funnel + review responses',
+			'Local rank tracking',
+			'Keyword / competitor research',
+			'Ongoing on-page SEO',
+			'Internal linking / schema',
+			'Local backlink / outreach work',
+			'Monthly plain-English report',
 		],
 	},
 	{
-		key: 'domination',
+		key: 'custom',
 		color: 'purple',
-		price: '$2,000+',
-		name: 'Local Domination',
-		tagline: 'Full-court press. For competitive markets and businesses that can turn extra jobs into real money.',
+		price: "Let's Chat",
+		cadence: '',
+		name: 'Custom Growth',
+		tagline: 'For businesses in competitive markets or with more complex SEO needs.',
+		cta: "Let's Talk",
 		bullets: [
-			'Everything in Growth',
-			'2 to 4 new website SEO pages / month',
-			'Service-area page expansion',
-			'Deeper competitor research',
-			'Backlink and outreach work',
-			'Quarterly press releases',
-			'Priority edits and support',
+			'Everything in Local Growth',
+			'More content and service-area pages',
+			'More aggressive backlink outreach',
+			'Multi-location SEO',
+			'Larger keyword / rank-tracking footprint',
+			'Competitive market research',
+			'Custom reporting and strategy',
+			'Scope built around your market',
 		],
 	},
 ];
@@ -440,9 +453,9 @@ const plans = [
 		<section class="section plans-section" id="plans" aria-labelledby="plans-heading">
 			<div class="section-header plans-header">
 				<span class="section-eyebrow">Monthly plans</span>
-				<h2 class="section-title" id="plans-heading">Pick a tier. Start ranking.</h2>
+				<h2 class="section-title" id="plans-heading">Pick your tier.</h2>
 				<p class="section-lead">
-					Three flat-monthly plans, each built around getting you visible in local search. Cancel any time. No long contracts.
+					Website Care keeps the site healthy. Local Growth runs the full monthly campaign. Custom Growth is scoped for tougher markets.
 				</p>
 			</div>
 			<div class="plan-grid">
@@ -452,8 +465,8 @@ const plans = [
 						<header class="plan-head">
 							<span class="plan-name">{plan.name}</span>
 							<div class="plan-price">
-								<span class="plan-price-amount">{plan.price}</span>
-								<span class="plan-price-cadence">/mo</span>
+								<span class:list={['plan-price-amount', !plan.cadence && 'plan-price-amount--text']}>{plan.price}</span>
+								{plan.cadence && <span class="plan-price-cadence">{plan.cadence}</span>}
 							</div>
 							<p class="plan-tagline">{plan.tagline}</p>
 						</header>
@@ -462,7 +475,7 @@ const plans = [
 								<li>{b}</li>
 							))}
 						</ul>
-						<a href={`/contact/?plan=${plan.key}`} class="plan-cta">Start {plan.name.split(' ')[0]} &rarr;</a>
+						<a href={`/contact/?plan=${plan.key}`} class="plan-cta">{plan.cta} &rarr;</a>
 					</article>
 				))}
 			</div>
@@ -1674,6 +1687,12 @@ const plans = [
 		color: var(--text);
 		letter-spacing: 0.01em;
 		line-height: 1;
+	}
+
+	.plan-price-amount--text {
+		font-size: clamp(2rem, 4vw, 2.75rem);
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
 	}
 
 	.plan-price-cadence {
