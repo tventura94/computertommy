@@ -24,46 +24,13 @@ const expectations = [
 	},
 	{
 		icon: 'fa-magnifying-glass-chart',
-		title: 'Free local audit on every reply',
-		body: 'I take a quick look at your market and competitors before we even talk.',
+		title: 'A real quote from your market',
+		body: 'I look at competition, service area, and what a job is worth before I name a number.',
 	},
 	{
 		icon: 'fa-comments',
 		title: 'No pressure call',
 		body: "If we hop on a quick call, it's a real conversation, not a pitch deck.",
-	},
-];
-
-const planOptions = [
-	{
-		key: 'care',
-		name: 'Website Care',
-		price: '$379/mo',
-		value: 'Website Care ($379/mo)',
-	},
-	{
-		key: 'growth',
-		name: 'Local Growth',
-		price: '$997/mo',
-		value: 'Local Growth ($997/mo)',
-	},
-	{
-		key: 'custom',
-		name: 'Custom Growth',
-		price: "Let's Chat",
-		value: "Custom Growth (Let's Chat)",
-	},
-	{
-		key: 'onetime',
-		name: 'One-time build',
-		price: 'Custom quote',
-		value: 'One-time build (custom quote)',
-	},
-	{
-		key: 'not-sure',
-		name: 'Not sure yet',
-		price: 'Help me pick',
-		value: 'Not sure yet',
 	},
 ];
 ---
@@ -154,20 +121,9 @@ const planOptions = [
 								<input id="contact-phone" name="phone" type="tel" autocomplete="tel" />
 							</div>
 
-							<fieldset class="form-field form-field--plan">
-								<legend>
-									Which plan are you interested in? <span class="field-hint">(optional)</span>
-								</legend>
-								<div class="plan-choices">
-									{planOptions.map((plan) => (
-										<label class="plan-choice" data-plan={plan.key}>
-											<input type="radio" name="plan" value={plan.value} data-key={plan.key} />
-											<span class="plan-choice-name">{plan.name}</span>
-											<span class="plan-choice-price">{plan.price}</span>
-										</label>
-									))}
-								</div>
-							</fieldset>
+							<p class="seo-quote-note">
+								Looking for local SEO? <a href="/#simple-pricing-form">Answer a few market questions</a> and I can price before we hop on a call.
+							</p>
 
 							<div class="form-field">
 								<label for="contact-message">What can I help with?</label>
@@ -190,23 +146,6 @@ const planOptions = [
 								<a href="mailto:letsbuild@computertommy.com">letsbuild@computertommy.com</a>.
 							</p>
 						</form>
-						<script is:inline>
-							(function () {
-								try {
-									var params = new URLSearchParams(window.location.search);
-									var plan = params.get('plan');
-									if (!plan) return;
-									var aliases = { starter: 'care', domination: 'custom' };
-									plan = (aliases[plan.toLowerCase()] || plan).toLowerCase();
-									var radio = document.querySelector(
-										'input[name="plan"][data-key="' + plan + '"]'
-									);
-									if (radio) radio.checked = true;
-								} catch (e) {
-									/* silently ignore */
-								}
-							})();
-						</script>
 					</div>
 
 					<aside class="contact-aside" aria-label="What to expect">
@@ -551,8 +490,7 @@ const planOptions = [
 		gap: 0.55rem;
 	}
 
-	.form-field label,
-	.form-field--plan legend {
+	.form-field label {
 		font-size: 0.95rem;
 		font-weight: 600;
 		letter-spacing: 0.01em;
@@ -612,103 +550,25 @@ const planOptions = [
 		background: #ffffff;
 	}
 
-	/* ───────────  Plan picker  ─────────── */
-	.form-field--plan {
-		border: 0;
-		padding: 0;
+	.seo-quote-note {
 		margin: 0;
-		min-width: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.65rem;
-	}
-
-	.plan-choices {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 0.6rem;
-	}
-
-	@media (min-width: 600px) {
-		.plan-choices {
-			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-		}
-	}
-
-	.plan-choice {
-		--plan-color: var(--text-muted);
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: center;
-		gap: 0.3rem;
-		padding: 0.95rem 1rem;
-		border: 1px solid var(--border);
+		padding: 0.85rem 1rem;
 		border-radius: var(--radius-sm);
-		background: var(--bg);
-		cursor: pointer;
-		transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
-		min-height: 76px;
-	}
-
-	html[data-theme='light'] .plan-choice {
-		background: #ffffff;
-	}
-
-	.plan-choice[data-plan='care']    { --plan-color: var(--accent); }
-	.plan-choice[data-plan='growth']  { --plan-color: var(--accent-green); }
-	.plan-choice[data-plan='custom']  { --plan-color: var(--accent-purple); }
-	.plan-choice[data-plan='onetime'] { --plan-color: var(--accent-pink); }
-
-	.plan-choice input {
-		position: absolute;
-		opacity: 0;
-		pointer-events: none;
-		width: 1px;
-		height: 1px;
-	}
-
-	.plan-choice:hover {
-		border-color: var(--plan-color);
-		transform: translateY(-1px);
-	}
-
-	.plan-choice:focus-within {
-		border-color: var(--plan-color);
-		box-shadow: 0 0 0 3px color-mix(in srgb, var(--plan-color) 25%, transparent);
-	}
-
-	.plan-choice:has(input:checked) {
-		border-color: var(--plan-color);
-		background: color-mix(in srgb, var(--plan-color) 12%, var(--bg));
-		box-shadow: 0 0 0 1px var(--plan-color), 0 8px 24px -12px color-mix(in srgb, var(--plan-color) 40%, transparent);
-	}
-
-	html[data-theme='light'] .plan-choice:has(input:checked) {
-		background: color-mix(in srgb, var(--plan-color) 10%, #ffffff);
-	}
-
-	.plan-choice-name {
-		font-family: var(--font-display);
-		font-size: 1.2rem;
-		font-weight: 400;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-		color: var(--text);
-		line-height: 1;
-	}
-
-	.plan-choice-price {
-		font-size: 0.82rem;
+		border: 1px dashed var(--border);
+		background: color-mix(in srgb, var(--accent) 8%, var(--bg));
 		color: var(--text-muted);
-		line-height: 1;
-		letter-spacing: 0.02em;
+		font-size: 0.95rem;
+		line-height: 1.5;
 	}
 
-	.plan-choice:has(input:checked) .plan-choice-price {
-		color: var(--plan-color);
+	.seo-quote-note a {
+		color: var(--accent);
 		font-weight: 600;
+		text-decoration: none;
+	}
+
+	.seo-quote-note a:hover {
+		text-decoration: underline;
 	}
 
 	.form-foot {

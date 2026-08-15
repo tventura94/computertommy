@@ -1,0 +1,482 @@
+---
+import LocalSeoInquiryForm from './LocalSeoInquiryForm.astro';
+
+interface Props {
+	sectionId?: string;
+	headingId?: string;
+	idPrefix?: string;
+	source?: string;
+	showPrice?: boolean;
+}
+
+const {
+	sectionId = 'simple-pricing',
+	headingId = 'pricing-heading',
+	idPrefix = 'seo-inquiry',
+	source = 'local-seo',
+	showPrice = true,
+} = Astro.props;
+
+const outcomes = [
+	{
+		accent: 'var(--accent)',
+		title: 'Show up in the map pack',
+		body: 'When someone searches your trade in your town, you are one of the three businesses they see on Google Maps.',
+	},
+	{
+		accent: 'var(--accent-green)',
+		title: 'Get found by people ready to buy',
+		body: 'Rank for the searches that mean the job is happening now. Not vanity terms. Not traffic that never calls.',
+	},
+	{
+		accent: 'var(--accent-purple, var(--accent-pink))',
+		title: 'More calls from your service area',
+		body: 'The point is the phone ringing from the towns you actually want to work in.',
+	},
+];
+
+const scope = [
+	'Website built and hosted if you need one',
+	'Google Business Profile',
+	'70+ local listings',
+	'Monthly service or location pages',
+	'GBP posts',
+	'Review funnel and replies',
+	'Rank tracking',
+	'On-page SEO',
+	'Local backlinks',
+];
+---
+
+<section class="seo-offer" id={sectionId} aria-labelledby={headingId}>
+	{showPrice ? (
+		<>
+			<div class="offer-intro">
+				<span class="section-eyebrow">What it costs</span>
+				<h2 class="section-title" id={headingId}>Starts at $997 a month.</h2>
+				<p class="offer-anchor">
+					Local SEO engagements start at <strong>$997/month</strong>, with most clients between
+					<strong>$1,000 and $2,500</strong> depending on market size and competition.
+				</p>
+			</div>
+
+			<div class="price-stage" aria-hidden="true">
+				<div class="price-floor">
+					<span class="price-kicker">Starting price</span>
+					<div class="price-display">
+						<span class="price-currency">$</span>
+						<span class="price-value">997</span>
+						<span class="price-cadence">/mo</span>
+					</div>
+				</div>
+				<div class="price-range">
+					<div class="range-track">
+						<span class="range-fill"></span>
+						<span class="range-mark range-mark--start">$1,000</span>
+						<span class="range-mark range-mark--end">$2,500</span>
+					</div>
+					<p class="range-caption">Where most clients land</p>
+				</div>
+			</div>
+		</>
+	) : (
+		<div class="offer-intro">
+			<span class="section-eyebrow">What it costs</span>
+			<h2 class="section-title" id={headingId}>Priced for your market.</h2>
+		</div>
+	)}
+
+	<div class="why-block">
+		<h3 class="why-title">Why the number moves</h3>
+		<p class="why-copy">
+			Pricing depends on how competitive your market is, how many locations you serve, and what a customer is worth to you. A roofer and a dog groomer need very different levels of investment. I quote after I understand your market, not from a menu of packages.
+		</p>
+	</div>
+
+	<div class="outcomes">
+		<h3 class="outcomes-title">What the work produces</h3>
+		<div class="outcome-grid">
+			{outcomes.map((item) => (
+				<article class="outcome-card" style={`--outcome-accent: ${item.accent}`}>
+					<h4>{item.title}</h4>
+					<p>{item.body}</p>
+				</article>
+			))}
+		</div>
+	</div>
+
+	<div class="offer-close">
+		<div class="scope-block">
+			<p class="scope-label">If you want the scope</p>
+			<ul class="scope-list">
+				{scope.map((item) => (
+					<li>{item}</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="form-wrap" id={`${sectionId}-form`}>
+			<header class="form-head">
+				<h3 class="form-title">Tell me about the business. I'll price from that.</h3>
+				<p class="form-lead">
+					These questions are enough to quote before we ever get on a call.
+				</p>
+			</header>
+			<LocalSeoInquiryForm idPrefix={idPrefix} source={source} />
+		</div>
+	</div>
+</section>
+
+<style>
+	.seo-offer {
+		position: relative;
+		z-index: 1;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 5rem 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2.75rem;
+		scroll-margin-top: 1.5rem;
+	}
+
+	.offer-intro {
+		max-width: 42rem;
+	}
+
+	.section-eyebrow {
+		display: inline-block;
+		font-family: var(--font-display);
+		font-size: 1.2rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+		margin-bottom: 0.5rem;
+	}
+
+	.section-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+		font-size: clamp(2.4rem, 7vw, 5rem);
+		line-height: 0.95;
+	}
+
+	.offer-anchor {
+		margin: 1rem 0 0;
+		color: var(--text-muted);
+		font-size: clamp(1.05rem, 2vw, 1.28rem);
+		line-height: 1.55;
+		max-width: 38rem;
+	}
+
+	.offer-anchor strong {
+		color: var(--text);
+		font-weight: 700;
+	}
+
+	.price-stage {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+		align-items: end;
+		padding: 1.6rem 1.4rem 1.7rem;
+		border-radius: calc(var(--radius) + 6px);
+		border: 1px solid var(--border);
+		background:
+			radial-gradient(ellipse 80% 90% at 0% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 58%),
+			var(--surface);
+	}
+
+	@media (min-width: 760px) {
+		.price-stage {
+			grid-template-columns: auto minmax(0, 1fr);
+			gap: 2.5rem;
+			padding: 2rem 2.1rem;
+		}
+	}
+
+	.price-kicker {
+		display: block;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 0.35rem;
+	}
+
+	.price-display {
+		display: flex;
+		align-items: flex-start;
+		line-height: 0.85;
+	}
+
+	.price-currency {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 5vw, 3rem);
+		margin-top: 0.28em;
+		color: var(--accent);
+	}
+
+	.price-value {
+		font-family: var(--font-display);
+		font-size: clamp(5.2rem, 16vw, 8.5rem);
+		letter-spacing: -0.02em;
+		color: var(--text);
+	}
+
+	.price-cadence {
+		align-self: flex-end;
+		margin: 0 0 0.45em 0.2em;
+		font-family: var(--font-display);
+		font-size: clamp(1.3rem, 3vw, 1.85rem);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.price-range {
+		min-width: 0;
+		padding-bottom: 0.35rem;
+	}
+
+	.range-track {
+		position: relative;
+		height: 10px;
+		border-radius: 999px;
+		background: color-mix(in srgb, var(--text) 10%, transparent);
+		margin: 1.8rem 0 2.1rem;
+	}
+
+	.range-fill {
+		position: absolute;
+		left: 8%;
+		right: 4%;
+		top: 0;
+		bottom: 0;
+		border-radius: inherit;
+		background: linear-gradient(90deg, var(--accent), var(--accent-green));
+	}
+
+	.range-mark {
+		position: absolute;
+		top: 1.15rem;
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--text);
+		white-space: nowrap;
+	}
+
+	.range-mark--start {
+		left: 8%;
+		transform: translateX(-10%);
+	}
+
+	.range-mark--end {
+		right: 4%;
+		transform: translateX(10%);
+	}
+
+	.range-caption {
+		margin: 0;
+		font-size: 0.92rem;
+		color: var(--text-muted);
+	}
+
+	.why-block {
+		max-width: 40rem;
+		padding-left: 1.1rem;
+		border-left: 3px solid var(--accent);
+	}
+
+	.why-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		font-size: clamp(1.45rem, 3vw, 2rem);
+		margin: 0 0 0.65rem;
+		line-height: 1;
+	}
+
+	.why-copy {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: clamp(1rem, 1.8vw, 1.15rem);
+		line-height: 1.65;
+	}
+
+	.outcomes-title,
+	.form-title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		margin: 0 0 1.1rem;
+		line-height: 1;
+	}
+
+	.outcomes-title {
+		font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+	}
+
+	.outcome-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	@media (min-width: 800px) {
+		.outcome-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	.outcome-card {
+		--outcome-accent: var(--accent);
+		position: relative;
+		padding: 1.45rem 1.3rem 1.5rem;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+		background: var(--surface);
+		overflow: hidden;
+	}
+
+	.outcome-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 3px;
+		background: var(--outcome-accent);
+	}
+
+	.outcome-card h4 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
+		font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+		line-height: 1.02;
+		margin: 0 0 0.7rem;
+		color: var(--text);
+	}
+
+	.outcome-card p {
+		margin: 0;
+		color: var(--text-muted);
+		font-size: 0.98rem;
+		line-height: 1.55;
+	}
+
+	.offer-close {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.75rem;
+		align-items: start;
+	}
+
+	@media (min-width: 920px) {
+		.offer-close {
+			grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+			gap: 2.25rem;
+		}
+	}
+
+	.scope-block {
+		padding: 1.25rem 1.2rem 1.35rem;
+		border-radius: var(--radius);
+		border: 1px dashed color-mix(in srgb, var(--text-muted) 35%, var(--border));
+		background: color-mix(in srgb, var(--surface) 70%, transparent);
+	}
+
+	.scope-label {
+		margin: 0 0 0.85rem;
+		font-family: var(--font-display);
+		font-size: 0.95rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.scope-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.45rem;
+	}
+
+	.scope-list li {
+		font-size: 0.92rem;
+		line-height: 1.4;
+		color: var(--text-muted);
+		padding-left: 0.9rem;
+		position: relative;
+	}
+
+	.scope-list li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: color-mix(in srgb, var(--text-muted) 55%, transparent);
+	}
+
+	.form-wrap {
+		border-radius: calc(var(--radius) + 8px);
+		padding: 1px;
+		scroll-margin-top: 1.5rem;
+		background: linear-gradient(
+			135deg,
+			color-mix(in srgb, var(--accent) 45%, transparent),
+			color-mix(in srgb, var(--accent-green) 28%, transparent)
+		);
+		box-shadow: 0 32px 90px -42px rgba(0, 0, 0, 0.55);
+	}
+
+	.form-head {
+		padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1.25rem, 3vw, 2rem) 0;
+		background: var(--surface);
+		border-radius: calc(var(--radius) + 7px) calc(var(--radius) + 7px) 0 0;
+	}
+
+	.form-wrap :global(.seo-inquiry-form) {
+		background: var(--surface);
+		padding: 1rem clamp(1.25rem, 3vw, 2rem) clamp(1.35rem, 3vw, 2rem);
+		border-radius: 0 0 calc(var(--radius) + 7px) calc(var(--radius) + 7px);
+	}
+
+	.form-title {
+		font-size: clamp(1.7rem, 3.6vw, 2.55rem);
+		margin-bottom: 0.5rem;
+	}
+
+	.form-lead {
+		margin: 0;
+		color: var(--text-muted);
+		line-height: 1.55;
+		font-size: 1rem;
+	}
+
+	@media (max-width: 640px) {
+		.seo-offer {
+			padding: 3.5rem 1rem;
+			gap: 2.1rem;
+		}
+
+		.price-stage {
+			padding: 1.25rem 1.1rem 1.4rem;
+		}
+	}
+</style>

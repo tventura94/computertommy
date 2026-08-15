@@ -4,6 +4,7 @@ import astroLogo from '../../assets/computertommylogo.svg';
 import background from '../../assets/background.svg';
 import Breadcrumbs from '../Breadcrumbs.astro';
 import ThemeToggleButton from '../ThemeToggleButton.astro';
+import LocalSeoOffer from '../local_seo/LocalSeoOffer.astro';
 
 const pillars = [
 	{
@@ -54,71 +55,6 @@ const cellH = 78;
 const startX = 50;
 const startY = 70;
 const dotR = 26;
-
-const plans = [
-	{
-		key: 'care',
-		color: 'orange',
-		price: '$379',
-		cadence: '/mo',
-		name: 'Website Care',
-		tagline: 'Keep the site healthy, fast, secure, and maintained. Not a growth SEO campaign.',
-		cta: 'Start Website Care',
-		bullets: [
-			'Hosting',
-			'Website maintenance',
-			'Security',
-			'Technical SEO',
-			'Speed / Core Web Vitals',
-			'Basic on-page fixes',
-			'Monthly site health report',
-		],
-	},
-	{
-		key: 'growth',
-		color: 'green',
-		featured: true,
-		price: '$997',
-		cadence: '/mo',
-		name: 'Local Growth',
-		tagline: 'Full local SEO campaign for most service businesses. Website plus real monthly ranking work.',
-		cta: 'Start Local Growth',
-		bullets: [
-			'Custom website built + hosted',
-			'Everything in Website Care',
-			'Google Business Profile optimization',
-			'70+ business listings / citations',
-			'1 new SEO service / location page per month',
-			'4–5 GBP posts / month',
-			'Review funnel + review responses',
-			'Local rank tracking',
-			'Keyword / competitor research',
-			'Ongoing on-page SEO',
-			'Internal linking / schema',
-			'Local backlink / outreach work',
-			'Monthly plain-English report',
-		],
-	},
-	{
-		key: 'custom',
-		color: 'purple',
-		price: "Let's Chat",
-		cadence: '',
-		name: 'Custom Growth',
-		tagline: 'For businesses in competitive markets or with more complex SEO needs.',
-		cta: "Let's Talk",
-		bullets: [
-			'Everything in Local Growth',
-			'More content and service-area pages',
-			'More aggressive backlink outreach',
-			'Multi-location SEO',
-			'Larger keyword / rank-tracking footprint',
-			'Competitive market research',
-			'Custom reporting and strategy',
-			'Scope built around your market',
-		],
-	},
-];
 ---
 
 <div class="themed-subpage">
@@ -149,8 +85,8 @@ const plans = [
 					This isn't rocket science. It's persistence and dedication, run by one person who actually gives a damn about your business.
 				</p>
 				<div class="hero-actions">
-					<a href="#plans" class="btn-solid">See plans</a>
-					<a href="/contact/" class="btn-outline">Free local audit</a>
+					<a href="#plans" class="btn-solid">See pricing</a>
+					<a href="#plans-form" class="btn-outline">Get a price</a>
 				</div>
 			</div>
 
@@ -450,49 +386,12 @@ const plans = [
 			</div>
 		</section>
 
-		<section class="section plans-section" id="plans" aria-labelledby="plans-heading">
-			<div class="section-header plans-header">
-				<span class="section-eyebrow">Monthly plans</span>
-				<h2 class="section-title" id="plans-heading">Pick your tier.</h2>
-				<p class="section-lead">
-					Website Care keeps the site healthy. Local Growth runs the full monthly campaign. Custom Growth is scoped for tougher markets.
-				</p>
-			</div>
-			<div class="plan-grid">
-				{plans.map((plan) => (
-					<article class:list={['plan-card', `plan-card--${plan.color}`, plan.featured && 'plan-card--featured']}>
-						{plan.featured && <span class="plan-badge">Most popular</span>}
-						<header class="plan-head">
-							<span class="plan-name">{plan.name}</span>
-							<div class="plan-price">
-								<span class:list={['plan-price-amount', !plan.cadence && 'plan-price-amount--text']}>{plan.price}</span>
-								{plan.cadence && <span class="plan-price-cadence">{plan.cadence}</span>}
-							</div>
-							<p class="plan-tagline">{plan.tagline}</p>
-						</header>
-						<ul class="plan-features">
-							{plan.bullets.map((b) => (
-								<li>{b}</li>
-							))}
-						</ul>
-						<a href={`/contact/?plan=${plan.key}`} class="plan-cta">{plan.cta} &rarr;</a>
-					</article>
-				))}
-			</div>
-			<p class="plans-foot">
-				Not sure which fits? <a href="/contact/">Send a quick message</a> and I'll point you to the right one based on your market.
-			</p>
-		</section>
-
-		<section class="section cta-section">
-			<div class="cta-inner">
-				<h2>Ready to start ranking in 3 months?</h2>
-				<p class="cta-lead">
-					I'll review your market, your competitors, your site, and your Google Business Profile. Then I'll show you a real path to rankings that turn into calls.
-				</p>
-				<a href="/contact/" class="btn-solid">Request a free local audit</a>
-			</div>
-		</section>
+		<LocalSeoOffer
+			sectionId="plans"
+			headingId="plans-heading"
+			idPrefix="seo-page"
+			source="seo-page"
+		/>
 	</main>
 </div>
 
@@ -1560,269 +1459,6 @@ const plans = [
 	.legend-item--low  .legend-dot { background: #f06464; border-color: #f06464; }
 	.legend-item--none .legend-dot { background: #ffffff; border-color: #cbd5e1; }
 
-	/* ─────────────  Plans  ───────────── */
-	.plans-section {
-		max-width: 1320px;
-	}
-
-	.plans-header {
-		max-width: 760px;
-		margin-left: auto;
-		margin-right: auto;
-		text-align: center;
-	}
-
-	.plan-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-		align-items: stretch;
-	}
-
-	@media (min-width: 760px) {
-		.plan-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.plan-grid {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 1.5rem;
-		}
-
-		.plan-card--featured {
-			transform: translateY(-12px);
-		}
-
-		.plan-card--featured:hover {
-			transform: translateY(-16px);
-		}
-	}
-
-	.plan-card {
-		--plan-color: var(--accent);
-		--plan-shadow: rgba(249, 115, 22, 0.35);
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 2rem;
-		transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-	}
-
-	.plan-card::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 4px;
-		background: var(--plan-color);
-		border-radius: var(--radius) var(--radius) 0 0;
-		pointer-events: none;
-	}
-
-	.plan-card:hover {
-		border-color: var(--plan-color);
-		box-shadow: 0 24px 60px -16px var(--plan-shadow);
-	}
-
-	.plan-card--orange { --plan-color: var(--accent);        --plan-shadow: rgba(249, 115, 22, 0.45); }
-	.plan-card--green  { --plan-color: var(--accent-green);  --plan-shadow: rgba(74, 222, 128, 0.45); }
-	.plan-card--purple { --plan-color: var(--accent-purple); --plan-shadow: rgba(167, 139, 250, 0.45); }
-
-	.plan-card--featured {
-		border-color: var(--plan-color);
-		box-shadow: 0 24px 60px -16px var(--plan-shadow);
-	}
-
-	.plan-badge {
-		position: absolute;
-		top: -14px;
-		left: 50%;
-		transform: translateX(-50%);
-		font-family: var(--font-display);
-		font-size: 0.85rem;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		background: var(--plan-color);
-		color: #0b0b0f;
-		padding: 0.4rem 0.9rem;
-		border-radius: 999px;
-		box-shadow: 0 0 0 6px var(--bg);
-		white-space: nowrap;
-	}
-
-	.plan-head {
-		display: flex;
-		flex-direction: column;
-		gap: 0.65rem;
-		padding-bottom: 1.25rem;
-		border-bottom: 1px solid var(--border);
-	}
-
-	.plan-name {
-		font-family: var(--font-display);
-		font-size: 1.15rem;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: var(--plan-color);
-		line-height: 1;
-	}
-
-	.plan-price {
-		display: flex;
-		align-items: baseline;
-		gap: 0.35rem;
-	}
-
-	.plan-price-amount {
-		font-family: var(--font-display);
-		font-size: clamp(2.75rem, 5vw, 3.75rem);
-		font-weight: 400;
-		color: var(--text);
-		letter-spacing: 0.01em;
-		line-height: 1;
-	}
-
-	.plan-price-amount--text {
-		font-size: clamp(2rem, 4vw, 2.75rem);
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-	}
-
-	.plan-price-cadence {
-		font-size: 1.1rem;
-		font-weight: 500;
-		color: var(--text-muted);
-		line-height: 1;
-	}
-
-	.plan-tagline {
-		font-size: 0.98rem;
-		color: var(--text-muted);
-		line-height: 1.55;
-		margin: 0;
-	}
-
-	.plan-features {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.7rem;
-		flex: 1;
-	}
-
-	.plan-features li {
-		position: relative;
-		padding-left: 1.6rem;
-		font-size: 0.96rem;
-		line-height: 1.45;
-		color: var(--text);
-	}
-
-	.plan-features li::before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0.32em;
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		background: var(--plan-color);
-		opacity: 0.18;
-	}
-
-	.plan-features li::after {
-		content: '';
-		position: absolute;
-		left: 4px;
-		top: 0.55em;
-		width: 6px;
-		height: 3px;
-		border-left: 2px solid var(--plan-color);
-		border-bottom: 2px solid var(--plan-color);
-		transform: rotate(-45deg);
-	}
-
-	.plan-cta {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		padding: 0.95rem 1.25rem;
-		border-radius: var(--radius);
-		background: var(--plan-color);
-		color: #0b0b0f;
-		font-weight: 600;
-		text-decoration: none;
-		font-size: 1rem;
-		letter-spacing: 0.01em;
-		transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-		margin-top: auto;
-	}
-
-	.plan-cta:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 12px 28px -10px var(--plan-shadow);
-		opacity: 0.95;
-	}
-
-	.plans-foot {
-		text-align: center;
-		color: var(--text-muted);
-		margin: 2rem 0 0;
-		font-size: 0.95rem;
-	}
-
-	.plans-foot a {
-		color: var(--accent);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.plans-foot a:hover {
-		text-decoration: underline;
-	}
-
-	/* ─────────────  Closing CTA  ───────────── */
-	.cta-section {
-		text-align: center;
-	}
-
-	.cta-inner {
-		max-width: 760px;
-		margin: 0 auto;
-		border: 1px solid var(--border);
-		background: var(--surface);
-		border-radius: var(--radius);
-		padding: 2.5rem 1.5rem;
-	}
-
-	.cta-inner h2 {
-		font-family: var(--font-display);
-		font-weight: 400;
-		text-transform: uppercase;
-		letter-spacing: 0.02em;
-		font-size: clamp(2rem, 6vw, 4rem);
-		line-height: 1;
-		margin: 0 0 0.75rem;
-	}
-
-	.cta-lead {
-		margin: 0 auto 1.35rem;
-		color: var(--text-muted);
-		font-size: 1rem;
-		line-height: 1.55;
-		max-width: 540px;
-	}
-
 	@media (max-width: 768px) {
 		.paint-strikes-bg {
 			top: 4%;
@@ -1866,9 +1502,7 @@ const plans = [
 
 	html[data-theme='light'] .pillar-card,
 	html[data-theme='light'] .connection-card,
-	html[data-theme='light'] .presence-tile,
-	html[data-theme='light'] .plan-card,
-	html[data-theme='light'] .cta-inner {
+	html[data-theme='light'] .presence-tile {
 		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
 	}
 
@@ -1897,11 +1531,5 @@ const plans = [
 	html[data-theme='light'] .presence-noise {
 		opacity: 0.045;
 		mix-blend-mode: multiply;
-	}
-
-	html[data-theme='light'] .plan-cta,
-	html[data-theme='light'] .plan-card--green .plan-badge,
-	html[data-theme='light'] .plan-card--green .plan-cta {
-		color: #ffffff;
 	}
 </style>

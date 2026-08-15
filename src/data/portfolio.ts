@@ -19,6 +19,32 @@ export interface PortfolioItem {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    slug: "bigfoot-site-services",
+    title: "Bigfoot Site Services",
+    category: "Service site",
+    serviceType: "Dumpster Rental",
+    url: "https://bigfootsiteservices.com/",
+    previewImage: "/portfolio_figmas/bigfoot-site-services-portfolio.jpeg",
+    previewPosition: "top",
+    whatTheyNeeded:
+      "A dumpster rental site for Athens and Barrow County with flat-rate pricing and a clear way to book a drop.",
+    result:
+      "A rugged service site with sizes, allowed items, transparent pricing, and a booking path built for homeowners and contractors.",
+  },
+  {
+    slug: "crossed-arrows-global-partners",
+    title: "Crossed Arrows Global Partners",
+    category: "Business site",
+    serviceType: "Defense Consulting",
+    url: "https://www.crossedarrowsglobal.com/",
+    previewImage: "/portfolio_figmas/crossed-arrows-portfolio.jpeg",
+    previewPosition: "top",
+    whatTheyNeeded:
+      "A high-trust site for helping defense and dual-use companies enter the U.S. market without burning credibility.",
+    result:
+      "A navy-and-gold advisory site that frames the process, who they work with, and a readiness conversation instead of a generic contact box.",
+  },
+  {
     slug: "strudel-construction",
     title: "Strudel Construction",
     category: "Service site",

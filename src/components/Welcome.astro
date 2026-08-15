@@ -2,6 +2,7 @@
 import astroLogo from '../assets/computertommylogo.svg';
 import background from '../assets/background.svg';
 import { portfolioItems } from '../data/portfolio';
+import LocalSeoOffer from './local_seo/LocalSeoOffer.astro';
 
 const featuredSlugs = ['time-to-shine-mobile-detailing', 'my-buddy-lawn-care', 'fresh-grill-bbq'];
 const featuredWork = featuredSlugs
@@ -39,11 +40,11 @@ const featuredWork = featuredSlugs
 
 			<div class="hero-foot">
 				<p class="hero-desc">
-					Flat-fee website maintenance and local SEO for service businesses. Start with technical upkeep and on-page cleanup, or move into full Google Business Profile, content, and rankings work. Based in Asheville, NC.
+					Local SEO for service businesses. Show up in the map pack, get found by people ready to buy, and take more calls from your service area. Based in Asheville, NC.
 				</p>
 				<div class="hero-actions">
-					<a href="/contact/" class="btn-solid">Start ranking &rarr;</a>
-					<a href="#simple-pricing" class="btn-outline">See plans</a>
+					<a href="#simple-pricing-form" class="btn-solid">Get a price for your market &rarr;</a>
+					<a href="#simple-pricing" class="btn-outline">See pricing</a>
 					<a href="/portfolio/" class="btn-outline">Portfolio</a>
 				</div>
 			</div>
@@ -505,90 +506,7 @@ const featuredWork = featuredSlugs
 	</section>
 
 	<!-- PRICING -->
-	<section class="pricing-section" id="simple-pricing">
-		<div class="pricing-header">
-			<span class="section-eyebrow">
-				<svg class="eyebrow-icon" viewBox="0 0 120 120" fill="currentColor"><path d="M114.44 54.69H71.9l30.08-30.08a5.03 5.03 0 0 0 0-7.12 5.03 5.03 0 0 0-7.12 0L64.78 47.57V5.04c0-2.78-2.25-5.04-5.04-5.04S54.7 2.25 54.7 5.04v42.53L24.62 17.49a5.027 5.027 0 0 0-7.12 0 5.03 5.03 0 0 0 0 7.12l30.08 30.08H5.04C2.26 54.69 0 56.94 0 59.73s2.25 5.04 5.04 5.04h42.53L17.49 94.85a5.027 5.027 0 0 0 0 7.12 5.027 5.027 0 0 0 7.12 0l30.08-30.08v42.54c0 2.78 2.25 5.04 5.04 5.04s5.04-2.25 5.04-5.04V71.89l30.08 30.08a5.03 5.03 0 0 0 7.12 0 5.027 5.027 0 0 0 0-7.12L71.89 64.77h42.53c2.78 0 5.04-2.25 5.04-5.04s-2.25-5.04-5.04-5.04z"/></svg>
-				Monthly plans.
-			</span>
-			<h2 class="section-title">Pick your tier.</h2>
-			<p class="section-desc">Flat monthly pricing. Keep the site healthy with Website Care, or run a full local SEO campaign with Local Growth.</p>
-		</div>
-
-		<div class="plan-grid">
-			<article class="plan-card plan-card--orange">
-				<header class="plan-head">
-					<span class="plan-name">Website Care</span>
-					<div class="plan-price">
-						<span class="plan-price-amount">$379</span>
-						<span class="plan-price-cadence">/mo</span>
-					</div>
-					<p class="plan-tagline">Keep the site healthy, fast, secure, and maintained. Not a growth SEO campaign.</p>
-				</header>
-				<ul class="plan-features">
-					<li>Hosting</li>
-					<li>Website maintenance</li>
-					<li>Security</li>
-					<li>Technical SEO</li>
-					<li>Speed / Core Web Vitals</li>
-					<li>Basic on-page fixes</li>
-					<li>Monthly site health report</li>
-				</ul>
-				<a href="/contact/?plan=care" class="plan-cta">Start Website Care &rarr;</a>
-			</article>
-
-			<article class="plan-card plan-card--green plan-card--featured">
-				<span class="plan-badge">Most popular</span>
-				<header class="plan-head">
-					<span class="plan-name">Local Growth</span>
-					<div class="plan-price">
-						<span class="plan-price-amount">$997</span>
-						<span class="plan-price-cadence">/mo</span>
-					</div>
-					<p class="plan-tagline">Full local SEO campaign for most service businesses. Website plus real monthly ranking work.</p>
-				</header>
-				<p class="plan-includes">Everything in Website Care, plus:</p>
-				<ul class="plan-features">
-					<li>Custom website built + hosted</li>
-					<li>Google Business Profile optimization</li>
-					<li>70+ business listings / citations</li>
-					<li>1 new SEO service / location page per month</li>
-					<li>4–5 GBP posts / month</li>
-					<li>Review funnel + review responses</li>
-					<li>Local rank tracking</li>
-					<li>Keyword / competitor research</li>
-					<li>Ongoing on-page SEO</li>
-					<li>Internal linking / schema</li>
-					<li>Local backlink / outreach work</li>
-					<li>Monthly plain-English report</li>
-				</ul>
-				<a href="/contact/?plan=growth" class="plan-cta">Start Local Growth &rarr;</a>
-			</article>
-
-			<article class="plan-card plan-card--purple">
-				<header class="plan-head">
-					<span class="plan-name">Custom Growth</span>
-					<div class="plan-price">
-						<span class="plan-price-amount plan-price-amount--text">Let's Chat</span>
-					</div>
-					<p class="plan-tagline">For businesses in competitive markets or with more complex SEO needs.</p>
-				</header>
-				<p class="plan-includes">Everything in Local Growth, plus:</p>
-				<ul class="plan-features">
-					<li>More content and service-area pages</li>
-					<li>More aggressive backlink outreach</li>
-					<li>Multi-location SEO</li>
-					<li>Larger keyword / rank-tracking footprint</li>
-					<li>Competitive market research</li>
-					<li>Custom reporting and strategy</li>
-					<li>Scope built around your market</li>
-				</ul>
-				<a href="/contact/?plan=custom" class="plan-cta">Let's Talk &rarr;</a>
-			</article>
-		</div>
-
-		<p class="plan-footnote">Not sure which tier fits? <a href="/contact/">Send a quick message</a> and I'll point you to the right one.</p>
-	</section>
+	<LocalSeoOffer source="homepage" idPrefix="home-seo" />
 
 	<!-- WHY CHOOSE ME -->
 	<section class="section section--alt" id="why-work-with-me">
@@ -638,7 +556,7 @@ const featuredWork = featuredSlugs
 					I'm a web developer and local SEO guy in Asheville, NC, working directly with local service businesses.
 				</p>
 				<p>
-					Most contractors and service business owners are used to people trying to sell them stuff they don't need. That's why I keep this simple. Website Care stays lean, and Local Growth adds the GBP, content, citations, and ranking work when you actually need it. You always work with me.
+					Most contractors and service business owners are used to people trying to sell them stuff they don't need. That's why I keep this simple. You always work with me, and the price is based on your market, not a menu of packages.
 				</p>
 				<p>
 					I work with remodelers, plumbers, electricians, pressure washers, and other service providers who want to actually rank on Google and get more calls, not just stand up a website and hope.
@@ -654,7 +572,7 @@ const featuredWork = featuredSlugs
 		<div class="cta-inner">
 			<img class="cta-icon" src={astroLogo.src} alt="Computer Tommy" />
 			<h2>Ready to start ranking in 3 months?</h2>
-			<a href="/contact/" class="btn-solid btn-lg">Start a Plan &rarr;</a>
+			<a href="#simple-pricing-form" class="btn-solid btn-lg">Get a price for your market &rarr;</a>
 		</div>
 	</section>
 </div>
@@ -2269,259 +2187,6 @@ const featuredWork = featuredSlugs
 	}
 
 	/* ═══════════════════════════════════════
-	   Pricing
-	   ═══════════════════════════════════════ */
-	.pricing-section {
-		position: relative;
-		z-index: 1;
-		max-width: 1320px;
-		margin: 0 auto;
-		padding: 5rem 2rem;
-	}
-
-	.pricing-header {
-		max-width: 760px;
-		margin: 0 auto 3rem;
-		text-align: center;
-	}
-
-	.pricing-header .section-eyebrow {
-		justify-content: center;
-	}
-
-	.pricing-header .section-desc {
-		margin: 0 auto;
-	}
-
-	.plan-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-		align-items: stretch;
-	}
-
-	.plan-card {
-		--plan-color: var(--accent);
-		--plan-shadow: rgba(249, 115, 22, 0.35);
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-		background: var(--surface);
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		padding: 2rem;
-		transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-	}
-
-	.plan-card::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		height: 4px;
-		background: var(--plan-color);
-		border-radius: var(--radius) var(--radius) 0 0;
-		pointer-events: none;
-	}
-
-	.plan-card:hover {
-		border-color: var(--plan-color);
-		box-shadow: 0 24px 60px -16px var(--plan-shadow);
-	}
-
-	.plan-card--orange { --plan-color: var(--accent);        --plan-shadow: rgba(249, 115, 22, 0.45); }
-	.plan-card--green  { --plan-color: var(--accent-green);  --plan-shadow: rgba(74, 222, 128, 0.45); }
-	.plan-card--purple { --plan-color: var(--accent-purple); --plan-shadow: rgba(167, 139, 250, 0.45); }
-
-	.plan-card--featured {
-		border-color: var(--plan-color);
-		box-shadow: 0 24px 60px -16px var(--plan-shadow);
-	}
-
-	.plan-badge {
-		position: absolute;
-		top: -14px;
-		left: 50%;
-		transform: translateX(-50%);
-		font-family: var(--font-display);
-		font-size: 0.85rem;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		background: var(--plan-color);
-		color: #0b0b0f;
-		padding: 0.4rem 0.9rem;
-		border-radius: 999px;
-		box-shadow: 0 0 0 6px var(--bg);
-		white-space: nowrap;
-	}
-
-	.plan-head {
-		display: flex;
-		flex-direction: column;
-		gap: 0.65rem;
-		padding-bottom: 1.25rem;
-		border-bottom: 1px solid var(--border);
-	}
-
-	.plan-name {
-		font-family: var(--font-display);
-		font-size: 1.15rem;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
-		color: var(--plan-color);
-		line-height: 1;
-	}
-
-	.plan-price {
-		display: flex;
-		align-items: baseline;
-		gap: 0.35rem;
-	}
-
-	.plan-price-amount {
-		font-family: var(--font-display);
-		font-size: clamp(2.75rem, 5vw, 3.75rem);
-		font-weight: 400;
-		color: var(--text);
-		letter-spacing: 0.01em;
-		line-height: 1;
-	}
-
-	.plan-price-amount--text {
-		font-size: clamp(2rem, 4vw, 2.75rem);
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-	}
-
-	.plan-price-cadence {
-		font-size: 1.1rem;
-		font-weight: 500;
-		color: var(--text-muted);
-		line-height: 1;
-	}
-
-	.plan-tagline {
-		font-size: 0.98rem;
-		color: var(--text-muted);
-		line-height: 1.55;
-		margin: 0;
-	}
-
-	.plan-includes {
-		font-family: var(--font-display);
-		font-size: 0.95rem;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--text);
-		margin: 0;
-	}
-
-	.plan-features {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.7rem;
-		flex: 1;
-	}
-
-	.plan-features li {
-		position: relative;
-		padding-left: 1.6rem;
-		font-size: 0.96rem;
-		line-height: 1.45;
-		color: var(--text);
-	}
-
-	.plan-features li::before {
-		content: "";
-		position: absolute;
-		left: 0;
-		top: 0.32em;
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		background: var(--plan-color);
-		opacity: 0.18;
-	}
-
-	.plan-features li::after {
-		content: "";
-		position: absolute;
-		left: 4px;
-		top: 0.55em;
-		width: 6px;
-		height: 3px;
-		border-left: 2px solid var(--plan-color);
-		border-bottom: 2px solid var(--plan-color);
-		transform: rotate(-45deg);
-	}
-
-	.plan-cta {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		padding: 0.95rem 1.25rem;
-		border-radius: var(--radius);
-		background: var(--plan-color);
-		color: #0b0b0f;
-		font-weight: 600;
-		text-decoration: none;
-		font-size: 1rem;
-		letter-spacing: 0.01em;
-		transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-		margin-top: auto;
-	}
-
-	.plan-cta:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 12px 28px -10px var(--plan-shadow);
-		opacity: 0.95;
-	}
-
-	.plan-footnote {
-		text-align: center;
-		color: var(--text-muted);
-		margin: 2rem 0 0;
-		font-size: 0.95rem;
-	}
-
-	.plan-footnote a {
-		color: var(--accent);
-		font-weight: 600;
-		text-decoration: none;
-	}
-
-	.plan-footnote a:hover {
-		text-decoration: underline;
-	}
-
-	@media (min-width: 760px) {
-		.plan-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.plan-grid {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 1.5rem;
-		}
-
-		.plan-card--featured {
-			transform: translateY(-12px);
-		}
-
-		.plan-card--featured:hover {
-			transform: translateY(-16px);
-		}
-	}
-
-	/* ═══════════════════════════════════════
 	   Why choose me
 	   ═══════════════════════════════════════ */
 	.why-grid {
@@ -3019,13 +2684,6 @@ const featuredWork = featuredSlugs
 			grid-template-columns: 1fr;
 		}
 
-		.pricing-section {
-			padding: 3rem 1rem;
-		}
-
-		.plan-grid {
-			grid-template-columns: 1fr;
-		}
 	}
 
 	@media (max-width: 480px) {
@@ -3241,28 +2899,6 @@ const featuredWork = featuredSlugs
 	:global(html[data-theme="light"]) .page-wrapper .about-card-full {
 		box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 		border-color: rgba(0, 0, 0, 0.08);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .plan-card {
-		box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-		border-color: rgba(0, 0, 0, 0.08);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .plan-card--featured {
-		box-shadow: 0 18px 48px -12px var(--plan-shadow);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .plan-card:hover {
-		box-shadow: 0 20px 50px -16px var(--plan-shadow);
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .plan-cta {
-		color: #ffffff;
-	}
-
-	:global(html[data-theme="light"]) .page-wrapper .plan-card--green .plan-cta,
-	:global(html[data-theme="light"]) .page-wrapper .plan-card--green .plan-badge {
-		color: #ffffff;
 	}
 
 	:global(html[data-theme="light"]) .page-wrapper .works-cta-card {
