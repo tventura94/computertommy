@@ -56,12 +56,12 @@ export const portfolioItems: PortfolioItem[] = [
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
   },
   {
-    slug: "cams-junk-removal",
-    title: "Cam's Junk Removal",
+    slug: "jams-junk-removal",
+    title: "Jam's Junk Removal",
     category: "Service site",
     serviceType: "Junk Removal",
-    url: "https://cams-junk-removal.netlify.app/",
-    previewImage: "/portfolio_figmas/cams-junk-portfolio.jpeg",
+    url: "https://jams-junk-removal.netlify.app/",
+    previewImage: "/portfolio_figmas/jams-junk-portfolio.jpeg",
     whatTheyNeeded: "A professional web presence to showcase their services.",
     result:
       "A clean, modern site highlighting services, past projects, and a clear way for customers to get in touch.",
